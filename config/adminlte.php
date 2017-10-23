@@ -13,7 +13,7 @@ return [
     |
     */
 
-    'title' => 'easy school',
+    'title' => 'Easy School',
 
     'title_prefix' => '',
 
@@ -110,15 +110,21 @@ return [
     'menu' => [
         'MAIN NAVIGATION',
         [
-            'text' => 'Blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text' => 'Users',
+            'url'  => 'users',
+            'icon'        => 'user',
         ],
         [
-            'text'        => 'Pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'file',
-            'label'       => 4,
+            'text'        => 'Roles',
+            'url'         => 'roles',
+            'icon'        => 'list',
+            'label'       => '3',
+            'label_color' => 'success',
+        ],[
+            'text'        => 'Students',
+            'url'         => 'students',
+            'icon'        => 'users',
+            'label'       => '3',
             'label_color' => 'success',
         ],
         'ACCOUNT SETTINGS',
