@@ -3,12 +3,14 @@
 namespace App;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Zizaco\Entrust\Traits\EntrustUserTrait;
 
 class User extends Authenticatable
 {
-    public function roles() {
-        return $this->belongsToMany('App\Role');
-    }
+    use EntrustUserTrait;
+    // public function roles() {
+    //     return $this->belongsToMany('App\Role');
+    // }
     /**
      * The attributes that are mass assignable.
      *

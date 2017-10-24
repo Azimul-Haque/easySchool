@@ -13,9 +13,9 @@
 	            <h2>Students CRUD</h2>
 	        </div>
 	        <div class="pull-right">
-	        	
+	        	@permission('student-create')
 	            <a class="btn btn-success" href="{{ route('students.create') }}"> Create New Student</a>
-	            
+	            @endpermission
 	        </div>
 	    </div>
 	</div>
@@ -38,11 +38,14 @@
 		<td>{{ $student->roll }}</td>
 		<td>
 			<a class="btn btn-info" href="{{ route('students.show',$student->id) }}">Show</a>
-			
+			@permission('student-edit')
 			<a class="btn btn-primary" href="{{ route('students.edit',$student->id) }}">Edit</a>
+			@endpermission
+			@permission('student-delete')
 			{!! Form::open(['method' => 'DELETE','route' => ['students.destroy', $student->id],'style'=>'display:inline']) !!}
             {!! Form::submit('Delete', ['class' => 'btn btn-danger']) !!}
         	{!! Form::close() !!}
+        	@endpermission
      
 		</td>
 	</tr>

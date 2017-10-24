@@ -17,7 +17,6 @@
         "phpunit/phpunit": "~4.0",
         "symfony/css-selector": "2.8.*|3.0.*",
         "symfony/dom-crawler": "2.8.*|3.0.*",
-        "doctrine/dbal" : "*",
         "zizaco/entrust": "5.2.x-dev"
     },
     "autoload": {

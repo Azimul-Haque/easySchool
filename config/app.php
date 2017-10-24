@@ -162,7 +162,7 @@ return [
         JeroenNoten\LaravelAdminLte\ServiceProvider::class,
         MaddHatter\LaravelFullcalendar\ServiceProvider::class,
         Collective\Html\HtmlServiceProvider::class,
-        Zizaco\Entrust\EntrustServiceProvider::class,
+        App\Providers\EntrustCustomServiceProvider::class,
 
     ],
 

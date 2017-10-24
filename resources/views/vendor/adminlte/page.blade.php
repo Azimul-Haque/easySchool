@@ -57,6 +57,7 @@
                 <div class="navbar-custom-menu">
 
                     <ul class="nav navbar-nav">
+                        <li><a href="#">{{ Auth::User()->name }}</a></li>
                         <li>
                             @if(config('adminlte.logout_method') == 'GET' || !config('adminlte.logout_method') && version_compare(\Illuminate\Foundation\Application::VERSION, '5.3.0', '<'))
                                 <a href="{{ url(config('adminlte.logout_url', 'auth/logout')) }}">
@@ -94,6 +95,10 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
+
+                    {{-- <li class="header">Admin Area</li>
+                    @permission('role-list')<li><a href="#">Users</a></li>@endpermission
+                    @permission('student-list')<li><a href="#">Students</a></li>@endpermission --}}
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>
