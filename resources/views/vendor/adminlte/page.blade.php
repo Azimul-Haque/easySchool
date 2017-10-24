@@ -94,11 +94,35 @@
 
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
-                    @each('adminlte::partials.menu-item', $adminlte->menu(), 'item')
+                    {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
 
-                    {{-- <li class="header">Admin Area</li>
-                    @permission('role-list')<li><a href="#">Users</a></li>@endpermission
-                    @permission('student-list')<li><a href="#">Students</a></li>@endpermission --}}
+                    <li class="header">Administration</li>
+                    @permission('user-crud')
+                    <li class="{{ Request::is('users') ? 'active' : '' }}">
+                        <a href="/users">
+                            <i class="fa fa-fw fa-user"></i>
+                            <span>Users</span>
+                        </a>
+                    </li>
+                    @endpermission
+                    @permission('role-crud')
+                    <li class="{{ Request::is('roles') ? 'active' : '' }}">
+                        <a href="/roles">
+                            <i class="fa fa-fw fa-list"></i>
+                            <span>Roles</span>
+                        </a>
+                    </li>
+                    @endpermission
+                    @permission('student-crud')
+                    <li class="{{ Request::is('students') ? 'active' : '' }}">
+                        <a href="/students">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span>Students</span>
+                        </a>
+                    </li>
+                    @endpermission
+
+                    
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

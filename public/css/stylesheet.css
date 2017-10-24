@@ -79,7 +79,7 @@ ul.errorlist > li {
 .well {
 	background-color: #ffffff;
 }
-.panel, .well{
+.panel, .well, .table-responsive{
     -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
     -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
     box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
@@ -115,6 +115,12 @@ ul.errorlist > li {
     color: #003300;
     background-color: #ffc107;
     border-color: #ffc107;
+}
+.link {
+    text-decoration: none !important;
+}
+.bold {
+    font-weight: bold;
 }
 .deleteModalHeader, .btn-danger, .panel-danger>.panel-heading {
     color: #ffffff;
@@ -177,15 +183,28 @@ ul.errorlist > li {
 }
 
 .table>thead>tr>th {
-    border-bottom: 2px solid #ddd;
+    border-bottom: 3px solid #ddd !important;
 }
 
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-    border-top: 1px solid #ddd;
+    border-top: 1px solid #3C8DBC !important;
+    vertical-align: middle !important;
 }
 
 .table-bordered {
     border: 1px solid #ddd;
+}
+
+thead th {
+    background-color: #3C8DBC !important;
+    color: white !important;
+}
+
+tbody td {
+    background-color: #FFFFFF !important;
+}
+.table-responsive {
+        overflow-x: visible; 
 }
 
 .modal-header-primary {

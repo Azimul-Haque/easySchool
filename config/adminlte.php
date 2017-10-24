@@ -58,7 +58,7 @@ return [
     |
     */
 
-    'layout' => null,
+    'layout' => 'fixed',
 
     /*
     |--------------------------------------------------------------------------
@@ -159,12 +159,12 @@ return [
                             'url'     => '#',
                             'submenu' => [
                                 [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
+                                    'text' => 'Students',
+                                    'url'  => 'students',
                                 ],
                                 [
-                                    'text' => 'Level Three',
-                                    'url'  => '#',
+                                    'text' => 'Roles',
+                                    'url'  => 'roles',
                                 ],
                             ],
                         ],
