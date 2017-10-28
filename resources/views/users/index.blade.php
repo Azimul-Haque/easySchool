@@ -46,11 +46,32 @@
 						<a class="btn btn-primary btn-sm" href="{{ route('users.edit',$user->id) }}">
 							<i class="fa fa-pencil"></i>
 						</a>
-						{!! Form::open(['method' => 'DELETE','route' => ['users.destroy', $user->id],'style'=>'display:inline']) !!}
-			            <button class="btn btn-danger btn-sm" type="submit">
-							<i class="fa fa-trash-o"></i>
-						</button>
-			        	{!! Form::close() !!}
+				    {{-- delete modal--}}
+				    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $user->id }}" data-backdrop="static"
+							@if($user->roles()->where('name', 'superadmin')->exists())  disabled="true"  @endif
+				    	><i class="fa fa-trash" aria-hidden="true"></i></button>
+				      	<!-- Trigger the modal with a button -->
+			        	<!-- Modal -->
+				        <div class="modal fade" id="deleteModal{{ $user->id }}" role="dialog">
+				          <div class="modal-dialog modal-md">
+				            <div class="modal-content">
+				              <div class="modal-header modal-header-danger">
+				                <button type="button" class="close" data-dismiss="modal">&times;</button>
+				                <h4 class="modal-title">Delete confirmation</h4>
+				              </div>
+				              <div class="modal-body">
+				                Delete user <b>{{ $user->name }}</b>?
+				              </div>
+				              <div class="modal-footer">
+				                {!! Form::model($user, ['route' => ['users.destroy', $user->id], 'method' => 'DELETE']) !!}
+				                    <button type="submit" class="btn btn-danger">Delete</button>
+				                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+				                {!! Form::close() !!}
+				              </div>
+				            </div>
+				          </div>
+				        </div>
+			      {{-- delete modal--}}
 					</td>
 				</tr>
 			@endforeach

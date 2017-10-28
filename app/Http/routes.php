@@ -9,7 +9,7 @@ Route::auth();
 
 Route::group(['middleware' => ['auth']], function() {
 
-	Route::get('/dashboard', 'DashboardController@index');
+	Route::get('dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 	Route::resource('users','UserController');
 

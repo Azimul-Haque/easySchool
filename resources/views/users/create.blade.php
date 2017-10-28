@@ -44,7 +44,7 @@
                 </div>
                 <div class="form-group">
                     <strong>Role:</strong>
-                    {!! Form::select('roles[]', $roles,[], array('class' => 'form-control','multiple')) !!}
+                    {!! Form::select('roles[]', $roles,[], array('class' => 'form-control multiple','multiple')) !!}
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>
@@ -52,3 +52,12 @@
     </div>
     {!! Form::close() !!}
 @stop
+
+@section('js')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('.multiple').select2();
+        });
+    </script>
+@stop
+
