@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy']);
 
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
+	Route::get('students/class/{class}',['as'=>'students.class','uses'=>'StudentController@classwise']);
 	Route::get('students/create',['as'=>'students.create','uses'=>'StudentController@create']);
 	Route::post('students/create',['as'=>'students.store','uses'=>'StudentController@store']);
 	Route::get('students/{id}',['as'=>'students.show','uses'=>'StudentController@show']);

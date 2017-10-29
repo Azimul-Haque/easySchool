@@ -9,11 +9,6 @@ use App\Student;
 
 class StudentController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
         $students = Student::orderBy('id','DESC')->paginate(5);
@@ -21,11 +16,14 @@ class StudentController extends Controller
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+
+    public function classwise(Request $request, $class)
+    {
+        $students = Student::where('class', $class)->orderBy('id','DESC')->paginate(5);
+        return view('students.index',compact('students'))
+            ->with('i', ($request->input('page', 1) - 1) * 5);
+    }
+
     public function create()
     {
         return view('students.create');
