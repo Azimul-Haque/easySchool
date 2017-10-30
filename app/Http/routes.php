@@ -21,6 +21,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('roles/{id}',['as'=>'roles.update','uses'=>'RoleController@update']);
 	Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy']);
 
+	Route::get('settings',['as'=>'settings.edit','uses'=>'SettingController@edit']);
+	Route::patch('settings/{id}',['as'=>'settings.update','uses'=>'SettingController@update']);
+
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
 	Route::get('students/class/{class}',['as'=>'students.class','uses'=>'StudentController@classwise']);
 	Route::get('students/create',['as'=>'students.create','uses'=>'StudentController@create']);

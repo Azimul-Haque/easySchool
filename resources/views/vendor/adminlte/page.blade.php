@@ -260,6 +260,15 @@
                         </a>
                     </li>
                     @endpermission
+                    @permission('school-settings')
+                    <li class="header">Academic</li>
+                    <li class="{{ Request::is('settings') ? 'active' : '' }}">
+                        <a href="{{ route('settings.edit') }}">
+                            <i class="fa fa-fw fa-cogs"></i>
+                            <span>School Settings</span>
+                        </a>
+                    </li>
+                    @endpermission
                     @permission('student-crud')
                     <li class="{{ Request::is('students') ? 'active' : '' }}">
                         <a href="/students">
