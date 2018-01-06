@@ -260,6 +260,14 @@
                         </a>
                     </li>
                     @endpermission
+                    @permission('role-crud') {{-- for the time being role-crud is used --}}
+                    <li class="{{ Request::is('sms') ? 'active' : '' }}">
+                        <a href="/sms">
+                            <i class="fa fa-envelope-o"></i>
+                            <span>SMS</span>
+                        </a>
+                    </li>
+                    @endpermission
                     @permission('school-settings')
                     <li class="header">Academic</li>
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">

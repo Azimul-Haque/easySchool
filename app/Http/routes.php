@@ -32,4 +32,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('students/{id}/edit',['as'=>'students.edit','uses'=>'StudentController@edit']);
 	Route::patch('students/{id}',['as'=>'students.update','uses'=>'StudentController@update']);
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
+
+	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);	
 });

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Student;
+use SoapClient;
 
 
 class StudentController extends Controller
@@ -105,5 +106,38 @@ class StudentController extends Controller
         Student::find($id)->delete();
         return redirect()->route('students.index')
                         ->with('success','Student deleted successfully');
+    }
+
+    public function sendsms()
+    {
+        try{
+            $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
+            $paramArray = array(
+            'userName' => "01751398392",
+            'userPassword' => "OnnoRokomRocks.1992",
+        );
+            $value = $soapClient->__call("GetBalance", array($paramArray));
+            $netBalance = floor($value->GetBalanceResult/0.60);
+            echo 'Balance: '.$netBalance.'<br/>';
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
+
+        try{
+            $soapClient = new SoapClient("https://api2.onnorokomSMS.com/sendSMS.asmx?wsdl");
+            $paramArray = array(
+            'userName' => "",
+            'userPassword' => "",
+            'mobileNumber' => "01751398392",
+            'smsText' => "This is a SMS. ইহা একটি পরীক্ষামূলক বার্তা।",
+            'type' => "TEXT",
+            'maskName' => '',
+            'campaignName' => '',
+            );
+            $value = $soapClient->__call("OneToOne", array($paramArray));
+            echo $value->OneToOneResult;
+        } catch (Exception $e) {
+            echo $e->getMessage();
+        }
     }
 }
