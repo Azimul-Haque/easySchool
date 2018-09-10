@@ -23,7 +23,8 @@
 					<th>ঠিকানা</th>
 					<th>চলতি শিক্ষাবর্ষ</th>
 					<th>ক্লাস</th>
-					<th width="280px">Action</th>
+					<th>বকেয়া</th>
+					<th>Action</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -35,6 +36,13 @@
 						<td>{{ $school->address }}</td>
 						<td>{{ $school->currentsession }}</td>
 						<td>{{ $school->classes }}</td>
+						<td>
+							@if($school->due == 0)
+							<span style="color: red;">✘ আছে</span>
+							@else
+							<span style="color: green;">✔ নেই</span>
+							@endif
+						</td>
 						<td>
 							{{-- edit modal--}}
 							<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $school->id }}" data-backdrop="static">

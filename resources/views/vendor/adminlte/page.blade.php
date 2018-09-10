@@ -5,6 +5,20 @@
           href="{{ asset('vendor/adminlte/dist/css/skins/skin-' . config('adminlte.skin', 'blue') . '.min.css')}} ">
     @stack('css')
     @yield('css')
+    <style type="text/css">
+      .slimScrollBar {
+        background: none repeat scroll 0 0 #6b58cd !important;
+        border-radius: 0;
+        display: none;
+        height: 702.936px;
+        position: absolute;
+        right: 1px;
+        top: 145px;
+        width: 5px!important;
+        z-index: 99;
+        opacity:0.5!important;
+      }
+    </style>
 @stop
 
 @section('body_class', 'skin-' . config('adminlte.skin', 'blue') . ' sidebar-mini ' . (config('adminlte.layout') ? [
@@ -56,6 +70,40 @@
                 <!-- Navbar Right Menu -->
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
+                        <li class="tasks-menu">
+                            <a href="../../../" title="View Home Page">
+                                <i class="fa fa-eye" aria-hidden="true"></i>
+                            </a>
+                        </li>
+                        {{-- Bill Payment Notification --}}
+                        @if(Auth::User()->school->due == 0)
+                        <li class="dropdown tasks-menu">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+                                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                                <span class="label label-success">1</span>
+                            </a>
+                            <ul class="dropdown-menu">
+                              <li class="header">বাৎসরিক বিল সংক্রান্ত বার্তা!</li>
+                              <li>
+                                <!-- inner menu: contains the actual data -->
+                                <ul class="menu">
+                                  <li>
+                                    <a href="#">
+                                      <div class="pull-left">
+                                        
+                                      </div>
+                                      <h4>
+                                        Support Team
+                                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
+                                      </h4>
+                                      <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li>                                </ul>
+                              </li>
+                            </ul>
+                        </li>
+                        @endif
+                        {{-- Bill Payment Notification --}}
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
@@ -91,30 +139,6 @@
                                       <p>Why not buy a new awesome theme?</p>
                                     </a>
                                   </li>
-                                  <li>
-                                    <a href="#">
-                                      <div class="pull-left">
-                                        <img src="{{ asset('images/img.jpg')}}" class="img-circle messenger-favicon" alt="User Image">
-                                      </div>
-                                      <span>
-                                        Developers
-                                        <small><i class="fa fa-clock-o"></i> Today</small>
-                                      </span>
-                                      <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                  </li>
-                                  <li>
-                                    <a href="#">
-                                      <div class="pull-left">
-                                        <img src="{{ asset('images/img.jpg')}}" class="img-circle messenger-favicon" alt="User Image">
-                                      </div>
-                                      <h4>
-                                        Sales Department
-                                        <small><i class="fa fa-clock-o"></i> Yesterday</small>
-                                      </h4>
-                                      <p>Why not buy a new awesome theme?</p>
-                                    </a>
-                                  </li>
                                 </ul>
                               </li>
                               <li class="footer"><a href="#">See All Messages</a></li>
@@ -130,16 +154,6 @@
                                   <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
-                                      <li>
-                                        <a href="#">
-                                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                      </li>
-                                      <li>
-                                        <a href="#">
-                                          <i class="fa fa-users text-aqua"></i> 5 new members joined today
-                                        </a>
-                                      </li>
                                       <li>
                                         <a href="#">
                                           <i class="fa fa-users text-aqua"></i> 5 new members joined today
@@ -246,11 +260,11 @@
                     @permission('developer-control')
                     <li class="header">Developer Control</li>
                     @endpermission
-                    @permission('school-crud')
+                    @permission('school-management-crud')
                     <li class="{{ Request::is('schools') ? 'active' : '' }}">
                         <a href="/schools">
                             <i class="fa fa-fw fa-university"></i>
-                            <span>Schools</span>
+                            <span>School Management</span>
                         </a>
                     </li>
                     @endpermission
@@ -258,7 +272,7 @@
                     <li class="{{ Request::is('users') ? 'active' : '' }}">
                         <a href="/users">
                             <i class="fa fa-fw fa-user"></i>
-                            <span>Users</span>
+                            <span>User Management</span>
                         </a>
                     </li>
                     @endpermission
@@ -278,7 +292,21 @@
                         </a>
                     </li>
                     @endpermission
+                    @role('headmaster')
                     <li class="header">Administration</li>
+                    @endrole
+                    <li class="{{ Request::is('students') ? 'active' : '' }}">
+                        <a href="/students">
+                            <i class="fa fa-fw fa-check-square-o"></i>
+                            <span>Admission</span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::is('students') ? 'active' : '' }}">
+                        <a href="/students">
+                            <i class="fa fa-fw fa-users"></i>
+                            <span>Student Management</span>
+                        </a>
+                    </li>
                     @permission('school-settings')
                     <li class="header">Academic</li>
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">

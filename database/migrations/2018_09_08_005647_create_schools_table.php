@@ -21,6 +21,7 @@ class CreateSchoolsTable extends Migration
             $table->string('classes');
             $table->integer('isadmissionon');
             $table->integer('isresultpublished');
+            $table->integer('due');
             $table->string('currentexam')->nullable();
             $table->string('monogram')->nullable();
             $table->timestamps();

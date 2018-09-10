@@ -24,10 +24,15 @@ class UserController extends Controller
         $superadmins = Role::with('users')->where('name', 'superadmin')->get();
         $headmasters = Role::with('users')->where('name', 'headmaster')->get();
         //dd($role);
+
+        $roles = Role::lists('display_name','id');
+        $schools = School::lists('name','id');
         
         return view('users.index')
             ->withSuperadmins($superadmins)
-            ->withHeadmasters($headmasters);
+            ->withHeadmasters($headmasters)
+            ->withRoles($roles)
+            ->withSchools($schools);
     }
 
     
@@ -73,11 +78,7 @@ class UserController extends Controller
    
     public function edit($id)
     {
-        $user = User::find($id);
-        $roles = Role::lists('display_name','id');
-        $userRole = $user->roles->lists('id','id')->toArray();
-
-        return view('users.edit',compact('user','roles','userRole'));
+        // Done with modals
     }
 
     
