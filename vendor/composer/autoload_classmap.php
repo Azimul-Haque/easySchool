@@ -6,7 +6,9 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddSchoolToUsers' => $baseDir . '/database/migrations/2018_09_08_035613_add_school_to_users.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
+    'CreateSchoolsTable' => $baseDir . '/database/migrations/2018_09_08_005647_create_schools_table.php',
     'CreateSettingsTable' => $baseDir . '/database/migrations/2017_10_30_233231_create_settings_table.php',
     'CreateStudentsTable' => $baseDir . '/database/migrations/2017_10_23_235407_create_students_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',
@@ -490,6 +492,7 @@ return array(
     'PHP_Token_YIELD' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PHP_Token_YIELD_FROM' => $vendorDir . '/phpunit/php-token-stream/src/Token.php',
     'PermissionTableSeeder' => $baseDir . '/database/seeds/PermissionTableSeeder.php',
+    'School' => $baseDir . '/database/migrations/2018_09_08_040426_school.php',
     'SebastianBergmann\\Comparator\\ArrayComparator' => $vendorDir . '/sebastian/comparator/src/ArrayComparator.php',
     'SebastianBergmann\\Comparator\\Comparator' => $vendorDir . '/sebastian/comparator/src/Comparator.php',
     'SebastianBergmann\\Comparator\\ComparisonFailure' => $vendorDir . '/sebastian/comparator/src/ComparisonFailure.php',

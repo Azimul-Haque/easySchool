@@ -231,7 +231,8 @@
                 @endif
             </nav>
         </header>
-
+        
+        {{-- NAV MENU CODES ARE HERE --}}
         @if(config('adminlte.layout') != 'top-nav')
         <!-- Left side column. contains the logo and sidebar -->
         <aside class="main-sidebar">
@@ -242,8 +243,17 @@
                 <!-- Sidebar Menu -->
                 <ul class="sidebar-menu" data-widget="tree">
                     {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
-
-                    <li class="header">Administration</li>
+                    @permission('developer-control')
+                    <li class="header">Developer Control</li>
+                    @endpermission
+                    @permission('school-crud')
+                    <li class="{{ Request::is('schools') ? 'active' : '' }}">
+                        <a href="/schools">
+                            <i class="fa fa-fw fa-university"></i>
+                            <span>Schools</span>
+                        </a>
+                    </li>
+                    @endpermission
                     @permission('user-crud')
                     <li class="{{ Request::is('users') ? 'active' : '' }}">
                         <a href="/users">
@@ -262,12 +272,13 @@
                     @endpermission
                     @permission('role-crud') {{-- for the time being role-crud is used --}}
                     <li class="{{ Request::is('sms') ? 'active' : '' }}">
-                        <a href="/sms">
+                        <a href="/#">
                             <i class="fa fa-envelope-o"></i>
                             <span>SMS</span>
                         </a>
                     </li>
                     @endpermission
+                    <li class="header">Administration</li>
                     @permission('school-settings')
                     <li class="header">Academic</li>
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">

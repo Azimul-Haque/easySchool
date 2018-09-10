@@ -12,6 +12,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 	Route::resource('users','UserController');
+	Route::resource('schools','SchoolController');
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
 	Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create']);

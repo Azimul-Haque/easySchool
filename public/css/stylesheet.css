@@ -46,6 +46,7 @@ body{
     -webkit-box-shadow: none;
     box-shadow: none;
     border-style: none !important;*/
+    max-height: 100px;
     white-space: initial;
 }
 

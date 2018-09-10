@@ -11,7 +11,7 @@ use App\Setting;
 class SettingController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:superadmin');
+        $this->middleware('role:headmaster');
     }
 
     public function edit()

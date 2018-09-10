@@ -46,6 +46,10 @@
                     <strong>Role:</strong>
                     {!! Form::select('roles[]', $roles,[], array('class' => 'form-control multiple','multiple')) !!}
                 </div>
+                <div class="form-group">
+                    <strong>School:</strong>
+                    {!! Form::select('school_id', $schools, null, array('class' => 'form-control')) !!}
+                </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </div>
         </div>

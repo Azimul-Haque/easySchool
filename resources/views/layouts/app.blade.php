@@ -23,10 +23,119 @@
         .fa-btn {
             margin-right: 6px;
         }
+
+         .navbar {
+          min-height: 80px;
+        }
+
+        .navbar-brand {
+          padding: 0 15px;
+          height: 80px;
+          line-height: 80px;
+        }
+
+        .navbar-toggle {
+          /* (80px - button height 34px) / 2 = 23px */
+          margin-top: 23px;
+          padding: 9px 10px !important;
+        }
+
+        @media (min-width: 768px) {
+          .navbar-nav > li > a {
+            /* (80px - line-height of 27px) / 2 = 26.5px */
+            padding-top: 26.5px;
+            padding-bottom: 26.5px;
+            line-height: 27px;
+          }
+        }
+
+        .navbar-default {
+          background-color: #00838f;
+          border-color: #00b8d4;
+        }
+        .navbar-default .navbar-brand {
+          color: #ffffff;
+        }
+        .navbar-default .navbar-brand:hover,
+        .navbar-default .navbar-brand:focus {
+          color: #7afbfb;
+        }
+        .navbar-default .navbar-text {
+          color: #ffffff;
+        }
+        .navbar-default .navbar-nav > li > a {
+          color: #ffffff;
+        }
+        .navbar-default .navbar-nav > li > a:hover,
+        .navbar-default .navbar-nav > li > a:focus {
+          color: #7afbfb;
+        }
+        .navbar-default .navbar-nav > li > .dropdown-menu {
+          background-color: #00838f;
+        }
+        .navbar-default .navbar-nav > li > .dropdown-menu > li > a {
+          color: #ffffff;
+        }
+        .navbar-default .navbar-nav > li > .dropdown-menu > li > a:hover,
+        .navbar-default .navbar-nav > li > .dropdown-menu > li > a:focus {
+          color: #7afbfb;
+          background-color: #00b8d4;
+        }
+        .navbar-default .navbar-nav > li > .dropdown-menu > li.divider {
+          background-color: #00b8d4;
+        }
+        .navbar-default .navbar-nav > .active > a,
+        .navbar-default .navbar-nav > .active > a:hover,
+        .navbar-default .navbar-nav > .active > a:focus {
+          color: #7afbfb;
+          background-color: #00b8d4;
+        }
+        .navbar-default .navbar-nav > .open > a,
+        .navbar-default .navbar-nav > .open > a:hover,
+        .navbar-default .navbar-nav > .open > a:focus {
+          color: #7afbfb;
+          background-color: #00b8d4;
+        }
+        .navbar-default .navbar-toggle {
+          border-color: #00b8d4;
+        }
+        .navbar-default .navbar-toggle:hover,
+        .navbar-default .navbar-toggle:focus {
+          background-color: #00b8d4;
+        }
+        .navbar-default .navbar-toggle .icon-bar {
+          background-color: #ffffff;
+        }
+        .navbar-default .navbar-collapse,
+        .navbar-default .navbar-form {
+          border-color: #ffffff;
+        }
+        .navbar-default .navbar-link {
+          color: #ffffff;
+        }
+        .navbar-default .navbar-link:hover {
+          color: #7afbfb;
+        }
+
+        @media (max-width: 767px) {
+          .navbar-default .navbar-nav .open .dropdown-menu > li > a {
+            color: #ffffff;
+          }
+          .navbar-default .navbar-nav .open .dropdown-menu > li > a:hover,
+          .navbar-default .navbar-nav .open .dropdown-menu > li > a:focus {
+            color: #7afbfb;
+          }
+          .navbar-default .navbar-nav .open .dropdown-menu > .active > a,
+          .navbar-default .navbar-nav .open .dropdown-menu > .active > a:hover,
+          .navbar-default .navbar-nav .open .dropdown-menu > .active > a:focus {
+            color: #7afbfb;
+            background-color: #00b8d4;
+          }
+        }
     </style>
 </head>
 <body id="app-layout">
-    <nav class="navbar navbar-default navbar-static-top">
+    <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
 
@@ -40,7 +149,7 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    Laravel
+                    EasySchool Platform
                 </a>
             </div>
 

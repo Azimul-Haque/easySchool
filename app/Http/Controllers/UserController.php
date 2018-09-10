@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
 use App\Role;
+use App\School;
 use DB;
 use Hash;
 
@@ -20,16 +21,23 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-        $data = User::orderBy('id','ASC')->paginate(5);
-        return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $superadmins = Role::with('users')->where('name', 'superadmin')->get();
+        $headmasters = Role::with('users')->where('name', 'headmaster')->get();
+        //dd($role);
+        
+        return view('users.index')
+            ->withSuperadmins($superadmins)
+            ->withHeadmasters($headmasters);
     }
 
     
     public function create()
     {
         $roles = Role::lists('display_name','id');
-        return view('users.create',compact('roles'));
+        $schools = School::lists('name','id');
+        return view('users.create')
+                    ->withRoles($roles)
+                    ->withSchools($schools);
     }
 
     
@@ -39,9 +47,9 @@ class UserController extends Controller
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
             'password' => 'required|same:confirm-password',
-            'roles' => 'required'
+            'roles' => 'required',
+            'school_id' => 'required'
         ]);
-
         $input = $request->all();
         $input['password'] = Hash::make($input['password']);
 
