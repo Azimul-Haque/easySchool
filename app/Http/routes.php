@@ -1,9 +1,6 @@
 <?php
 
-
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', ['as'=>'index','uses'=>'IndexController@index']);
 
 Route::auth();
 
@@ -13,6 +10,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('users','UserController');
 	Route::resource('schools','SchoolController');
+	Route::resource('admissions','AdmissionController');
+
+	Route::get('admissiontoggle/on/{id}',['as'=>'admissions.toggleon','uses'=>'AdmissionController@admissionToggleOn']);
+	Route::get('admissiontoggle/off/{id}',['as'=>'admissions.toggleoff','uses'=>'AdmissionController@admissionToggleOff']);
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
 	Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create']);
@@ -34,5 +35,10 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('students/{id}',['as'=>'students.update','uses'=>'StudentController@update']);
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
 
-	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);	
+	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 });
+
+// public gets, posts and so on
+Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'AdmissionController@apply']);
+// public APIs
+Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);

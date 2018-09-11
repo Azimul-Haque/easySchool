@@ -291,6 +291,7 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
 
     public static $classMap = array (
         'AddSchoolToUsers' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_035613_add_school_to_users.php',
+        'CreateAdmissionsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_12_003709_create_admissions_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_005647_create_schools_table.php',
         'CreateSettingsTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_30_233231_create_settings_table.php',
@@ -776,7 +777,6 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
         'PHP_Token_YIELD' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PHP_Token_YIELD_FROM' => __DIR__ . '/..' . '/phpunit/php-token-stream/src/Token.php',
         'PermissionTableSeeder' => __DIR__ . '/../..' . '/database/seeds/PermissionTableSeeder.php',
-        'School' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_040426_school.php',
         'SebastianBergmann\\Comparator\\ArrayComparator' => __DIR__ . '/..' . '/sebastian/comparator/src/ArrayComparator.php',
         'SebastianBergmann\\Comparator\\Comparator' => __DIR__ . '/..' . '/sebastian/comparator/src/Comparator.php',
         'SebastianBergmann\\Comparator\\ComparisonFailure' => __DIR__ . '/..' . '/sebastian/comparator/src/ComparisonFailure.php',

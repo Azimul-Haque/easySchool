@@ -23,6 +23,7 @@
 					<th>ঠিকানা</th>
 					<th>চলতি শিক্ষাবর্ষ</th>
 					<th>ক্লাস</th>
+					<th>অ্যাাডমিশন</th>
 					<th>বকেয়া</th>
 					<th>Action</th>
 				</tr>
@@ -36,6 +37,7 @@
 						<td>{{ $school->address }}</td>
 						<td>{{ $school->currentsession }}</td>
 						<td>{{ $school->classes }}</td>
+						<td>{{ $school->isadmissionon }}</td>
 						<td>
 							@if($school->due == 0)
 							<span style="color: red;">✘ আছে</span>
@@ -151,7 +153,7 @@
 				                            <label style="margin-right: 40px;">
 				                            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes"
 																		@if(in_array($clss, $classes)) checked @endif
-				                            > {{ $clss }}
+				                            > Class {{ $clss }}
 				                            </label>
 				                          @endfor
 				                        </div>  

@@ -91,7 +91,7 @@
                   <br/>
                   @for($clss = 1;$clss<=10;$clss++)
                     <label style="margin-right: 40px;">
-                    <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes"> {{ $clss }}
+                    <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes"> Class {{ $clss }}
                     </label>
                   @endfor
                 </div>  

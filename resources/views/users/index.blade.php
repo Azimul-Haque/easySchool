@@ -146,7 +146,7 @@
 
 			<h4>Headmasters</h4>
 			<div class="table-responsive">
-				<table class="table">
+				<table class="table" id="datatable-headmasters">
 					<thead>
 						<tr>
 							<th>No</th>
@@ -154,7 +154,7 @@
 							<th>Email</th>
 							<th>Roles</th>
 							<th>School</th>
-							<th width="280px">Action</th>
+							<th>Action</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -278,5 +278,25 @@
         $(document).ready(function() {
             $('.multiple').select2();
         });
+    </script>
+    <script type="text/javascript">
+    	
+    	$(function () {
+    	  $('#example1').DataTable()
+    	  $('#datatable-headmasters').DataTable({
+    	    'paging'      : true,
+    	    'pageLength'  : 10,
+    	    'lengthChange': true,
+    	    'searching'   : true,
+    	    'ordering'    : true,
+    	    'info'        : true,
+    	    'autoWidth'   : true,
+    	    columnDefs: [
+    	    		{ targets: [5], visible: true, searchable: false},
+			        { targets: '_all', visible: true, searchable: true }
+			    ]
+    	  })
+    	})
+
     </script>
 @stop

@@ -13,7 +13,7 @@ class AddSchoolToUsers extends Migration
     public function up()
     {
         Schema::table('users', function ($table) {
-            $table->string('school_id')->after('id');
+            $table->integer('school_id')->after('id');
         });
     }
 
@@ -25,7 +25,7 @@ class AddSchoolToUsers extends Migration
     public function down()
     {
         Schema::table('users', function ($table) {
-            $table->dropColumn('school');
+            $table->dropColumn('school_id');
         });
     }
 }

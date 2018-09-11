@@ -19,6 +19,6 @@ class DashboardController extends Controller
     {
     	//Session::flash('success', 'Landed Succesfully!');
     	//dd(Auth::User()->can('role-list'));
-        return view('dashboard');
+        return view('dashboard.index');
     }
 }

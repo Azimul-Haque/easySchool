@@ -295,8 +295,8 @@
                     @role('headmaster')
                     <li class="header">Administration</li>
                     @endrole
-                    <li class="{{ Request::is('students') ? 'active' : '' }}">
-                        <a href="/students">
+                    <li class="{{ Request::is('admissions') ? 'active' : '' }}">
+                        <a href="{{ route('admissions.index') }}">
                             <i class="fa fa-fw fa-check-square-o"></i>
                             <span>Admission</span>
                         </a>

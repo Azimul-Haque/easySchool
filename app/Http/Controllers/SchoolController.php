@@ -9,6 +9,9 @@ use App\Http\Controllers\Controller;
 
 use App\School;
 
+use Validator, Input, Redirect, Session;
+use Auth;
+
 class SchoolController extends Controller
 {
     public function __construct(){
@@ -53,8 +56,6 @@ class SchoolController extends Controller
             'currentexam' => 'sometimes',
             'monogram' => 'sometimes'
         ]);
-
-        $input = $request->all();
 
         $school = new School();
         $school->name = $request->name;
@@ -109,7 +110,39 @@ class SchoolController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'name' => 'required',
+            'eiin' => 'required|integer|unique:schools,eiin,'.$id,
+            'address' => 'required',
+            'currentsession' => 'required',
+            'classes' => 'required',
+            'isadmissionon' => 'required',
+            'isresultpublished' => 'required',
+            'currentexam' => 'sometimes',
+            'monogram' => 'sometimes'
+        ]);
+
+
+        $school = School::find($id);
+        $school->name = $request->name;
+        $school->eiin = $request->eiin;
+        $school->address = $request->address;
+        $school->currentsession = $request->currentsession;
+        $school->classes = implode (", ", $request->classes);
+        $school->isadmissionon = $request->isadmissionon;
+        $school->isresultpublished = $request->isresultpublished;
+        $school->currentexam = $request->currentexam;
+        //$school->monogram = $request->monogram;
+        
+        
+        $school->save();
+        // foreach ($request->input('roles') as $key => $value) {
+        //     $user->attachRole($value);
+        // }
+        //$user->roles()->sync($request->roles, false);
+
+        return redirect()->route('schools.index')
+                        ->with('success','School updated successfully');
     }
 
     /**
