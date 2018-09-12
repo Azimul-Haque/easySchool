@@ -16,5 +16,5 @@ class School extends Model
       return $this->hasMany('App\Admission');
   }
 
-  protected $fillable = ['name', 'eiin', 'address', 'currentsession', 'classes', 'isadmissionon', 'isresultpublished', 'due', 'currentexam', 'monogram'];
+  protected $fillable = ['name', 'eiin', 'established', 'address', 'currentsession', 'classes', 'isadmissionon', 'isresultpublished', 'due', 'currentexam', 'monogram'];
 }

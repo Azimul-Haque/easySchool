@@ -47,6 +47,7 @@ class SchoolController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin',
             'address' => 'required',
             'currentsession' => 'required',
@@ -59,6 +60,7 @@ class SchoolController extends Controller
 
         $school = new School();
         $school->name = $request->name;
+        $school->established = $request->established;
         $school->eiin = $request->eiin;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;
@@ -112,6 +114,7 @@ class SchoolController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin,'.$id,
             'address' => 'required',
             'currentsession' => 'required',
@@ -125,6 +128,7 @@ class SchoolController extends Controller
 
         $school = School::find($id);
         $school->name = $request->name;
+        $school->established = $request->established;
         $school->eiin = $request->eiin;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;

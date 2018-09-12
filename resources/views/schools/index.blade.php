@@ -57,7 +57,7 @@
 						      <div class="modal-content">
 						        <div class="modal-header modal-header-primary">
 						          <button type="button" class="close" data-dismiss="modal">&times;</button>
-						          <h4 class="modal-title">{{ $school->name }} সম্পাদনাঃ</b></h4>
+						          <h4 class="modal-title">{{ $school->name }} সম্পাদনাঃ</h4>
 						        </div>
 						        {!! Form::model($school, ['route' => ['schools.update', $school->id], 'method' => 'PUT']) !!}
 						        <div class="modal-body">
@@ -78,7 +78,26 @@
 				                            </div>
 				                        </div>
 				                        <div class="row">
-				                            <div class="col-md-6">
+				                            <div class="col-md-4">
+				                                <div class="form-group">
+				                                  <strong>স্থাপিতঃ</strong>
+				                                  <select class="form-control" name="established" required="">
+				                                    <option value="" selected disabled>স্থাপনার সাল নির্ধারণ করুন</option>
+				                                  @php
+				                                    $y = date('Y');
+				                                    for($y; $y>=1901; $y--) {
+				                                  @endphp
+				                                      <option value="{{ $y }}"
+				                                      @if($school->established == $y)
+				                                      selected 
+				                                      @endif>{{ $y }}</option>
+				                                  @php
+				                                    }
+				                                  @endphp
+				                                  </select>
+				                                </div>
+				                            </div>
+				                            <div class="col-md-4">
 				                                <div class="form-group">
 				                                  <strong>চলতি অ্যাকাডেমিক সেশনঃ (শিক্ষাবর্ষ)</strong>
 				                                  <select class="form-control" name="currentsession" required="">
@@ -98,7 +117,7 @@
 				                                  </select>
 				                                </div>
 				                            </div>
-				                            <div class="col-md-6">
+				                            <div class="col-md-4">
 				                                <div class="form-group">
 				                                  <strong>ভর্তি প্রক্রিয়াঃ</strong>
 				                                  <br/>

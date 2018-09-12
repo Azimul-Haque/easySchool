@@ -16,6 +16,7 @@ class CreateSchoolsTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('eiin')->unique();
+            $table->integer('established');
             $table->text('address');
             $table->integer('currentsession');
             $table->string('classes');
