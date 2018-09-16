@@ -24,8 +24,8 @@
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
 
     @if(config('adminlte.plugins.datatables'))
-        <!-- DataTables -->
-        <link rel="stylesheet" href="//cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css">
+        <!-- DataTables with bootstrap 3 style -->
+        <link rel="stylesheet" href="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.css">
     @endif
 
     @yield('adminlte_css')
@@ -43,6 +43,7 @@
 @yield('body')
 
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 
 @if(config('adminlte.plugins.select2'))
@@ -51,8 +52,13 @@
 @endif
 
 @if(config('adminlte.plugins.datatables'))
-    <!-- DataTables -->
-    <script src="//cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+    <!-- DataTables with bootstrap 3 renderer -->
+    <script src="//cdn.datatables.net/v/bs/dt-1.10.18/datatables.min.js"></script>
+@endif
+
+@if(config('adminlte.plugins.chartjs'))
+    <!-- ChartJS -->
+    <script src="//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
 @endif
 
 @yield('adminlte_js')

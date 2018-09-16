@@ -10,7 +10,6 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('users','UserController');
 	Route::resource('schools','SchoolController');
-	Route::resource('admissions','AdmissionController');
 
 	Route::get('admissiontoggle/on/{id}',['as'=>'admissions.toggleon','uses'=>'AdmissionController@admissionToggleOn']);
 	Route::get('admissiontoggle/off/{id}',['as'=>'admissions.toggleoff','uses'=>'AdmissionController@admissionToggleOff']);
@@ -39,6 +38,13 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 // public gets, posts and so on
+Route::resource('admissions','AdmissionController');
 Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'AdmissionController@apply']);
+Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'AdmissionController@searchPaymentPage']);
+Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
+Route::get('admission/form/retrieve',['as'=>'admissions.retrieveid','uses'=>'AdmissionController@retrieveApplicationId']);
+
 // public APIs
 Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);
+Route::get('admission/form/retrieve/{dob}/{contact}',['as'=>'admissions.retrieveidapi','uses'=>'AdmissionController@retrieveApplicationIdAPI']);
+

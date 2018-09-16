@@ -76,7 +76,7 @@
                             </a>
                         </li>
                         {{-- Bill Payment Notification --}}
-                        @if(Auth::User()->school->due == 0)
+                        @if(Auth::check() && Auth::User()->school->due == 0)
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>

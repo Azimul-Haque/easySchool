@@ -6,7 +6,7 @@
     <h1>
     	অ্যাডমিশন
 	    <div class="pull-right">
-			  <a class="btn btn-success" href="{{ route('admissions.create') }}"> সংযোজন</a>
+			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"> সংযোজন</a>
 			</div>
 		</h1>
 @stop

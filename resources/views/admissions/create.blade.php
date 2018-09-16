@@ -49,7 +49,12 @@
             <div class="panel panel-default">
                 <div class="panel-heading"><center><h3><u>ভর্তির আবেদন</u></h3></center></div>
                 <div class="panel-body" id="admissionformpanelshow">
-                  {!! Form::open(array('route' => 'admissions.store','method'=>'POST')) !!}
+                  {!! Form::open(array('route' => 'admissions.store','method'=>'POST', 'enctype' => 'multipart/form-data')) !!}
+                    @if(isset($school))
+                      {!! Form::hidden('school_id', $school->id) !!}
+                    @else
+                      {!! Form::hidden('school_id', 'manual') !!}
+                    @endif
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">

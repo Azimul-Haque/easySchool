@@ -35,6 +35,8 @@
 
                                     @elseif($school->isadmissionon == 1)
                                     <a href="{{ route('admissions.apply', $school->id) }}" class="btn btn-success btn-sm">আবেদন করুন</a>
+                                    <a href="{{ route('admissions.searchpayment') }}" class="btn btn-primary btn-sm">পেমেন্ট চেক করুন</a>
+                                    <a href="{{ route('admissions.retrieveid') }}" class="btn btn-info btn-sm">অ্যাপলিকেশন আইডি উদ্ধার করুন</a>
                                     @endif
                                 </td>
                             </tr>
