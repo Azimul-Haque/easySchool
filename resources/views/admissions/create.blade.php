@@ -131,7 +131,7 @@
                           <label for="dob">জন্মতারিখ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                            {!! Form::text('dob', null, array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control')) !!}
+                            {!! Form::text('dob', null, array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control', 'autocomplete' => 'off')) !!}
                           </div>
                       </div>
                     </div>
