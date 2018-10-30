@@ -275,11 +275,6 @@
 
 @section('js')
     <script type="text/javascript">
-        $(document).ready(function() {
-            $('.multiple').select2();
-        });
-    </script>
-    <script type="text/javascript">
     	
     	$(function () {
     	  $('#example1').DataTable()

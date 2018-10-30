@@ -85,13 +85,23 @@
                     </div>
                 </div> 
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <strong>ঠিকানাঃ</strong>
                             {!! Form::text('address', null, array('placeholder' => 'ঠিকানা','class' => 'form-control', 'required' => '')) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>পেমেন্ট মেথডঃ</strong>
+                          <select class="form-control" name="payment_method" required="">
+                            <option value="" selected disabled>পেমেন্ট মেথড নির্ধারণ করুন</option>
+                            <option value="manual">ম্যানুয়াল</option>
+                            <option value="online">অনলাইন</option>
+                          </select>
+                        </div> 
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                           <strong>শেষ সংঘটিত পরীক্ষার ফলাফলঃ</strong>
                           <br/>

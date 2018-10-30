@@ -165,6 +165,7 @@ return [
         App\Providers\EntrustCustomServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
+        niklasravnsborg\LaravelPdf\PdfServiceProvider::class
 
     ],
 
@@ -219,6 +220,7 @@ return [
         'Entrust'   => Zizaco\Entrust\EntrustFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'NoCaptcha' => Anhskohbo\NoCaptcha\Facades\NoCaptcha::class,
+        'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class
 
     ],
 

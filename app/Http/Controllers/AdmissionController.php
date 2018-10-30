@@ -10,15 +10,18 @@ use App\Services\PayUService\Exception;
 
 use App\Admission;
 use App\School;
+use App\Student;
 
 use Image;
-use Validator, Input, Redirect, Session;
+use Validator, Input, Redirect, Session, File;
 use Auth;
+use Illuminate\Support\Facades\DB;
+use PDF;
 
 class AdmissionController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:headmaster', ['except' => ['create', 'apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI']]);
+        $this->middleware('role:headmaster', ['except' => ['create', 'apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI', 'pdfAdmitCard']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -26,6 +29,7 @@ class AdmissionController extends Controller
     {
         $admissions = Admission::where('school_id', Auth::User()->school_id)
                             ->where('session', Auth::User()->school->currentsession)
+                            ->where('application_status', null)
                             ->orderBy('id', 'ASC')->get();
         return view('admissions.index')
                     ->withAdmissions($admissions);
@@ -67,7 +71,7 @@ class AdmissionController extends Controller
             'address' => 'required|max:500',
             'contact' => 'required|max:255',
             'class' => 'required',
-            'image' => 'required|image|max:100'
+            'image' => 'required|image|max:200'
         ]);
 
         if($request->school_id == 'manual') {
@@ -191,7 +195,16 @@ class AdmissionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $application = Admission::find($id);
+        if($application->image != null) {
+          $image_path = public_path('images/admission-images/'. $application->image);
+          if(File::exists($image_path)) {
+              File::delete($image_path);
+          }
+        }
+        $application->delete();
+        Session::flash('success', 'আবেদনটি ডিলেট করা হয়েছে!');
+        return redirect()->route('admissions.index');
     }
 
     public function getAdmissionStatusAPI($id)
@@ -205,6 +218,7 @@ class AdmissionController extends Controller
         }
         
     }
+
     public function admissionToggleOn($id)
     {
         $school = School::find($id);
@@ -213,6 +227,7 @@ class AdmissionController extends Controller
 
         return 'success';
     }
+
     public function admissionToggleOff($id)
     {
         $school = School::find($id);
@@ -222,5 +237,60 @@ class AdmissionController extends Controller
         return 'success';
     }
 
+    public function pdfAdmitCard($application_id)
+    {
+        $application = Admission::where('application_id', $application_id)->first();
+        
+        $pdf = PDF::loadView('admissions.pdf.admitcard', ['application' => $application], ['data' => $application_id]);
+        $fileName = $application_id . '_Admit_Card' . '.pdf';
+        return $pdf->stream($fileName);
+    }
 
+    public function updatePaymentManual($id)
+    {
+        $application = Admission::find($id);
+        $application->payment = 1;
+        $application->save();
+        
+        Session::flash('success', 'পেমেন্ট সফল হয়েছে!');
+        return redirect()->route('admissions.index');
+    }
+
+    public function finalSelection(Request $request)
+    {
+        $this->validate($request, [
+            'application_ids' => 'required',
+        ]);
+        $application_ids_array = explode(',', $request->application_ids);
+        foreach ($application_ids_array as $application_id) {
+          $application = Admission::where('application_id', $application_id)->first();
+          try {
+            $student = new Student;
+            $student->school_id = $application->school_id;
+            $student->application_id = $application_id;
+            $student->name_bangla = $application->name_bangla;
+            $student->name = $application->name;
+            $student->father = $application->father;
+            $student->mother = $application->mother;
+            $student->nationality = $application->nationality;
+            $student->gender = $application->gender;
+            $student->dob = $application->dob;
+            $student->address = $application->address;
+            $student->contact = $application->contact;
+            $student->session = $application->session;
+            $student->class = $application->class;
+            $student->image = $application->image;
+            $student->save();
+          }
+          catch (\Exception $e) {
+            Session::flash('warning', $student->name_bangla.' ইতোমধ্যে আমাদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত রয়েছে!');
+            // do nothing
+          }
+          $application->application_status = 'done';
+          $application->save();
+        }
+        
+        Session::flash('success', 'আবেদনকারীদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত করা হয়েছে!');
+        return redirect()->route('admissions.index');
+    }
 }

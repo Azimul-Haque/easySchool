@@ -178,7 +178,7 @@
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <span class="btn btn-default btn-file">
-                                        ব্রাউজ করুন <input type="file" id="image" name="image">
+                                        ব্রাউজ করুন <input type="file" id="image" name="image" required="">
                                     </span>
                                 </span>
                                 <input type="text" class="form-control" readonly>
@@ -363,6 +363,15 @@
           }
           $("#image").change(function(){
               readURL(this);
+              var filesize = parseInt((this.files[0].size)/1024);
+              if(filesize > 200) {
+                $("#image").val('');
+                toastr.warning('File size is: '+filesize+' Kb. try uploading less than 200Kb', 'WARNING').css('width', '400px;');
+                  setTimeout(function() {
+                    $("#img-upload").attr('src', '{{ asset('images/dummy_student.jpg') }}');
+                    $("#imagePreview").attr('src', '{{ asset('images/dummy_student.jpg') }}');
+                  }, 1000);
+              }
           });
 
 

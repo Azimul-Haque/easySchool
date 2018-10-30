@@ -24,6 +24,8 @@ class CreateSchoolsTable extends Migration
             $table->integer('isresultpublished');
             $table->integer('due');
             $table->string('currentexam')->nullable();
+            $table->string('payment_method')->nullable();
+            $table->integer('admission_fee')->nullable();
             $table->string('monogram')->nullable();
             $table->timestamps();
         });

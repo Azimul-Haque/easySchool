@@ -294,7 +294,7 @@
                     @endpermission
                     @role('headmaster')
                     <li class="header">Administration</li>
-                    @endrole
+                    
                     <li class="{{ Request::is('admissions') ? 'active' : '' }}">
                         <a href="{{ route('admissions.index') }}">
                             <i class="fa fa-fw fa-check-square-o"></i>
@@ -341,7 +341,8 @@
                         <li><a href="{{ route('students.class', 4) }}"><i class="fa fa-id-badge"></i> Class Four</a></li>
                         <li><a href="{{ route('students.class', 5) }}"><i class="fa fa-id-badge"></i> Class Five</a></li>
                       </ul>
-                    </li>                    
+                    </li>
+                    @endrole                  
                     @endpermission
 
                     

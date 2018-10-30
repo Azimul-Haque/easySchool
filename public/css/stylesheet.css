@@ -207,6 +207,13 @@ ul.errorlist > li {
         overflow-x: visible; 
 }
 
+.modal-header-success {
+    color:#fff;
+    padding:9px 15px;
+    border-bottom:1px solid #eee;
+    background-color: #00a65a;
+}
+
 .modal-header-primary {
     color:#fff;
     padding:9px 15px;

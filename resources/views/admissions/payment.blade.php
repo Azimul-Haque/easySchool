@@ -26,9 +26,15 @@
                       <h4>অ্যাপলিকেশন আইডিঃ <b><u>{{ $application->application_id }}</u></b></h4>
                       <h4>পেমেন্ট স্ট্যাটাসঃ 
                         @if($application->payment == 0)
-                        <b style="color: red;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> পেমেন্ট করা হয়নি</b>
+                        <b style="color: red;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> পেমেন্ট করা হয়নি</b><br/><br/>
+                          @if($application->school->payment_method == 'online')
+                            <button class="btn btn-primary">এই বাটনে ক্লিক করে Aamarpay এর মাধ্যোমে {{ $application->school->admission_form_fee }} টাকা পরিশোধ করুন</button>
+                          @else
+                            স্কুলে গিয়ে {{ $application->school->admission_form_fee }} টাকা পরিশোধ করুন
+                          @endif
                         @elseif($application->payment == 1)
-                        <b style="color: green;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> পেমেন্ট করা হয়েছে</b>
+                        <b style="color: green;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> পেমেন্ট করা হয়েছে</b><br/><br/>
+                        <a href="{{ route('admissions.pdfadmitcard', $application->application_id) }}" target="_blank" class="btn btn-success">এডমিট কার্ড প্রিন্ট করুন</a>
                         @endif
                       </h4>
                       <p>অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>

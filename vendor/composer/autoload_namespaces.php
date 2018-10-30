@@ -10,6 +10,4 @@ return array(
     'Mockery' => array($vendorDir . '/mockery/mockery/library'),
     'MaddHatter\\LaravelFullcalendar' => array($vendorDir . '/maddhatter/laravel-fullcalendar/src'),
     'JakubOnderka\\PhpConsoleHighlighter' => array($vendorDir . '/jakub-onderka/php-console-highlighter/src'),
-    'JakubOnderka\\PhpConsoleColor' => array($vendorDir . '/jakub-onderka/php-console-color/src'),
-    'Doctrine\\Common\\Inflector\\' => array($vendorDir . '/doctrine/inflector/lib'),
 );

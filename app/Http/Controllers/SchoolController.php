@@ -53,6 +53,7 @@ class SchoolController extends Controller
             'currentsession' => 'required',
             'classes' => 'required',
             'isadmissionon' => 'required',
+            'payment_method' => 'required',
             'isresultpublished' => 'required',
             'currentexam' => 'sometimes',
             'monogram' => 'sometimes'
@@ -66,6 +67,7 @@ class SchoolController extends Controller
         $school->currentsession = $request->currentsession;
         $school->classes = implode (", ", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
+        $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
         $school->currentexam = $request->currentexam;
         //$school->monogram = $request->monogram;
@@ -120,6 +122,7 @@ class SchoolController extends Controller
             'currentsession' => 'required',
             'classes' => 'required',
             'isadmissionon' => 'required',
+            'payment_method' => 'required',
             'isresultpublished' => 'required',
             'currentexam' => 'sometimes',
             'monogram' => 'sometimes'
@@ -134,6 +137,7 @@ class SchoolController extends Controller
         $school->currentsession = $request->currentsession;
         $school->classes = implode (", ", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
+        $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
         $school->currentexam = $request->currentexam;
         //$school->monogram = $request->monogram;

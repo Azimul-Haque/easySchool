@@ -22,8 +22,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('roles/{id}',['as'=>'roles.update','uses'=>'RoleController@update']);
 	Route::delete('roles/{id}',['as'=>'roles.destroy','uses'=>'RoleController@destroy']);
 
-	Route::get('settings',['as'=>'settings.edit','uses'=>'SettingController@edit']);
-	Route::patch('settings/{id}',['as'=>'settings.update','uses'=>'SettingController@update']);
+	Route::get('settings/',['as'=>'settings.edit','uses'=>'SettingController@edit']);
+	Route::put('settings/{id}',['as'=>'settings.update','uses'=>'SettingController@update']);
 
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
 	Route::get('students/class/{class}',['as'=>'students.class','uses'=>'StudentController@classwise']);
@@ -35,6 +35,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
+
 });
 
 // public gets, posts and so on
@@ -43,8 +44,14 @@ Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'Admiss
 Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'AdmissionController@searchPaymentPage']);
 Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
 Route::get('admission/form/retrieve',['as'=>'admissions.retrieveid','uses'=>'AdmissionController@retrieveApplicationId']);
+Route::get('admission/form/payment/manual/{id}',['as'=>'admissions.updatepayment','uses'=>'AdmissionController@updatePaymentManual']);
+Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
 
 // public APIs
 Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);
 Route::get('admission/form/retrieve/{dob}/{contact}',['as'=>'admissions.retrieveidapi','uses'=>'AdmissionController@retrieveApplicationIdAPI']);
+
+
+// pdf generators
+Route::get('admission/form/admitcard/pdf/{application_id}',['as'=>'admissions.pdfadmitcard','uses'=>'AdmissionController@pdfAdmitCard']);
 
