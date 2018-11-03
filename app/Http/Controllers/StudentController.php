@@ -6,15 +6,37 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Student;
 use SoapClient;
+use Auth, Session, DB, File;
+use Image;
 
 
 class StudentController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $students = Student::orderBy('id','DESC')->paginate(5);
-        return view('students.index',compact('students'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', Auth::user()->school->currentsession)
+                           ->orderBy('created_at','DESC')->get();
+        return view('students.index')
+                    ->withSessionsearch(null)
+                    ->withClasssearch(null)
+                    ->withSectionsearch(null)
+                    ->withStudents($students);
+    }
+
+    public function getStudents($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session',$session)
+                           ->where('class',$class)
+                           ->where('section',$section)
+                           ->orderBy('id','DESC')->get();
+
+        return view('students.index')
+                    ->withSessionsearch($session)
+                    ->withClasssearch($class)
+                    ->withSectionsearch($section)
+                    ->withStudents($students);
     }
 
 
@@ -58,8 +80,7 @@ class StudentController extends Controller
      */
     public function show($id)
     {
-        $student = Student::find($id);
-        return view('students.show',compact('student'));
+        
     }
 
     /**
@@ -70,8 +91,17 @@ class StudentController extends Controller
      */
     public function edit($id)
     {
-        $student = Student::find($id);
-        return view('students.edit',compact('student'));
+        try {
+          $student = Student::where('id', $id)
+                            ->where('school_id', Auth::user()->school_id)->first();
+          if($student == null) {
+            return redirect()->route('students.index');
+          }
+          return view('students.edit',compact('student'));
+        }
+        catch (\Exception $e) {
+          return redirect()->route('students.index');
+        }
     }
 
     /**
@@ -84,15 +114,46 @@ class StudentController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'name' => 'required',
+            'name_bangla' => 'required|max:255',
+            'name' => 'required|max:255',
+            'father' => 'required|max:255',
+            'mother' => 'required|max:255',
+            'dob' => 'required|max:255',
+            'address' => 'required|max:500',
+            'contact' => 'required|numeric',
             'class' => 'required',
-            'roll' => 'required',
+            'section' => 'required',
+            'roll' => 'required|numeric',
+            'session' => 'required|numeric',
+            'image' => 'sometimes|image|max:200'
         ]);
 
-        Student::find($id)->update($request->all());
+        $student = Student::find($id);
+        $student->name_bangla = $request->name_bangla;
+        $student->name = $request->name;
+        $student->father = $request->father;
+        $student->mother = $request->mother;
+        $student->dob = \Carbon\Carbon::parse($request->dob);
+        $student->address = $request->address;
+        $student->contact = $request->contact;
+        $student->class = $request->class;
+        $student->section = $request->section;
+        $student->roll = $request->roll;
+        $student->session = $request->session;
 
-        return redirect()->route('students.index')
-                        ->with('success','Student updated successfully');
+        // image upload
+        if($request->hasFile('image')) {
+            $image      = $request->file('image');
+            $filename   = $student->image;
+            $location   = public_path('images/admission-images/'. $filename);
+            Image::make($image)->resize(200, 200)->save($location);
+            $student->image = $filename;
+        }
+
+        $student->save();
+
+        Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
+        return redirect()->route('students.getstudents', [$student->session, $student->class, $student->section]);
     }
 
     /**
@@ -106,6 +167,19 @@ class StudentController extends Controller
         Student::find($id)->delete();
         return redirect()->route('students.index')
                         ->with('success','Student deleted successfully');
+    }
+
+    public function promoteBulk(Request $request)
+    {
+        $student_ids = explode(',', $request->student_ids);
+        foreach ($student_ids as $student_id) {
+            $student = Student::find($student_id);
+            $student->class = $request->promotion_class;
+            $student->session = $request->promotion_session;
+            $student->save();
+        }
+        return redirect()->route('students.index')
+                     ->with('success','সফলভাবে উন্নীত করা হয়েছে!');
     }
 
     public function sendsms()

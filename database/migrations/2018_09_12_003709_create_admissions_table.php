@@ -15,7 +15,8 @@ class CreateAdmissionsTable extends Migration
         Schema::create('admissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id')->unsigned();
-            $table->string('application_id')->uniqe();
+            $table->integer('application_id')->unique();
+            $table->integer('application_roll')->unsigned();
             $table->string('name_bangla');
             $table->string('name');
             $table->string('father');

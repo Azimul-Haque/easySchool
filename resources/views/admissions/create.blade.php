@@ -61,7 +61,7 @@
                           <label for="name_bangla">আবেদনকারীর নাম (বাংলায়)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় পুরো নাম','class' => 'form-control', 'id' => 'name_bangla')) !!}
+                            {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় পুরো নাম','class' => 'form-control', 'id' => 'name_bangla', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -70,7 +70,7 @@
                           <label for="name">Applicants Name (English)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name', null, array('placeholder' => 'Name in English','class' => 'form-control', 'id' => 'name')) !!}
+                            {!! Form::text('name', null, array('placeholder' => 'Name in English','class' => 'form-control', 'id' => 'name', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -81,7 +81,7 @@
                           <label for="father">Father's Name (English)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                            {!! Form::text('father', null, array('placeholder' => 'Father&#8216;s Name in English','class' => 'form-control', 'id' => 'father')) !!}
+                            {!! Form::text('father', null, array('placeholder' => 'Father&#8216;s Name in English','class' => 'form-control', 'id' => 'father', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -90,7 +90,7 @@
                           <label for="mother">Mother's Name (English)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-female"></i></span>
-                            {!! Form::text('mother', null, array('placeholder' => 'Mother&#8216;s Name in English','class' => 'form-control', 'id' => 'mother')) !!}
+                            {!! Form::text('mother', null, array('placeholder' => 'Mother&#8216;s Name in English','class' => 'form-control', 'id' => 'mother', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -131,7 +131,7 @@
                           <label for="dob">জন্মতারিখ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                            {!! Form::text('dob', null, array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control', 'autocomplete' => 'off')) !!}
+                            {!! Form::text('dob', null, array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control', 'autocomplete' => 'off', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -140,7 +140,7 @@
                           <label for="address">ঠিকানা</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('address', null, array('placeholder' => 'যোগাযোগের পূর্ণ ঠিকানা','class' => 'form-control', 'id' => 'address')) !!}
+                            {!! Form::text('address', null, array('placeholder' => 'যোগাযোগের পূর্ণ ঠিকানা','class' => 'form-control', 'id' => 'address', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -151,7 +151,7 @@
                         <label for="contact">অভিভাবকের মোবাইল নম্বর</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            {!! Form::text('contact', null, array('placeholder' => 'Put Mobile Number','class' => 'form-control', 'id' => 'contact')) !!}
+                            {!! Form::text('contact', null, array('placeholder' => 'Put Mobile Number','class' => 'form-control', 'id' => 'contact', 'required' => '')) !!}
                         </div>
                       </div>
                     </div>

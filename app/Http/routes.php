@@ -26,6 +26,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::put('settings/{id}',['as'=>'settings.update','uses'=>'SettingController@update']);
 
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
+	Route::get('students/{session}/{class}/{section}',['as'=>'students.getstudents','uses'=>'StudentController@getStudents']);
 	Route::get('students/class/{class}',['as'=>'students.class','uses'=>'StudentController@classwise']);
 	Route::get('students/create',['as'=>'students.create','uses'=>'StudentController@create']);
 	Route::post('students/create',['as'=>'students.store','uses'=>'StudentController@store']);
@@ -33,6 +34,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('students/{id}/edit',['as'=>'students.edit','uses'=>'StudentController@edit']);
 	Route::patch('students/{id}',['as'=>'students.update','uses'=>'StudentController@update']);
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
+	Route::post('students/promote/bulk',['as'=>'students.promotebulk','uses'=>'StudentController@promoteBulk']);
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 

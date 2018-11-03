@@ -2,28 +2,22 @@
 
 @section('title', 'Easy School | Payment')
 
-@section('css')
-<style type="text/css">
-    .panel-default>.panel-heading {
-        color: #fff !important;
-        background-color: #0097a7 !important;
-        border-color: #ddd;
-    }
-</style>
-@stop
-
 @section('content')
 <div class="container" style="margin-top: 100px;">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 full-width-col">
             <div class="panel panel-default">
                 <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | আবেদন সফলভাবে করা হয়েছে</u></h3></center></div>
                 <div class="panel-body">
                   <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-9">
                       <h4>আবেদিত স্কুলঃ <b>{{ $application->school->name }}</b></h4>
-                      <big>{{ $application->name }}</big>, পিতাঃ {{ $application->father }}, মাতাঃ {{ $application->mother }} এর আবেদন সফলভাবে সম্পন্ন হয়েছে।<b></b>
+                      <big>{{ $application->name }}</big><br/>
+                      পিতাঃ {{ $application->father }}<br/>
+                      মাতাঃ {{ $application->mother }}<br/>
+
                       <h4>অ্যাপলিকেশন আইডিঃ <b><u>{{ $application->application_id }}</u></b></h4>
+                      <h4>অ্যাপলিকেশন রোলঃ <b>{{ $application->application_roll }}</b></h4>
                       <h4>পেমেন্ট স্ট্যাটাসঃ 
                         @if($application->payment == 0)
                         <b style="color: red;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> পেমেন্ট করা হয়নি</b><br/><br/>
@@ -39,7 +33,7 @@
                       </h4>
                       <p>অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-3">
                       <img src="{{ url('/images/admission-images/'.$application->image) }}" style="height: 120px; width: auto; border: 1px solid #0196A6;">
                     </div>
                   </div>
@@ -52,4 +46,58 @@
 
 @section('js')
 
+@stop
+
+@section('css')
+<style type="text/css">
+    .panel-default>.panel-heading {
+        color: #fff !important;
+        background-color: #0097a7 !important;
+        border-color: #ddd;
+    }
+    @media print {
+     .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12 {
+          float: left;
+     }
+     .col-md-12 {
+          width: 100%;
+     }
+     .col-md-11 {
+          width: 91.66666667%;
+     }
+     .col-md-10 {
+          width: 83.33333333%;
+     }
+     .col-md-9 {
+          width: 75%;
+     }
+     .col-md-8 {
+          width: 66.66666667%;
+     }
+     .col-md-7 {
+          width: 58.33333333%;
+     }
+     .col-md-6 {
+          width: 50%;
+     }
+     .col-md-5 {
+          width: 41.66666667%;
+     }
+     .col-md-4 {
+          width: 33.33333333%;
+     }
+     .col-md-3 {
+          width: 25%;
+     }
+     .col-md-2 {
+          width: 16.66666667%;
+     }
+     .col-md-1 {
+          width: 8.33333333%;
+     }
+     .full-width-col {
+      width: 100%;
+     }
+  }
+</style>
 @stop

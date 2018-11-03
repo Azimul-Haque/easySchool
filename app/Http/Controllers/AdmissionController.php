@@ -44,6 +44,7 @@ class AdmissionController extends Controller
     {
         return view('admissions.create');
     }
+
     public function apply($id)
     {
         $school = School::find($id);
@@ -79,14 +80,35 @@ class AdmissionController extends Controller
         }
 
         $school = School::find($request->school_id);
-        $length = 5;
-        $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-        $random_string = substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
-        $application_id = $school->eiin.$request->class.$random_string;
+        // $length = 5;
+        // $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        // $random_string = substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+        
+        //dd($application_id);
+        $last_application = Admission::where('school_id', $school->id)
+                                     ->where('class', $request->class)
+                                     ->where('session', $school->currentsession)
+                                     ->orderBy('application_id', 'desc')
+                                     ->first();
+        if($last_application != null) {
+            $application_id = $last_application->application_id + 1;
+            //dd($application_id);
+        } else {
+            $first_id_for_application = str_pad(1, 3, '0', STR_PAD_LEFT);
+            if(date('m') > 10) {
+                $admission_year = date('y') + 1;
+            } else {
+                $admission_year = date('Y');
+            }
+            $application_id = $request->class.$admission_year.$school->id.$first_id_for_application;
+            //dd($application_id);
+        }
+        
 
         $admission = new Admission;
         $admission->school_id = $request->school_id;
         $admission->application_id = $application_id;
+        $admission->application_roll = substr($application_id, -3);
         $admission->name_bangla = $request->name_bangla;
         $admission->name = $request->name;
         $admission->father = $request->father;

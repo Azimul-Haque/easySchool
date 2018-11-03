@@ -25,6 +25,7 @@
 
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
 	<div class="pull-right">
+		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
 		<button class="btn btn-primary btn-sm" id="showCheckbox"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি</button>
 	</div>
 	</h4>
@@ -33,13 +34,14 @@
 			<thead>
 				<tr>
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
+					<th>ক্লাস</th>
 					<th>নাম</th>
 					<th>পিতা</th>
 					<th>মাতা</th>
 					<th>জন্মতারিখ</th>
 					<th>শিক্ষাবর্ষ</th>
-					<th>ক্লাস</th>
 					<th>পেমেন্ট</th>
+					<th>প্রাপ্ত নম্বর</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -49,12 +51,12 @@
 						<td class="hiddenCheckbox" id="hiddenCheckbox">
 							<input type="checkbox" name="application_check_ids[]" value="{{ $admission->application_id }}" @if($admission->payment == 0) disabled @endif>
 						</td>
+						<td>{{ $admission->class }}</td>
 						<td>{{ $admission->name }}</td>
 						<td>{{ $admission->father }}</td>
 						<td>{{ $admission->mother }}</td>
 						<td>{{ date('F d, Y', strtotime($admission->dob)) }}</td>
 						<td>{{ $admission->session }}</td>
-						<td>{{ $admission->class }}</td>
 						<td>
 							@if($admission->payment == 0)
 							<span style="color: red;">✘</span>
@@ -62,6 +64,7 @@
 							<span style="color: green;">✔</span>
 							@endif
 						</td>
+						<td><input type="text" name="" class="form-control" style="width: 70px;"></td>
 						<td>
 							{{-- payment modal--}}
 							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#paymentModal{{ $admission->id }}" data-backdrop="static">
@@ -214,7 +217,7 @@
 				});
 				$('#application_ids').val(checked);
 				if($('#application_ids').val() == '') {
-					toastr.success('অন্তত একটি আবেদনকারী নির্বাচন করুন!', 'সফল (SUCCESS)').css('width','400px');
+					toastr.warning('অন্তত একজন আবেদনকারী নির্বাচন করুন!', 'Warning').css('width','400px');
 					
 					setTimeout(function() {
             $('#finalSelectModal').modal('hide');
@@ -227,13 +230,13 @@
     	  $('#example1').DataTable()
     	  $('#datatable-admissions').DataTable({
     	    'paging'      : true,
-    	    'pageLength'  : 3,
+    	    'pageLength'  : 10,
     	    'lengthChange': true,
     	    'searching'   : true,
     	    'ordering'    : true,
     	    'info'        : true,
     	    'autoWidth'   : true,
-    	    'order': [[ 6, "desc" ]],
+    	    'order': [[ 2, "asc" ]],
 		       // columnDefs: [
 		       //    { targets: [5], type: 'date'}
 		       // ]
