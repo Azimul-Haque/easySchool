@@ -28,9 +28,12 @@ class CreateAdmissionsTable extends Migration
             $table->string('contact');
             $table->string('session');
             $table->integer('class');
+            $table->integer('section');
             $table->string('image');
             $table->integer('payment');
             $table->integer('application_status ')->nullable();
+            $table->string('mark_obtained ')->nullable();
+            $table->integer('merit_position ')->unsigned(->nullable();
             $table->timestamps();
         });
     }

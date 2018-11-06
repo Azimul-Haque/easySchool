@@ -26,7 +26,30 @@
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
 	<div class="pull-right">
 		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
-		<button class="btn btn-primary btn-sm" id="showCheckbox"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি</button>
+		<button class="btn btn-primary btn-sm" id="submitMarkBtn" data-toggle="modal" data-target="#submitMarkModal" data-backdrop="static"><i class="fa fa-bar-chart"></i> নম্বর প্রদান</button>
+		<!-- submit mark Modal -->
+    <div class="modal fade" id="submitMarkModal" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header modal-header-primary">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">চূড়ান্ত নম্বর দাখিল</h4>
+          </div>
+          {!! Form::open(array('route' => 'admissions.submitmark','method'=>'POST')) !!}
+          <div class="modal-body">
+            আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের নম্বর দাখিল করতে চান?
+            {!! Form::hidden('application_ids_with_marks', null, ['id' => 'application_ids_with_marks', 'required' => '']) !!}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          {!! Form::close() !!}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- submit mark Modal -->
+    <button class="btn btn-info btn-sm" id="showFinalSelectionCheckbox"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি</button>
 	</div>
 	</h4>
 	<div class="table-responsive">
@@ -34,14 +57,17 @@
 			<thead>
 				<tr>
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
+					<th class="hiddenFinalSelectionCheckbox" id="hiddenFinalSelectionCheckbox"></th>
 					<th>ক্লাস</th>
+					<th>শাখা</th>
+					<th>আইডি</th>
 					<th>নাম</th>
-					<th>পিতা</th>
-					<th>মাতা</th>
 					<th>জন্মতারিখ</th>
 					<th>শিক্ষাবর্ষ</th>
 					<th>পেমেন্ট</th>
 					<th>প্রাপ্ত নম্বর</th>
+					<th>ভর্তি স্ট্যাটাস</th>
+					<th>মেরিট পজিশন</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -49,12 +75,28 @@
 				@foreach($admissions as $admission)
 					<tr>
 						<td class="hiddenCheckbox" id="hiddenCheckbox">
-							<input type="checkbox" name="application_check_ids[]" value="{{ $admission->application_id }}" @if($admission->payment == 0) disabled @endif>
+							@if($admission->payment == 0) 
+							<input type="checkbox" name="application_check_ids[]" value="{{ $admission->application_id }}">
+							@endif
+						</td>
+
+						<td class="hiddenFinalSelectionCheckbox" id="hiddenFinalSelectionCheckbox">
+							@if($admission->mark_obtained > 0) 
+							<input type="checkbox" name="application_final_selection_check_ids[]" value="{{ $admission->application_id }}">
+							@endif
 						</td>
 						<td>{{ $admission->class }}</td>
+						<td>
+							@if( $admission->section == 1)
+								A
+							@elseif( $admission->section == 2)
+								B
+							@elseif( $admission->section == 3)
+							 	C
+							@endif
+						</td>
+						<td>{{ $admission->application_id }}</td>
 						<td>{{ $admission->name }}</td>
-						<td>{{ $admission->father }}</td>
-						<td>{{ $admission->mother }}</td>
 						<td>{{ date('F d, Y', strtotime($admission->dob)) }}</td>
 						<td>{{ $admission->session }}</td>
 						<td>
@@ -64,7 +106,19 @@
 							<span style="color: green;">✔</span>
 							@endif
 						</td>
-						<td><input type="text" name="" class="form-control" style="width: 70px;"></td>
+						<td>
+							@if($admission->payment != 0)
+							<input type="text" name="" class="form-control" style="width: 50px;" id="mark_obtained{{ $admission->application_id }}" value="{{ $admission->mark_obtained }}">
+							@endif
+						</td>
+						<td>
+							@if($admission->application_status == 'done')
+								<span style="color: green;">✔ ভর্তিকৃত</span>
+							@else
+								ভর্তিচ্ছু
+							@endif
+						</td>
+						<td>{{ $admission->merit_position }}</td>
 						<td>
 							{{-- payment modal--}}
 							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#paymentModal{{ $admission->id }}" data-backdrop="static">
@@ -77,10 +131,10 @@
 					            <div class="modal-content">
 					              <div class="modal-header modal-header-success">
 					                <button type="button" class="close" data-dismiss="modal">&times;</button>
-					                <h4 class="modal-title">Payment confirmation</h4>
+					                <h4 class="modal-title">পেমেন্ট নিশ্চিতকরণ</h4>
 					              </div>
 					              <div class="modal-body">
-					                Confirm payment of <b>{{ $admission->name }}</b>?
+					                <b>{{ $admission->name }}</b> এর পেমেন্ট দাখিল করবেন?
 					              </div>
 					              <div class="modal-footer">
 					                <a href="{{ route('admissions.updatepayment', $admission->id) }}" class="btn btn-success">Save</a>
@@ -99,10 +153,10 @@
 					            <div class="modal-content">
 					              <div class="modal-header modal-header-danger">
 					                <button type="button" class="close" data-dismiss="modal">&times;</button>
-					                <h4 class="modal-title">Delete confirmation</h4>
+					                <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
 					              </div>
 					              <div class="modal-body">
-					                Delete admission <b>{{ $admission->name }}</b>?
+					                <b>{{ $admission->name }}</b> কে ডিলেট করবেন?
 					              </div>
 					              <div class="modal-footer">
 					                {!! Form::model($admission, ['route' => ['admissions.destroy', $admission->id], 'method' => 'DELETE']) !!}
@@ -121,20 +175,20 @@
 		</table>
 	</div>
 
-	{{-- final select modal--}}
-	<button class="btn btn-success hiddenFinalSaveBtn" id="hiddenFinalSaveBtn" data-toggle="modal" data-target="#finalSelectModal" data-backdrop="static">চূড়ান্তভাবে নির্বাচন করুন</button>
+	{{-- bulk payment modal--}}
+	<button class="btn btn-success bulkPaymentSaveBtn" id="bulkPaymentSaveBtn" data-toggle="modal" data-target="#bulkPaymentModal" data-backdrop="static">পেমেন্ট দাখিল করুন</button>
 	<!-- Trigger the modal with a button -->
     	<!-- Modal -->
-      <div class="modal fade" id="finalSelectModal" role="dialog">
+      <div class="modal fade" id="bulkPaymentModal" role="dialog">
         <div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header modal-header-success">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">চূড়ান্ত নির্বাচন</h4>
+              <h4 class="modal-title">চূড়ান্ত পেমেন্ট দাখিল</h4>
             </div>
-            {!! Form::open(array('route' => 'admissions.finalselection','method'=>'POST')) !!}
+            {!! Form::open(array('route' => 'admissions.bulkpayment','method'=>'POST')) !!}
             <div class="modal-body">
-              আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্ত নির্বাচন করতে চান?
+              আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের পেমেন্ট দাখিল করতে চান?
               {!! Form::hidden('application_ids', null, ['id' => 'application_ids', 'required' => '']) !!}
             </div>
             <div class="modal-footer">
@@ -145,7 +199,32 @@
           </div>
         </div>
       </div>
-  {{-- final select modal--}}
+  {{-- bulk payment modal--}}
+  {{-- final selection modal--}}
+  <button class="btn btn-info btn-sm finalSelectionSubmitBtn" id="finalSelectionSubmitBtn" data-toggle="modal" data-target="#finalSelectionModal" data-backdrop="static"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি করুন</button>
+		<!-- final selection Modal -->
+    <div class="modal fade" id="finalSelectionModal" role="dialog">
+      <div class="modal-dialog modal-md">
+        <div class="modal-content">
+          <div class="modal-header modal-header-info">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4 class="modal-title">চূড়ান্ত ভর্তি</h4>
+          </div>
+          {!! Form::open(array('route' => 'admissions.finalselection','method'=>'POST')) !!}
+          <div class="modal-body">
+            আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্তভাবে ভর্তি করতে চান?
+            {!! Form::hidden('application_ids_to_admit', null, ['id' => 'application_ids_to_admit', 'required' => '']) !!}
+          </div>
+          <div class="modal-footer">
+            <button type="submit" class="btn btn-info">Save</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+          {!! Form::close() !!}
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- final selection Modal -->
+  {{-- final selection modal--}}
 @stop
 
 @section('js')
@@ -206,10 +285,15 @@
 	    $('#showCheckbox').click(function() {
 	    	$('td:nth-child(1)').toggleClass('hiddenCheckbox');
 	    	$('th:nth-child(1)').toggleClass('hiddenCheckbox');
-	    	$('#hiddenFinalSaveBtn').toggleClass('hiddenFinalSaveBtn');
+	    	$('#bulkPaymentSaveBtn').toggleClass('bulkPaymentSaveBtn');
+	    });
+	    $('#showFinalSelectionCheckbox').click(function() {
+	    	$('td:nth-child(2)').toggleClass('hiddenFinalSelectionCheckbox');
+	    	$('th:nth-child(2)').toggleClass('hiddenFinalSelectionCheckbox');
+	    	$('#finalSelectionSubmitBtn').toggleClass('finalSelectionSubmitBtn');
 	    });
 
-	    $('#hiddenFinalSaveBtn').click(function() {
+	    $('#bulkPaymentSaveBtn').click(function() {
 	    	var checked = [];
 				$("input[name='application_check_ids[]']:checked").each(function ()
 				{
@@ -218,25 +302,65 @@
 				$('#application_ids').val(checked);
 				if($('#application_ids').val() == '') {
 					toastr.warning('অন্তত একজন আবেদনকারী নির্বাচন করুন!', 'Warning').css('width','400px');
-					
 					setTimeout(function() {
-            $('#finalSelectModal').modal('hide');
-          }, 1000);
+            $('#bulkPaymentModal').modal('hide');
+          }, 600);
 				}
 				console.log(checked);
+	    });
+
+	    $('#finalSelectionSubmitBtn').click(function() {
+	    	var checked_final = [];
+				$("input[name='application_final_selection_check_ids[]']:checked").each(function ()
+				{
+				    checked_final.push($(this).val());
+				});
+				$('#application_ids_to_admit').val(checked_final);
+				if($('#application_ids_to_admit').val() == '') {
+					toastr.warning('অন্তত একজন আবেদনকারী নির্বাচন করুন!', 'Warning').css('width','400px');
+					setTimeout(function() {
+            $('#finalSelectionModal').modal('hide');
+          }, 600);
+				}
+				console.log(checked_final);
+	    });
+
+	    $('#submitMarkBtn').click(function() {
+	    	var applications = [];
+				@foreach($admissions as $admission)
+					var mark = 0;
+					if((($('#mark_obtained{{ $admission->application_id }}').val() != '') && $('#mark_obtained{{ $admission->application_id }}').val() != undefined) && ({{ $admission->payment }} != 0)) {
+						mark = $('#mark_obtained{{ $admission->application_id }}').val();
+						var id = {{ $admission->application_id }};
+					  applications.push(id+':'+mark);
+					} else {
+						// toastr.warning('সকল প্রাপ্ত নম্বর ঘরে নম্বর প্রদান করুন!', 'Warning').css('width','400px');
+						// setTimeout(function() {
+	     //        $('#submitMarkModal').modal('hide');
+	     //      }, 600);
+					}
+				@endforeach
+				$('#application_ids_with_marks').val(applications);
+				if($('#application_ids_with_marks').val() == '') {
+					toastr.warning('অন্তত একজন আবেদনকারীকে নম্বর প্রদান করুন!', 'Warning').css('width','400px');
+					setTimeout(function() {
+            $('#submitMarkModal').modal('hide');
+          }, 600);
+				}
+				console.log(applications);
 	    });
 
 	    $(function () {
     	  $('#example1').DataTable()
     	  $('#datatable-admissions').DataTable({
     	    'paging'      : true,
-    	    'pageLength'  : 10,
+    	    'pageLength'  : 15,
     	    'lengthChange': true,
     	    'searching'   : true,
     	    'ordering'    : true,
     	    'info'        : true,
     	    'autoWidth'   : true,
-    	    'order': [[ 2, "asc" ]],
+    	    'order': [[ 1, "asc" ]],
 		       // columnDefs: [
 		       //    { targets: [5], type: 'date'}
 		       // ]
@@ -305,7 +429,10 @@
 	  border-radius: 50%;
 	}
 
-	.hiddenCheckbox, .hiddenFinalSaveBtn {
+	.hiddenCheckbox, .bulkPaymentSaveBtn {
+		display:none;
+	}
+	.hiddenFinalSelectionCheckbox, .finalSelectionSubmitBtn {
 		display:none;
 	}
 	</style>

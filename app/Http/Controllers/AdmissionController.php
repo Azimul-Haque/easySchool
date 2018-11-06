@@ -21,7 +21,7 @@ use PDF;
 class AdmissionController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:headmaster', ['except' => ['create', 'apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI', 'pdfAdmitCard']]);
+        $this->middleware('role:headmaster', ['except' => ['apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI', 'pdfAdmitCard']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -29,7 +29,6 @@ class AdmissionController extends Controller
     {
         $admissions = Admission::where('school_id', Auth::User()->school_id)
                             ->where('session', Auth::User()->school->currentsession)
-                            ->where('application_status', null)
                             ->orderBy('id', 'ASC')->get();
         return view('admissions.index')
                     ->withAdmissions($admissions);
@@ -42,7 +41,8 @@ class AdmissionController extends Controller
      */
     public function create()
     {
-        return view('admissions.create');
+        $school = School::find(Auth::user()->school->id);
+        return view('admissions.create')->withSchool($school);
     }
 
     public function apply($id)
@@ -61,6 +61,8 @@ class AdmissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'class' => 'required',
+            'section' => 'sometimes',
             'school_id' => 'required',
             'name_bangla' => 'required|max:255',
             'name' => 'required|max:255',
@@ -71,13 +73,8 @@ class AdmissionController extends Controller
             'dob' => 'required|max:255',
             'address' => 'required|max:500',
             'contact' => 'required|max:255',
-            'class' => 'required',
             'image' => 'required|image|max:200'
         ]);
-
-        if($request->school_id == 'manual') {
-            $request->school_id = Auth::User()->school->id;
-        }
 
         $school = School::find($request->school_id);
         // $length = 5;
@@ -85,11 +82,22 @@ class AdmissionController extends Controller
         // $random_string = substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
         
         //dd($application_id);
-        $last_application = Admission::where('school_id', $school->id)
-                                     ->where('class', $request->class)
-                                     ->where('session', $school->currentsession)
-                                     ->orderBy('application_id', 'desc')
-                                     ->first();
+        if($school->sections > 0) {
+          $last_application = Admission::where('school_id', $school->id)
+                                       ->where('class', $request->class)
+                                       ->where('session', $school->currentsession)
+                                       ->where('section', $request->section)
+                                       ->orderBy('application_id', 'desc')
+                                       ->first();
+        } else {
+          $last_application = Admission::where('school_id', $school->id)
+                                       ->where('class', $request->class)
+                                       ->where('session', $school->currentsession)
+                                       ->where('section', 0)
+                                       ->orderBy('application_id', 'desc')
+                                       ->first();
+        }
+        //dd($last_application);
         if($last_application != null) {
             $application_id = $last_application->application_id + 1;
             //dd($application_id);
@@ -100,7 +108,7 @@ class AdmissionController extends Controller
             } else {
                 $admission_year = date('Y');
             }
-            $application_id = $request->class.$admission_year.$school->id.$first_id_for_application;
+            $application_id = $request->class.$admission_year.$school->id.$request->section.$first_id_for_application;
             //dd($application_id);
         }
         
@@ -120,12 +128,16 @@ class AdmissionController extends Controller
         $admission->contact = $request->contact;
         $admission->session = $school->currentsession;
         $admission->class = $request->class;
+        if($school->sections > 0) {
+          $admission->section = $request->section;
+        }
+        
         $admission->payment = 0;
 
         // image upload
         if($request->hasFile('image')) {
             $image      = $request->file('image');
-            $filename   = str_replace(' ','', $request->name).$application_id.'.' . $image->getClientOriginalExtension();
+            $filename   = $application_id.'.' . $image->getClientOriginalExtension();
             $location   = public_path('images/admission-images/'. $filename);
 
             Image::make($image)->resize(200, 200)->save($location);
@@ -278,13 +290,52 @@ class AdmissionController extends Controller
         return redirect()->route('admissions.index');
     }
 
+    public function submitMarks(Request $request)
+    {
+        $this->validate($request, [
+            'application_ids_with_marks' => 'required',
+        ]);
+        //dd($request->application_ids_with_marks);
+        $ids_array = [];
+        $marks_array = [];
+        $application_ids_with_marks_array = explode(',', $request->application_ids_with_marks);
+        foreach ($application_ids_with_marks_array as $application_id_with_marks) {
+          $application_array = explode(':', $application_id_with_marks);
+          $ids_array[] = $application_array[0];
+          $marks_array[] = $application_array[1];
+          
+        }
+        $newidmarks_array = array_combine($ids_array,$marks_array);
+        // sort in descending array...
+        arsort($newidmarks_array);
+        //dd($newidmarks_array);
+        $merit_position = 1;
+        foreach ($newidmarks_array as $key => $value) {
+          try {
+            $application = Admission::where('application_id', $key)->first();
+            $application->mark_obtained = $value;
+            $application->merit_position = $merit_position;
+            $application->save();
+
+            $merit_position++;
+          }
+          catch (\Exception $e) {
+            // do nothing
+          }
+        }
+        
+        Session::flash('success', 'আবেদনকারীদের প্রাপ্ত নম্বর দাখিল করা হয়েছে!');
+        return redirect()->route('admissions.index');
+    }
+
     public function finalSelection(Request $request)
     {
         $this->validate($request, [
-            'application_ids' => 'required',
+            'application_ids_to_admit' => 'required',
         ]);
-        $application_ids_array = explode(',', $request->application_ids);
-        foreach ($application_ids_array as $application_id) {
+        //dd($request->application_ids_to_admit);
+        $application_ids = explode(',', $request->application_ids_to_admit);
+        foreach ($application_ids as $application_id) {
           $application = Admission::where('application_id', $application_id)->first();
           try {
             $student = new Student;
@@ -301,6 +352,8 @@ class AdmissionController extends Controller
             $student->contact = $application->contact;
             $student->session = $application->session;
             $student->class = $application->class;
+            $student->section = $application->section;
+            $student->roll = $application->merit_position;
             $student->image = $application->image;
             $student->save();
           }
@@ -313,6 +366,28 @@ class AdmissionController extends Controller
         }
         
         Session::flash('success', 'আবেদনকারীদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত করা হয়েছে!');
+        return redirect()->route('admissions.index');
+    }
+
+    public function payBulk(Request $request)
+    {
+        $this->validate($request, [
+            'application_ids' => 'required',
+        ]);
+        $application_ids_array = explode(',', $request->application_ids);
+        foreach ($application_ids_array as $application_id) {
+          $application = Admission::where('application_id', $application_id)->first();
+          try {
+            $application->payment = 1;
+            $application->save();
+          }
+          catch (\Exception $e) {
+            Session::flash('warning', $application->name_bangla.' এর পেমেন্ট ইতোমধ্যে দাখিল হয়েছে!');
+            // do nothing
+          }
+        }
+        
+        Session::flash('success', 'আবেদনকারীদের পেমেন্ট সম্পন্ন করা হয়েছে!');
         return redirect()->route('admissions.index');
     }
 }

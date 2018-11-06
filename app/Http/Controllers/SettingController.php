@@ -32,6 +32,7 @@ class SettingController extends Controller
             'name' => 'required',
             'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin,'.$id,
+            'sections' => 'required',
             'address' => 'required',
             'currentsession' => 'required',
             'classes' => 'required',
@@ -48,6 +49,7 @@ class SettingController extends Controller
         $school->name = $request->name;
         $school->established = $request->established;
         $school->eiin = $request->eiin;
+        $school->sections = $request->sections;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;
         $school->classes = implode (", ", $request->classes);

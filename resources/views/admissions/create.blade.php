@@ -50,11 +50,41 @@
                 <div class="panel-heading"><center><h3><u>ভর্তির আবেদন</u></h3></center></div>
                 <div class="panel-body" id="admissionformpanelshow">
                   {!! Form::open(array('route' => 'admissions.store','method'=>'POST', 'enctype' => 'multipart/form-data')) !!}
-                    @if(isset($school))
-                      {!! Form::hidden('school_id', $school->id) !!}
-                    @else
-                      {!! Form::hidden('school_id', 'manual') !!}
-                    @endif
+                    {!! Form::hidden('school_id', $school->id) !!}
+                  <div class="row">
+                    <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="class">যে শ্রেণীতে ভর্তি হতে ইচ্ছুক</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-users"></i></span>
+                            <select class="form-control" name="class" id="class" required="">
+                              <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+                              @for($clss = 1;$clss<=10;$clss++)
+                                <option value="{{ $clss }}">Class {{ $clss }}</option>
+                              @endfor
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      @if($school->sections > 0)
+                      <div class="form-group">
+                        <label for="class">যে শাখায় ভর্তি হতে ইচ্ছুক</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+                            <select class="form-control" name="section" id="section" required="">
+                              <option value="" selected disabled>শাখা নির্ধারণ করুন</option>
+                              <option value="1">A</option>
+                              <option value="2">B</option>
+                              @if($school->sections == 3)
+                              <option value="3">C</option>
+                              @endif
+                            </select>
+                        </div>
+                      </div>
+                      @endif
+                    </div>
+                  </div>
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">

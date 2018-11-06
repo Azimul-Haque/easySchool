@@ -1,11 +1,12 @@
 <?php
 
+Route::get('/clear', ['as'=>'clear','uses'=>'IndexController@clear']);
+
 Route::get('/', ['as'=>'index','uses'=>'IndexController@index']);
 
 Route::auth();
 
 Route::group(['middleware' => ['auth']], function() {
-
 	Route::get('dashboard', ['as'=>'dashboard','uses'=>'DashboardController@index']);
 
 	Route::resource('users','UserController');
@@ -13,6 +14,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('admissiontoggle/on/{id}',['as'=>'admissions.toggleon','uses'=>'AdmissionController@admissionToggleOn']);
 	Route::get('admissiontoggle/off/{id}',['as'=>'admissions.toggleoff','uses'=>'AdmissionController@admissionToggleOff']);
+	Route::get('admission/form/payment/manual/{id}',['as'=>'admissions.updatepayment','uses'=>'AdmissionController@updatePaymentManual']);
+	Route::post('admission/form/payment/bulk/',['as'=>'admissions.bulkpayment','uses'=>'AdmissionController@payBulk']);
+	Route::post('admission/form/submit/mark/',['as'=>'admissions.submitmark','uses'=>'AdmissionController@submitMarks']);
+	Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
 	Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create']);
@@ -46,8 +51,6 @@ Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'Admiss
 Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'AdmissionController@searchPaymentPage']);
 Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
 Route::get('admission/form/retrieve',['as'=>'admissions.retrieveid','uses'=>'AdmissionController@retrieveApplicationId']);
-Route::get('admission/form/payment/manual/{id}',['as'=>'admissions.updatepayment','uses'=>'AdmissionController@updatePaymentManual']);
-Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
 
 // public APIs
 Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);

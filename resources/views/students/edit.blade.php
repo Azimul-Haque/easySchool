@@ -94,9 +94,9 @@
                 <strong>শাখাঃ</strong>
                 <select class="form-control" name="section" required="">
                     <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-                    <option value="A" @if($student->section == 'A') selected="" @endif>A</option>
-                    <option value="B" @if($student->section == 'B') selected="" @endif>B</option>
-                    <option value="C" @if($student->section == 'C') selected="" @endif>C</option>
+                    <option value="1" @if($student->section == 1) selected="" @endif>A</option>
+                    <option value="2" @if($student->section == 2) selected="" @endif>B</option>
+                    <option value="3" @if($student->section == 3) selected="" @endif>C</option>
                 </select>
             </div>
             <div class="form-group col-md-3">

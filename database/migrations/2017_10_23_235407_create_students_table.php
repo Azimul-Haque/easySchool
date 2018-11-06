@@ -27,7 +27,7 @@ class CreateStudentsTable extends Migration
             $table->string('contact');
             $table->string('session');
             $table->integer('class');
-            $table->string('section')->nullable();
+            $table->integer('section')->unsigned();
             $table->integer('roll')->nullable();
             $table->string('image');
             $table->integer('payment');

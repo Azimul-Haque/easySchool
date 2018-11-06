@@ -89,7 +89,12 @@
 					<td>{{ $student->roll }}</td>
 					<td>{{ $student->name }}</td>
 					<td>{{ $student->class }}</td>
-					<td>{{ $student->section }}</td>
+					<td>
+              @if($student->section == 1) A
+              @elseif($student->section == 2) B
+              @elseif($student->section == 3) C
+              @endif
+          </td>
 					<td>
 						<img src="{{ asset('images/admission-images/'.$student->image) }}" style="width: 35px;">
 					</td>

@@ -27,16 +27,27 @@
         <div class="col-md-12">
             <div class="well">
                 <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <strong>প্রতিষ্ঠানের নাম নামঃ</strong>
                             {!! Form::text('name', null, array('placeholder' => 'নাম','class' => 'form-control', 'required' => '')) !!}
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <strong>ইআইআইএনঃ</strong>
                             {!! Form::text('eiin', null, array('placeholder' => 'ইআইআইএন','class' => 'form-control', 'required' => '')) !!}
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                          <strong>শাখার সংখ্যাঃ</strong>
+                          <select class="form-control" name="sections" required="">
+                            <option value="" selected disabled>শাখার সংখ্যা নির্ধারণ করুন</option>
+                            <option value="0">কোন শাখা নেই</option>
+                            <option value="2">দুইটি শাখা</option>
+                            <option value="3">তিনটি শাখা</option>
+                          </select>
                         </div>
                     </div>
                 </div>
