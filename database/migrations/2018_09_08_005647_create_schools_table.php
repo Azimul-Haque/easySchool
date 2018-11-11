@@ -20,13 +20,14 @@ class CreateSchoolsTable extends Migration
             $table->integer('established');
             $table->text('address');
             $table->integer('currentsession');
+            $table->integer('admission_session');
             $table->string('classes');
             $table->integer('isadmissionon');
             $table->integer('isresultpublished');
             $table->integer('due');
             $table->string('currentexam')->nullable();
             $table->string('payment_method')->nullable();
-            $table->integer('admission_fee')->nullable();
+            $table->integer('admission_form_fee')->nullable();
             $table->string('monogram')->nullable();
             $table->timestamps();
         });

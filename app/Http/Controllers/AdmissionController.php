@@ -28,7 +28,8 @@ class AdmissionController extends Controller
     public function index()
     {
         $admissions = Admission::where('school_id', Auth::User()->school_id)
-                            ->where('session', Auth::User()->school->currentsession)
+                            ->where('session', Auth::User()->school->admission_session)
+                            ->where('class',6)
                             ->orderBy('id', 'ASC')->get();
         return view('admissions.index')
                     ->withAdmissions($admissions);
@@ -61,21 +62,33 @@ class AdmissionController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+            'school_id' => 'required',
             'class' => 'required',
             'section' => 'sometimes',
-            'school_id' => 'required',
             'name_bangla' => 'required|max:255',
             'name' => 'required|max:255',
             'father' => 'required|max:255',
             'mother' => 'required|max:255',
+            'fathers_occupation' => 'required|max:255',
+            'mothers_occupation' => 'required|max:255',
+            'yearly_income' => 'required|numeric',
+            'religion' => 'required',
             'nationality' => 'required|max:255',
-            'gender' => 'required|max:255',
+            'blood_group' => 'required',
             'dob' => 'required|max:255',
-            'address' => 'required|max:500',
-            'contact' => 'required|max:255',
-            'image' => 'required|image|max:200'
+            'gender' => 'required|max:255',
+            'cocurricular' => 'required',
+            'village' => 'required|max:500',
+            'post_office' => 'required|max:500',
+            'upazilla' => 'required|max:500',
+            'district' => 'required|max:500',
+            'contact' => 'required',
+            'contact_2' => 'required',
+            'previous_school' => 'required|max:255',
+            'pec_result' => 'required|max:255',
+            'image' => 'sometimes|image|max:200' // sometimes for now...
         ]);
-
+        //dd($request->cocurricular);
         $school = School::find($request->school_id);
         // $length = 5;
         // $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
@@ -85,14 +98,14 @@ class AdmissionController extends Controller
         if($school->sections > 0) {
           $last_application = Admission::where('school_id', $school->id)
                                        ->where('class', $request->class)
-                                       ->where('session', $school->currentsession)
+                                       ->where('session', $school->admission_session)
                                        ->where('section', $request->section)
                                        ->orderBy('application_id', 'desc')
                                        ->first();
         } else {
           $last_application = Admission::where('school_id', $school->id)
                                        ->where('class', $request->class)
-                                       ->where('session', $school->currentsession)
+                                       ->where('session', $school->admission_session)
                                        ->where('section', 0)
                                        ->orderBy('application_id', 'desc')
                                        ->first();
@@ -106,7 +119,7 @@ class AdmissionController extends Controller
             if(date('m') > 10) {
                 $admission_year = date('y') + 1;
             } else {
-                $admission_year = date('Y');
+                $admission_year = date('y');
             }
             $application_id = $request->class.$admission_year.$school->id.$request->section.$first_id_for_application;
             //dd($application_id);
@@ -117,23 +130,33 @@ class AdmissionController extends Controller
         $admission->school_id = $request->school_id;
         $admission->application_id = $application_id;
         $admission->application_roll = substr($application_id, -3);
-        $admission->name_bangla = $request->name_bangla;
-        $admission->name = $request->name;
-        $admission->father = $request->father;
-        $admission->mother = $request->mother;
-        $admission->nationality = $request->nationality;
-        $admission->gender = $request->gender;
-        $admission->dob = \Carbon\Carbon::parse($request->dob);
-        $admission->address = $request->address;
-        $admission->contact = $request->contact;
-        $admission->session = $school->currentsession;
+
         $admission->class = $request->class;
         if($school->sections > 0) {
           $admission->section = $request->section;
         }
+        $admission->name_bangla = $request->name_bangla;
+        $admission->name = $request->name;
+        $admission->father = $request->father;
+        $admission->mother = $request->mother;
+        $admission->fathers_occupation = $request->fathers_occupation;
+        $admission->mothers_occupation = $request->mothers_occupation;
+        $admission->yearly_income = $request->yearly_income;
+        $admission->religion = $request->religion;
+        $admission->nationality = $request->nationality;
+        $admission->blood_group = $request->blood_group;
+        $admission->dob = \Carbon\Carbon::parse($request->dob);
+        $admission->gender = $request->gender;
+        $admission->cocurricular = implode(',', $request->cocurricular);
+        $admission->village = $request->village;
+        $admission->post_office = $request->post_office;
+        $admission->upazilla = $request->upazilla;
+        $admission->district = $request->district;
+        $admission->contact = $request->contact;
+        $admission->contact_2 = $request->contact_2;
+        $admission->previous_school = $request->previous_school;
+        $admission->pec_result = $request->pec_result;
         
-        $admission->payment = 0;
-
         // image upload
         if($request->hasFile('image')) {
             $image      = $request->file('image');
@@ -148,6 +171,8 @@ class AdmissionController extends Controller
             $admission->image = $filename;
         }
 
+        $admission->session = $school->admission_session;
+        $admission->payment = 0;
         $admission->save();
         
         Session::flash('success', 'আবেদনটি সফলভাবে সম্পন্ন হয়েছে!');
@@ -340,22 +365,40 @@ class AdmissionController extends Controller
           try {
             $student = new Student;
             $student->school_id = $application->school_id;
-            $student->application_id = $application_id;
+            $student->student_id = $application_id;
+
+            $student->roll = $application->merit_position;
+
+            $student->class = $application->class;
+            $student->section = $application->section;
             $student->name_bangla = $application->name_bangla;
             $student->name = $application->name;
             $student->father = $application->father;
             $student->mother = $application->mother;
+            $student->fathers_occupation = $application->fathers_occupation;
+            $student->mothers_occupation   = $application->mothers_occupation ;
+            $student->yearly_income   = $application->yearly_income ;
+            $student->religion   = $application->religion ;
             $student->nationality = $application->nationality;
-            $student->gender = $application->gender;
+            $student->blood_group = $application->blood_group;
             $student->dob = $application->dob;
-            $student->address = $application->address;
+            $student->gender = $application->gender;
+            $student->cocurricular = $application->cocurricular;
+            $student->village = $application->village;
+            $student->post_office = $application->post_office;
+            $student->upazilla = $application->upazilla;
+            $student->district = $application->district;
             $student->contact = $application->contact;
-            $student->session = $application->session;
-            $student->class = $application->class;
-            $student->section = $application->section;
-            $student->roll = $application->merit_position;
+            $student->contact_2 = $application->contact_2;
+            $student->previous_school = $application->previous_school;
+            $student->pec_result = $application->pec_result;
+            $student->pec_result = $application->pec_result;
             $student->image = $application->image;
+            $student->session = $application->session;
+            //$student->payment = $application->payment;
+
             $student->save();
+            Session::flash('success', 'আবেদনকারীদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত করা হয়েছে!');
           }
           catch (\Exception $e) {
             Session::flash('warning', $student->name_bangla.' ইতোমধ্যে আমাদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত রয়েছে!');
@@ -364,8 +407,7 @@ class AdmissionController extends Controller
           $application->application_status = 'done';
           $application->save();
         }
-        
-        Session::flash('success', 'আবেদনকারীদের শিক্ষার্থীতালিকায় অন্তর্ভুক্ত করা হয়েছে!');
+      
         return redirect()->route('admissions.index');
     }
 
@@ -389,5 +431,15 @@ class AdmissionController extends Controller
         
         Session::flash('success', 'আবেদনকারীদের পেমেন্ট সম্পন্ন করা হয়েছে!');
         return redirect()->route('admissions.index');
+    }
+
+    public function pdfApplicantslist() {
+        $applications = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->orderBy('merit_position', 'asc')
+                                 ->get();
+        $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications]);
+        $fileName = 'Applicants_List' . '.pdf';
+        return $pdf->stream($fileName);
     }
 }

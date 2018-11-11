@@ -26,7 +26,7 @@
                         <div class="form-inline">
                             <div class="input-group" id="birthDateContainer">
                               <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                              <input type="text" id="dob" class="form-control" placeholder="জন্মতারিখ" required="">
+                              <input type="text" id="dob" class="form-control" placeholder="জন্মতারিখ" required="" autocomplete="off">
                             </div>
                             <div class="input-group" id="birthDateContainer">
                               <span class="input-group-addon"><i class="fa fa-phone"></i></span>
@@ -71,7 +71,7 @@
           success: function (data) {
             var response = data;
             console.log(response);
-            $('#application_id').html('অ্যাপলিকেশন আইডিঃ '+response);
+            $('#application_id').html('অ্যাপলিকেশন আইডিঃ <b><u>'+response+'</u></b>');
           }
         });
       } else {

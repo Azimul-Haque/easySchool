@@ -41,7 +41,7 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                   <strong>স্থাপিতঃ</strong>
                   <select class="form-control" name="established" required="">
@@ -60,7 +60,7 @@
                   </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                   <strong>চলতি অ্যাকাডেমিক সেশনঃ (শিক্ষাবর্ষ)</strong>
                   <select class="form-control" name="currentsession" required="">
@@ -80,7 +80,27 @@
                   </select>
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
+                <div class="form-group">
+                  <strong>ভর্তি শিক্ষাবর্ষ</strong>
+                  <select class="form-control" name="admission_session" required="">
+                    <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+                  @php
+                    $y = date('Y');
+                    for($y; $y<=2038; $y++) {
+                  @endphp
+                      <option value="{{ $y }}"
+                      @if($school->admission_session == $y)
+                      selected 
+                      @endif
+                      >{{ $y }}</option>
+                  @php
+                    }
+                  @endphp
+                  </select>
+                </div>
+            </div>
+            <div class="col-md-3">
                 <div class="form-group">
                   <strong>ভর্তি প্রক্রিয়াঃ</strong>
                   <br/>

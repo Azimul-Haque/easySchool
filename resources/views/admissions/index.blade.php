@@ -6,7 +6,8 @@
     <h1>
     	অ্যাডমিশন
 	    <div class="pull-right">
-			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"> সংযোজন</a>
+        <a class="btn btn-warning" href="{{ route('admissions.applicantslist') }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
+			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> সংযোজন</a>
 			</div>
 		</h1>
 @stop
@@ -75,14 +76,14 @@
 				@foreach($admissions as $admission)
 					<tr>
 						<td class="hiddenCheckbox" id="hiddenCheckbox">
-							@if($admission->payment == 0) 
-							<input type="checkbox" name="application_check_ids[]" value="{{ $admission->application_id }}">
+							@if($admission->payment == 0)
+              <input type="checkbox" class="icheck" name="application_check_ids[]" value="{{ $admission->application_id }}">
 							@endif
 						</td>
 
 						<td class="hiddenFinalSelectionCheckbox" id="hiddenFinalSelectionCheckbox">
 							@if($admission->mark_obtained > 0) 
-							<input type="checkbox" name="application_final_selection_check_ids[]" value="{{ $admission->application_id }}">
+							<input type="checkbox" class="icheck" name="application_final_selection_check_ids[]" value="{{ $admission->application_id }}">
 							@endif
 						</td>
 						<td>{{ $admission->class }}</td>
@@ -201,7 +202,7 @@
       </div>
   {{-- bulk payment modal--}}
   {{-- final selection modal--}}
-  <button class="btn btn-info btn-sm finalSelectionSubmitBtn" id="finalSelectionSubmitBtn" data-toggle="modal" data-target="#finalSelectionModal" data-backdrop="static"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি করুন</button>
+  <button class="btn btn-info finalSelectionSubmitBtn" id="finalSelectionSubmitBtn" data-toggle="modal" data-target="#finalSelectionModal" data-backdrop="static"><i class="fa fa-graduation-cap"></i> চূড়ান্ত ভর্তি করুন</button>
 		<!-- final selection Modal -->
     <div class="modal fade" id="finalSelectionModal" role="dialog">
       <div class="modal-dialog modal-md">
@@ -228,6 +229,15 @@
 @stop
 
 @section('js')
+  <script type="text/javascript" src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.js') }}"></script>
+  <script>
+    $(document).ready(function(){
+      $('.icheck').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        increaseArea: '20%' // optional
+      });
+    });
+  </script>
 	<script type="text/javascript">
 		$(document).ready(function() {
 			$.ajax({
@@ -372,6 +382,7 @@
 
 
 @section('css')
+  <link rel="stylesheet" type="text/css" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
 	<style>
 	.switch {
 	  position: relative;

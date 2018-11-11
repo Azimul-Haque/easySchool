@@ -18,6 +18,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('admission/form/payment/bulk/',['as'=>'admissions.bulkpayment','uses'=>'AdmissionController@payBulk']);
 	Route::post('admission/form/submit/mark/',['as'=>'admissions.submitmark','uses'=>'AdmissionController@submitMarks']);
 	Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
+	Route::get('admission/applicants/list/pdf',['as'=>'admissions.applicantslist','uses'=>'AdmissionController@pdfApplicantslist']);
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
 	Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create']);

@@ -52,6 +52,7 @@ class SchoolController extends Controller
             'sections' => 'required',
             'address' => 'required',
             'currentsession' => 'required',
+            'admission_session' => 'required',
             'classes' => 'required',
             'isadmissionon' => 'required',
             'payment_method' => 'required',
@@ -67,6 +68,7 @@ class SchoolController extends Controller
         $school->sections = $request->sections;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;
+        $school->admission_session = $request->admission_session;
         $school->classes = implode (", ", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
         $school->payment_method = $request->payment_method;
@@ -123,6 +125,7 @@ class SchoolController extends Controller
             'sections' => 'required',
             'address' => 'required',
             'currentsession' => 'required',
+            'admission_session' => 'required',
             'classes' => 'required',
             'isadmissionon' => 'required',
             'payment_method' => 'required',
@@ -139,6 +142,7 @@ class SchoolController extends Controller
         $school->sections = $request->sections;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;
+        $school->admission_session = $request->admission_session;
         $school->classes = implode (", ", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
         $school->payment_method = $request->payment_method;

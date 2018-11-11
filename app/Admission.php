@@ -10,5 +10,5 @@ class Admission extends Model
       return $this->belongsTo('App\School');
   }
 
-  public $fillable = ['school_id', 'application_id', 'name_bangla', 'name', 'father','mother', 'nationality', 'gender', 'dob', 'address','contact','session', 'class','image', 'payment'];
+  //public $fillable = ['school_id', 'application_id', 'name_bangla', 'name', 'father','mother', 'nationality', 'gender', 'dob', 'address','contact','session', 'class','image', 'payment'];
 }

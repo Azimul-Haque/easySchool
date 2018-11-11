@@ -34,7 +34,11 @@
                       <p>অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>
                     </div>
                     <div class="col-md-3">
+                      @if($application->image != null || $application->image != '')
                       <img src="{{ url('/images/admission-images/'.$application->image) }}" style="height: 120px; width: auto; border: 1px solid #0196A6;">
+                      @else
+                      <img src="{{ url('images/dummy_student.jpg') }}" style="height: 120px; width: auto; border: 1px solid #0196A6;">
+                      @endif
                     </div>
                   </div>
                 </div>

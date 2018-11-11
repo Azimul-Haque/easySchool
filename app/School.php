@@ -10,6 +10,11 @@ class School extends Model
   {
       return $this->hasMany('App\User');
   }
+
+  public function students()
+  {
+      return $this->hasMany('App\Student');
+  }
   
   public function admissions()
   {

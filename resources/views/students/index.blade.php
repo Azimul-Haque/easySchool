@@ -39,14 +39,18 @@
 					@endforeach
 				</select>
 			</div>
+      @if(Auth::user()->school->sections > 0)
 			<div class="col-md-2">
 				<select class="form-control" id="search_section">
 					<option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-					<option value="A" @if($sectionsearch == 'A') selected="" @endif>A</option>
-					<option value="B" @if($sectionsearch == 'B') selected="" @endif>B</option>
-					<option value="C" @if($sectionsearch == 'C') selected="" @endif>C</option>
+					<option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+					<option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+          @if(Auth::user()->school->sections == 3)
+					<option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+          @endif
 				</select>
-			</div>	
+			</div>
+      @endif
 			<div class="col-md-2">
 				<select class="form-control" id="search_session">
 					<option selected="" disabled="">শিক্ষাবর্ষ নির্ধারণ করুন</option>
@@ -72,11 +76,13 @@
 			<thead>
 				<tr>
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
-					<th>Roll</th>
-					<th>Name</th>
-					<th>Class</th>
-					<th>Section</th>
-					<th>Photo</th>
+          <th>ক্লাস</th>
+					<th>আইডি</th>
+          <th>রোল</th>
+          <th>নাম</th>
+					<th>নাম (ইংরেজি)</th>
+					<th>শাখা</th>
+					<th>ছবি</th>
 					<th>Action</th>
 				</tr>
 			</thead>
@@ -86,9 +92,11 @@
 					<td class="hiddenCheckbox" id="hiddenCheckbox">
 						<input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}">
 					</td>
+          <td>{{ $student->class }}</td>
+					<td>{{ $student->student_id }}</td>
 					<td>{{ $student->roll }}</td>
+          <td>{{ $student->name_bangla }}</td>
 					<td>{{ $student->name }}</td>
-					<td>{{ $student->class }}</td>
 					<td>
               @if($student->section == 1) A
               @elseif($student->section == 2) B
@@ -96,7 +104,11 @@
               @endif
           </td>
 					<td>
-						<img src="{{ asset('images/admission-images/'.$student->image) }}" style="width: 35px;">
+						@if($student->image != null || $student->image != '')
+            <img src="{{ asset('images/admission-images/'.$student->image) }}" style="width: 35px;">
+            @else
+            <img src="{{ asset('images/dummy_student.jpg') }}" style="width: 35px;">
+            @endif
 					</td>
 					<td>
 						<a class="btn btn-primary btn-sm" href="{{ route('students.edit',$student->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
@@ -200,11 +212,16 @@
   	})
 	  $(document).ready(function() {
 	  	$('#search_students_btn').click(function() {
-	  		if($('#search_class').val() && $('#search_section').val() && $('#search_session').val()) {
-		  		window.location.href = window.location.protocol + "//" + window.location.host + "/students/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val();
-		  	} else {
-		  		toastr.warning('শ্রেণি, শাখা এবং শিক্ষাবর্ষ সবগুলো সিলেক্ট করুন!');
-		  	}
+        @if(Auth::user()->school->sections > 0)
+  	  		if($('#search_class').val() && $('#search_section').val() && $('#search_session').val()) {
+  		  		
+            window.location.href = window.location.protocol + "//" + window.location.host + "/students/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val();
+  		  	} else {
+  		  		toastr.warning('শ্রেণি, শাখা এবং শিক্ষাবর্ষ সবগুলো সিলেক্ট করুন!');
+  		  	}
+        @else
+          window.location.href = window.location.protocol + "//" + window.location.host + "/students/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section";
+        @endif
 	  	})
 
 	  	$('#showCheckbox').click(function() {
