@@ -35,6 +35,7 @@
 @section('content')
 <div class="container">
     <div class="row">
+        @if($school->isadmissionon == 1)
         <div class="col-md-10 col-md-offset-1">
             <center>
                 @if(isset($school))
@@ -186,10 +187,10 @@
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="blood_group">রক্তের গ্রুপ</label>
+                          <label for="blood_group">রক্তের গ্রুপ (জানা না থাকলে এড়িয়ে যান)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-tint"></i></span>
-                            <select class="form-control" name="blood_group" id="blood_group" required>
+                            <select class="form-control" name="blood_group" id="blood_group">
                               <option selected disabled>রক্তের গ্রুপ নির্ধারণ করুন</option>
                               <option value="A+">A+</option>
                               <option value="A-">A-</option>
@@ -398,10 +399,6 @@
                                     <td id="dobPreview"></td>
                                   </tr>
                                   <tr>
-                                    <td>ঠিকানাঃ</td>
-                                    <td id="addressPreview"></td>
-                                  </tr>
-                                  <tr>
                                     <td>অভিভাবকের মোবাইল নম্বরঃ</td>
                                     <td id="contactPreview"></td>
                                   </tr>
@@ -432,6 +429,11 @@
                 </div>
             </div>
         </div>
+        @else
+        <div class="col-md-12">
+          <center>আবেদন গ্রহণ বন্ধ আছে...</center>
+        </div>
+        @endif
     </div>
 </div>
 @endsection
@@ -449,26 +451,6 @@
             container: '#birthDateContainer'
           });
         });
-    </script>
-    <script type="text/javascript">
-      @if(isset($school))
-        $(document).ready(function() {
-          $.ajax({
-            url: "/getadmissionstatus/{{$school->id }}",
-            type: "GET",
-            data: {},
-            success: function (data) {
-              var response = data;
-              console.log(response);
-              if(response == 0) {
-                $('#admissionformpanelshow').html('আবেদন গ্রহণ বন্ধ আছে।');
-              } else if(response == 1) {
-                
-              }
-            }
-          });
-        });
-      @endif
     </script>
     <script type="text/javascript">
       $(document).ready(function() {

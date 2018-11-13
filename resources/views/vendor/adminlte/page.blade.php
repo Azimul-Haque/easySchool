@@ -293,57 +293,31 @@
                     </li>
                     @endpermission
                     @role('headmaster')
-                    <li class="header">Administration</li>
+                    <li class="header">প্রশাসনিক</li>
                     
                     <li class="{{ Request::is('admissions') ? 'active' : '' }}">
                         <a href="{{ route('admissions.index') }}">
                             <i class="fa fa-fw fa-check-square-o"></i>
-                            <span>Admission</span>
+                            <span>শিক্ষার্থী ভর্তি প্রক্রিয়া</span>
                         </a>
                     </li>
                     <li class="{{ Request::is('students') ? 'active' : '' }}">
-                        <a href="/students">
+                        <a href="{{ route('students.index') }}">
                             <i class="fa fa-fw fa-users"></i>
-                            <span>Student Management</span>
+                            <span>শিক্ষার্থী ব্যবস্থাপনা</span>
                         </a>
                     </li>
                     @permission('school-settings')
-                    <li class="header">Academic</li>
+                    <li class="header">অ্যাকাডেমিক</li>
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">
                         <a href="{{ route('settings.edit') }}">
                             <i class="fa fa-fw fa-cogs"></i>
-                            <span>School Settings</span>
+                            <span>স্কুল সেটিংস</span>
                         </a>
                     </li>
                     @endpermission
-                    @permission('student-crud')
-                    <li class="{{ Request::is('students') ? 'active' : '' }}">
-                        <a href="/students">
-                            <i class="fa fa-fw fa-users"></i>
-                            <span>Students</span>
-                        </a>
-                    </li>
-                    <li class="{{ Request::is('students/class/*') ? 'active menu-open' : '' }} treeview">
-                      <a href="#">
-                        <i class="fa fa-fw fa-users"></i>
-                        <span>Students</span>
-                        <span class="pull-right-container">
-                          <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                      </a>
-                      <ul class="treeview-menu">
-                        {{-- classes will be dynamic after SCHOOL SETUP functionality --}}
-                        {{-- classes will be dynamic after SCHOOL SETUP functionality --}}
-                        {{-- classes will be dynamic after SCHOOL SETUP functionality --}}
-                        <li><a href="{{ route('students.class', 1) }}"><i class="fa fa-id-badge"></i> Class One</a></li>
-                        <li><a href="{{ route('students.class', 2) }}"><i class="fa fa-id-badge"></i> Class Two</a></li>
-                        <li><a href="{{ route('students.class', 3) }}"><i class="fa fa-id-badge"></i> Class Three</a></li>
-                        <li><a href="{{ route('students.class', 4) }}"><i class="fa fa-id-badge"></i> Class Four</a></li>
-                        <li><a href="{{ route('students.class', 5) }}"><i class="fa fa-id-badge"></i> Class Five</a></li>
-                      </ul>
-                    </li>
-                    @endrole                  
-                    @endpermission
+                    
+                    @endrole
 
                     
                 </ul>

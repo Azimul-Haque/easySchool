@@ -60,14 +60,10 @@
           <div class="tab-content">
             <div class="tab-pane fade in active" id="home">
                 <h3 class="head text-center">
-                  <b>{{ $school->name }}</b>-এ আপনাকে স্বাগতম
+                  <b>{{ $school->name_bangla }}</b>-এ আপনাকে স্বাগতম
                 </h3>
                 <p class="narrow text-center">
-                    Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
-                </p>
-                
-                <p class="text-center">
-                    <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                    বিদ্যালয়টি {{ bangla($school->established) }} সাল থেকে প্রতিষ্ঠার পর থেকে নিষ্ঠার সাথে এ অঞ্চলে নিম্নমাধ্যমিক ও মাধ্যমিক শিক্ষাক্ষেত্রে ব্যাপক ভূমিকা রেখে চলেছে। 
                 </p>
             </div>
             <div class="tab-pane fade" id="admission">
@@ -90,23 +86,17 @@
                 </div>
             </div>
             <div class="tab-pane fade" id="notice">
-                <h3 class="head text-center">Drop comments!</h3>
+                <h3 class="head text-center">নোটিশ তালিকা</h3>
                 <p class="narrow text-center">
-                    Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
+                    <div class="list-group">
+                      <a href="#" class="list-group-item">প্রথম নোটিশ</a>
+                      <a href="#" class="list-group-item">দ্বিতীয় নোটিশ</a>
+                      <a href="#" class="list-group-item">তৃতীয় নোটিশ</a>
+                    </div>
                 </p>
-                
-                <p class="text-center">
-                  <a href="" class="btn btn-success btn-outline-rounded green"> start using bootsnipp <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
-              </p>
             </div>
             <div class="tab-pane fade" id="others">
-              <div class="text-center">
-                <i class="img-intro icon-checkmark-circle"></i>
-              </div>
-              <h3 class="head text-center">thanks for staying tuned! <span style="color:#f48260;">♥</span> Bootstrap</h3>
-              <p class="narrow text-center">
-                Lorem ipsum dolor sit amet, his ea mollis fabellas principes. Quo mazim facilis tincidunt ut, utinam saperet facilisi an vim.
-              </p>
+              কাজ চলছে...
             </div>
             <div class="clearfix"></div>
           </div>
