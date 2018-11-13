@@ -34,7 +34,8 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
-                    EasySchool Platform
+                    <img src="http://placehold.it/35x35" class="img-circle school-thumnail">
+                    {{ $school->name }}
                 </a>
             </div>
 

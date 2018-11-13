@@ -2,6 +2,10 @@
 
 @section('title', 'Easy School')
 
+@section('css')
+  <link rel="stylesheet" type="text/css" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
+@endsection
+
 @section('content_header')
     <h1>
       School Settings
@@ -12,23 +16,29 @@
 @stop
 
 @section('content')
-{!! Form::model($school, ['route' => ['settings.update', $school->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
   <div class="row">
-    <div class="col-md-10 col-md-offset-1 well">
+    <div class="col-md-12">
+      {!! Form::model($school, ['route' => ['settings.update', $school->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data', 'class' => 'well']) !!}
         <div class="row">
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
-                    <strong>প্রতিষ্ঠানের নাম নামঃ</strong>
+                    <strong>প্রতিষ্ঠানের নামঃ (বাংলায়)</strong>
+                    {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় নাম','class' => 'form-control', 'required' => '')) !!}
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <strong>প্রতিষ্ঠানের নাম নামঃ (ইংরেজিতে)</strong>
                     {!! Form::text('name', null, array('placeholder' => 'নাম','class' => 'form-control', 'required' => '')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
                 <div class="form-group">
                     <strong>ইআইআইএনঃ</strong>
                     {!! Form::text('eiin', null, array('placeholder' => 'ইআইআইএন','class' => 'form-control', 'required' => '')) !!}
                 </div>
             </div>
-            <div class="col-md-4">
+            <div class="col-md-3">
               <div class="form-group">
                 <strong>শাখার সংখ্যা</strong>
                 <select class="form-control" name="sections" required="">
@@ -171,7 +181,7 @@
           @endphp
           @for($clss = 1;$clss<=10;$clss++)
             <label style="margin-right: 20px;">
-            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes"
+            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"
             @if(in_array($clss, $classes)) checked @endif
             > Class {{ $clss }}
             </label>
@@ -228,12 +238,21 @@
             </div>
         </div>
         <button type="submit" class="btn  btn-success">Save</button>
+      {!! Form::close() !!}
     </div>
   </div>
-{!! Form::close() !!}
 @stop
 
 @section('js')
+  <script type="text/javascript" src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.js') }}"></script>
+  <script>
+    $(document).ready(function(){
+      $('.icheck').iCheck({
+        checkboxClass: 'icheckbox_square-blue',
+        increaseArea: '20%' // optional
+      });
+    });
+  </script>
   <script type="text/javascript">
       $(document).ready( function() {
         $(document).on('change', '.btn-file :file', function() {

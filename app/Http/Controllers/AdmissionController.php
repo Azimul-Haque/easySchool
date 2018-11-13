@@ -21,7 +21,7 @@ use PDF;
 class AdmissionController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:headmaster', ['except' => ['apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI', 'pdfAdmitCard']]);
+        $this->middleware('role:headmaster', ['except' => ['apply', 'store', 'getAdmissionStatusAPI', 'searchPaymentPage', 'getPaymentPage', 'retrieveApplicationId', 'retrieveApplicationIdAPI', 'pdfApplicantsCopy', 'pdfAdmitCard']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -48,9 +48,21 @@ class AdmissionController extends Controller
 
     public function apply($id)
     {
-        $school = School::find($id);
-        return view('admissions.create')
-                    ->withSchool($school);
+        try {
+          $school = School::find($id);
+          if($school != null) {
+            return view('admissions.create')
+                        ->withSchool($school);
+          } else {
+            Session::flash('warning', 'আপনার কোথাও ভুল হচ্ছে! পুনরায় আরম্ভ করুন।');
+            return redirect()->route('index');
+          }
+          
+        }
+        catch (\Exception $e) {
+          Session::flash('warning', 'আপনার কোথাও ভুল হচ্ছে! পুনরায় আরম্ভ করুন।');
+          return redirect()->route('index');
+        }
     }
 
     /**
@@ -294,6 +306,35 @@ class AdmissionController extends Controller
         $school->save();
 
         return 'success';
+    }
+
+    public function pdfApplicantsCopy($application_id)
+    {
+        $application = Admission::where('application_id', $application_id)->first();
+        
+        $pdf = PDF::loadView('admissions.pdf.applicantscopy', ['application' => $application]);
+        $fileName = $application_id . '_Applicants_Cooy' . '.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function pdfAllApplications()
+    {
+        $applications = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->get();
+        $pdf = PDF::loadView('admissions.pdf.applicantscopies', ['applications' => $applications]);
+        $fileName = 'Applications' . '.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function pdfAdmissionSeatPlan()
+    {
+        $applications = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->get();
+        $pdf = PDF::loadView('admissions.pdf.admissionseatplan', ['applications' => $applications]);
+        $fileName = 'Applications' . '.pdf';
+        return $pdf->stream($fileName);
     }
 
     public function pdfAdmitCard($application_id)

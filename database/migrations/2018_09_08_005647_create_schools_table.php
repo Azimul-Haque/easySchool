@@ -14,10 +14,14 @@ class CreateSchoolsTable extends Migration
     {
         Schema::create('schools', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('token')->unique();
             $table->string('name');
+            $table->string('name_bangla');
             $table->integer('eiin')->unique();
             $table->integer('sections')->unsigned();
             $table->integer('established');
+            $table->string('district');
+            $table->string('upazilla');
             $table->text('address');
             $table->integer('currentsession');
             $table->integer('admission_session');

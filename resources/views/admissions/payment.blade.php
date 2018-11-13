@@ -3,7 +3,7 @@
 @section('title', 'Easy School | Payment')
 
 @section('content')
-<div class="container" style="margin-top: 100px;">
+<div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1 full-width-col">
             <div class="panel panel-default">
@@ -31,14 +31,17 @@
                         <a href="{{ route('admissions.pdfadmitcard', $application->application_id) }}" target="_blank" class="btn btn-success">এডমিট কার্ড প্রিন্ট করুন</a>
                         @endif
                       </h4>
-                      <p>অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>
+                      <p>* অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>
                     </div>
                     <div class="col-md-3">
                       @if($application->image != null || $application->image != '')
-                      <img src="{{ url('/images/admission-images/'.$application->image) }}" style="height: 120px; width: auto; border: 1px solid #0196A6;">
+                      <center><img src="{{ url('/images/admission-images/'.$application->image) }}" style="height: 120px; width: auto; border: 1px solid #0196A6;"></center>
                       @else
-                      <img src="{{ url('images/dummy_student.jpg') }}" style="height: 120px; width: auto; border: 1px solid #0196A6;">
+                      <center><img src="{{ url('images/dummy_student.jpg') }}" style="height: 120px; width: auto; border: 1px solid #0196A6;"></center>
                       @endif
+                      <br>
+                      <br>
+                      <center><a class="btn btn-success btn-block" href="{{ route('admissions.pdfapplicantscopy', $application->application_id) }}" target="_blank"><i class="fa fa-print"></i> আবেদনটি প্রিন্ট করুন</a></center>
                     </div>
                   </div>
                 </div>

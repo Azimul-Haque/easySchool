@@ -26,6 +26,12 @@
 
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
 	<div class="pull-right">
+    <a href="{{ route('admissions.pdfadmissionseatplan') }}" class="btn btn-brown btn-sm" title="সিটপ্ল্যান জেনারেট করুন" target="_blank">
+      <i class="fa fa-print"></i> সিটপ্ল্যান জেনারেট করুন
+    </a>
+    <a href="{{ route('admissions.pdfallapplication') }}" class="btn btn-warning btn-sm" title="আবেদনপত্রগুলো প্রিন্ট করুন" target="_blank">
+      <i class="fa fa-print"></i> আবেদনপত্রগুলো প্রিন্ট করুন
+    </a>
 		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
 		<button class="btn btn-primary btn-sm" id="submitMarkBtn" data-toggle="modal" data-target="#submitMarkModal" data-backdrop="static"><i class="fa fa-bar-chart"></i> নম্বর প্রদান</button>
 		<!-- submit mark Modal -->
@@ -109,7 +115,7 @@
 						</td>
 						<td>
 							@if($admission->payment != 0)
-							<input type="text" name="" class="form-control" style="width: 50px;" id="mark_obtained{{ $admission->application_id }}" value="{{ $admission->mark_obtained }}">
+							<input type="text" name="" class="form-control" style="width: 50px;" id="mark_obtained{{ $admission->application_id }}" value="{{ $admission->mark_obtained }}" tabindex="{{ $admission->id }}">
 							@endif
 						</td>
 						<td>
@@ -121,6 +127,9 @@
 						</td>
 						<td>{{ $admission->merit_position }}</td>
 						<td>
+              <a href="{{ route('admissions.pdfapplicantscopy', $admission->application_id) }}" class="btn btn-warning btn-sm" title="{{ $admission->name_bangla }}-এর আবেদনপত্রটি প্রিন্ট করুন" target="_blank">
+                <i class="fa fa-print"></i>
+              </a>
 							{{-- payment modal--}}
 							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#paymentModal{{ $admission->id }}" data-backdrop="static">
 								<i class="fa fa-check"></i>
@@ -229,6 +238,11 @@
 @stop
 
 @section('js')
+  <script type="text/javascript">
+    $(function(){
+     $('a[title]').tooltip();
+    });
+  </script>
   <script type="text/javascript" src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.js') }}"></script>
   <script>
     $(document).ready(function(){

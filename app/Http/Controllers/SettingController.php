@@ -30,6 +30,7 @@ class SettingController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'name_bangla' => 'required',
             'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin,'.$id,
             'sections' => 'required',
@@ -47,6 +48,7 @@ class SettingController extends Controller
 
         $school = School::find($id);
         $school->name = $request->name;
+        $school->name_bangla = $request->name_bangla;
         $school->established = $request->established;
         $school->eiin = $request->eiin;
         $school->sections = $request->sections;

@@ -4,15 +4,7 @@
 
 @section('css')
   {!!Html::style('css/bootstrap-datepicker.min.css')!!}
-  {!!Html::style('css/select2.min.css')!!}
-  <style type="text/css">
-    .select2-selection__choice {
-     background-color: #3c8dbc !important; 
-     border-color: #367fa9 !important;
-     padding: 1px 10px !important;
-     color: #fff !important;
-    }
-  </style>
+  
 @stop
 
 
@@ -452,7 +444,6 @@
 
 @section('js')
     {!!Html::script('js/bootstrap-datepicker.min.js')!!}
-    {!!Html::script('js/select2.full.min.js')!!}
     <script type="text/javascript">
         $(function() {
           $("#dob").datepicker({

@@ -4,11 +4,6 @@
 
 @section('css')
 <style type="text/css">
-    .panel-default>.panel-heading {
-        color: #fff !important;
-        background-color: #0097a7 !important;
-        border-color: #ddd;
-    }
     .btn-file {
         position: relative;
         overflow: hidden;
@@ -38,7 +33,7 @@
 @stop
 
 @section('content')
-<div class="container" style="margin-top: 100px;">
+<div class="container">
     <div class="row">
         <div class="col-md-10 col-md-offset-1">
             <center>

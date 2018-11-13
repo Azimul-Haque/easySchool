@@ -40,12 +40,6 @@ body{
     resize: none;
     word-wrap: break-word !important;
     word-break: break-all !important;
-    /*border:none !important;
-    outline:none;
-    border-color: inherit;
-    -webkit-box-shadow: none;
-    box-shadow: none;
-    border-style: none !important;*/
     max-height: 100px;
     white-space: initial;
 }
@@ -113,9 +107,13 @@ ul.errorlist > li {
     border-color: #00bcd4;
 }
 .btn-warning, .panel-warning>.panel-heading {
-    color: #003300;
-    background-color: #ffc107;
-    border-color: #ffc107;
+    color: #fff;
+    background-color: #f2711c;
+    border-color: #CE5810;
+}
+.btn-warning:hover {
+    background-color: #CE5810;
+    border-color: #CE5810;
 }
 .link {
     text-decoration: none !important;
@@ -258,6 +256,39 @@ ul.errorlist > li {
 .messenger-favicon {
     height: 40px;
     width: 40px;
+}
+
+.btn-brown {
+    background: #965A33;
+    color: #fff;
+}
+.btn-brown:hover {
+    background: #A52A2A;
+    color: #fff;
+}
+.btn-grey {
+    background: #A0A0A0;
+    color: #fff;
+}
+.btn-grey:hover {
+    background: #828282;
+    color: #fff;
+}
+.btn-dark {
+    background: #000000;
+    color: #fff;
+}
+.btn-dark:hover {
+    background: #262829;
+    color: #fff;
+}
+.btn-violet {
+    background: #6435c9;
+    color: #fff;
+}
+.btn-violet:hover {
+    background: #592AB9;
+    color: #fff;
 }
 
 

@@ -2,6 +2,11 @@
 
 @section('title', 'Easy School | Schools')
 
+@section('css')
+	<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
+	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
+@stop
+
 @section('content_header')
     <h1>
     	School Management
@@ -32,7 +37,7 @@
 				@foreach($schools as $school)
 					<tr>
 						<td>No</td>
-						<td>{{ $school->name }}</td>
+						<td>{{ $school->name_bangla }}</td>
 						<td>{{ $school->eiin }}</td>
 						<td>{{ $school->address }}</td>
 						<td>{{ $school->currentsession }}</td>
@@ -47,7 +52,7 @@
 						</td>
 						<td>
 							{{-- edit modal--}}
-							<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $school->id }}" data-backdrop="static">
+							<button class="btn btn-primary btn-sm" data-toggle="modal" data-target="#editModal{{ $school->id }}" data-backdrop="static" style="overflow:hidden;">
 								<i class="fa fa-pencil"></i>
 							</button>
 							<!-- Trigger the modal with a button -->
@@ -64,19 +69,25 @@
 						            <div class="row">
 						                <div class="col-md-12">
 				                        <div class="row">
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
 				                                <div class="form-group">
-				                                    <strong>প্রতিষ্ঠানের নাম নামঃ</strong>
-				                                    {!! Form::text('name', null, array('placeholder' => 'নাম','class' => 'form-control', 'required' => '')) !!}
+				                                    <strong>প্রতিষ্ঠানের নামঃ (বাংলায়)</strong>
+				                                    {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় নাম','class' => 'form-control', 'required' => '')) !!}
 				                                </div>
 				                            </div>
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
+				                                <div class="form-group">
+				                                    <strong>প্রতিষ্ঠানের নামঃ (ইংরেজিতে)</strong>
+				                                    {!! Form::text('name', null, array('placeholder' => 'ইংরেজিতে নাম','class' => 'form-control', 'required' => '')) !!}
+				                                </div>
+				                            </div>
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                    <strong>ইআইআইএনঃ</strong>
 				                                    {!! Form::text('eiin', null, array('placeholder' => 'ইআইআইএন','class' => 'form-control', 'required' => '')) !!}
 				                                </div>
 				                            </div>
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
 						                        	<div class="form-group">
 							                          <strong>শাখার সংখ্যা</strong>
 							                          <select class="form-control" name="sections" required="">
@@ -89,7 +100,7 @@
 								                    </div>
 				                        </div>
 				                        <div class="row">
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                  <strong>স্থাপিতঃ</strong>
 				                                  <select class="form-control" name="established" required="">
@@ -108,7 +119,7 @@
 				                                  </select>
 				                                </div>
 				                            </div>
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                  <strong>চলতি অ্যাকাডেমিক সেশনঃ (শিক্ষাবর্ষ)</strong>
 				                                  <select class="form-control" name="currentsession" required="">
@@ -128,7 +139,25 @@
 				                                  </select>
 				                                </div>
 				                            </div>
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
+								                        <div class="form-group">
+								                          <strong>ভর্তি শিক্ষাবর্ষ</strong>
+								                          <select class="form-control" name="admission_session" required="">
+								                            <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+								                          @php
+								                            $y = date('Y');
+								                            for($y; $y<=2038; $y++) {
+								                          @endphp
+								                              <option value="{{ $y }}"
+																							@if($school->admission_session == $y) selected="" @endif
+								                              >{{ $y }}</option>
+								                          @php
+								                            }
+								                          @endphp
+								                          </select>
+								                        </div>
+								                    </div>
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                  <strong>ভর্তি প্রক্রিয়াঃ</strong>
 				                                  <br/>
@@ -148,31 +177,35 @@
 				                            </div>
 				                        </div> 
 				                        <div class="row">
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                    <strong>ঠিকানাঃ</strong>
 				                                    {!! Form::text('address', null, array('placeholder' => 'ঠিকানা','class' => 'form-control', 'required' => '')) !!}
 				                                </div>
 				                            </div>
-				                            <div class="col-md-4">
-								                        <div class="form-group">
-								                          <strong>পেমেন্ট মেথডঃ</strong>
-								                          <select class="form-control" name="payment_method" required="">
-								                            <option value="" selected disabled>পেমেন্ট মেথড নির্ধারণ করুন</option>
-								                            <option value="manual"
-																						@if($school->payment_method == 'manual')
-																						selected
-																						@endif
-								                            >ম্যানুয়াল</option>
-								                            <option value="online"
-																						@if($school->payment_method == 'online')
-																						selected
-																						@endif
-								                            >অনলাইন</option>
-								                          </select>
-								                        </div> 
-								                    </div>
-				                            <div class="col-md-4">
+				                            <div class="col-md-3">
+							                        <div class="form-group">
+							                          <strong>জেলাঃ</strong>
+							                          <select class="form-control" id="district{{ $school->id }}" name="district" required="">
+							                            <option value="" selected="" disabled="">জেলা নির্ধারণ করুন</option>
+							                            @foreach($districts as $district)
+							                            <option value="{{ $district }}" @if($school->district == $district) selected="" @endif>{{ $district }}</option>
+							                            @endforeach
+							                          </select>
+							                        </div> 
+							                    </div>
+							                    <div class="col-md-3">
+							                        <div class="form-group">
+							                          <strong>উপজেলাঃ</strong>
+							                          <select class="form-control" id="upazilla{{ $school->id }}" name="upazilla" required="">
+							                            <option value="" disabled>উপজেলা নির্ধারণ করুন</option>
+							                            @if($school->upazilla != null || $school->upazilla != '')
+																					<option value="{{ $school->upazilla }}" selected>{{ $school->upazilla }}</option>
+							                            @endif
+							                          </select>
+							                        </div> 
+							                    </div>
+				                            <div class="col-md-3">
 				                                <div class="form-group">
 				                                  <strong>শেষ সংঘটিত পরীক্ষার ফলাফলঃ</strong>
 				                                  <br/>
@@ -198,15 +231,33 @@
 				                          $classes = explode(',', $school->classes);
 				                          @endphp
 				                          @for($clss = 1;$clss<=10;$clss++)
-				                            <label style="margin-right: 40px;">
-				                            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes"
+				                            <label style="margin-right: 15px; float: left;">
+				                            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"
 																		@if(in_array($clss, $classes)) checked @endif
 				                            > Class {{ $clss }}
 				                            </label>
 				                          @endfor
-				                        </div>  
+				                        </div><br/>
 				                        <div class="row">
-				                            <div class="col-md-6">
+				                        	  <div class="col-md-4">
+								                        <div class="form-group">
+								                          <strong>পেমেন্ট মেথডঃ</strong>
+								                          <select class="form-control" name="payment_method" required="">
+								                            <option value="" selected disabled>পেমেন্ট মেথড নির্ধারণ করুন</option>
+								                            <option value="manual"
+																						@if($school->payment_method == 'manual')
+																						selected
+																						@endif
+								                            >ম্যানুয়াল</option>
+								                            <option value="online"
+																						@if($school->payment_method == 'online')
+																						selected
+																						@endif
+								                            >অনলাইন</option>
+								                          </select>
+								                        </div> 
+								                    </div>
+				                            <div class="col-md-4">
 				                                <div class="form-group">
 				                                  <strong>চলতি পরীক্ষার নাম নির্ধারণ করুন</strong>
 				                                  <select class="form-control" name="currentexam">
@@ -224,23 +275,23 @@
 				                                  </select>
 				                                </div>
 				                            </div>
-				                            <div class="col-md-6">
+				                            <div class="col-md-4">
 				                                <div class="row">
-				                                    <div class="col-md-6">
+				                                    <div class="col-md-8">
 				                                        <div class="form-group">
 				                                            <label>মনোগ্রাম</label>
 				                                            <div class="input-group">
 				                                                <span class="input-group-btn">
 				                                                    <span class="btn btn-default btn-file">
-				                                                        ব্রাউজ করুন <input type="file" id="imgInp" name="monogram">
+				                                                        ব্রাউজ করুন <input type="file" id="monogram{{ $school->id }}" name="monogram">
 				                                                    </span>
 				                                                </span>
 				                                                <input type="text" class="form-control" readonly>
 				                                            </div>
 				                                        </div>
 				                                    </div>
-				                                    <div class="col-md-6">
-				                                        <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload' style="height: 120px; width: auto; padding: 5px; float: right;" />
+				                                    <div class="col-md-4">
+				                                        <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload{{ $school->id }}' style="height: 90px; width: auto; padding: 5px; float: right;" />
 				                                    </div>
 				                                </div>
 				                            </div>
@@ -283,8 +334,85 @@
 				      {{-- delete modal--}}
 						</td>
 					</tr>
+					<script type="text/javascript">
+					  $(document).ready(function() {
+					      $('#district{{ $school->id }}').on('change', function() {
+					        $('#upazilla{{ $school->id }}').prop('disabled', true);
+					        $('#upazilla{{ $school->id }}').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+					        $.ajax({
+					          url: "/schools/getupazillas/api/"+$(this).val(), 
+					          type: "GET",
+					          success: function(result){
+					            $('#upazilla{{ $school->id }}')
+					                .find('option')
+					                .remove()
+					                .end()
+					                .prop('disabled', false)
+					                .append('<option value="" selected disabled>উপজেলা নির্ধারণ করুন</option>')
+					            ;
+					            for(var countupazilla = 0; countupazilla < result.length; countupazilla++) {
+					              //console.log(result[countupazilla]);
+					              $('#upazilla{{ $school->id }}').append('<option value="'+result[countupazilla]+'">'+result[countupazilla]+'</option>')
+					            }
+					          }
+					        });
+					      });
+
+					      $(document).on('change', '.btn-file :file', function() {
+					      var input = $(this),
+					          label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+					      input.trigger('fileselect', [label]);
+					      });
+					      $('.btn-file :file').on('fileselect', function(event, label) {
+					          
+					          var input = $(this).parents('.input-group').find(':text'),
+					              log = label;
+					          
+					          if( input.length ) {
+					              input.val(log);
+					          } else {
+					              if( log ) alert(log);
+					          }
+					      });
+					      function readURL(input) {
+					          if (input.files && input.files[0]) {
+					              var reader = new FileReader();
+					              
+					              reader.onload = function (e) {
+					                  $('#img-upload{{ $school->id }}').attr('src', e.target.result);
+					              }
+					              
+					              reader.readAsDataURL(input.files[0]);
+					          }
+					      }
+
+					      $("#monogram{{ $school->id }}").change(function(){
+					          readURL(this);
+					          var filesize = parseInt((this.files[0].size)/1024);
+					          if(filesize > 100) {
+					            $("#monogram{{ $school->id }}").val('');
+					            toastr.warning('File size is: '+filesize+' Kb. try uploading less than 100Kb', 'WARNING').css('width', '400px;');
+					              setTimeout(function() {
+					                $("#img-upload{{ $school->id }}").attr('src', '{{ asset('images/dummy_student.jpg') }}');
+					              }, 1000);
+					          }
+					      });     
+					  });
+					</script>
 				@endforeach
 			</tbody>
 		</table>	
 	</div>
+@stop
+
+@section('js')
+	<script type="text/javascript" src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.js') }}"></script>
+	<script>
+	  $(document).ready(function(){
+	    $('.icheck').iCheck({
+	      checkboxClass: 'icheckbox_square-blue',
+	      increaseArea: '20%' // optional
+	    });
+	  });
+	</script>
 @stop

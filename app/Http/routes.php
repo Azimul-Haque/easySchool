@@ -52,12 +52,20 @@ Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'Admiss
 Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'AdmissionController@searchPaymentPage']);
 Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
 Route::get('admission/form/retrieve',['as'=>'admissions.retrieveid','uses'=>'AdmissionController@retrieveApplicationId']);
+Route::get('school/{token}',['as'=>'schools.getschool','uses'=>'SchoolController@getSchool']);
 
 // public APIs
 Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);
 Route::get('admission/form/retrieve/{dob}/{contact}',['as'=>'admissions.retrieveidapi','uses'=>'AdmissionController@retrieveApplicationIdAPI']);
+Route::get('schools/getdistricts/api',['as'=>'schools.getdistricts','uses'=>'SchoolController@getDistrictsAPI']);
+Route::get('schools/getupazillas/api/{district}',['as'=>'schools.getupazillas','uses'=>'SchoolController@getUpazillasAPI']);
+Route::get('schools/getschools/api/{district}/{upazilla}',['as'=>'schools.getschools','uses'=>'SchoolController@getSchoolsAPI']);
+
 
 
 // pdf generators
+Route::get('admission/form/copy/pdf/{application_id}',['as'=>'admissions.pdfapplicantscopy','uses'=>'AdmissionController@pdfApplicantsCopy']);
+Route::get('admission/applications/pdf',['as'=>'admissions.pdfallapplication','uses'=>'AdmissionController@pdfAllApplications']);
+Route::get('admission/seatplan/pdf',['as'=>'admissions.pdfadmissionseatplan','uses'=>'AdmissionController@pdfAdmissionSeatPlan']);
 Route::get('admission/form/admitcard/pdf/{application_id}',['as'=>'admissions.pdfadmitcard','uses'=>'AdmissionController@pdfAdmitCard']);
 

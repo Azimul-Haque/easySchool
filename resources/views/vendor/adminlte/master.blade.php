@@ -3,6 +3,13 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="icon" sizes="192x192" href="{{ asset('images/icon.png') }}">
+    <meta name="theme-color" content="#3C8CBB">
+    <meta name="msapplication-navbutton-color" content="#3C8CBB">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#3C8CBB">
+    <meta name="description" content="EasySchool is a Bangladeshi educational institute management web platform. &copy; {{ date('Y') }} Copyright Reserved. Developed By A. H. M. Azimul Haque. Initiated by Ahasan Arefin"/>
+
     <title>@yield('title_prefix', config('adminlte.title_prefix', ''))
 @yield('title', config('adminlte.title', 'Easy School'))
 @yield('title_postfix', config('adminlte.title_postfix', ''))</title>
@@ -15,7 +22,6 @@
     <!-- Ionicons -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/vendor/Ionicons/css/ionicons.min.css') }}">
     <!-- Custom CSS by Orbachin Ujbuk -->
-    {!!Html::style('css/stylesheet.css')!!}
 
     @if(config('adminlte.plugins.select2'))
         <!-- Select2 -->
@@ -24,12 +30,13 @@
 
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
+    {!!Html::style('css/stylesheet.css')!!}
 
     @if(config('adminlte.plugins.datatables'))
         <!-- DataTables -->
         <link rel="stylesheet" href="https://cdn.datatables.net/1.10.19/css/dataTables.bootstrap.min.css">
     @endif
-
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pace.min.css') }}">
     @yield('adminlte_css')
 
     <!--[if lt IE 9]>
@@ -47,6 +54,7 @@
 <script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/vendor/bootstrap/dist/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendor/adminlte/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('js/pace.min.js') }}"></script>
 
 @if(config('adminlte.plugins.select2'))
     <!-- Select2 -->
@@ -61,6 +69,10 @@
 
 @yield('adminlte_js')
 @include('partials._messages')
-
+<script>
+ $(document).ajaxStart(function () {
+    Pace.restart()
+ })
+</script>
 </body>
 </html>

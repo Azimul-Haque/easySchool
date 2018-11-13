@@ -8,14 +8,18 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\School;
+use App\Upazilla;
 use Artisan;
 
 class IndexController extends Controller
 {
     public function index()
     {
-        $schools = School::All();
-        return view('index.index')->withSchools($schools);
+        $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');
+        $schools = School::orderBy('id', 'ASC')->get();
+        return view('index.index')
+                    ->withSchools($schools)
+                    ->withDistricts($districts);
     }
 
     // clear configs, routes and serve
