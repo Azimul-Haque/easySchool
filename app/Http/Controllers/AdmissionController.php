@@ -205,11 +205,13 @@ class AdmissionController extends Controller
             return view('admissions.payment')
                       ->withApplication($application);
           } else {
-            return redirect()->route('admissions.getpayment');
+            Session::flash('warning', 'আইডি দিতে ভুল হয়েছে, আবার চেষ্টা করুন!');
+            return redirect()->route('admissions.searchpayment');
           }
         }
         catch (\Exception $e) {
-          return redirect()->route('admissions.getpayment');
+          Session::flash('warning', 'আইডি দিতে ভুল হয়েছে, আবার চেষ্টা করুন!');
+          return redirect()->route('admissions.searchpayment');
         }
     }
 
