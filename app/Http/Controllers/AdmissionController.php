@@ -29,7 +29,6 @@ class AdmissionController extends Controller
     {
         $admissions = Admission::where('school_id', Auth::User()->school_id)
                             ->where('session', Auth::User()->school->admission_session)
-                            ->where('class',6)
                             ->orderBy('id', 'ASC')->get();
         return view('admissions.index')
                     ->withAdmissions($admissions);
