@@ -433,17 +433,13 @@
           <div class="panel panel-default">
               <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | পেমেন্ট</u></h3></center></div>
               <div class="panel-body">
-                <div class="row">
-                  <div class="col-md-6 col-md-offset-3">
-                    <div class="form-inline">
-                        <label for="application_id">অ্যাপলিকেশন আইডিঃ</label>
-                        <div class="input-group">
-                          <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                          <input type="text" id="application_id" class="form-control" placeholder="অ্যাপলিকেশন আইডিঃ" required="">
-                        </div>
-                        <button class="btn btn-success" id="search"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                <div class="form-inline">
+                    <label for="application_id">অ্যাপলিকেশন আইডিঃ</label>
+                    <div class="input-group">
+                      <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                      <input type="text" id="application_id" class="form-control" placeholder="অ্যাপলিকেশন আইডিঃ" required="">
                     </div>
-                  </div>
+                    <button class="btn btn-success" id="search"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
                 </div>
               </div>
           </div>
