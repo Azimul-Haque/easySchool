@@ -201,11 +201,15 @@ class AdmissionController extends Controller
         try {
           $application = Admission::where('application_id', $application_id)->first();
           //dd($application);
-          return view('admissions.payment')
-                    ->withApplication($application);
+          if($application != null) {
+            return view('admissions.payment')
+                      ->withApplication($application);
+          } else {
+            return redirect()->route('admissions.getpayment');
+          }
         }
         catch (\Exception $e) {
-          return $e->getMessage();
+          return redirect()->route('admissions.getpayment');
         }
     }
 
