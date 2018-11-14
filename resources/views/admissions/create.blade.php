@@ -36,7 +36,7 @@
 <div class="container">
     <div class="row">
         @if($school->isadmissionon == 1)
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10">
             <center>
                 @if(isset($school))
                 <h2>{{ $school->name }}</h2>
@@ -55,7 +55,7 @@
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users"></i></span>
                             <select class="form-control" name="class" id="class" required="">
-                              <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+                              <option value="" selected disabled>শ্রেণী নির্ধারণ করুন</option>
                               @php
                                 $classes = explode(',', $school->classes);
                               @endphp
@@ -428,6 +428,25 @@
                   {!! Form::close() !!}
                 </div>
             </div>
+        </div>
+        <div class="col-md-2">
+          <div class="panel panel-default">
+              <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | পেমেন্ট</u></h3></center></div>
+              <div class="panel-body">
+                <div class="row">
+                  <div class="col-md-6 col-md-offset-3">
+                    <div class="form-inline">
+                        <label for="application_id">অ্যাপলিকেশন আইডিঃ</label>
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                          <input type="text" id="application_id" class="form-control" placeholder="অ্যাপলিকেশন আইডিঃ" required="">
+                        </div>
+                        <button class="btn btn-success" id="search"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+          </div>
         </div>
         @else
         <div class="col-md-12">
