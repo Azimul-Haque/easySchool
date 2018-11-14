@@ -461,7 +461,7 @@
         $('#search').click(function() {
           if($('#application_id').val()){
             application_id = $('#application_id').val();
-            window.location = 'http://localhost:8000/admission/form/payment/'+application_id;
+            window.location = '/admission/form/payment/'+application_id;
           } else {
             toastr.warning('অ্যাপলিকেশন আইডিটি দিন!', 'WARNING').css('width','400px');
           }
