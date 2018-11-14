@@ -33,10 +33,10 @@
 @stop
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="row">
         @if($school->isadmissionon == 1)
-        <div class="col-md-10">
+        <div class="col-md-10 col-md-offset-1">
             <center>
                 @if(isset($school))
                 <h2>{{ $school->name }}</h2>
@@ -429,21 +429,6 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-2">
-          <div class="panel panel-default">
-              <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | পেমেন্ট</u></h3></center></div>
-              <div class="panel-body">
-                <div class="form-inline">
-                    <label for="application_id">অ্যাপলিকেশন আইডিঃ</label>
-                    <div class="input-group">
-                      <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                      <input type="text" id="application_id" class="form-control" placeholder="অ্যাপলিকেশন আইডিঃ" required="">
-                    </div>
-                    <button class="btn btn-success" id="search"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
-                </div>
-              </div>
-          </div>
-        </div>
         @else
         <div class="col-md-12">
           <center>আবেদন গ্রহণ বন্ধ আছে...</center>
@@ -456,18 +441,7 @@
 @section('js')
     {!!Html::script('js/bootstrap-datepicker.min.js')!!}
     {!!Html::script('js/select2.min.js')!!}
-    <script type="text/javascript">
-      $(document).ready(function() {
-        $('#search').click(function() {
-          if($('#application_id').val()){
-            application_id = $('#application_id').val();
-            window.location = '/admission/form/payment/'+application_id;
-          } else {
-            toastr.warning('অ্যাপলিকেশন আইডিটি দিন!', 'WARNING').css('width','400px');
-          }
-        });
-      });
-    </script>
+    
     <script type="text/javascript">
         $(function() {
           $("#dob").datepicker({
