@@ -460,7 +460,18 @@
 @section('js')
     {!!Html::script('js/bootstrap-datepicker.min.js')!!}
     {!!Html::script('js/select2.min.js')!!}
-    
+    <script type="text/javascript">
+      $(document).ready(function() {
+        $('#search').click(function() {
+          if($('#application_id').val()){
+            application_id = $('#application_id').val();
+            window.location = 'http://localhost:8000/admission/form/payment/'+application_id;
+          } else {
+            toastr.warning('অ্যাপলিকেশন আইডিটি দিন!', 'WARNING').css('width','400px');
+          }
+        });
+      });
+    </script>
     <script type="text/javascript">
         $(function() {
           $("#dob").datepicker({
