@@ -71,7 +71,7 @@
 @include('partials._messages')
 <script>
  $(document).ajaxStart(function () {
-    Pace.restart()
+    Pace.restart();
  })
 </script>
 </body>

@@ -32,6 +32,16 @@ class CreateSchoolsTable extends Migration
             $table->string('currentexam')->nullable();
             $table->string('payment_method')->nullable();
             $table->integer('admission_form_fee')->nullable();
+            $table->integer('admission_total_marks')->nullable();
+            $table->integer('admission_bangla_mark')->nullable();
+            $table->integer('admission_english_mark')->nullable();
+            $table->integer('admission_math_mark')->nullable();
+            $table->integer('admission_gk_mark')->nullable();
+            $table->integer('admission_pass_mark')->nullable();
+            $table->datetime('admission_start_date')->nullable();
+            $table->datetime('admission_end_date')->nullable();
+            $table->datetime('admission_test_datetime')->nullable();
+            $table->string('headmaster_sign')->nullable();
             $table->string('monogram')->nullable();
             $table->timestamps();
         });

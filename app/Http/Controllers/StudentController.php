@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 
 use App\Student;
 use App\School;
+use App\Upazilla;
 
 use SoapClient;
 use Auth, Session, DB, File;
@@ -60,8 +61,11 @@ class StudentController extends Controller
 
     public function create()
     {
+        $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');
         $school = School::where('id', Auth::user()->school_id)->first();
-        return view('students.create')->withSchool($school);
+        return view('students.create')
+                    ->withDistricts($districts)
+                    ->withSchool($school);
     }
 
     /**
@@ -77,12 +81,12 @@ class StudentController extends Controller
             'section' => 'required',
             'roll' => 'required',
             'session' => 'required',
-            'name_bangla' => 'required|max:255',
+            //'name_bangla' => 'required|max:255',
             'name' => 'required|max:255',
             'father' => 'required|max:255',
             'mother' => 'required|max:255',
             'fathers_occupation' => 'required|max:255',
-            'mothers_occupation' => 'required|max:255',
+            //'mothers_occupation' => 'required|max:255',
             'yearly_income' => 'required|numeric',
             'religion' => 'required',
             'nationality' => 'required|max:255',
@@ -90,6 +94,7 @@ class StudentController extends Controller
             'dob' => 'required|max:255',
             'gender' => 'required|max:255',
             'cocurricular' => 'required',
+            'facility' => 'required',
             'village' => 'required|max:500',
             'post_office' => 'required|max:500',
             'upazilla' => 'required|max:500',
@@ -98,7 +103,20 @@ class StudentController extends Controller
             'contact_2' => 'required',
             'previous_school' => 'required|max:255',
             'pec_result' => 'required|max:255',
-            'image' => 'sometimes|image|max:200'
+            'image' => 'sometimes|image|max:200',
+
+            'jsc_registration_no' => 'sometimes',
+            'jsc_roll' => 'sometimes',
+            'jsc_session' => 'sometimes',
+            'jsc_result' => 'sometimes',
+            'jsc_subject_codes' => 'sometimes',
+            'ssc_registration_no' => 'sometimes',
+            'ssc_roll' => 'sometimes',
+            'ssc_session' => 'sometimes',
+            'ssc_result' => 'sometimes',
+            'ssc_subject_codes' => 'sometimes',
+
+            'remarks' => 'sometimes'
         ]);
 
         $school = School::where('id', Auth::user()->school_id)->first();
@@ -139,12 +157,12 @@ class StudentController extends Controller
         $student->roll = $request->roll;
         $student->class = $request->class;
         $student->section = $request->section;
-        $student->name_bangla = $request->name_bangla;
+        //$student->name_bangla = $request->name_bangla;
         $student->name = $request->name;
         $student->father = $request->father;
         $student->mother = $request->mother;
         $student->fathers_occupation = $request->fathers_occupation;
-        $student->mothers_occupation   = $request->mothers_occupation ;
+        //$student->mothers_occupation   = $request->mothers_occupation ;
         $student->yearly_income   = $request->yearly_income ;
         $student->religion   = $request->religion ;
         $student->nationality = $request->nationality;
@@ -152,6 +170,7 @@ class StudentController extends Controller
         $student->dob = \Carbon\Carbon::parse($request->dob);
         $student->gender = $request->gender;
         $student->cocurricular = implode(',', $request->cocurricular);
+        $student->facility = $request->facility;
         $student->village = $request->village;
         $student->post_office = $request->post_office;
         $student->upazilla = $request->upazilla;
@@ -171,7 +190,22 @@ class StudentController extends Controller
             $student->image = $filename;
         }
 
+        $student->jsc_registration_no = $request->jsc_registration_no;
+        $student->jsc_roll = $request->jsc_roll;
+        $student->jsc_session = $request->jsc_session;
+        $student->jsc_result = $request->jsc_result;
+        $student->jsc_subject_codes = $request->jsc_subject_codes;
+        $student->jsc_fourth_subject_code = $request->jsc_fourth_subject_code;
+        
+        $student->ssc_registration_no = $request->ssc_registration_no;
+        $student->ssc_roll = $request->ssc_roll;
+        $student->ssc_session = $request->ssc_session;
+        $student->ssc_result = $request->ssc_result;
+        $student->ssc_subject_codes = $request->ssc_subject_codes;
+        $student->ssc_fourth_subject_code = $request->ssc_fourth_subject_code;
+
         $student->session = $request->session;
+        $student->remarks = $request->remarks;
         $student->save();
 
         Session::flash('success', 'সফলভাবে শিক্ষার্থী ভর্তি করা হয়েছে!');
@@ -198,12 +232,15 @@ class StudentController extends Controller
     public function edit($id)
     {
         try {
+          $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');
           $student = Student::where('id', $id)
                             ->where('school_id', Auth::user()->school_id)->first();
           if($student == null) {
             return redirect()->route('students.index');
           }
-          return view('students.edit',compact('student'));
+          return view('students.edit')
+                    ->withDistricts($districts)
+                    ->withStudent($student);
         }
         catch (\Exception $e) {
           return redirect()->route('students.index');
@@ -224,12 +261,12 @@ class StudentController extends Controller
             'section' => 'required',
             'roll' => 'required',
             'session' => 'required',
-            'name_bangla' => 'required|max:255',
+            //'name_bangla' => 'required|max:255',
             'name' => 'required|max:255',
             'father' => 'required|max:255',
             'mother' => 'required|max:255',
             'fathers_occupation' => 'required|max:255',
-            'mothers_occupation' => 'required|max:255',
+            //'mothers_occupation' => 'required|max:255',
             'yearly_income' => 'required|numeric',
             'religion' => 'required',
             'nationality' => 'required|max:255',
@@ -237,6 +274,7 @@ class StudentController extends Controller
             'dob' => 'required|max:255',
             'gender' => 'required|max:255',
             'cocurricular' => 'required',
+            'facility' => 'required',
             'village' => 'required|max:500',
             'post_office' => 'required|max:500',
             'upazilla' => 'required|max:500',
@@ -256,7 +294,8 @@ class StudentController extends Controller
             'ssc_roll' => 'sometimes',
             'ssc_session' => 'sometimes',
             'ssc_result' => 'sometimes',
-            'ssc_subject_codes' => 'sometimes'
+            'ssc_subject_codes' => 'sometimes',
+            'remarks' => 'sometimes'
         ]);
 
         $student = Student::find($id);
@@ -264,12 +303,12 @@ class StudentController extends Controller
         $student->section = $request->section;
         $student->roll = $request->roll;
         $student->session = $request->session;
-        $student->name_bangla = $request->name_bangla;
+        //$student->name_bangla = $request->name_bangla;
         $student->name = $request->name;
         $student->father = $request->father;
         $student->mother = $request->mother;
         $student->fathers_occupation = $request->fathers_occupation;
-        $student->mothers_occupation   = $request->mothers_occupation ;
+        //$student->mothers_occupation   = $request->mothers_occupation ;
         $student->yearly_income   = $request->yearly_income ;
         $student->religion   = $request->religion ;
         $student->nationality = $request->nationality;
@@ -277,6 +316,7 @@ class StudentController extends Controller
         $student->dob = \Carbon\Carbon::parse($request->dob);
         $student->gender = $request->gender;
         $student->cocurricular = implode(',', $request->cocurricular);
+        $student->facility = $request->facility;
         $student->village = $request->village;
         $student->post_office = $request->post_office;
         $student->upazilla = $request->upazilla;
@@ -324,6 +364,7 @@ class StudentController extends Controller
         }
 
         $student->session = $request->session;
+        $student->remarks = $request->remarks;
         $student->save();
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');

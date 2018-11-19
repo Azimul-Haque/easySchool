@@ -15,7 +15,7 @@ class CreateAdmissionsTable extends Migration
         Schema::create('admissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id')->unsigned();
-            $table->integer('application_id')->unique();
+            $table->string('application_id', 15)->unique();
             $table->integer('application_roll')->unsigned();
 
             $table->integer('class');
@@ -31,7 +31,7 @@ class CreateAdmissionsTable extends Migration
             $table->string('nationality');
             $table->string('blood_group');
             $table->datetime('dob');
-            $table->integer('gender');
+            $table->string('gender', 10);
             $table->string('cocurricular');
             $table->string('village');
             $table->string('post_office');
@@ -47,7 +47,7 @@ class CreateAdmissionsTable extends Migration
             $table->integer('payment');
             $table->string('application_status')->nullable();
             $table->string('mark_obtained')->nullable();
-            $table->integer('merit_position')->unsigned()->nullable();
+            $table->integer('merit_position')->nullable();
             $table->timestamps();
         });
     }

@@ -1,7 +1,6 @@
 <?php 
 
 function bangla($str){
-
       $en = array(1,2,3,4,5,6,7,8,9,0);
       $bn = array('১','২','৩','৪','৫','৬','৭','৮','৯','০');
       $str = str_replace($en, $bn, $str);
@@ -20,4 +19,17 @@ function bangla($str){
       $bn = array( 'পূর্বাহ্ন', 'অপরাহ্ন' );
       $str = str_replace( $en, $bn, $str );
       return $str;
-  }
+}
+
+function bangla_class($str){
+      $en = array(1,2,3,4,5,6,7,8,9,10);
+      $bn = array('প্রথম','দ্বিতীয়','তৃতীয়','চতুর্থ','পঞ্চম','ষষ্ঠ','সপ্তম','অষ্টম','নবম','দশম');
+      $str = str_replace($en, $bn, $str);
+      return $str;
+}
+function bangla_section($str){
+      $en = array('A', 'B', 'C', 'SCIENCE', 'ARTS', 'COMMERCE', 'VOCATIONAL', 'TECHNICAL');
+      $bn = array('ক','খ','গ','বিজ্ঞান','মানবিক','বাণিজ্য','ভোকেশনাল','কারগরি');
+      $str = str_replace($en, $bn, $str);
+      return $str;
+}

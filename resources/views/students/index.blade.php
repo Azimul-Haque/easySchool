@@ -204,7 +204,7 @@
   	    'ordering'    : true,
   	    'info'        : true,
   	    'autoWidth'   : true,
-  	    'order': [[ 0, "asc" ]],
+  	    'order': [[ 2, "asc" ]],
 	       // columnDefs: [
 	       //    { targets: [5], type: 'date'}
 	       // ]

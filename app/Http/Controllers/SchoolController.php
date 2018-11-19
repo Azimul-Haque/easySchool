@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;
 use App\School;
 use App\Upazilla;
 
+use Image;
 use Validator, Input, Redirect, Session, DB;
 use Auth;
+use Carbon\Carbon;
 
 class SchoolController extends Controller
 {
@@ -87,12 +89,24 @@ class SchoolController extends Controller
         $school->upazilla = $request->upazilla;
         $school->currentsession = $request->currentsession;
         $school->admission_session = $request->admission_session;
-        $school->classes = implode (", ", $request->classes);
+        $school->classes = implode (",", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
         $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
         $school->currentexam = $request->currentexam;
-        //$school->monogram = $request->monogram;
+
+        // image upload
+        if($request->hasFile('monogram')) {
+            $image      = $request->file('monogram');
+            if($school->monogram == null || $school->monogram == '') {
+              $filename   = 'monogram_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
+            } else {
+              $filename = $school->monogram;
+            }
+            $location   = public_path('images/schools/monograms/'. $filename);
+            Image::make($image)->resize(200, 200)->save($location);
+            $school->monogram = $filename;
+        }
         
         
         $school->save();
@@ -148,10 +162,22 @@ class SchoolController extends Controller
             'currentsession' => 'required',
             'admission_session' => 'required',
             'classes' => 'required',
-            'isadmissionon' => 'required',
             'payment_method' => 'required',
             'isresultpublished' => 'required',
             'currentexam' => 'sometimes',
+
+            'admission_form_fee' => 'sometimes',
+            'admission_total_marks' => 'sometimes',
+            'admission_bangla_mark' => 'sometimes',
+            'admission_english_mark' => 'sometimes',
+            'admission_math_mark' => 'sometimes',
+            'admission_gk_mark' => 'sometimes',
+            'isadmissionon' => 'required',
+            'admission_pass_mark' => 'sometimes',
+            'admission_start_date' => 'sometimes',
+            'admission_end_date' => 'sometimes',
+            'admission_test_datetime' => 'sometimes',
+            'headmaster_sign' => 'sometimes',
             'monogram' => 'sometimes'
         ]);
 
@@ -166,13 +192,48 @@ class SchoolController extends Controller
         $school->district = $request->district;
         $school->upazilla = $request->upazilla;
         $school->currentsession = $request->currentsession;
-        $school->admission_session = $request->admission_session;
-        $school->classes = implode (", ", $request->classes);
-        $school->isadmissionon = $request->isadmissionon;
+        $school->classes = implode (",", $request->classes);
         $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
         $school->currentexam = $request->currentexam;
-        //$school->monogram = $request->monogram;
+        
+        $school->admission_session = $request->admission_session;
+        $school->admission_form_fee = $request->admission_form_fee;
+        $school->admission_total_marks = $request->admission_total_marks;
+        $school->admission_bangla_mark = $request->admission_bangla_mark;
+        $school->admission_english_mark = $request->admission_english_mark;
+        $school->admission_math_mark = $request->admission_math_mark;
+        $school->admission_gk_mark = $request->admission_gk_mark;
+        $school->isadmissionon = $request->isadmissionon;
+        $school->admission_pass_mark = $request->admission_pass_mark;
+        $school->admission_start_date = new Carbon($request->admission_start_date);
+        $school->admission_end_date = new Carbon($request->admission_end_date);
+        $school->admission_test_datetime = new Carbon($request->admission_test_datetime);
+
+        // sign upload
+        if($request->hasFile('headmaster_sign')) {
+            $image      = $request->file('headmaster_sign');
+            if($school->headmaster_sign == null || $school->headmaster_sign == '') {
+              $filename   = 'sign_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
+            } else {
+              $filename = $school->headmaster_sign;
+            }
+            $location   = public_path('/images/schools/signs/'. $filename);
+            Image::make($image)->resize(300, 80)->save($location);
+            $school->headmaster_sign = $filename;
+        }
+        // monogram upload
+        if($request->hasFile('monogram')) {
+            $image      = $request->file('monogram');
+            if($school->monogram == null || $school->monogram == '') {
+              $filename   = 'monogram_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
+            } else {
+              $filename = $school->monogram;
+            }
+            $location   = public_path('/images/schools/monograms/'. $filename);
+            Image::make($image)->resize(200, 200)->save($location);
+            $school->monogram = $filename;
+        }
         
         
         $school->save();

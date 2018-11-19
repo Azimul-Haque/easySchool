@@ -29,13 +29,13 @@
       <div style="text-align: center;  border:1px solid black; width: 200px;  height: 115px;">
         <span>
           <span style="@if(strlen($application->school->name_bangla) < 65) font-size: 20px; @elseif(strlen($application->school->name_bangla) > 65 && strlen($application->school->name_bangla) <= 97) font-size: 14px; @elseif(strlen($application->school->name_bangla) > 97) font-size: 11px; @endif padding: 1px; margin-top: 5px;"><b>{{ $application->school->name_bangla }}</b></span><br/>
-          <span style="font-size: 14px; padding: 1px; border-bottom: 1px solid black;">{{ bangla($application->class) }}@if($application->class == 6)ষ্ঠ @elseম@endif শ্রেণি ভর্তি পরীক্ষা</span><br/>
+          <span style="font-size: 14px; padding: 1px; border-bottom: 1px solid black;">{{ bangla_class($application->class) }} শ্রেণি ভর্তি পরীক্ষা</span><br/>
           <span style="font-size: 14px; padding: 2px;">
             আইডিঃ {{ $application->application_id }}
           </span><br/>
 
           <span style="font-size: 24px; margin-top: 1px;"><b>রোল: {{ $application->application_roll }}</b></span><br/>
-          <span style="font-size: 15px; margin-top: 1px;">{{ $application->name_bangla }}</span><br/>
+          <span style="font-size: 15px; margin-top: 1px;">{{ $application->name }}</span><br/>
         </span>
       </div>
     </div>

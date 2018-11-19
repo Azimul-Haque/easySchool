@@ -11,6 +11,7 @@ use App\Services\PayUService\Exception;
 use App\Admission;
 use App\School;
 use App\Student;
+use App\Upazilla;
 
 use Image;
 use Validator, Input, Redirect, Session, File;
@@ -34,6 +35,17 @@ class AdmissionController extends Controller
                     ->withAdmissions($admissions);
     }
 
+    public function getClassWise($class)
+    {
+        $admissions = Admission::where('school_id', Auth::User()->school_id)
+                            ->where('session', Auth::User()->school->admission_session)
+                            ->where('class', $class)
+                            ->orderBy('id', 'ASC')->get();
+        return view('admissions.index')
+                    ->withAdmissions($admissions)
+                    ->withClass($class);
+    }
+
     /**
      * Show the form for creating a new resource.
      *
@@ -42,16 +54,21 @@ class AdmissionController extends Controller
     public function create()
     {
         $school = School::find(Auth::user()->school->id);
-        return view('admissions.create')->withSchool($school);
+        $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');
+        return view('admissions.create')
+                  ->withSchool($school)
+                  ->withDistricts($districts);
     }
 
     public function apply($id)
     {
         try {
           $school = School::find($id);
+          $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');
           if($school != null) {
             return view('admissions.create')
-                        ->withSchool($school);
+                        ->withSchool($school)
+                        ->withDistricts($districts);
           } else {
             Session::flash('warning', 'আপনার কোথাও ভুল হচ্ছে! পুনরায় আরম্ভ করুন।');
             return redirect()->route('index');
@@ -76,12 +93,10 @@ class AdmissionController extends Controller
             'school_id' => 'required',
             'class' => 'required',
             'section' => 'sometimes',
-            'name_bangla' => 'required|max:255',
             'name' => 'required|max:255',
             'father' => 'required|max:255',
             'mother' => 'required|max:255',
             'fathers_occupation' => 'required|max:255',
-            'mothers_occupation' => 'required|max:255',
             'yearly_income' => 'required|numeric',
             'religion' => 'required',
             'nationality' => 'required|max:255',
@@ -99,59 +114,46 @@ class AdmissionController extends Controller
             'pec_result' => 'required|max:255',
             'image' => 'sometimes|image|max:200' // sometimes for now...
         ]);
-        //dd($request->cocurricular);
         $school = School::find($request->school_id);
         // $length = 5;
         // $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
         // $random_string = substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
-        
-        //dd($application_id);
-        if($school->sections > 0) {
-          $last_application = Admission::where('school_id', $school->id)
-                                       ->where('class', $request->class)
-                                       ->where('session', $school->admission_session)
-                                       ->where('section', $request->section)
-                                       ->orderBy('application_id', 'desc')
-                                       ->first();
-        } else {
-          $last_application = Admission::where('school_id', $school->id)
-                                       ->where('class', $request->class)
-                                       ->where('session', $school->admission_session)
-                                       ->where('section', 0)
-                                       ->orderBy('application_id', 'desc')
-                                       ->first();
-        }
+        $last_application = Admission::where('school_id', $school->id)
+                                     ->where('session', $school->admission_session)
+                                     ->orderBy('application_id', 'desc')
+                                     ->first();
         //dd($last_application);
         if($last_application != null) {
             $application_id = $last_application->application_id + 1;
-            //dd($application_id);
         } else {
             $first_id_for_application = str_pad(1, 3, '0', STR_PAD_LEFT);
-            if(date('m') > 10) {
-                $admission_year = date('y') + 1;
-            } else {
-                $admission_year = date('y');
-            }
-            $application_id = $request->class.$admission_year.$school->id.$request->section.$first_id_for_application;
-            //dd($application_id);
+            $application_id = (int)($school->eiin.(date('y', strtotime($school->admission_session))).$first_id_for_application);
         }
-        
+        //dd($application_id);
+
+        $last_application_for_roll = Admission::where('school_id', $school->id)
+                                     ->where('class', $request->class)
+                                     ->where('session', $school->admission_session)
+                                     ->orderBy('application_id', 'desc')
+                                     ->first();
+        if($last_application_for_roll != null) {
+            $application_roll = $last_application_for_roll->application_roll + 1;
+        } else {
+            $first_roll_for_application = str_pad(1, 2, '0', STR_PAD_LEFT);
+            $application_roll = $first_roll_for_application;
+        }
+        //dd($application_roll);
 
         $admission = new Admission;
         $admission->school_id = $request->school_id;
         $admission->application_id = $application_id;
-        $admission->application_roll = substr($application_id, -3);
+        $admission->application_roll = $application_roll;
 
         $admission->class = $request->class;
-        if($school->sections > 0) {
-          $admission->section = $request->section;
-        }
-        $admission->name_bangla = $request->name_bangla;
         $admission->name = $request->name;
         $admission->father = $request->father;
         $admission->mother = $request->mother;
         $admission->fathers_occupation = $request->fathers_occupation;
-        $admission->mothers_occupation = $request->mothers_occupation;
         $admission->yearly_income = $request->yearly_income;
         $admission->religion = $request->religion;
         $admission->nationality = $request->nationality;
@@ -322,23 +324,25 @@ class AdmissionController extends Controller
         return $pdf->stream($fileName);
     }
 
-    public function pdfAllApplications()
+    public function pdfAllApplications($class)
     {
         $applications = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class', $class)
                                  ->get();
-        $pdf = PDF::loadView('admissions.pdf.applicantscopies', ['applications' => $applications]);
-        $fileName = 'Applications' . '.pdf';
+        $pdf = PDF::loadView('admissions.pdf.applicantscopies', ['applications' => $applications], ['data' => $class]);
+        $fileName = 'Class_'.$class.'_All_Applications' . '.pdf';
         return $pdf->stream($fileName);
     }
 
-    public function pdfAdmissionSeatPlan()
+    public function pdfAdmissionSeatPlan($class)
     {
         $applications = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class',$class)
                                  ->get();
-        $pdf = PDF::loadView('admissions.pdf.admissionseatplan', ['applications' => $applications]);
-        $fileName = 'Applications' . '.pdf';
+        $pdf = PDF::loadView('admissions.pdf.admissionseatplan', ['applications' => $applications], ['data' => $class]);
+        $fileName = 'Class_'.$class.'_Seatplan' . '.pdf';
         return $pdf->stream($fileName);
     }
 
@@ -358,13 +362,14 @@ class AdmissionController extends Controller
         $application->save();
         
         Session::flash('success', 'পেমেন্ট সফল হয়েছে!');
-        return redirect()->route('admissions.index');
+        return redirect()->route('admissions.getclasswise', $application->class);
     }
 
     public function submitMarks(Request $request)
     {
         $this->validate($request, [
             'application_ids_with_marks' => 'required',
+            'class'                      => 'required',
         ]);
         //dd($request->application_ids_with_marks);
         $ids_array = [];
@@ -383,9 +388,15 @@ class AdmissionController extends Controller
         $merit_position = 1;
         foreach ($newidmarks_array as $key => $value) {
           try {
-            $application = Admission::where('application_id', $key)->first();
+            $application = Admission::where('application_id', $key)
+                                    ->where('class', $request->class)
+                                    ->first();
             $application->mark_obtained = $value;
-            $application->merit_position = $merit_position;
+            if(Auth::user()->school->admission_pass_mark > $value) {
+              $application->merit_position = -1;
+            } else {
+              $application->merit_position = $merit_position;
+            }
             $application->save();
 
             $merit_position++;
@@ -396,27 +407,58 @@ class AdmissionController extends Controller
         }
         
         Session::flash('success', 'আবেদনকারীদের প্রাপ্ত নম্বর দাখিল করা হয়েছে!');
-        return redirect()->route('admissions.index');
+        return redirect()->route('admissions.getclasswise', $request->class);
     }
 
     public function finalSelection(Request $request)
     {
         $this->validate($request, [
             'application_ids_to_admit' => 'required',
+            'class' => 'required',
+            'section_to_final_admit' => 'required',
         ]);
-        //dd($request->application_ids_to_admit);
         $application_ids = explode(',', $request->application_ids_to_admit);
-        foreach ($application_ids as $application_id) {
-          $application = Admission::where('application_id', $application_id)->first();
+        $ids_array = [];
+        $merit_position_array = [];
+        $application_ids_with_merit_position_array = explode(',', $request->application_ids_to_admit);
+        foreach ($application_ids_with_merit_position_array as $application_id_with_merit_position) {
+          $application_array = explode(':', $application_id_with_merit_position);
+          $ids_array[] = $application_array[0];
+          $merit_position_array[] = $application_array[1];
+          
+        }
+        $newidmeritposition_array = array_combine($ids_array,$merit_position_array);
+        // sort in descending array...
+        asort($newidmeritposition_array);
+        //dd($newidmeritposition_array);
+        $rollandserial = 1;
+        foreach ($newidmeritposition_array as $key => $value) {
+          $application = Admission::where('application_id', $key)->first();
+
+          $last_student_id = Student::where('school_id', $application->school_id)
+                                    ->where('session', $application->session)
+                                    ->where('class', $request->class)
+                                    ->where('section', $request->section_to_final_admit)
+                                    ->orderBy('student_id', 'desc')
+                                    ->first();
+          if($last_student_id != null) {
+            $student_id = $last_student_id->student_id + 1;
+            $roll = $last_student_id->roll + 1;
+          } else {
+            $student_id = $request->class.date('y', strtotime(Auth::user()->school->admission_session)).$application->school_id.$request->section_to_final_admit.str_pad($rollandserial, 3, '0', STR_PAD_LEFT);
+            $roll = $rollandserial;
+          }
+          //dd($student_id);
+
           try {
             $student = new Student;
             $student->school_id = $application->school_id;
-            $student->student_id = $application_id;
+            $student->student_id = $student_id;
 
-            $student->roll = $application->merit_position;
+            $student->roll = $roll;
 
             $student->class = $application->class;
-            $student->section = $application->section;
+            $student->section = $request->section_to_final_admit;
             $student->name_bangla = $application->name_bangla;
             $student->name = $application->name;
             $student->father = $application->father;
@@ -452,15 +494,18 @@ class AdmissionController extends Controller
           }
           $application->application_status = 'done';
           $application->save();
+
+          $rollandserial++;
         }
       
-        return redirect()->route('admissions.index');
+        return redirect()->route('admissions.getclasswise', $request->class);
     }
 
     public function payBulk(Request $request)
     {
         $this->validate($request, [
-            'application_ids' => 'required',
+            'application_ids'  => 'required',
+            'class'            => 'required'
         ]);
         $application_ids_array = explode(',', $request->application_ids);
         foreach ($application_ids_array as $application_id) {
@@ -476,16 +521,28 @@ class AdmissionController extends Controller
         }
         
         Session::flash('success', 'আবেদনকারীদের পেমেন্ট সম্পন্ন করা হয়েছে!');
-        return redirect()->route('admissions.index');
+        return redirect()->route('admissions.getclasswise', $request->class);
     }
 
-    public function pdfApplicantslist() {
+    public function pdfApplicantslist($class) {
         $applications = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
-                                 ->orderBy('merit_position', 'asc')
+                                 ->where('class', $class)
+                                 ->orderBy('mark_obtained', 'desc')
                                  ->get();
-        $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications]);
-        $fileName = 'Applicants_List' . '.pdf';
+
+        $appeared = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class', $class)
+                                 ->having('mark_obtained', '>=', 0)
+                                 ->get();
+        $passed = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class', $class)
+                                 ->having('merit_position', '>', 0)
+                                 ->get();
+        $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications], ['data' => [$class, $applications->count(), $appeared->count(), $passed->count()]]);
+        $fileName = 'Class_'.$class.'_Applicants_List' . '.pdf';
         return $pdf->stream($fileName);
     }
 }

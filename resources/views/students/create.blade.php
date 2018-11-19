@@ -4,7 +4,7 @@
 
 @section('css')
   {!!Html::style('css/bootstrap-datepicker.min.css')!!}
-  {!!Html::style('css/select2.min.css')!!}
+
   <style type="text/css">
     .select2-selection__choice {
      background-color: #3c8dbc !important; 
@@ -31,7 +31,7 @@
         <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="class">যে শ্রেণীতে ভর্তি হতে ইচ্ছুক</label>
+                        <label for="class">শ্রেণী</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-users"></i></span>
                             <select class="form-control" name="class" id="class" required="">
@@ -87,25 +87,16 @@
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group">
-                          <label for="name_bangla">আবেদনকারীর নাম (বাংলায়)</label>
-                          <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় পুরো নাম','class' => 'form-control', 'id' => 'name_bangla', 'required' => '')) !!}
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                          <label for="name">Applicants Name (English)</label>
+                          <label for="name">আবেদনকারীর নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
                             {!! Form::text('name', null, array('placeholder' => 'Name in English','class' => 'form-control', 'id' => 'name', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-3">
                       <div class="form-group" id="birthDateContainer">
                           <label for="dob">জন্মতারিখ</label>
                           <div class="input-group">
@@ -114,11 +105,9 @@
                           </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="father">Father's Name (English)</label>
+                          <label for="father">পিতার নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-male"></i></span>
                             {!! Form::text('father', null, array('placeholder' => 'Father&#8216;s Name in English','class' => 'form-control', 'id' => 'father', 'required' => '')) !!}
@@ -127,34 +116,11 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="mother">Mother's Name (English)</label>
+                          <label for="mother">মাতার নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-female"></i></span>
                             {!! Form::text('mother', null, array('placeholder' => 'Mother&#8216;s Name in English','class' => 'form-control', 'id' => 'mother', 'required' => '')) !!}
                           </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                          <label for="yearly_income">অভিভাবকের বাৎসরিক আয় (টাকায়)</label>
-                          <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-line-chart"></i></span>
-                            {!! Form::text('yearly_income', null, array('placeholder' => 'অভিভাবকের বাৎসরিক আয়','class' => 'form-control', 'id' => 'yearly_income', 'required' => '')) !!}
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="nationality">জাতীয়তা</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-flag"></i></span>
-                            <select class="form-control" name="nationality" id="nationality" required>
-                              <option selected disabled>জাতীয়তা নির্ধারণ করুন</option>
-                              <option value="Bangladeshi">Bangladeshi</option>
-                              <option value="Others">Others</option>
-                            </select>
-                            {!! Form::text('nationality', null, array('placeholder' => 'Write Nationality','class' => 'form-control', 'id' => 'nationalityText', 'style' => 'display:none;')) !!}
-                        </div>
                       </div>
                     </div>
                   </div>
@@ -170,10 +136,10 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="mothers_occupation">মাতার পেশা</label>
+                          <label for="yearly_income">অভিভাবকের বাৎসরিক আয় (টাকায়)</label>
                           <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-female"></i></span>
-                            {!! Form::text('mothers_occupation', null, array('placeholder' => 'মাতার পেশা','class' => 'form-control', 'id' => 'mothers_occupation', 'required' => '')) !!}
+                            <span class="input-group-addon"><i class="fa fa-line-chart"></i></span>
+                            {!! Form::text('yearly_income', null, array('placeholder' => 'অভিভাবকের বাৎসরিক আয়','class' => 'form-control', 'id' => 'yearly_income', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -199,16 +165,30 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
+                        <label for="nationality">জাতীয়তা</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                            <select class="form-control" name="nationality" id="nationality" required>
+                              <option selected disabled>জাতীয়তা নির্ধারণ করুন</option>
+                              <option value="BANGLADESHI">BANGLADESHI</option>
+                              <option value="OTHERS">OTHERS</option>
+                            </select>
+                            {!! Form::text('nationality', null, array('placeholder' => 'Write Nationality','class' => 'form-control', 'id' => 'nationalityText', 'style' => 'display:none;')) !!}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-3">
+                      <div class="form-group">
                           <label for="religion">ধর্ম</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-flag-o"></i></span>
                             <select class="form-control" name="religion" id="religion" required>
                               <option selected disabled>ধর্ম নির্ধারণ করুন</option>
-                              <option value="ইসলাম">ইসলাম</option>
-                              <option value="হিন্দু">হিন্দু</option>
-                              <option value="বৌদ্ধ">বৌদ্ধ</option>
-                              <option value="খ্রিস্টান">খ্রিস্টান</option>
-                              <option value="অন্যান্য">অন্যান্য</option>
+                              <option value="ISLAM">ISLAM</option>
+                              <option value="HINDU">HINDU</option>
+                              <option value="BUDDHIST">BUDDHIST</option>
+                              <option value="CHRISTIAN">CHRISTIAN</option>
+                              <option value="OTHERS">OTHERS</option>
                             </select>
                           </div>
                       </div>
@@ -239,30 +219,9 @@
                             <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
                             <select class="form-control" name="gender" id="gender" required="">
                               <option selected disabled value="">লিঙ্গ নির্ধারণ করুন</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                              <option value="Others">Others</option>
-                            </select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-3">
-                      <div class="form-group">
-                        <label for="cocurricular">সহপাঠ্যক্রম (এক বা একাধিক)</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-music"></i></span>
-                            <select class="form-control" name="cocurricular[]" id="cocurricular" multiple="multiple" required>
-                              <option disabled>সহপাঠ্যক্রম নির্ধারণ করুন</option>
-                              <option value="ক্রিকেট">ক্রিকেট</option>
-                              <option value="ফুটবল">ফুটবল</option>
-                              <option value="ভলিবল">ভলিবল</option>
-                              <option value="সাতাঁর">সাতাঁর</option>
-                              <option value="নাচ">নাচ</option>
-                              <option value="গান">গান</option>
-                              <option value="চিত্রাংকন">চিত্রাংকন</option>
-                              <option value="অভিনয়">অভিনয়</option>
-                              <option value="বক্তৃতা">বক্তৃতা</option>
-                              <option value="বির্তক">বির্তক</option>
+                              <option value="MALE">MALE</option>
+                              <option value="FEMALE">FEMALE</option>
+                              <option value="OTHERS">OTHERS</option>
                             </select>
                         </div>
                       </div>
@@ -288,24 +247,163 @@
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div class="form-group">
-                          <label for="upazilla">উপজেলা</label>
+                        <div class="form-group">
+                          <label for="district">জেলাঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('upazilla', null, array('placeholder' => 'উপজেলার নাম','class' => 'form-control', 'id' => 'upazilla', 'required' => '')) !!}
+                            <select class="form-control" id="district" name="district" required="">
+                              <option value="" selected="" disabled="">জেলা নির্ধারণ করুন</option>
+                              @foreach($districts as $district)
+                              <option value="{{ $district }}">{{ $district }}</option>
+                              @endforeach
+                            </select>
                           </div>
+                        </div> 
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                          <label for="district">উপজেলাঃ</label>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                            <select class="form-control" id="upazilla" name="upazilla" required="" disabled="">
+                              <option value="" selected disabled>উপজেলা নির্ধারণ করুন</option>
+                            </select>
+                          </div>
+                        </div>  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-3">
+                      <div class="form-group">
+                        <label for="cocurricular">সহপাঠ্যক্রম (এক বা একাধিক)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-music"></i></span>
+                            <select class="form-control" name="cocurricular[]" id="cocurricular" multiple="multiple" required>
+                              <option disabled>সহপাঠ্যক্রম নির্ধারণ করুন</option>
+                              <option value="CRICKET">CRICKET</option>
+                              <option value="FOOTBALL">FOOTBALL</option>
+                              <option value="VOLLEYBAL">VOLLEYBAL</option>
+                              <option value="SWIMMING">SWIMMING</option>
+                              <option value="DANCE">DANCE</option>
+                              <option value="SINGING">SINGING</option>
+                              <option value="DRAWING">DRAWING</option>
+                              <option value="ACTING">ACTING</option>
+                              <option value="EXTEMPORE SPEECH">EXTEMPORE SPEECH</option>
+                              <option value="DEBATE">DEBATE</option>
+                            </select>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="district">জেলা</label>
+                        <label for="facility">সুবিধাভোগীঃ</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
+                            <select class="form-control" name="facility" id="facility" required="">
+                              <option selected disabled value="">সুবিধা নির্ধারণ করুন</option>
+                              <option value="0">প্রযোজ্য নয়</option>
+                              <option value="1">উপবৃত্তি (UPOBRITTI)</option>
+                              <option value="2">হাফ-ফ্রি (HALF-FREE)</option>
+                              <option value="3">ফুল-ফ্রি (FULL-FREE)</option>
+                            </select>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <div class="form-group">
+                          <label for="remarks">প্রধান শিক্ষকের মন্তব্যঃ</label>
                           <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('district', null, array('placeholder' => 'জেলার নাম','class' => 'form-control', 'id' => 'district', 'required' => '')) !!}
+                            <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
+                            {!! Form::text('remarks', null, array('placeholder' => 'প্রধান শিক্ষকের মন্তব্য','class' => 'form-control', 'id' => 'remarks')) !!}
                           </div>
                       </div>
                     </div>
                   </div>
+
+                  {{-- JSC Row --}}
+                  <hr>
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_registration_no">JSC রেজিস্ট্রেশন নম্বর</label>
+                        {!! Form::text('jsc_registration_no', null, array('placeholder' => 'JSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'jsc_registration_no', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_roll">JSC রোল নম্বর</label>
+                        {!! Form::text('jsc_roll', null, array('placeholder' => 'JSC রোল নম্বর','class' => 'form-control', 'id' => 'jsc_roll', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_session">JSC বোর্ড সেশন</label>
+                        {!! Form::text('jsc_session', null, array('placeholder' => 'JSC বোর্ড সেশন','class' => 'form-control', 'id' => 'jsc_session', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_result">JSC ফলাফল (GPA)</label>
+                        {!! Form::text('jsc_result', null, array('placeholder' => 'JSC ফলাফল','class' => 'form-control', 'id' => 'jsc_result', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_fourth_subject_code">JSC ৪র্থ বিষয় কোড</label>
+                        {!! Form::text('jsc_fourth_subject_code', null, array('placeholder' => 'JSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'jsc_fourth_subject_code', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="jsc_subject_codes">JSC বিষয় কোডসমূহ</label>
+                        {!! Form::textarea('jsc_subject_codes', null, array('placeholder' => 'JSC বিষয় কোডসমূহ','class' => 'form-control', 'id' => 'jsc_subject_codes', 'rows' => '3', 'style' => 'resize: none;')) !!}
+                      </div>
+                    </div>
+                  </div>
+                  {{-- JSC Row --}}
+                  {{-- SSC Row --}}
+                  <div class="row">
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_registration_no">SSC রেজিস্ট্রেশন নম্বর</label>
+                        {!! Form::text('ssc_registration_no', null, array('placeholder' => 'SSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'ssc_registration_no', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_roll">SSC রোল নম্বর</label>
+                        {!! Form::text('ssc_roll', null, array('placeholder' => 'SSC রোল নম্বর','class' => 'form-control', 'id' => 'ssc_roll', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_session">SSC বোর্ড সেশন</label>
+                        {!! Form::text('ssc_session', null, array('placeholder' => 'SSC বোর্ড সেশন','class' => 'form-control', 'id' => 'ssc_session', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_result">SSC ফলাফল (GPA)</label>
+                        {!! Form::text('ssc_result', null, array('placeholder' => 'SSC ফলাফল','class' => 'form-control', 'id' => 'ssc_result', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_fourth_subject_code">SSC ৪র্থ বিষয় কোড</label>
+                        {!! Form::text('ssc_fourth_subject_code', null, array('placeholder' => 'SSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'ssc_fourth_subject_code', 'autocomplete' => 'off')) !!}
+                      </div>
+                    </div>
+                    <div class="col-md-2">
+                      <div class="form-group">
+                        <label for="ssc_subject_codes">SSC বিষয় কোডসমূহ</label>
+                        {!! Form::textarea('ssc_subject_codes', null, array('placeholder' => 'SSC বিষয় কোডসমূহ','class' => 'form-control', 'id' => 'ssc_subject_codes', 'rows' => '3', 'style' => 'resize: none;')) !!}
+                      </div>
+                    </div>
+                  </div>
+                  <hr>
+                  {{-- SSC Row --}}
+
+
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
@@ -318,7 +416,7 @@
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="pec_result">সমাপনি পরীক্ষার ফলাফল</label>
+                        <label for="pec_result">সমাপনি/সর্বশেষ বার্ষিক পরীক্ষার ফলাফল</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
                             {!! Form::text('pec_result', null, array('placeholder' =>'সমাপনি পরীক্ষার ফলাফল','class' => 'form-control', 'id' => 'pec_result', 'required' => '')) !!}
@@ -373,8 +471,6 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function() {
-          $('#cocurricular').select2();
-
           $('#name').keyup(function(){
               this.value = this.value.toUpperCase();
           });
@@ -435,5 +531,64 @@
               }
           });
         });
+    </script>
+    <script type="text/javascript">
+      $('#cocurricular').select2();
+      $('#district').select2();
+      $('#upazilla').select2();
+
+      $('#district').on('change', function() {
+        $('#upazilla').prop('disabled', true);
+        $('#upazilla').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+        $.ajax({
+          url: "/schools/getupazillas/api/"+$(this).val(), 
+          type: "GET",
+          success: function(result){
+            $('#upazilla')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>উপজেলা নির্ধারণ করুন</option>')
+            ;
+            for(var countupazilla = 0; countupazilla < result.length; countupazilla++) {
+              //console.log(result[countupazilla]);
+              $('#upazilla').append('<option value="'+result[countupazilla]+'">'+result[countupazilla]+'</option>')
+            }
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $('#class').on('change', function() {
+        $('#section').prop('disabled', true);
+        $('#section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+
+        if($('#class').val() < 9) {
+          $('#section')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+          $('#section').append('<option value="'+1+'">A</option>');
+          $('#section').append('<option value="'+2+'">B</option>');
+          $('#section').append('<option value="'+3+'">C</option>');
+        } else {
+          $('#section')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+          $('#section').append('<option value="'+1+'">SCIENCE</option>');
+          $('#section').append('<option value="'+2+'">ARTS</option>');
+          $('#section').append('<option value="'+3+'">COMMERCE</option>');
+          $('#section').append('<option value="'+4+'">VOCATIONAL</option>');
+          $('#section').append('<option value="'+5+'">TECHNICAL</option>');
+        }
+      });
     </script>
 @stop

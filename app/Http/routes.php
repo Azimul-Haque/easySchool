@@ -14,11 +14,14 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('admissiontoggle/on/{id}',['as'=>'admissions.toggleon','uses'=>'AdmissionController@admissionToggleOn']);
 	Route::get('admissiontoggle/off/{id}',['as'=>'admissions.toggleoff','uses'=>'AdmissionController@admissionToggleOff']);
+	Route::get('admission/classwise/{class}',['as'=>'admissions.getclasswise','uses'=>'AdmissionController@getClassWise']);
 	Route::get('admission/form/payment/manual/{id}',['as'=>'admissions.updatepayment','uses'=>'AdmissionController@updatePaymentManual']);
 	Route::post('admission/form/payment/bulk/',['as'=>'admissions.bulkpayment','uses'=>'AdmissionController@payBulk']);
 	Route::post('admission/form/submit/mark/',['as'=>'admissions.submitmark','uses'=>'AdmissionController@submitMarks']);
 	Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
-	Route::get('admission/applicants/list/pdf',['as'=>'admissions.applicantslist','uses'=>'AdmissionController@pdfApplicantslist']);
+	Route::get('admission/applicants/list/pdf/{class}',['as'=>'admissions.applicantslist','uses'=>'AdmissionController@pdfApplicantslist']);
+	Route::get('admission/applications/pdf/{class}',['as'=>'admissions.pdfallapplication','uses'=>'AdmissionController@pdfAllApplications']);
+	Route::get('admission/seatplan/pdf/{class}',['as'=>'admissions.pdfadmissionseatplan','uses'=>'AdmissionController@pdfAdmissionSeatPlan']);
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
 	Route::get('roles/create',['as'=>'roles.create','uses'=>'RoleController@create']);
@@ -30,6 +33,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('settings/',['as'=>'settings.edit','uses'=>'SettingController@edit']);
 	Route::put('settings/{id}',['as'=>'settings.update','uses'=>'SettingController@update']);
+	Route::put('settings/admission/{id}',['as'=>'settings.updateadmission','uses'=>'SettingController@updateAdmission']);
 
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
 	Route::get('students/{session}/{class}/{section}',['as'=>'students.getstudents','uses'=>'StudentController@getStudents']);
@@ -65,7 +69,5 @@ Route::get('schools/getschools/api/{district}/{upazilla}',['as'=>'schools.getsch
 
 // pdf generators
 Route::get('admission/form/copy/pdf/{application_id}',['as'=>'admissions.pdfapplicantscopy','uses'=>'AdmissionController@pdfApplicantsCopy']);
-Route::get('admission/applications/pdf',['as'=>'admissions.pdfallapplication','uses'=>'AdmissionController@pdfAllApplications']);
-Route::get('admission/seatplan/pdf',['as'=>'admissions.pdfadmissionseatplan','uses'=>'AdmissionController@pdfAdmissionSeatPlan']);
 Route::get('admission/form/admitcard/pdf/{application_id}',['as'=>'admissions.pdfadmitcard','uses'=>'AdmissionController@pdfAdmitCard']);
 

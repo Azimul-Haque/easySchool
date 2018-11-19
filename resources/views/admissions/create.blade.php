@@ -23,13 +23,11 @@
         cursor: inherit;
         display: block;
     }
-
     #img-upload{
         width: 100%;
     }
 </style>
   {!!Html::style('css/bootstrap-datepicker.min.css')!!}
-  {!!Html::style('css/select2.min.css')!!}
 @stop
 
 @section('content')
@@ -39,12 +37,20 @@
         <div class="col-md-10 col-md-offset-1">
             <center>
                 @if(isset($school))
-                <h2>{{ $school->name }}</h2>
-                <h4>স্থাপিতঃ {{ $school->established }} | EIIN: {{ $school->eiin }}</h4>
+                <h2>{{ $school->name_bangla }}</h2>
+                <h4>{{ $school->address }}, {{ $school->upazilla }}, {{ $school->district }}</h4>
+                <h4>স্থাপিতঃ {{ bangla($school->established) }} খ্রিঃ | ইআইআইএনঃ {{ bangla($school->eiin) }}</h4>
                 @endif
             </center>
             <div class="panel panel-default">
-                <div class="panel-heading"><center><h3><u>ভর্তির আবেদন</u></h3></center></div>
+                <div class="panel-heading"><center><span style="font-size: 25px;"><u>ভর্তির আবেদন ফর্ম</u></span></center></div>
+                <div class="panel-heading" style="background: lightblue !important; color: black !important;">
+                  <small>নির্দেশনাঃ</small><br>
+                  <ul>
+                    <li><small>ভর্তি শিক্ষাবর্ষঃ {{ bangla($school->admission_session) }}</small></li>
+                    <li><small>সকল তথ্য ইংরেজিতে দিতে হবে।</small></li>
+                  </ul>
+                </div>
                 <div class="panel-body" id="admissionformpanelshow">
                   {!! Form::open(array('route' => 'admissions.store','method'=>'POST', 'enctype' => 'multipart/form-data')) !!}
                     {!! Form::hidden('school_id', $school->id) !!}
@@ -60,67 +66,38 @@
                                 $classes = explode(',', $school->classes);
                               @endphp
                               @foreach($classes as $class)
-                              <option value="{{ $class }}">Class {{ $class }}</option>
+                              <option value="{{ $class }}" {{ (old("class") == $class ? "selected":"") }}>Class {{ $class }}</option>
                               @endforeach
                             </select>
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
-                      @if($school->sections > 0)
-                      <div class="form-group">
-                        <label for="class">যে শাখায় ভর্তি হতে ইচ্ছুক</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-tags"></i></span>
-                            <select class="form-control" name="section" id="section" required="">
-                              <option value="" selected disabled>শাখা নির্ধারণ করুন</option>
-                              <option value="1">A</option>
-                              <option value="2">B</option>
-                              @if($school->sections == 3)
-                              <option value="3">C</option>
-                              @endif
-                            </select>
-                        </div>
-                      </div>
-                      @endif
-                    </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                          <label for="name_bangla">আবেদনকারীর নাম (বাংলায়)</label>
+                          <label for="name">আবেদনকারীর নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় পুরো নাম','class' => 'form-control', 'id' => 'name_bangla', 'required' => '')) !!}
+                            {!! Form::text('name', old('name'), array('placeholder' => 'Name in English','class' => 'form-control', 'id' => 'name', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                          <label for="name">Applicants Name (English)</label>
-                          <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
-                            {!! Form::text('name', null, array('placeholder' => 'Name in English','class' => 'form-control', 'id' => 'name', 'required' => '')) !!}
-                          </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                          <label for="father">Father's Name (English)</label>
+                          <label for="father">পিতার নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                            {!! Form::text('father', null, array('placeholder' => 'Father&#8216;s Name in English','class' => 'form-control', 'id' => 'father', 'required' => '')) !!}
+                            {!! Form::text('father', old('father'), array('placeholder' => 'Father&#8216;s Name in English','class' => 'form-control', 'id' => 'father', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                          <label for="mother">Mother's Name (English)</label>
+                          <label for="mother">মাতার নামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-female"></i></span>
-                            {!! Form::text('mother', null, array('placeholder' => 'Mother&#8216;s Name in English','class' => 'form-control', 'id' => 'mother', 'required' => '')) !!}
+                            {!! Form::text('mother', old('mother'), array('placeholder' => 'Mother&#8216;s Name in English','class' => 'form-control', 'id' => 'mother', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
@@ -128,78 +105,34 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="fathers_occupation">পিতার/ অভিভাবকের পেশা</label>
+                          <label for="fathers_occupation">পিতার/ অভিভাবকের পেশাঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-male"></i></span>
-                            {!! Form::text('fathers_occupation', null, array('placeholder' => 'পিতা/ অভিভাবকের পেশা','class' => 'form-control', 'id' => 'fathers_occupation', 'required' => '')) !!}
+                            {!! Form::text('fathers_occupation', old('fathers_occupation'), array('placeholder' => 'পিতা/ অভিভাবকের পেশা','class' => 'form-control', 'id' => 'fathers_occupation', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="mothers_occupation">মাতার পেশা</label>
-                          <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-female"></i></span>
-                            {!! Form::text('mothers_occupation', null, array('placeholder' => 'মাতার পেশা','class' => 'form-control', 'id' => 'mothers_occupation', 'required' => '')) !!}
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                          <label for="yearly_income">অভিভাবকের বাৎসরিক আয় (টাকায়)</label>
+                          <label for="yearly_income">অভিভাবকের বাৎসরিক আয়ঃ (টাকায়)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-line-chart"></i></span>
-                            {!! Form::text('yearly_income', null, array('placeholder' => 'অভিভাবকের বাৎসরিক আয়','class' => 'form-control', 'id' => 'yearly_income', 'required' => '')) !!}
+                            {!! Form::text('yearly_income', old('yearly_income'), array('placeholder' => 'অভিভাবকের বাৎসরিক আয়','class' => 'form-control', 'id' => 'yearly_income', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
-                  </div>
-                  <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="religion">ধর্ম</label>
+                          <label for="religion">ধর্মঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-flag-o"></i></span>
                             <select class="form-control" name="religion" id="religion" required>
                               <option selected disabled>ধর্ম নির্ধারণ করুন</option>
-                              <option value="ইসলাম">ইসলাম</option>
-                              <option value="হিন্দু">হিন্দু</option>
-                              <option value="বৌদ্ধ">বৌদ্ধ</option>
-                              <option value="খ্রিস্টান">খ্রিস্টান</option>
-                              <option value="অন্যান্য">অন্যান্য</option>
-                            </select>
-                          </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                        <label for="nationality">জাতীয়তা</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-flag"></i></span>
-                            <select class="form-control" name="nationality" id="nationality" required>
-                              <option selected disabled>জাতীয়তা নির্ধারণ করুন</option>
-                              <option value="Bangladeshi">Bangladeshi</option>
-                              <option value="Others">Others</option>
-                            </select>
-                            {!! Form::text('nationality', null, array('placeholder' => 'Write Nationality','class' => 'form-control', 'id' => 'nationalityText', 'style' => 'display:none;')) !!}
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-4">
-                      <div class="form-group">
-                          <label for="blood_group">রক্তের গ্রুপ (জানা না থাকলে এড়িয়ে যান)</label>
-                          <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-tint"></i></span>
-                            <select class="form-control" name="blood_group" id="blood_group">
-                              <option selected disabled>রক্তের গ্রুপ নির্ধারণ করুন</option>
-                              <option value="A+">A+</option>
-                              <option value="A-">A-</option>
-                              <option value="B+">B+</option>
-                              <option value="B-">B-</option>
-                              <option value="AB+">AB+</option>
-                              <option value="AB-">AB-</option>
-                              <option value="O+">O+</option>
-                              <option value="O-">O-</option>
+                              <option value="ISLAM" {{ (old("religion") == 'ISLAM' ? "selected":"") }}>ISLAM</option>
+                              <option value="HINDU" {{ (old("religion") == 'HINDU' ? "selected":"") }}>HINDU</option>
+                              <option value="BUDDHIST" {{ (old("religion") == 'BUDDHIST' ? "selected":"") }}>BUDDHIST</option>
+                              <option value="CHRISTIAN" {{ (old("religion") == 'CHRISTIAN' ? "selected":"") }}>CHRISTIAN</option>
+                              <option value="OTHERS" {{ (old("religion") == 'OTHERS' ? "selected":"") }}>OTHERS</option>
                             </select>
                           </div>
                       </div>
@@ -208,44 +141,45 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group" id="birthDateContainer">
-                          <label for="dob">জন্মতারিখ</label>
+                          <label for="dob">জন্মতারিখঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-calendar-check-o"></i></span>
-                            {!! Form::text('dob', null, array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control', 'autocomplete' => 'off', 'required' => '')) !!}
+                            {!! Form::text('dob', old('dob'), array('id' => 'dob','placeholder' => 'জন্মতারিখ','class' => 'form-control', 'autocomplete' => 'off', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="gender">লিঙ্গ</label>
+                        <label for="gender">লিঙ্গঃ</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-venus-mars"></i></span>
                             <select class="form-control" name="gender" id="gender" required>
                               <option selected disabled>লিঙ্গ নির্ধারণ করুন</option>
-                              <option value="Male">Male</option>
-                              <option value="Female">Female</option>
-                              <option value="Others">Others</option>
+                              <option value="MALE" {{ (old("gender") == 'MALE' ? "selected":"") }}>MALE</option>
+                              <option value="FEMALE" {{ (old("gender") == 'FEMALE' ? "selected":"") }}>FEMALE</option>
+                              <option value="OTHERS" {{ (old("gender") == 'OTHERS' ? "selected":"") }}>OTHERS</option>
                             </select>
                         </div>
                       </div>
                     </div>
                     <div class="col-md-4">
                       <div class="form-group">
-                        <label for="cocurricular">সহপাঠ্যক্রম (এক বা একাধিক)</label>
+                        <label for="cocurricular">সহপাঠ্যক্রমঃ (এক বা একাধিক)</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-music"></i></span>
                             <select class="form-control" name="cocurricular[]" id="cocurricular" multiple="multiple" data-placeholder="সহপাঠ্যক্রম নির্বাচন করুন"  required>
                               <option disabled>সহপাঠ্যক্রম নির্ধারণ করুন</option>
-                              <option value="ক্রিকেট">ক্রিকেট</option>
-                              <option value="ফুটবল">ফুটবল</option>
-                              <option value="ভলিবল">ভলিবল</option>
-                              <option value="সাতাঁর">সাতাঁর</option>
-                              <option value="নাচ">নাচ</option>
-                              <option value="গান">গান</option>
-                              <option value="চিত্রাংকন">চিত্রাংকন</option>
-                              <option value="অভিনয়">অভিনয়</option>
-                              <option value="বক্তৃতা">বক্তৃতা</option>
-                              <option value="বির্তক">বির্তক</option>
+                              <option value="CRICKET" {{ (collect(old('cocurricular'))->contains('CRICKET')) ? 'selected':'' }}>CRICKET</option>
+                              <option value="FOOTBALL" {{ (collect(old('cocurricular'))->contains('FOOTBALL')) ? 'selected':'' }}>FOOTBALL</option>
+                              <option value="VOLLEYBAL" {{ (collect(old('cocurricular'))->contains('VOLLEYBAL')) ? 'selected':'' }}>VOLLEYBALL</option>
+                              <option value="SWIMMING" {{ (collect(old('cocurricular'))->contains('SWIMMING')) ? 'selected':'' }}>SWIMMING</option>
+                              <option value="DANCE" {{ (collect(old('cocurricular'))->contains('DANCE')) ? 'selected':'' }}>DANCE</option>
+                              <option value="SINGING" {{ (collect(old('cocurricular'))->contains('SINGING')) ? 'selected':'' }}>SINGING</option>
+                              <option value="DRAWING" {{ (collect(old('cocurricular'))->contains('CRICKET')) ? 'selected':'' }}>DRAWING</option>
+                              <option value="DRAWING" {{ (collect(old('cocurricular'))->contains('CRICKET')) ? 'selected':'' }}>DRAWING</option>
+                              <option value="ACTING" {{ (collect(old('cocurricular'))->contains('ACTING')) ? 'selected':'' }}>ACTING</option>
+                              <option value="EXTEMPORE SPEECH" {{ (collect(old('cocurricular'))->contains('EXTEMPORE SPEECH')) ? 'selected':'' }}>EXTEMPORE SPEECH</option>
+                              <option value="DEBATE" {{ (collect(old('cocurricular'))->contains('DEBATE')) ? 'selected':'' }}>DEBATE</option>
                             </select>
                         </div>
                       </div>
@@ -254,77 +188,121 @@
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="village">গ্রাম</label>
+                          <label for="village">গ্রামঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('village', null, array('placeholder' => 'গ্রামের নাম','class' => 'form-control', 'id' => 'village', 'required' => '')) !!}
+                            {!! Form::text('village', old('village'), array('placeholder' => 'গ্রামের নাম','class' => 'form-control', 'id' => 'village', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
                     <div class="col-md-3">
                       <div class="form-group">
-                          <label for="post_office">ডাকঘর</label>
+                          <label for="post_office">ডাকঘরঃ (ইংরেজিতে)</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('post_office', null, array('placeholder' => 'ডাকঘরের নাম','class' => 'form-control', 'id' => 'post_office', 'required' => '')) !!}
+                            {!! Form::text('post_office', old('post_office'), array('placeholder' => 'ডাকঘরের নাম','class' => 'form-control', 'id' => 'post_office', 'required' => '')) !!}
                           </div>
                       </div>
                     </div>
                     <div class="col-md-3">
-                      <div class="form-group">
-                          <label for="upazilla">উপজেলা</label>
+                        <div class="form-group">
+                          <label for="district">জেলাঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('upazilla', null, array('placeholder' => 'উপজেলার নাম','class' => 'form-control', 'id' => 'upazilla', 'required' => '')) !!}
+                            <select class="form-control" id="district" name="district" required="">
+                              <option value="" selected="" disabled="">জেলা নির্ধারণ করুন</option>
+                              @foreach($districts as $district)
+                              <option value="{{ $district }}" {{ (old("district") == $district ? "selected":"") }}>{{ $district }}</option>
+                              @endforeach
+                            </select>
                           </div>
-                      </div>
+                        </div> 
                     </div>
                     <div class="col-md-3">
-                      <div class="form-group">
-                          <label for="district">জেলা</label>
+                        <div class="form-group">
+                          <label for="district">উপজেলাঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                            {!! Form::text('district', null, array('placeholder' => 'জেলার নাম','class' => 'form-control', 'id' => 'district', 'required' => '')) !!}
+                            <select class="form-control" id="upazilla" name="upazilla" required="" disabled="">
+                              @if(old('upazilla', null) != null)
+                              <option value="{{ old('upazilla') }}" selected>{{ old('upazilla') }}</option>
+                              @else
+                              <option value="" selected disabled>উপজেলা নির্ধারণ করুন</option>
+                              @endif
+                            </select>
                           </div>
+                        </div>  
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="contact">অভিভাবকের মোবাইল নম্বরঃ (ইংরেজিতে)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            {!! Form::text('contact', old('contact'), array('placeholder' => 'মোবাইল নম্বর লিখুন','class' => 'form-control', 'id' => 'contact', 'required' => '')) !!}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="contact_2">অভিভাবকের আরেকটি মোবাইল নম্বরঃ (ইংরেজিতে)</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            {!! Form::text('contact_2', old('contact_2'), array('placeholder' =>'দ্বিতীয় মোবাইল নম্বর লিখুন','class' => 'form-control', 'id' => 'contact_2', 'required' => '')) !!}
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-4">
+                      <div class="form-group">
+                        <label for="nationality">জাতীয়তাঃ</label>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-flag"></i></span>
+                            <select class="form-control" name="nationality" id="nationality" required>
+                              <option selected disabled>জাতীয়তা নির্ধারণ করুন</option>
+                              <option value="BANGLADESHI" {{ (old("nationality") == 'BANGLADESHI' ? "selected":"") }}>BANGLADESHI</option>
+                              <option value="OTHERS">OTHERS</option>
+                            </select>
+                            {!! Form::text('nationality', null, array('placeholder' => 'Write Nationality','class' => 'form-control', 'id' => 'nationalityText', 'style' => 'display:none;')) !!}
+                        </div>
                       </div>
                     </div>
                   </div>
                   <div class="row">
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="contact">অভিভাবকের মোবাইল নম্বর</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            {!! Form::text('contact', null, array('placeholder' => 'মোবাইল নম্বর লিখুন','class' => 'form-control', 'id' => 'contact', 'required' => '')) !!}
-                        </div>
+                          <label for="blood_group">রক্তের গ্রুপঃ (জানা না থাকলে এড়িয়ে যান)</label>
+                          <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-tint"></i></span>
+                            <select class="form-control" name="blood_group" id="blood_group">
+                              <option selected disabled>রক্তের গ্রুপ নির্ধারণ করুন</option>
+                              <option value="A+" {{ (old("blood_group") == 'A+' ? "selected":"") }}>A+</option>
+                              <option value="A-" {{ (old("blood_group") == 'A-' ? "selected":"") }}>A-</option>
+                              <option value="B+" {{ (old("blood_group") == 'B+' ? "selected":"") }}>B+</option>
+                              <option value="B-" {{ (old("blood_group") == 'B-' ? "selected":"") }}>B-</option>
+                              <option value="AB+" {{ (old("blood_group") == 'AB+' ? "selected":"") }}>AB+</option>
+                              <option value="AB-" {{ (old("blood_group") == 'AB-' ? "selected":"") }}>AB-</option>
+                              <option value="O+" {{ (old("blood_group") == 'O+' ? "selected":"") }}>O+</option>
+                              <option value="O-" {{ (old("blood_group") == 'O-' ? "selected":"") }}>O-</option>
+                            </select>
+                          </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="contact_2">অভিভাবকের আরেকটি মোবাইল নম্বর</label>
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-                            {!! Form::text('contact_2', null, array('placeholder' =>'দ্বিতীয় মোবাইল নম্বর লিখুন','class' => 'form-control', 'id' => 'contact_2', 'required' => '')) !!}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="previous_school">গতবছরে পঠিত বিদ্যালয়ের নাম</label>
+                        <label for="previous_school">গতবছরে পঠিত বিদ্যালয়ের নামঃ (ইংরেজিতে)</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                            {!! Form::text('previous_school', null, array('placeholder' => 'পূর্ববর্তী স্কুলের নাম লিখুন','class' => 'form-control', 'id' => 'previous_school', 'required' => '')) !!}
+                            {!! Form::text('previous_school', old('previous_school'), array('placeholder' => 'পূর্ববর্তী স্কুলের নাম লিখুন','class' => 'form-control', 'id' => 'previous_school', 'required' => '')) !!}
                         </div>
                       </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                       <div class="form-group">
-                        <label for="pec_result">সমাপনি পরীক্ষার ফলাফল</label>
+                        <label for="pec_result">সমাপনি/ সর্বশেষ বার্ষিক পরীক্ষার ফলাফল</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-                            {!! Form::text('pec_result', null, array('placeholder' =>'সমাপনি পরীক্ষার ফলাফল','class' => 'form-control', 'id' => 'pec_result', 'required' => '')) !!}
+                            {!! Form::text('pec_result', old('pec_result'), array('placeholder' =>'সমাপনি/ সর্বশেষ বার্ষিক পরীক্ষার ফলাফল','class' => 'form-control', 'id' => 'pec_result', 'required' => '')) !!}
                         </div>
                       </div>
                     </div>
@@ -336,7 +314,7 @@
                             <div class="input-group">
                                 <span class="input-group-btn">
                                     <span class="btn btn-default btn-file">
-                                        ব্রাউজ করুন <input type="file" id="image" name="image">
+                                        ছবি যুক্ত করুন <input type="file" id="image" name="image">
                                     </span>
                                 </span>
                                 <input type="text" class="form-control" readonly>
@@ -454,8 +432,6 @@
     </script>
     <script type="text/javascript">
       $(document).ready(function() {
-          $('#cocurricular').select2();
-
           $('#name').keyup(function(){
               this.value = this.value.toUpperCase();
           });
@@ -465,9 +441,24 @@
           $('#mother').keyup(function(){
               this.value = this.value.toUpperCase();
           });
+          $('#fathers_occupation').keyup(function(){
+              this.value = this.value.toUpperCase();
+          });
+          $('#village').keyup(function(){
+              this.value = this.value.toUpperCase();
+          });
+          $('#post_office').keyup(function(){
+              this.value = this.value.toUpperCase();
+          });
+          $('#nationalityText').keyup(function(){
+              this.value = this.value.toUpperCase();
+          });
+          $('#previous_school').keyup(function(){
+              this.value = this.value.toUpperCase();
+          });
 
           $('#nationality').change(function(){
-              if($('#nationality').val() == 'Others') {
+              if($('#nationality').val() == 'OTHERS') {
                 $('#nationality').attr('style', 'display:none;');
                 $('#nationalityText').attr('style', 'display:block;');
               } else {
@@ -531,5 +522,64 @@
             $("#addressPreview").html($("#address").val());
           }); 
         });
+    </script>
+
+    <script type="text/javascript">
+      $('#cocurricular').select2();
+      $('#district').select2();
+      $('#upazilla').select2();
+
+      $('#district').on('change', function() {
+        $('#upazilla').prop('disabled', true);
+        $('#upazilla').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+        $.ajax({
+          url: "/schools/getupazillas/api/"+$(this).val(), 
+          type: "GET",
+          success: function(result){
+            $('#upazilla')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>উপজেলা নির্ধারণ করুন</option>');
+            for(var countupazilla = 0; countupazilla < result.length; countupazilla++) {
+              //console.log(result[countupazilla]);
+              $('#upazilla').append('<option value="'+result[countupazilla]+'">'+result[countupazilla]+'</option>')
+            }
+          }
+        });
+      });
+    </script>
+    <script type="text/javascript">
+      $('#class').on('change', function() {
+        $('#section').prop('disabled', true);
+        $('#section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+
+        if($('#class').val() < 9) {
+          $('#section')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+          $('#section').append('<option value="'+1+'">A</option>');
+          $('#section').append('<option value="'+2+'">B</option>');
+          $('#section').append('<option value="'+3+'">C</option>');
+        } else {
+          $('#section')
+                .find('option')
+                .remove()
+                .end()
+                .prop('disabled', false)
+                .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+          $('#section').append('<option value="'+1+'">SCIENCE</option>');
+          $('#section').append('<option value="'+2+'">ARTS</option>');
+          $('#section').append('<option value="'+3+'">COMMERCE</option>');
+          $('#section').append('<option value="'+4+'">VOCATIONAL</option>');
+          $('#section').append('<option value="'+5+'">TECHNICAL</option>');
+        }
+      });
     </script>
 @stop

@@ -15,7 +15,7 @@ class CreateStudentsTable extends Migration
         Schema::create('students', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id')->unsigned();
-            $table->string('student_id')->unique();
+            $table->string('student_id', 15)->unique();
 
             $table->integer('roll')->nullable();
 
@@ -32,8 +32,9 @@ class CreateStudentsTable extends Migration
             $table->string('nationality');
             $table->string('blood_group');
             $table->datetime('dob');
-            $table->integer('gender');
+            $table->string('gender', 10);
             $table->string('cocurricular');
+            $table->integer('facility');
             $table->string('village');
             $table->string('post_office');
             $table->string('upazilla');
@@ -60,6 +61,7 @@ class CreateStudentsTable extends Migration
 
             $table->string('session');
             $table->integer('payment');
+            $table->string('remarks');
             $table->timestamps();
         });
     }

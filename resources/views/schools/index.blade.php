@@ -5,6 +5,10 @@
 @section('css')
 	<script src="{{ asset('vendor/adminlte/vendor/jquery/dist/jquery.min.js') }}"></script>
 	<link rel="stylesheet" type="text/css" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
+  {!!Html::style('https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css')!!}
+  <script type="text/javascript" src="{{ asset('js/moment.js') }}"></script>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+  
 @stop
 
 @section('content_header')
@@ -64,7 +68,7 @@
 						          <button type="button" class="close" data-dismiss="modal">&times;</button>
 						          <h4 class="modal-title">{{ $school->name }} সম্পাদনাঃ</h4>
 						        </div>
-						        {!! Form::model($school, ['route' => ['schools.update', $school->id], 'method' => 'PUT']) !!}
+						        {!! Form::model($school, ['route' => ['schools.update', $school->id], 'method' => 'PUT', 'enctype' => 'multipart/form-data']) !!}
 						        <div class="modal-body">
 						            <div class="row">
 						                <div class="col-md-12">
@@ -100,81 +104,81 @@
 								                    </div>
 				                        </div>
 				                        <div class="row">
-				                            <div class="col-md-3">
-				                                <div class="form-group">
-				                                  <strong>স্থাপিতঃ</strong>
-				                                  <select class="form-control" name="established" required="">
-				                                    <option value="" selected disabled>স্থাপনার সাল নির্ধারণ করুন</option>
-				                                  @php
-				                                    $y = date('Y');
-				                                    for($y; $y>=1901; $y--) {
-				                                  @endphp
-				                                      <option value="{{ $y }}"
-				                                      @if($school->established == $y)
-				                                      selected 
-				                                      @endif>{{ $y }}</option>
-				                                  @php
-				                                    }
-				                                  @endphp
-				                                  </select>
-				                                </div>
-				                            </div>
-				                            <div class="col-md-3">
-				                                <div class="form-group">
-				                                  <strong>চলতি অ্যাকাডেমিক সেশনঃ (শিক্ষাবর্ষ)</strong>
-				                                  <select class="form-control" name="currentsession" required="">
-				                                    <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
-				                                  @php
-				                                    $y = date('Y')-2;
-				                                    for($y; $y<=2038; $y++) {
-				                                  @endphp
-				                                      <option 
-																							@if($school->currentsession == $y)
-																							selected 
-																							@endif
-				                                       value="{{ $y }}">{{ $y }}</option>
-				                                  @php
-				                                    }
-				                                  @endphp
-				                                  </select>
-				                                </div>
-				                            </div>
-				                            <div class="col-md-3">
-								                        <div class="form-group">
-								                          <strong>ভর্তি শিক্ষাবর্ষ</strong>
-								                          <select class="form-control" name="admission_session" required="">
-								                            <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
-								                          @php
-								                            $y = date('Y');
-								                            for($y; $y<=2038; $y++) {
-								                          @endphp
-								                              <option value="{{ $y }}"
-																							@if($school->admission_session == $y) selected="" @endif
-								                              >{{ $y }}</option>
-								                          @php
-								                            }
-								                          @endphp
-								                          </select>
-								                        </div>
-								                    </div>
-				                            <div class="col-md-3">
-				                                <div class="form-group">
-				                                  <strong>ভর্তি প্রক্রিয়াঃ</strong>
-				                                  <br/>
-				                                  <label style="margin-right: 40px;">
-				                                  <input type="radio" name="isadmissionon" value="0" 
-																					@if($school->isadmissionon == 0)
-																					checked="checked" 
+			                            <div class="col-md-3">
+		                                <div class="form-group">
+		                                  <strong>স্থাপিতঃ</strong>
+		                                  <select class="form-control" name="established" required="">
+		                                    <option value="" selected disabled>স্থাপনার সাল নির্ধারণ করুন</option>
+		                                  @php
+		                                    $y = date('Y');
+		                                    for($y; $y>=1901; $y--) {
+		                                  @endphp
+		                                      <option value="{{ $y }}"
+		                                      @if($school->established == $y)
+		                                      selected 
+		                                      @endif>{{ $y }}</option>
+		                                  @php
+		                                    }
+		                                  @endphp
+		                                  </select>
+		                                </div>
+			                            </div>
+			                            <div class="col-md-3">
+		                                <div class="form-group">
+		                                  <strong>চলতি অ্যাকাডেমিক সেশনঃ (শিক্ষাবর্ষ)</strong>
+		                                  <select class="form-control" name="currentsession" required="">
+		                                    <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+		                                  @php
+		                                    $y = date('Y')-2;
+		                                    for($y; $y<=2038; $y++) {
+		                                  @endphp
+		                                      <option 
+																					@if($school->currentsession == $y)
+																					selected 
 																					@endif
-				                                  required> বন্ধ</label>
-				                                  <label style="margin-right: 40px;">
-				                                  <input type="radio" name="isadmissionon" value="1"
-																					@if($school->isadmissionon == 1)
-																					checked="checked" 
-																					@endif
-				                                  > চলছে</label>
-				                                </div> 
-				                            </div>
+		                                       value="{{ $y }}">{{ $y }}</option>
+		                                  @php
+		                                    }
+		                                  @endphp
+		                                  </select>
+		                                </div>
+			                            </div>
+	                            	  <div class="col-md-3">
+    				                        <div class="form-group">
+    				                          <strong>পেমেন্ট মেথডঃ</strong>
+    				                          <select class="form-control" name="payment_method" required="">
+    				                            <option value="" selected disabled>পেমেন্ট মেথড নির্ধারণ করুন</option>
+    				                            <option value="manual"
+    																		@if($school->payment_method == 'manual')
+    																		selected
+    																		@endif
+    				                            >ম্যানুয়াল</option>
+    				                            <option value="online"
+    																		@if($school->payment_method == 'online')
+    																		selected
+    																		@endif
+    				                            >অনলাইন</option>
+    				                          </select>
+    				                        </div> 
+	    				                    </div>
+	                                <div class="col-md-3">
+                                    <div class="form-group">
+                                      <strong>চলতি পরীক্ষার নাম নির্ধারণ করুন</strong>
+                                      <select class="form-control" name="currentexam">
+                                        <option selected disabled>চলতি পরীক্ষার নাম নির্ধারণ করুন</option>
+                                        <option value="halfyearly"
+    																		@if($school->currentexam == 'halfyearly')
+    																		  selected 
+    																		@endif
+                                        >অর্ধবার্ষিকী/প্রাক-নির্বাচনী পরীক্ষা</option>
+                                        <option value="final"
+    																		@if($school->currentexam == 'final')
+    																		  selected 
+    																		@endif
+                                        >বার্ষিক/নির্বাচনী পরীক্ষা</option>
+                                      </select>
+                                    </div>
+	                                </div>
 				                        </div> 
 				                        <div class="row">
 				                            <div class="col-md-3">
@@ -237,64 +241,148 @@
 				                            > Class {{ $clss }}
 				                            </label>
 				                          @endfor
-				                        </div><br/>
+				                        </div><br/><br/><br/>
 				                        <div class="row">
-				                        	  <div class="col-md-4">
-								                        <div class="form-group">
-								                          <strong>পেমেন্ট মেথডঃ</strong>
-								                          <select class="form-control" name="payment_method" required="">
-								                            <option value="" selected disabled>পেমেন্ট মেথড নির্ধারণ করুন</option>
-								                            <option value="manual"
-																						@if($school->payment_method == 'manual')
-																						selected
-																						@endif
-								                            >ম্যানুয়াল</option>
-								                            <option value="online"
-																						@if($school->payment_method == 'online')
-																						selected
-																						@endif
-								                            >অনলাইন</option>
-								                          </select>
-								                        </div> 
-								                    </div>
-				                            <div class="col-md-4">
-				                                <div class="form-group">
-				                                  <strong>চলতি পরীক্ষার নাম নির্ধারণ করুন</strong>
-				                                  <select class="form-control" name="currentexam">
-				                                    <option selected disabled>চলতি পরীক্ষার নাম নির্ধারণ করুন</option>
-				                                    <option value="halfyearly"
-																						@if($school->currentexam == 'halfyearly')
-																						  selected 
-																						@endif
-				                                    >অর্ধবার্ষিকী/প্রাক-নির্বাচনী পরীক্ষা</option>
-				                                    <option value="final"
-																						@if($school->currentexam == 'final')
-																						  selected 
-																						@endif
-				                                    >বার্ষিক/নির্বাচনী পরীক্ষা</option>
-				                                  </select>
-				                                </div>
-				                            </div>
-				                            <div class="col-md-4">
-				                                <div class="row">
-				                                    <div class="col-md-8">
-				                                        <div class="form-group">
-				                                            <label>মনোগ্রাম</label>
-				                                            <div class="input-group">
-				                                                <span class="input-group-btn">
-				                                                    <span class="btn btn-default btn-file">
-				                                                        ব্রাউজ করুন <input type="file" id="monogram{{ $school->id }}" name="monogram">
-				                                                    </span>
-				                                                </span>
-				                                                <input type="text" class="form-control" readonly>
-				                                            </div>
-				                                        </div>
-				                                    </div>
-				                                    <div class="col-md-4">
-				                                        <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload{{ $school->id }}' style="height: 90px; width: auto; padding: 5px; float: right;" />
-				                                    </div>
-				                                </div>
-				                            </div>
+				                        	<div class="col-md-2">
+  					                        <div class="form-group">
+  					                          <strong>ভর্তি শিক্ষাবর্ষ</strong>
+  					                          <select class="form-control" name="admission_session" required="">
+  					                            <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+  					                          @php
+  					                            $y = date('Y');
+  					                            for($y; $y<=2038; $y++) {
+  					                          @endphp
+  					                              <option value="{{ $y }}"
+  																				@if($school->admission_session == $y) selected="" @endif
+  					                              >{{ $y }}</option>
+  					                          @php
+  					                            }
+  					                          @endphp
+  					                          </select>
+  					                        </div>
+	  					                    </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>ভর্তি পরীক্ষার পূর্ণমান</strong>
+		                                    {!! Form::text('admission_total_marks', null, array('placeholder' => 'ভর্তি পরীক্ষার পূর্ণমান','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>নম্বর বণ্টন (বাংলা)</strong>
+		                                    {!! Form::text('admission_bangla_mark', null, array('placeholder' => 'নম্বর বণ্টন (বাংলা)','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>নম্বর বণ্টন (ইংরেজি)</strong>
+		                                    {!! Form::text('admission_english_mark', null, array('placeholder' => 'নম্বর বণ্টন (ইংরেজি)','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>নম্বর বণ্টন (গণিত)</strong>
+		                                    {!! Form::text('admission_math_mark', null, array('placeholder' => 'নম্বর বণ্টন (গণিত)','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>নম্বর বণ্টন (সাঃ জ্ঞান)</strong>
+		                                    {!! Form::text('admission_gk_mark', null, array('placeholder' => 'নম্বর বণ্টন (সাঃ জ্ঞান)','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+				                        </div>
+				                        <div class="row">
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+  	                                  <strong>ভর্তি প্রক্রিয়াঃ</strong>
+  	                                  <br/>
+  	                                  <label style="margin-right: 40px;">
+  	                                  <input type="radio" name="isadmissionon" value="0" 
+  																		@if($school->isadmissionon == 0)
+  																		checked="checked" 
+  																		@endif
+  	                                  required> বন্ধ</label>
+  	                                  <label style="margin-right: 40px;">
+  	                                  <input type="radio" name="isadmissionon" value="1"
+  																		@if($school->isadmissionon == 1)
+  																		checked="checked" 
+  																		@endif
+  	                                  > চলছে</label>
+  	                                </div> 
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>উত্তীর্ণ নম্বর</strong>
+		                                    {!! Form::text('admission_pass_mark', null, array('placeholder' => 'উত্তীর্ণ নম্বর','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>ভর্তি আবেদন শুরু</strong>
+		                                    {!! Form::text('admission_start_date', null, array('placeholder' => 'ভর্তি আবেদন শুরু','class' => 'form-control', 'id' => 'admission_start_date'.$school->id)) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>ভর্তি আবেদন শেষ</strong>
+		                                    {!! Form::text('admission_end_date', null, array('placeholder' => 'ভর্তি আবেদন শেষ','class' => 'form-control', 'id' => 'admission_end_date'.$school->id)) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>ভর্তি পরীক্ষার সময়</strong>
+		                                    {!! Form::text('admission_test_datetime', null, array('placeholder' => 'ভর্তি পরীক্ষার সময়','class' => 'form-control', 'id' => 'admission_test_datetime'.$school->id)) !!}
+		                                </div>
+	  	                            </div>
+	  	                            <div class="col-md-2">
+  	                                <div class="form-group">
+		                                    <strong>ভর্তি পরীক্ষার ফিঃ</strong>
+		                                    {!! Form::text('admission_form_fee', null, array('placeholder' => 'ভর্তি পরীক্ষার ফি','class' => 'form-control')) !!}
+		                                </div>
+	  	                            </div>
+				                        </div>
+				                        <div class="row">
+			                            <div class="col-md-6">
+			                                <div class="row">
+			                                    <div class="col-md-6">
+			                                        <div class="form-group">
+			                                            <label>প্রধান শিক্ষকের স্বাক্ষর</label>
+			                                            <div class="input-group">
+			                                                <span class="input-group-btn">
+			                                                    <span class="btn btn-default btn-file">
+			                                                        ব্রাউজ করুন <input type="file" id="headmaster_sign{{ $school->id }}" name="headmaster_sign">
+			                                                    </span>
+			                                                </span>
+			                                                <input type="text" class="form-control" readonly>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-md-6">
+			                                        <img src="https://via.placeholder.com/100x27?text=Sign" id='sign-upload{{ $school->id }}' style="height: 54px; width: 200px; padding: 5px; float: right;" />
+			                                    </div>
+			                                </div>
+			                            </div>
+			                            <div class="col-md-4">
+			                                <div class="row">
+			                                    <div class="col-md-8">
+			                                        <div class="form-group">
+			                                            <label>মনোগ্রাম</label>
+			                                            <div class="input-group">
+			                                                <span class="input-group-btn">
+			                                                    <span class="btn btn-default btn-file">
+			                                                        ব্রাউজ করুন <input type="file" id="monogram{{ $school->id }}" name="monogram">
+			                                                    </span>
+			                                                </span>
+			                                                <input type="text" class="form-control" readonly>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                    <div class="col-md-4">
+			                                        <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload{{ $school->id }}' style="height: 90px; width: auto; padding: 5px; float: right;" />
+			                                    </div>
+			                                </div>
+			                            </div>
 				                        </div>
 						                </div>
 						            </div>
@@ -396,12 +484,50 @@
 					                $("#img-upload{{ $school->id }}").attr('src', '{{ asset('images/dummy_student.jpg') }}');
 					              }, 1000);
 					          }
-					      });     
+					      }); 
+					      function readSignURL(input) {
+					          if (input.files && input.files[0]) {
+					              var reader = new FileReader();
+					              
+					              reader.onload = function (e) {
+					                  $('#sign-upload{{ $school->id }}').attr('src', e.target.result);
+					              }
+					              
+					              reader.readAsDataURL(input.files[0]);
+					          }
+					      }
+					      $("#headmaster_sign{{ $school->id }}").change(function(){
+					          readSignURL(this);
+					          var filesize = parseInt((this.files[0].size)/1024);
+					          if(filesize > 100) {
+					            $("#headmaster_sign{{ $school->id }}").val('');
+					            toastr.warning('File size is: '+filesize+' Kb. try uploading less than 100Kb', 'WARNING').css('width', '400px;');
+					              setTimeout(function() {
+					                $("#sign-upload{{ $school->id }}").attr('src', '{{ asset('images/dummy_student.jpg') }}');
+					              }, 1000);
+					          }
+					      });
 					  });
 					</script>
+          <script type="text/javascript">
+              $(function () {
+                  $('#admission_start_date{{ $school->id }}').datetimepicker({
+                    format: 'MMMM DD, YYYY hh:mm A',
+                    date: new Date('{{ $school->admission_start_date }}')
+                  });
+                  $('#admission_end_date{{ $school->id }}').datetimepicker({
+                    format: 'MMMM DD, YYYY hh:mm A',
+                    date: new Date('{{ $school->admission_end_date }}')
+                  });
+                  $('#admission_test_datetime{{ $school->id }}').datetimepicker({
+                    format: 'MMMM DD, YYYY hh:mm A',
+                    date: new Date('{{ $school->admission_test_datetime }}')
+                  });
+              });
+          </script>
 				@endforeach
 			</tbody>
-		</table>	
+		</table>
 	</div>
 @stop
 
@@ -415,4 +541,5 @@
 	    });
 	  });
 	</script>
+
 @stop

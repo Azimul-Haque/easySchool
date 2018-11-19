@@ -295,12 +295,27 @@
                     @role('headmaster')
                     <li class="header">প্রশাসনিক</li>
                     
-                    <li class="{{ Request::is('admissions') ? 'active' : '' }}">
-                        <a href="{{ route('admissions.index') }}">
+                    <li class="{{ Request::is('admission/classwise/*') ? 'active menu-open' : '' }} treeview">
+                        <a href="#">
                             <i class="fa fa-fw fa-check-square-o"></i>
                             <span>শিক্ষার্থী ভর্তি প্রক্রিয়া</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                          @php
+                            $classes = explode(',', Auth::user()->school->classes);
+                            if (($key = array_search(10, $classes)) !== false) {
+                                unset($classes[$key]);
+                            }
+                          @endphp
+                          @foreach($classes as $class)
+                          <li class="{{ Request::is('admission/classwise/'.$class) ? 'active' : '' }}"><a href="{{ route('admissions.getclasswise', $class) }}"><i class="fa fa-file-text"></i>{{ bangla_class($class) }} শ্রেণি</a></li>
+                          @endforeach
+                        </ul>
                     </li>
+
                     <li class="{{ Request::is('students') ? 'active' : '' }}">
                         <a href="{{ route('students.index') }}">
                             <i class="fa fa-fw fa-users"></i>

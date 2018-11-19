@@ -15,9 +15,8 @@
                       <big>{{ $application->name }}</big><br/>
                       পিতাঃ {{ $application->father }}<br/>
                       মাতাঃ {{ $application->mother }}<br/>
-
+                      </h4>
                       <h4>অ্যাপলিকেশন আইডিঃ <b><u>{{ $application->application_id }}</u></b></h4>
-                      <h4>অ্যাপলিকেশন রোলঃ <b>{{ $application->application_roll }}</b></h4>
                       <h4>পেমেন্ট স্ট্যাটাসঃ 
                         @if($application->payment == 0)
                         <b style="color: red;"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> পেমেন্ট করা হয়নি</b><br/><br/>
@@ -28,6 +27,7 @@
                           @endif
                         @elseif($application->payment == 1)
                         <b style="color: green;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> পেমেন্ট করা হয়েছে</b><br/><br/>
+                        <h4>ভর্তি পরীক্ষার রোলঃ <b>{{ $application->application_roll }}</b><br/>
                         <a href="{{ route('admissions.pdfadmitcard', $application->application_id) }}" target="_blank" class="btn btn-success">এডমিট কার্ড প্রিন্ট করুন</a>
                         @endif
                       </h4>

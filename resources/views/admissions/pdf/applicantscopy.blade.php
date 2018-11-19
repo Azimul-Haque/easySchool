@@ -23,30 +23,75 @@
   </style>
 </head>
 <body>
-  <p style="text-align: center; font-size: 25px;">
-    <b>{{ $application->school->name_bangla }}</b><br/>
-    <span style="font-size: 15px;">
-      {{ $application->school->address }}, {{ $application->school->upazilla }}, {{ $application->school->district }} <br/>
-      স্থাপিতঃ {{ bangla($application->school->established) }} ইংরেজি | ইআইআইএনঃ {{ bangla($application->school->eiin) }}<br/><br/>
-      <span style="font-size: 22px;">
-        <b><u>{{ bangla($application->class) }}@if($application->class == 6)ষ্ঠ @else ম @endif শ্রেণিতে ভর্তি পরীক্ষার আবেদন ফর্ম-{{ bangla($application->school->admission_session) }} খ্রিঃ</u></b>
-      </span>
-    </span><br/>
-  </p>
+  <table>
+    <tr>
+      <td width="18%">
+        @if($application->school->monogram != null || $application->school->monogram != '')
+          <img src="{{ public_path('images/schools/monograms/'.$application->school->monogram) }}" height="120" width="120" style="float: left !important;">
+        @else
+          
+        @endif
+      </td>
+      <td>
+        <p style="text-align: center; font-size: 22px;">
+          <center>
+            <b>{{ $application->school->name_bangla }}</b><br/>
+            <span style="font-size: 15px;">
+              {{ $application->school->address }}, {{ $application->school->upazilla }}, {{ $application->school->district }} <br/>
+              স্থাপিতঃ {{ bangla($application->school->established) }} ইংরেজি | ইআইআইএনঃ {{ bangla($application->school->eiin) }}<br/><br/>
+              <span style="font-size: 22px;">
+                <b><u>আবেদনপত্র</u></b>
+              </span><br/><br/>
+              <span style="font-size: 18px;">
+                <u>{{ bangla_class($application->class) }} শ্রেণিতে ভর্তি পরীক্ষা-{{ bangla($application->school->admission_session) }} খ্রিঃ</u>
+              </span>
+            </span><br/><br/><br/>
+          </center>
+        </p>
+      </td>
+      <td width="18%">
+        @if($application->image != null || $application->image != '')
+          <img src="{{ public_path('images/admission-images/'.$application->image) }}" height="120" width="120" style="float: right !important; border: 1px solid #666;">
+        @else
+          <img src="{{ public_path('images/dummy_student.jpg') }}" height="120" width="120" style="float: right !important; border: 1px solid #666;">
+        @endif
+      </td>
+    </tr>
+  </table>
   <table class="maintable">
     <tr>
       <td align="right"><b>অ্যাপ্লিকেশন আইডিঃ</b> <big>{{ $application->application_id }}</big></td>
       <td><b>ভর্তিচ্ছু শ্রেণি ও শাখাঃ</b> 
-        {{ bangla($application->class) }}@if($application->class == 6)ষ্ঠ@elseম@endif 
-        @if($application->section == 1) ক @elseif($application->section ==2) খ @elseif($application->section == 3) গ @endif
+        {{ bangla_class($application->class) }}
+        @if($application->class < 9)
+                @if( $application->section == 1)
+                  {{ bangla_section('A') }}
+                @elseif( $application->section == 2)
+                  {{ bangla_section('B') }}
+                @elseif( $application->section == 3)
+                  {{ bangla_section('C') }}
+                @endif
+              @else
+                @if( $application->section == 1)
+                  {{ bangla_section('SCIENCE') }}
+                @elseif( $application->section == 2)
+                  {{ bangla_section('ARTS') }}
+                @elseif( $application->section == 3)
+                  {{ bangla_section('COMMERCE') }}
+                @elseif( $application->section == 4)
+                  {{ bangla_section('VOCATIONAL') }}
+                @elseif( $application->section == 5)
+                  {{ bangla_section('TECHNICAL') }}
+                @endif
+              @endif
       </td>
     </tr>
     <tr>
-      <th width="40%" align="right">আবেদনকারী শিক্ষার্থীর নামঃ (বাংলায়)</th>
-      <td>{{ $application->name_bangla }}</td>
+      <th align="right">ভর্তি শিক্ষাবর্ষঃ</th>
+      <td>{{ bangla($application->session) }}</td>
     </tr>
     <tr>
-      <th align="right">আবেদনকারী শিক্ষার্থীর নামঃ (ইংরেজিতে)</th>
+      <th align="right">আবেদনকারী শিক্ষার্থীর নামঃ</th>
       <td>{{ $application->name }}</td>
     </tr>
     <tr>
@@ -71,12 +116,12 @@
       <td>{{ $application->fathers_occupation }}</td>
     </tr>
     <tr>
-      <th align="right">মাতার পেশাঃ</th>
-      <td>{{ $application->fathers_occupation }}</td>
+      <th align="right">পিতা/ অভিভাবকের বাৎসরিক আয়ঃ</th>
+      <td>{{ bangla($application->yearly_income) }}/-</td>
     </tr>
     <tr>
       <th align="right">মোবাইল নম্বরঃ</th>
-      <td>{{ $application->contact }}</td>
+      <td>{{ $application->contact }}, {{ $application->contact_2 }}</td>
     </tr>
     <tr>
       <th align="right">প্রার্থীর জন্মতারিখঃ</th>
@@ -91,8 +136,16 @@
       <td>{{ $application->nationality }}</td>
     </tr>
     <tr>
-      <th align="right">অভিভাবকের বার্ষিক আয়ঃ</th>
-      <td>{{ $application->yearly_income }}</td>
+      <th align="right">লিঙ্গঃ</th>
+      <td>{{ $application->gender }}</td>
+    </tr>
+    <tr>
+      <th align="right">রক্তের গ্রুপঃ</th>
+      <td>{{ $application->blood_group }}</td>
+    </tr>
+    <tr>
+      <th align="right">সহপাঠ্যক্রমঃ</th>
+      <td>{{ $application->cocurricular }}</td>
     </tr>
     <tr>
       <th align="right">পূর্বতন বিদ্যালয়ের নামঃ</th>
@@ -101,16 +154,6 @@
     <tr>
       <th align="right">সমাপনী পরীক্ষার ফলাফলঃ</th>
       <td>{{ $application->pec_result }}</td>
-    </tr>
-    <tr>
-      <th align="right">ছবিঃ</th>
-      <td>
-        @if($application->image != null || $application->image != '')
-          <img src="{{ public_path('images/admission-images/'.$application->image) }}" style="height: 150px; width: auto;">
-        @else
-          <img src="{{ public_path('images/dummy_student.jpg') }}" style="height: 150px; width: auto;">
-        @endif
-      </td>
     </tr>
   </table>
   <p style="text-align: center; font-size: 17px;">

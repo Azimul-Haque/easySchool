@@ -4,10 +4,10 @@
 
 @section('content_header')
     <h1>
-    	অ্যাডমিশন
+    	অ্যাডমিশনঃ (ভর্তি প্রক্রিয়া) <span style="color: #008000;">[{{ bangla_class($class) }} শ্রেণি]</span>
 	    <div class="pull-right">
-        <a class="btn btn-warning" href="{{ route('admissions.applicantslist') }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
-			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> সংযোজন</a>
+        <a class="btn btn-warning" href="{{ route('admissions.applicantslist', $class) }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
+			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> আবেদন সংযোজন</a>
 			</div>
 		</h1>
 @stop
@@ -26,10 +26,10 @@
 
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
 	<div class="pull-right">
-    <a href="{{ route('admissions.pdfadmissionseatplan') }}" class="btn btn-brown btn-sm" title="সিটপ্ল্যান জেনারেট করুন" target="_blank">
+    <a href="{{ route('admissions.pdfadmissionseatplan', $class) }}" class="btn btn-brown btn-sm" title="সিটপ্ল্যান জেনারেট করুন" target="_blank">
       <i class="fa fa-print"></i> সিটপ্ল্যান জেনারেট করুন
     </a>
-    <a href="{{ route('admissions.pdfallapplication') }}" class="btn btn-warning btn-sm" title="আবেদনপত্রগুলো প্রিন্ট করুন" target="_blank">
+    <a href="{{ route('admissions.pdfallapplication', $class) }}" class="btn btn-warning btn-sm" title="আবেদনপত্রগুলো প্রিন্ট করুন" target="_blank">
       <i class="fa fa-print"></i> আবেদনপত্রগুলো প্রিন্ট করুন
     </a>
 		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
@@ -46,6 +46,7 @@
           <div class="modal-body">
             আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের নম্বর দাখিল করতে চান?
             {!! Form::hidden('application_ids_with_marks', null, ['id' => 'application_ids_with_marks', 'required' => '']) !!}
+            {!! Form::hidden('class', $class) !!}
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-primary">Save</button>
@@ -66,9 +67,9 @@
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
 					<th class="hiddenFinalSelectionCheckbox" id="hiddenFinalSelectionCheckbox"></th>
 					<th>ক্লাস</th>
-					<th>শাখা</th>
 					<th>আইডি</th>
-					<th>নাম</th>
+          <th>নাম</th>
+					<th>লিঙ্গ</th>
 					<th>জন্মতারিখ</th>
 					<th>শিক্ষাবর্ষ</th>
 					<th>পেমেন্ট</th>
@@ -88,22 +89,14 @@
 						</td>
 
 						<td class="hiddenFinalSelectionCheckbox" id="hiddenFinalSelectionCheckbox">
-							@if($admission->mark_obtained > 0) 
-							<input type="checkbox" class="icheck" name="application_final_selection_check_ids[]" value="{{ $admission->application_id }}">
+							@if($admission->merit_position > 0 && $admission->application_status != 'done') 
+							<input type="checkbox" class="icheck" name="application_final_selection_check_ids[]" value="{{ $admission->application_id }}:{{ $admission->merit_position }}">
 							@endif
 						</td>
 						<td>{{ $admission->class }}</td>
-						<td>
-							@if( $admission->section == 1)
-								A
-							@elseif( $admission->section == 2)
-								B
-							@elseif( $admission->section == 3)
-							 	C
-							@endif
-						</td>
 						<td>{{ $admission->application_id }}</td>
-						<td>{{ $admission->name }}</td>
+            <td>{{ $admission->name }}</td>
+						<td>{{ $admission->gender }}</td>
 						<td>{{ date('F d, Y', strtotime($admission->dob)) }}</td>
 						<td>{{ $admission->session }}</td>
 						<td>
@@ -125,13 +118,19 @@
 								ভর্তিচ্ছু
 							@endif
 						</td>
-						<td>{{ $admission->merit_position }}</td>
 						<td>
-              <a href="{{ route('admissions.pdfapplicantscopy', $admission->application_id) }}" class="btn btn-warning btn-sm" title="{{ $admission->name_bangla }}-এর আবেদনপত্রটি প্রিন্ট করুন" target="_blank">
+              @if($admission->merit_position == -1)
+                <span style="color: #FF0000;">Failed</span>
+              @else
+                {{ $admission->merit_position }}
+              @endif
+            </td>
+						<td>
+              <a href="{{ route('admissions.pdfapplicantscopy', $admission->application_id) }}" class="btn btn-warning btn-sm" title="{{ $admission->name }}-এর আবেদনপত্রটি প্রিন্ট করুন" target="_blank">
                 <i class="fa fa-print"></i>
               </a>
 							{{-- payment modal--}}
-							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#paymentModal{{ $admission->id }}" data-backdrop="static">
+							<button class="btn btn-success btn-sm" data-toggle="modal" data-target="#paymentModal{{ $admission->id }}" data-backdrop="static" title="{{ $admission->name }}-এর পেমেন্ট দাখিল করুন">
 								<i class="fa fa-check"></i>
 							</button>
 							<!-- Trigger the modal with a button -->
@@ -200,6 +199,7 @@
             <div class="modal-body">
               আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের পেমেন্ট দাখিল করতে চান?
               {!! Form::hidden('application_ids', null, ['id' => 'application_ids', 'required' => '']) !!}
+              {!! Form::hidden('class', $class) !!}
             </div>
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">Save</button>
@@ -218,15 +218,51 @@
         <div class="modal-content">
           <div class="modal-header modal-header-info">
             <button type="button" class="close" data-dismiss="modal">&times;</button>
-            <h4 class="modal-title">চূড়ান্ত ভর্তি</h4>
+            <h4 class="modal-title">{{ bangla_class($class) }} শ্রেণিতে চূড়ান্ত ভর্তি</h4>
           </div>
           {!! Form::open(array('route' => 'admissions.finalselection','method'=>'POST')) !!}
           <div class="modal-body">
-            আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্তভাবে ভর্তি করতে চান?
             {!! Form::hidden('application_ids_to_admit', null, ['id' => 'application_ids_to_admit', 'required' => '']) !!}
+            {!! Form::hidden('class', $class) !!}
+            <div class="form-group">
+              <strong>যে শাখায় ভর্তি করাতে চান</strong>
+              <select class="form-control" name="section_to_final_admit" required="">
+                <option value="" selected="" disabled="">শাখা নির্ধারণ করুন</option>
+                @if($class < 9)
+                <option value="1">A</option>
+                <option value="2">B</option>
+                  @if(Auth::user()->school->sections > 2)
+                  <option value="3">C</option>
+                  @endif
+                @else
+                <option value="1">SCIENCE</option>
+                <option value="2">ARTS</option>
+                <option value="3">COMMERCE</option>
+                <option value="4">VOCATIONAL</option>
+                <option value="5">TECHNICAL</option>
+                <option value="" disabled="">অথবা</option>
+                <option value="1">A</option>
+                <option value="2">B</option>
+                <option value="3">C</option>
+                @endif
+              </select>
+            </div><br/>
+            <b><big><span style="color: #FF0000;">সতর্কীকরণঃ</span></big></b><br/>
+            আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্তভাবে ভর্তি করতে চান?
+            <ul>
+              <li>মেরিট পজিশন চূড়ান্তভাবে তৈরী হবার পরে চূড়ান্তভাবে ভর্তি করুন</li>
+              <li>একবার তৈরী হওয়া আইডি এবং রোল পরিবর্তন সময়সাপেক্ষ এবং ঝামেলাপূর্ণ</li>
+              <li>তাই, পুরোপুরি নিশ্চিত হয়ে নিচের Save বাটোনে ক্লিক করুন</li>
+              <li>আপনি নিশ্চিত হলে নিচের 'আমি নিশ্চিত' চেকবক্সটি চেক(টিক) করুন</li>
+            </ul>
+            <center>
+              <label>
+                <input type="checkbox" id="check_to_finally_submit_to_admit"> আমি নিশ্চিত
+              </label>
+            </center>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-info">Save</button>
+            <button type="submit" class="btn btn-info" id="btn_to_finally_submit_to_admit" disabled="">Save</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
           {!! Form::close() !!}
           </div>
@@ -241,6 +277,7 @@
   <script type="text/javascript">
     $(function(){
      $('a[title]').tooltip();
+     $('button[title]').tooltip();
     });
   </script>
   <script type="text/javascript" src="{{ asset('vendor/adminlte/plugins/iCheck/icheck.js') }}"></script>
@@ -378,7 +415,7 @@
     	  $('#example1').DataTable()
     	  $('#datatable-admissions').DataTable({
     	    'paging'      : true,
-    	    'pageLength'  : 15,
+    	    'pageLength'  : 100,
     	    'lengthChange': true,
     	    'searching'   : true,
     	    'ordering'    : true,
@@ -392,6 +429,19 @@
     	})
 		});
 	</script>
+  <script type="text/javascript">
+    $(function()
+      {
+        $('#check_to_finally_submit_to_admit').change(function()
+        {
+          if ($(this).is(':checked')) {
+             $('#btn_to_finally_submit_to_admit').prop('disabled', false);
+          } else {
+            $('#btn_to_finally_submit_to_admit').prop('disabled', true);
+          };
+        });
+      });
+  </script>
 @stop
 
 

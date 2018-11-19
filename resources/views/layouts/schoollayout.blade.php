@@ -34,7 +34,11 @@
 
                 <!-- Branding Image -->
                 <a class="navbar-brand" href="{{ url('/') }}">
+                    @if($school->monogram != null & $school->monogram != '')
+                    <img src="{{ asset('images/schools/monograms/'.$school->monogram) }}" class="img-circle school-thumnail">
+                    @else
                     <img src="http://placehold.it/35x35" class="img-circle school-thumnail">
+                    @endif
                     {{ $school->name_bangla }}
                 </a>
             </div>
