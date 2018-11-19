@@ -285,6 +285,14 @@
 
       $("#imgInp").change(function(){
           readURL(this);
+          var filesize = parseInt((this.files[0].size)/1024);
+          if(filesize > 100) {
+            $("#imgInp").val('');
+            toastr.warning('File size is: '+filesize+' Kb. try uploading less than 100Kb', 'WARNING').css('width', '400px;');
+              setTimeout(function() {
+                $("#img-upload").attr('src', '{{ asset('images/dummy_student.jpg') }}');
+              }, 1000);
+          }
       });     
     });
   </script>
