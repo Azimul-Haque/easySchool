@@ -27,8 +27,8 @@
                           @endif
                         @elseif($application->payment == 1)
                         <b style="color: green;"><i class="fa fa-check-circle-o" aria-hidden="true"></i> পেমেন্ট করা হয়েছে</b><br/><br/>
-                        <h4>ভর্তি পরীক্ষার রোলঃ <b>{{ $application->application_roll }}</b><br/>
-                        <a href="{{ route('admissions.pdfadmitcard', $application->application_id) }}" target="_blank" class="btn btn-success">এডমিট কার্ড প্রিন্ট করুন</a>
+                        <h4>ভর্তি পরীক্ষার রোলঃ <b>{{ $application->application_roll }}</b><br/><br/>
+                        <a href="{{ route('admissions.pdfadmitcard', $application->application_id) }}" target="_blank" class="btn btn-primary"><i class="fa fa-print fa-fw"></i> এডমিট কার্ড প্রিন্ট করুন</a>
                         @endif
                       </h4>
                       <p>* অ্যাপলিকেশন আইডিটি সাবধানে সংরক্ষন করুন।</p>

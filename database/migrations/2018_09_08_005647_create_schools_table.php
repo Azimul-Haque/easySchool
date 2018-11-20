@@ -41,6 +41,10 @@ class CreateSchoolsTable extends Migration
             $table->datetime('admission_start_date')->nullable();
             $table->datetime('admission_end_date')->nullable();
             $table->datetime('admission_test_datetime')->nullable();
+            $table->datetime('admission_test_result')->nullable();
+            $table->datetime('admission_final_start')->nullable();
+            $table->datetime('admission_final_end')->nullable();
+            $table->datetime('admit_card_texts')->nullable();
             $table->string('headmaster_sign')->nullable();
             $table->string('monogram')->nullable();
             $table->timestamps();

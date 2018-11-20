@@ -6,8 +6,8 @@
     <h1>
     	অ্যাডমিশনঃ (ভর্তি প্রক্রিয়া) <span style="color: #008000;">[{{ bangla_class($class) }} শ্রেণি]</span>
 	    <div class="pull-right">
-        <a class="btn btn-warning" href="{{ route('admissions.applicantslist', $class) }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
-			  <a class="btn btn-success" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> আবেদন সংযোজন</a>
+        <a class="btn btn-warning btn-sm" href="{{ route('admissions.applicantslist', $class) }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
+			  <a class="btn btn-success btn-sm" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> আবেদন সংযোজন</a>
 			</div>
 		</h1>
 @stop
@@ -27,10 +27,13 @@
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
 	<div class="pull-right">
     <a href="{{ route('admissions.pdfadmissionseatplan', $class) }}" class="btn btn-brown btn-sm" title="সিটপ্ল্যান জেনারেট করুন" target="_blank">
-      <i class="fa fa-print"></i> সিটপ্ল্যান জেনারেট করুন
+      <i class="fa fa-print"></i> সিটপ্ল্যান জেনারেট
     </a>
-    <a href="{{ route('admissions.pdfallapplication', $class) }}" class="btn btn-warning btn-sm" title="আবেদনপত্রগুলো প্রিন্ট করুন" target="_blank">
-      <i class="fa fa-print"></i> আবেদনপত্রগুলো প্রিন্ট করুন
+    <a href="{{ route('admissions.pdfallapplications', $class) }}" class="btn btn-warning btn-sm" title="সকল আবেদনপত্র প্রিন্ট করুন" target="_blank">
+      <i class="fa fa-print"></i> সকল আবেদনপত্র প্রিন্ট
+    </a>
+    <a href="{{ route('admissions.pdfalladmitcards', $class) }}" class="btn btn-warning btn-grey btn-sm" title="সকল এডমিট কার্ড প্রিন্ট করুন" target="_blank">
+      <i class="fa fa-print"></i> সকল এডমিট কার্ড প্রিন্ট
     </a>
 		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
 		<button class="btn btn-primary btn-sm" id="submitMarkBtn" data-toggle="modal" data-target="#submitMarkModal" data-backdrop="static"><i class="fa fa-bar-chart"></i> নম্বর প্রদান</button>
@@ -126,6 +129,11 @@
               @endif
             </td>
 						<td>
+              @if($admission->payment != 0)
+              <a href="{{ route('admissions.pdfadmitcard', $admission->application_id) }}" class="btn btn-info btn-sm" title="{{ $admission->name }}-এর এডমিট কার্ড প্রিন্ট করুন" target="_blank">
+                <i class="fa fa-print"></i>
+              </a>
+              @endif
               <a href="{{ route('admissions.pdfapplicantscopy', $admission->application_id) }}" class="btn btn-warning btn-sm" title="{{ $admission->name }}-এর আবেদনপত্রটি প্রিন্ট করুন" target="_blank">
                 <i class="fa fa-print"></i>
               </a>
@@ -165,7 +173,12 @@
 					                <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
 					              </div>
 					              <div class="modal-body">
-					                <b>{{ $admission->name }}</b> কে ডিলেট করবেন?
+					                <b>{{ $admission->name }}</b>-কে ডিলেট করতে চান?<br/><br/>
+                          <b><span style="color: #FF0000;">সতর্কীকরণঃ</span></b><br/>
+                          <ul>
+                            <li>ডিলেট করা আবেদনকারীর কোন তথ্য আর ফিরে পাওয়া যাবে না</li>
+                            <li>আবেদনকারীর সকল তথ্য সিস্টেম থেকে মুছে ফেলা হবে</li>
+                          </ul>
 					              </div>
 					              <div class="modal-footer">
 					                {!! Form::model($admission, ['route' => ['admissions.destroy', $admission->id], 'method' => 'DELETE']) !!}

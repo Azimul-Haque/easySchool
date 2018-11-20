@@ -43,6 +43,13 @@ body{
     max-height: 100px;
     white-space: initial;
 }
+.textarea-long {
+    resize: none;
+    word-wrap: break-word !important;
+    word-break: break-all !important;
+    max-height: 200px;
+    white-space: initial;
+}
 
 
 ul.errorlist {

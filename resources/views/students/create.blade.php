@@ -588,6 +588,10 @@
           $('#section').append('<option value="'+3+'">COMMERCE</option>');
           $('#section').append('<option value="'+4+'">VOCATIONAL</option>');
           $('#section').append('<option value="'+5+'">TECHNICAL</option>');
+          $('#section').append('<option value="" disabled>অথবা</option>');
+          $('#section').append('<option value="'+1+'">A</option>');
+          $('#section').append('<option value="'+2+'">B</option>');
+          $('#section').append('<option value="'+3+'">C</option>');
         }
       });
     </script>

@@ -60,7 +60,7 @@ class SettingController extends Controller
 
         // sign upload
         if($request->hasFile('headmaster_sign')) {
-            $image      = $request->file('headmaster_sign');
+            $image = $request->file('headmaster_sign');
             if($school->headmaster_sign == null || $school->headmaster_sign == '') {
               $filename   = 'sign_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             } else {
@@ -73,7 +73,7 @@ class SettingController extends Controller
 
         // monogram upload
         if($request->hasFile('monogram')) {
-            $image      = $request->file('monogram');
+            $image = $request->file('monogram');
             if($school->monogram == null || $school->monogram == '') {
               $filename   = 'monogram_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             } else {
@@ -99,11 +99,15 @@ class SettingController extends Controller
             'admission_math_mark' => 'sometimes',
             'admission_gk_mark' => 'sometimes',
             'isadmissionon' => 'required',
+            'admission_form_fee' => 'sometimes',
             'admission_pass_mark' => 'sometimes',
             'admission_start_date' => 'sometimes',
             'admission_end_date' => 'sometimes',
             'admission_test_datetime' => 'sometimes',
-            'admission_form_fee' => 'sometimes'
+            'admission_test_result' => 'sometimes',
+            'admission_final_start' => 'sometimes',
+            'admission_final_end' => 'sometimes',
+            'admit_card_texts' => 'sometimes'
         ]);
 
         $school = School::find($id);
@@ -114,12 +118,15 @@ class SettingController extends Controller
         $school->admission_math_mark = $request->admission_math_mark;
         $school->admission_gk_mark = $request->admission_gk_mark;
         $school->isadmissionon = $request->isadmissionon;
+        $school->admission_form_fee = $request->admission_form_fee;
         $school->admission_pass_mark = $request->admission_pass_mark;
         $school->admission_start_date = new Carbon($request->admission_start_date);
         $school->admission_end_date = new Carbon($request->admission_end_date);
         $school->admission_test_datetime = new Carbon($request->admission_test_datetime);
-        $school->admission_form_fee = $request->admission_form_fee;
-
+        $school->admission_test_result = new Carbon($request->admission_test_result);
+        $school->admission_final_start = new Carbon($request->admission_final_start);
+        $school->admission_final_end = new Carbon($request->admission_final_end);
+        $school->admit_card_texts = nl2br($request->admit_card_texts);
         $school->save();
 
         return redirect()->route('settings.edit')

@@ -335,6 +335,17 @@ class AdmissionController extends Controller
         return $pdf->stream($fileName);
     }
 
+    public function pdfAllAdmitCards($class)
+    {
+        $applications = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class', $class)
+                                 ->get();
+        $pdf = PDF::loadView('admissions.pdf.admitcards', ['applications' => $applications], ['data' => $class]); // ['mode' => 'utf-8', 'format' => 'A4-L']
+        $fileName = 'Class_'.$class.'_All_Admit_Cards' . '.pdf';
+        return $pdf->stream($fileName);
+    }
+
     public function pdfAdmissionSeatPlan($class)
     {
         $applications = Admission::where('school_id', Auth::user()->school_id)

@@ -12,6 +12,7 @@ use App\Upazilla;
 use SoapClient;
 use Auth, Session, DB, File;
 use Image;
+use PDF;
 
 
 class StudentController extends Controller
@@ -49,14 +50,6 @@ class StudentController extends Controller
                     ->withClasssearch($class)
                     ->withSectionsearch($section)
                     ->withStudents($students);
-    }
-
-
-    public function classwise(Request $request, $class)
-    {
-        $students = Student::where('class', $class)->orderBy('id','DESC')->paginate(5);
-        return view('students.index',compact('students'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     public function create()
@@ -428,5 +421,17 @@ class StudentController extends Controller
         } catch (Exception $e) {
             echo $e->getMessage();
         }
+    }
+
+    public function getStudentListPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.studentslist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $fileName = $session.'_'.$class.'_'.$section.'.pdf';
+        return $pdf->stream($fileName);
     }
 }

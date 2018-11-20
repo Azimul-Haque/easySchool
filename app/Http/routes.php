@@ -20,7 +20,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('admission/form/submit/mark/',['as'=>'admissions.submitmark','uses'=>'AdmissionController@submitMarks']);
 	Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
 	Route::get('admission/applicants/list/pdf/{class}',['as'=>'admissions.applicantslist','uses'=>'AdmissionController@pdfApplicantslist']);
-	Route::get('admission/applications/pdf/{class}',['as'=>'admissions.pdfallapplication','uses'=>'AdmissionController@pdfAllApplications']);
+	Route::get('admission/applications/pdf/{class}',['as'=>'admissions.pdfallapplications','uses'=>'AdmissionController@pdfAllApplications']);
+	Route::get('admission/admitcards/pdf/{class}',['as'=>'admissions.pdfalladmitcards','uses'=>'AdmissionController@pdfAllAdmitCards']);
 	Route::get('admission/seatplan/pdf/{class}',['as'=>'admissions.pdfadmissionseatplan','uses'=>'AdmissionController@pdfAdmissionSeatPlan']);
 
 	Route::get('roles',['as'=>'roles.index','uses'=>'RoleController@index']);
@@ -37,7 +38,6 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
 	Route::get('students/{session}/{class}/{section}',['as'=>'students.getstudents','uses'=>'StudentController@getStudents']);
-	Route::get('students/class/{class}',['as'=>'students.class','uses'=>'StudentController@classwise']);
 	Route::get('students/create',['as'=>'students.create','uses'=>'StudentController@create']);
 	Route::post('students/create',['as'=>'students.store','uses'=>'StudentController@store']);
 	Route::get('students/{id}',['as'=>'students.show','uses'=>'StudentController@show']);
@@ -45,6 +45,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('students/{id}',['as'=>'students.update','uses'=>'StudentController@update']);
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
 	Route::post('students/promote/bulk',['as'=>'students.promotebulk','uses'=>'StudentController@promoteBulk']);
+	Route::get('students/getlist/pdf/{session}/{class}/{section}',['as'=>'students.getstudentlistpdf','uses'=>'StudentController@getStudentListPDF']);
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 

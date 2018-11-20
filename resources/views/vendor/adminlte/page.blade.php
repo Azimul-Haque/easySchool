@@ -316,7 +316,7 @@
                         </ul>
                     </li>
 
-                    <li class="{{ Request::is('students') ? 'active' : '' }}">
+                    <li class="{{ Request::is('students/*') ? 'active' : '' }}">
                         <a href="{{ route('students.index') }}">
                             <i class="fa fa-fw fa-users"></i>
                             <span>শিক্ষার্থী ব্যবস্থাপনা</span>

@@ -186,9 +186,9 @@
                   </div>
                   <div class="col-md-6">
                     @if($school->monogram != null)
-                    <img src="{{ asset('images/schools/signs/'.$school->headmaster_sign) }}" id='sign-upload' style="height: 54px; width: 200px; padding: 5px; float: right;" />
+                    <img src="{{ asset('images/schools/signs/'.$school->headmaster_sign) }}" id='sign-upload' style="height: 54px; width: 200px; float: right; border: 1px solid #555555;" />
                     @else
-                    <img src="https://via.placeholder.com/100x27?text=Sign" id='sign-upload' style="height: 54px; width: 200px; padding: 5px; float: right;" />
+                    <img src="https://via.placeholder.com/100x27?text=Sign" id='sign-upload' style="height: 54px; width: 200px; float: right; border: 1px solid #555555;" />
                     @endif
                   </div>
               </div>
@@ -210,9 +210,9 @@
                   </div>
                   <div class="col-md-4">
                       @if($school->monogram != null)
-                      <img src="{{ asset('images/schools/monograms/'.$school->monogram) }}" id='img-upload' style="width: 70px; height: 70px; padding: 5px; float: right;" />
+                      <img src="{{ asset('images/schools/monograms/'.$school->monogram) }}" id='img-upload' style="width: 70px; height: 70px; float: right; border: 1px solid #555555;" />
                       @else
-                      <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload' style="width: 70px; height: 70px; padding: 5px; float: right;" />
+                      <img src="https://via.placeholder.com/120x120?text=Monogram" id='img-upload' style="width: 70px; height: 70px; float: right; border: 1px solid #555555;" />
                       @endif
                   </div>
               </div>
@@ -332,7 +332,33 @@
                 {!! Form::text('admission_test_datetime', null, array('placeholder' => 'ভর্তি পরীক্ষার সময়','class' => 'form-control' , 'id' => 'admission_test_datetime', 'autocomplete' => 'off')) !!}
             </div>
           </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <strong>ভর্তি পরীক্ষার ফলাফল প্রকাশের সময়</strong>
+                {!! Form::text('admission_test_result', null, array('placeholder' => 'ভর্তি পরীক্ষার ফলাফল প্রকাশের সময়','class' => 'form-control' , 'id' => 'admission_test_result', 'autocomplete' => 'off')) !!}
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-md-3">
+            <div class="form-group">
+                <strong>ভর্তির তারিখ (শুরু)</strong>
+                {!! Form::text('admission_final_start', null, array('placeholder' => 'ভর্তির তারিখ (শুরু)','class' => 'form-control' , 'id' => 'admission_final_start', 'autocomplete' => 'off')) !!}
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+                <strong>ভর্তির তারিখ (শেষ)</strong>
+                {!! Form::text('admission_final_end', null, array('placeholder' => 'ভর্তির তারিখ (শেষ)','class' => 'form-control' , 'id' => 'admission_final_end', 'autocomplete' => 'off')) !!}
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-8">
+            <strong>এডমিট কার্ডের 'সাধারণ নির্দেশাবলী' (বাংলা হলে ইউনিকোডে লিখুন, সর্বোচ্চ ৮ লাইন)</strong>
+            {!! Form::textarea('admit_card_texts', str_replace('<br />', "", $school->admit_card_texts) , array('placeholder' => 'এডমিট কার্ডের সাধারণ নির্দেশাবলী (বাংলা হলে ইউনিকোডে লিখুন)','class' => 'form-control textarea-long' , 'id' => 'admit_card_texts', 'autocomplete' => 'off')) !!}
+          </div>
+        </div><br/>
         <button type="submit" class="btn  btn-success">Save</button>
       {!! Form::close() !!}
     </div>
@@ -426,6 +452,18 @@
           $('#admission_test_datetime').datetimepicker({
             format: 'MMMM DD, YYYY hh:mm A',
             date: new Date('{{ $school->admission_test_datetime }}')
+          });
+          $('#admission_test_result').datetimepicker({
+            format: 'MMMM DD, YYYY hh:mm A',
+            date: new Date('{{ $school->admission_test_result }}')
+          });
+          $('#admission_final_start').datetimepicker({
+            format: 'MMMM DD, YYYY hh:mm A',
+            date: new Date('{{ $school->admission_final_start }}')
+          });
+          $('#admission_final_end').datetimepicker({
+            format: 'MMMM DD, YYYY hh:mm A',
+            date: new Date('{{ $school->admission_final_end }}')
           });
       });
   </script>

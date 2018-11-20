@@ -12,10 +12,27 @@
 
 @section('content_header')
     <h1>
-    	শিক্ষার্থী তালিকা
+    	শিক্ষার্থী তালিকাঃ <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ
+      @if($classsearch < 9)
+        @if($sectionsearch == 1) ক
+        @elseif($sectionsearch == 2) খ
+        @elseif($sectionsearch == 3) গ
+        @endif
+      @else
+        @if($sectionsearch == 1) বিজ্ঞান
+        @elseif($sectionsearch == 2) মানবিক
+        @elseif($sectionsearch == 3) বাণিজ্য
+        @elseif($sectionsearch == 4) ভোকেশনাল
+        @elseif($sectionsearch == 5) কারিগরি
+        @endif
+      @endif
+      ]</span>
     	<div class="pull-right">
-	        <a class="btn btn-success btn-sm" href="{{ route('students.create') }}"> সরাসরি শিক্ষার্থী ভর্তি</a>
-	        <button class="btn btn-primary btn-sm" id="showCheckbox"><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button>
+          <a href="{{ route('students.getstudentlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-warning btn-sm" title="শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }} তৈরি করুন" target="_blank">
+            <i class="fa fa-print"></i> শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }}
+          </a>
+	        <a class="btn btn-success btn-sm" href="{{ route('students.create') }}"><i class="fa fa-user-plus"></i>  সরাসরি শিক্ষার্থী ভর্তি</a>
+	        <button class="btn btn-primary btn-sm" id="showCheckbox" disabled=""><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button>
 	    </div>	
     </h1>
 @stop
@@ -194,6 +211,12 @@
 
 @section('js')
 <script type="text/javascript">
+  $(function(){
+   $('a[title]').tooltip();
+   $('button[title]').tooltip();
+  });
+</script>
+<script type="text/javascript">
 	$(function () {
   	  $('#example1').DataTable()
   	  $('#datatable-students').DataTable({
@@ -247,5 +270,41 @@
 	    });
 
 	  })
+</script>
+<script type="text/javascript">
+  $('#search_class').on('change', function() {
+    $('#search_section').prop('disabled', true);
+    $('#search_section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+
+    if($('#search_class').val() < 9) {
+      $('#search_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+      $('#search_section').append('<option value="'+1+'">A</option>');
+      $('#search_section').append('<option value="'+2+'">B</option>');
+      $('#search_section').append('<option value="'+3+'">C</option>');
+    } else {
+      $('#search_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+      $('#search_section').append('<option value="'+1+'">SCIENCE</option>');
+      $('#search_section').append('<option value="'+2+'">ARTS</option>');
+      $('#search_section').append('<option value="'+3+'">COMMERCE</option>');
+      $('#search_section').append('<option value="'+4+'">VOCATIONAL</option>');
+      $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
+      $('#search_section').append('<option value="" disabled>অথবা</option>');
+      $('#search_section').append('<option value="'+1+'">A</option>');
+      $('#search_section').append('<option value="'+2+'">B</option>');
+      $('#search_section').append('<option value="'+3+'">C</option>');
+    }
+  });
 </script>
 @stop
