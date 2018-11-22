@@ -12,6 +12,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::resource('users','UserController');
 	Route::resource('schools','SchoolController');
 
+	Route::resource('teachers','TeacherController');
+	Route::put('teachers/resetpassword/{id}',['as'=>'teachers.resetpassword','uses'=>'TeacherController@resetPassword']);
+
 	Route::get('admissiontoggle/on/{id}',['as'=>'admissions.toggleon','uses'=>'AdmissionController@admissionToggleOn']);
 	Route::get('admissiontoggle/off/{id}',['as'=>'admissions.toggleoff','uses'=>'AdmissionController@admissionToggleOff']);
 	Route::get('admission/classwise/{class}',['as'=>'admissions.getclasswise','uses'=>'AdmissionController@getClassWise']);
@@ -46,6 +49,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
 	Route::post('students/promote/bulk',['as'=>'students.promotebulk','uses'=>'StudentController@promoteBulk']);
 	Route::get('students/getlist/pdf/{session}/{class}/{section}',['as'=>'students.getstudentlistpdf','uses'=>'StudentController@getStudentListPDF']);
+
+
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 

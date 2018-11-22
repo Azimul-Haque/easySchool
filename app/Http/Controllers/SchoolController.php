@@ -57,6 +57,7 @@ class SchoolController extends Controller
             'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin',
             'sections' => 'required',
+            'section_type' => 'required',
             'address' => 'required',
             'district' => 'required',
             'upazilla' => 'required',
@@ -84,6 +85,7 @@ class SchoolController extends Controller
         $school->established = $request->established;
         $school->eiin = $request->eiin;
         $school->sections = $request->sections;
+        $school->section_type = $request->section_type;
         $school->address = $request->address;
         $school->district = $request->district;
         $school->upazilla = $request->upazilla;
@@ -156,6 +158,7 @@ class SchoolController extends Controller
             'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin,'.$id,
             'sections' => 'required',
+            'section_type' => 'required',
             'address' => 'required',
             'district' => 'required',
             'upazilla' => 'required',
@@ -188,6 +191,7 @@ class SchoolController extends Controller
         $school->established = $request->established;
         $school->eiin = $request->eiin;
         $school->sections = $request->sections;
+        $school->section_type = $request->section_type;
         $school->address = $request->address;
         $school->district = $request->district;
         $school->upazilla = $request->upazilla;

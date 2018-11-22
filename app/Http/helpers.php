@@ -27,9 +27,42 @@ function bangla_class($str){
       $str = str_replace($en, $bn, $str);
       return $str;
 }
-function bangla_section($str){
-      $en = array('A', 'B', 'C', 'SCIENCE', 'ARTS', 'COMMERCE', 'VOCATIONAL', 'TECHNICAL');
-      $bn = array('ক','খ','গ','বিজ্ঞান','মানবিক','বাণিজ্য','ভোকেশনাল','কারগরি');
-      $str = str_replace($en, $bn, $str);
-      return $str;
+function bangla_section($section_type, $class, $section){
+      if($section_type == 1) {
+            $en = array(0, 1, 2, 3, 4, 5);
+            $bn = array('', 'ক','খ','গ', 'ঘ', 'ঙ');
+            $section = str_replace($en, $bn, $section);
+      } elseif ($section_type == 2) {
+            $en = array(0, 1, 2, 3, 4, 5);
+            if($class < 9) {
+                  $bn = array('', 'ক','খ','গ', 'ঘ', 'ঙ');
+            } else {
+                  $bn = array('', 'বিজ্ঞান','মানবিক','বাণিজ্য', 'ভোকেশনাল', 'কারিগরি');
+            }
+            
+            $section = str_replace($en, $bn, $section);
+      } else {
+            //
+      }
+      return $section;
+}
+
+function english_section($section_type, $class, $section){
+      if($section_type == 1) {
+            $en = array(0, 1, 2, 3, 4, 5);
+            $bn = array('', 'A','B','C', 'D', 'E');
+            $section = str_replace($en, $bn, $section);
+      } elseif ($section_type == 2) {
+            $en = array(0, 1, 2, 3, 4, 5);
+            if($class < 9) {
+                  $bn = array('', 'A','B','C', 'D', 'E');
+            } else {
+                  $bn = array('', 'SCIENCE','ARTS','COMMERCE', 'VOCATIONAL', 'TECHNICAL');
+            }
+            
+            $section = str_replace($en, $bn, $section);
+      } else {
+            //
+      }
+      return $section;
 }

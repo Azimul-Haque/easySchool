@@ -292,8 +292,28 @@
                         </a>
                     </li>
                     @endpermission
-                    @role('headmaster')
+
+                  @role('headmaster')
+
+                    @permission('school-settings')
+                    <li class="header">প্লাটফর্ম সেটিংস</li>
+                    <li class="{{ Request::is('settings') ? 'active' : '' }}">
+                        <a href="{{ route('settings.edit') }}">
+                            <i class="fa fa-fw fa-cogs"></i>
+                            <span>স্কুল সেটিংস</span>
+                        </a>
+                    </li>
+                    @endpermission
+
                     <li class="header">প্রশাসনিক</li>
+                    <li class="{{ Request::is('teachers') ? 'active' : '' }}">
+                        <a href="{{ route('teachers.index') }}">
+                            <i class="fa fa-fw fa-address-book"></i>
+                            <span>শিক্ষক ব্যবস্থাপনা</span>
+                        </a>
+                    </li>
+
+                    <li class="header">শিক্ষার্থী সংক্রান্ত</li>
                     
                     <li class="{{ Request::is('admission/classwise/*') ? 'active menu-open' : '' }} treeview">
                         <a href="#">
@@ -322,17 +342,8 @@
                             <span>শিক্ষার্থী ব্যবস্থাপনা</span>
                         </a>
                     </li>
-                    @permission('school-settings')
-                    <li class="header">অ্যাকাডেমিক</li>
-                    <li class="{{ Request::is('settings') ? 'active' : '' }}">
-                        <a href="{{ route('settings.edit') }}">
-                            <i class="fa fa-fw fa-cogs"></i>
-                            <span>স্কুল সেটিংস</span>
-                        </a>
-                    </li>
-                    @endpermission
                     
-                    @endrole
+                  @endrole
 
                     
                 </ul>

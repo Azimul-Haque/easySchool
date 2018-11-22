@@ -343,7 +343,18 @@
 	  	                            </div>
 				                        </div>
 				                        <div class="row">
-			                            <div class="col-md-6">
+                                  <div class="col-md-3">
+                                      <div class="form-group">
+                                        <strong>শাখার ধরণ (৯ম-১০ম শ্রেণির জন্য)</strong>
+                                        <select class="form-control" name="section_type" required="">
+                                          <option value="" selected disabled>শাখার ধরণ নির্ধারণ করুন</option>
+                                          <option value="0" @if($school->section_type == 0) selected="" @endif>প্রযোজ্য নয়</option>
+                                          <option value="1" @if($school->section_type == 1) selected="" @endif>A(ক), B(খ), C(গ)</option>
+                                          <option value="2" @if($school->section_type == 2) selected="" @endif>SCIENCE (বিজ্ঞান), Arts(মানবিক), COMMERCE(বাণিজ্য)</option>
+                                        </select>
+                                      </div>
+                                  </div>
+			                            <div class="col-md-5">
 			                                <div class="row">
 			                                    <div class="col-md-6">
 			                                        <div class="form-group">
@@ -359,7 +370,7 @@
 			                                        </div>
 			                                    </div>
 			                                    <div class="col-md-6">
-			                                        <img src="https://via.placeholder.com/100x27?text=Sign" id='sign-upload{{ $school->id }}' style="height: 54px; width: 200px; padding: 5px; float: right;" />
+			                                        <img src="https://via.placeholder.com/100x27?text=Sign" id='sign-upload{{ $school->id }}' style="height: 50px; width: 180px; padding: 5px; float: right;" />
 			                                    </div>
 			                                </div>
 			                            </div>

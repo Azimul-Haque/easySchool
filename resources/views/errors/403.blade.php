@@ -4,7 +4,7 @@
 @section('title', '403 Access Denied')
 
 @section('content_header')
-    <h1><i class="fa fa-fw fa-warning"></i> 403 Error Occurd</h1>
+    <h1><i class="fa fa-fw fa-warning"></i> 403 Error Occurred</h1>
 @stop
 
 @section('content')

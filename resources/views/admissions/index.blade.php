@@ -237,29 +237,34 @@
           <div class="modal-body">
             {!! Form::hidden('application_ids_to_admit', null, ['id' => 'application_ids_to_admit', 'required' => '']) !!}
             {!! Form::hidden('class', $class) !!}
-            <div class="form-group">
-              <strong>যে শাখায় ভর্তি করাতে চান</strong>
-              <select class="form-control" name="section_to_final_admit" required="">
-                <option value="" selected="" disabled="">শাখা নির্ধারণ করুন</option>
-                @if($class < 9)
-                <option value="1">A</option>
-                <option value="2">B</option>
-                  @if(Auth::user()->school->sections > 2)
+            @if(Auth::user()->school->sections != 0)
+              <div class="form-group">
+                <strong>যে শাখায় ভর্তি করাতে চান</strong>
+                <select class="form-control" name="section_to_final_admit" required="">
+                  <option value="" selected="" disabled="">শাখা নির্ধারণ করুন</option>
+                  @if($class < 9)
+                  <option value="1">A</option>
+                  <option value="2">B</option>
+                    @if(Auth::user()->school->sections > 2)
+                    <option value="3">C</option>
+                    @endif
+                  @else
+                  <option value="1">SCIENCE</option>
+                  <option value="2">ARTS</option>
+                  <option value="3">COMMERCE</option>
+                  <option value="4">VOCATIONAL</option>
+                  <option value="5">TECHNICAL</option>
+                  <option value="" disabled="">অথবা</option>
+                  <option value="1">A</option>
+                  <option value="2">B</option>
                   <option value="3">C</option>
                   @endif
-                @else
-                <option value="1">SCIENCE</option>
-                <option value="2">ARTS</option>
-                <option value="3">COMMERCE</option>
-                <option value="4">VOCATIONAL</option>
-                <option value="5">TECHNICAL</option>
-                <option value="" disabled="">অথবা</option>
-                <option value="1">A</option>
-                <option value="2">B</option>
-                <option value="3">C</option>
-                @endif
-              </select>
-            </div><br/>
+                </select>
+              </div>
+            @else
+                {!! Form::hidden('section_to_final_admit', 0) !!}
+            @endif
+            <br/>
             <b><big><span style="color: #FF0000;">সতর্কীকরণঃ</span></big></b><br/>
             আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্তভাবে ভর্তি করতে চান?
             <ul>

@@ -64,6 +64,17 @@
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
+                          <strong>শাখার ধরণ (৯ম-১০ম শ্রেণির জন্য)</strong>
+                          <select class="form-control" name="section_type" required="">
+                            <option value="" selected disabled>শাখার ধরণ নির্ধারণ করুন</option>
+                            <option value="0">প্রযোজ্য নয়</option>
+                            <option value="1">A(ক), B(খ), C(গ)</option>
+                            <option value="2">SCIENCE (বিজ্ঞান), Arts(মানবিক), COMMERCE(বাণিজ্য)</option>
+                          </select>
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
                           <strong>স্থাপিতঃ</strong>
                           <select class="form-control" name="established" required="">
                             <option value="" selected disabled>স্থাপনার সাল নির্ধারণ করুন</option>
@@ -96,22 +107,6 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                          <strong>ভর্তি শিক্ষাবর্ষ</strong>
-                          <select class="form-control" name="admission_session" required="">
-                            <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
-                          @php
-                            $y = date('Y');
-                            for($y; $y<=2038; $y++) {
-                          @endphp
-                              <option value="{{ $y }}">{{ $y }}</option>
-                          @php
-                            }
-                          @endphp
-                          </select>
-                        </div>
-                    </div>
-                    <div class="col-md-3">
-                        <div class="form-group">
                           <strong>ভর্তি প্রক্রিয়াঃ</strong>
                           <br/>
                           <label style="margin-right: 40px;">
@@ -121,6 +116,18 @@
                         </div> 
                     </div>
                 </div> 
+                <div class="row">
+                  <div class="col-md-3">
+                      <div class="form-group">
+                        <strong>ভর্তি প্রক্রিয়াঃ</strong>
+                        <br/>
+                        <label style="margin-right: 40px;">
+                        <input type="radio" name="isadmissionon" value="0" required> বন্ধ</label>
+                        <label style="margin-right: 40px;">
+                        <input type="radio" name="isadmissionon" value="1"> চলছে</label>
+                      </div> 
+                  </div>
+                </div>
                 <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">

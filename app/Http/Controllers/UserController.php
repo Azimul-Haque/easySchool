@@ -23,6 +23,7 @@ class UserController extends Controller
     {
         $superadmins = Role::with('users')->where('name', 'superadmin')->get();
         $headmasters = Role::with('users')->where('name', 'headmaster')->get();
+        $teachers = Role::with('users')->where('name', 'teacher')->get();
         //dd($role);
 
         $roles = Role::lists('display_name','id');
@@ -31,6 +32,7 @@ class UserController extends Controller
         return view('users.index')
             ->withSuperadmins($superadmins)
             ->withHeadmasters($headmasters)
+            ->withTeachers($teachers)
             ->withRoles($roles)
             ->withSchools($schools);
     }

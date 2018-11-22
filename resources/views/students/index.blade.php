@@ -12,21 +12,7 @@
 
 @section('content_header')
     <h1>
-    	শিক্ষার্থী তালিকাঃ <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ
-      @if($classsearch < 9)
-        @if($sectionsearch == 1) ক
-        @elseif($sectionsearch == 2) খ
-        @elseif($sectionsearch == 3) গ
-        @endif
-      @else
-        @if($sectionsearch == 1) বিজ্ঞান
-        @elseif($sectionsearch == 2) মানবিক
-        @elseif($sectionsearch == 3) বাণিজ্য
-        @elseif($sectionsearch == 4) ভোকেশনাল
-        @elseif($sectionsearch == 5) কারিগরি
-        @endif
-      @endif
-      ]</span>
+    	শিক্ষার্থী তালিকাঃ <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
     	<div class="pull-right">
           <a href="{{ route('students.getstudentlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-warning btn-sm" title="শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }} তৈরি করুন" target="_blank">
             <i class="fa fa-print"></i> শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }}
@@ -60,10 +46,28 @@
 			<div class="col-md-2">
 				<select class="form-control" id="search_section">
 					<option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-					<option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-					<option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-          @if(Auth::user()->school->sections == 3)
-					<option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+          @if($classsearch < 9)
+  					<option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+  					<option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+            @if(Auth::user()->school->sections == 3)
+  					<option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+            @endif
+          @else
+            @if(Auth::user()->school->section_type == 1)
+                <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+                <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+                @if(Auth::user()->school->sections >2)
+                <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+                @endif
+            @elseif(Auth::user()->school->section_type == 2)
+                <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
+                <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
+                @if(Auth::user()->school->sections >2)
+                <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
+                <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
+                <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
+                @endif
+            @endif
           @endif
 				</select>
 			</div>
@@ -115,10 +119,7 @@
           <td>{{ $student->name_bangla }}</td>
 					<td>{{ $student->name }}</td>
 					<td>
-              @if($student->section == 1) A
-              @elseif($student->section == 2) B
-              @elseif($student->section == 3) C
-              @endif
+              {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}
           </td>
 					<td>
 						@if($student->image != null || $student->image != '')
@@ -221,7 +222,7 @@
   	  $('#example1').DataTable()
   	  $('#datatable-students').DataTable({
   	    'paging'      : true,
-  	    'pageLength'  : 10,
+  	    'pageLength'  : 100,
   	    'lengthChange': true,
   	    'searching'   : true,
   	    'ordering'    : true,
@@ -295,15 +296,17 @@
             .prop('disabled', false)
             .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
 
-      $('#search_section').append('<option value="'+1+'">SCIENCE</option>');
-      $('#search_section').append('<option value="'+2+'">ARTS</option>');
-      $('#search_section').append('<option value="'+3+'">COMMERCE</option>');
-      $('#search_section').append('<option value="'+4+'">VOCATIONAL</option>');
-      $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
-      $('#search_section').append('<option value="" disabled>অথবা</option>');
-      $('#search_section').append('<option value="'+1+'">A</option>');
-      $('#search_section').append('<option value="'+2+'">B</option>');
-      $('#search_section').append('<option value="'+3+'">C</option>');
+      @if(Auth::user()->school->section_type == 1)
+        $('#search_section').append('<option value="'+1+'">A</option>');
+        $('#search_section').append('<option value="'+2+'">B</option>');
+        $('#search_section').append('<option value="'+3+'">C</option>');
+      @elseif(Auth::user()->school->section_type == 2)
+        $('#search_section').append('<option value="'+1+'">SCIENCE</option>');
+        $('#search_section').append('<option value="'+2+'">ARTS</option>');
+        $('#search_section').append('<option value="'+3+'">COMMERCE</option>');
+        $('#search_section').append('<option value="'+4+'">VOCATIONAL</option>');
+        $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
+      @endif
     }
   });
 </script>

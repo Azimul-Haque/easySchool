@@ -20,6 +20,9 @@
     font-family: 'kalpurush', sans-serif;
     font-size: 12px;
   }
+  .nostyletd {
+    border: 0px solid white !important;
+  }
   </style>
 </head>
 <body>
@@ -48,11 +51,11 @@
   <table class="">
     <tr>
       <td>শ্রেণিঃ {{ bangla_class($data[1]) }},</td>
-      <td>শাখাঃ {{ bangla($data[2]) }},</td>
+      <td>শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }},</td>
       <td>ছাত্র সংখ্যাঃ {{ bangla(count($students->where("gender", "MALE"))) }} জন,</td>
       <td>ছাত্রী সংখ্যাঃ {{ bangla(count($students->where("gender", "FEMALE"))) }} জন,</td>
       <td>মোটঃ {{ bangla($students->count()) }} জন,</td>
-      <td>মুসলমানঃ {{ bangla(count($students->where("religion", "ISLAM"))) }} জন,</td>
+      <td>ইসলামঃ {{ bangla(count($students->where("religion", "ISLAM"))) }} জন,</td>
       <td>হিন্দু {{ bangla(count($students->where("religion", "HINDU"))) }} জন,</td>
       <td>উচ্চতরঃ -{{ bangla(count($students->where("religion", "HINDU"))) }} জন,</td>
       <td>কৃষিঃ - জন,</td>
@@ -77,7 +80,7 @@
     @foreach($students as $student)
     <tr>
       <td>{{ $counter }}</td>
-      <td>{{ $student->student_id }}<br/>{{ $student->section }}<br/>{{ $student->roll }}</td>
+      <td>{{ $student->student_id }}<br/>{{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}<br/>{{ $student->roll }}</td>
       <td>
         @if($student->image != null && $student->image != '')
         <img src="{{ public_path('images/admission-images/'.$student->image) }}" height="40" width="40">
@@ -93,6 +96,9 @@
       <td>{{ $student->mother }}</td>
       <td>{{ $student->mother }}</td>
     </tr>
+    @if($counter%10 == 0)
+     
+    @endif
     @php
       $counter++;
     @endphp

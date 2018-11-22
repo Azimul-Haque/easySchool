@@ -17,6 +17,11 @@ use PDF;
 
 class StudentController extends Controller
 {
+    public function __construct(){
+        $this->middleware('role:headmaster');
+        //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
+    }
+
     public function index()
     {
         $students = Student::where('school_id', Auth::user()->school_id)
@@ -33,16 +38,16 @@ class StudentController extends Controller
     {
         if($section != 'No_Section') {
             $students = Student::where('school_id', Auth::user()->school_id)
-                           ->where('session',$session)
-                           ->where('class',$class)
-                           ->where('section',$section)
-                           ->orderBy('id','DESC')->get();
+                               ->where('session',$session)
+                               ->where('class',$class)
+                               ->where('section',$section)
+                               ->orderBy('id','DESC')->get();
 
         } else {
-        $students = Student::where('school_id', Auth::user()->school_id)
-                           ->where('session',$session)
-                           ->where('class',$class)
-                           ->orderBy('id','DESC')->get();
+            $students = Student::where('school_id', Auth::user()->school_id)
+                               ->where('session',$session)
+                               ->where('class',$class)
+                               ->orderBy('id','DESC')->get();
         } 
 
         return view('students.index')
@@ -117,14 +122,14 @@ class StudentController extends Controller
         if($school->sections > 0) {
           $last_student = Student::where('school_id', $school->id)
                                        ->where('class', $request->class)
-                                       ->where('session', $school->currentsession)
+                                       ->where('session', $request->session)
                                        ->where('section', $request->section)
                                        ->orderBy('student_id', 'desc')
                                        ->first();
         } else {
           $last_student = Student::where('school_id', $school->id)
                                        ->where('class', $request->class)
-                                       ->where('session', $school->currentsession)
+                                       ->where('session', $request->session)
                                        ->where('section', 0)
                                        ->orderBy('student_id', 'desc')
                                        ->first();
