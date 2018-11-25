@@ -530,12 +530,12 @@ class StudentController extends Controller
 
     public function getInfoSinglePDF($student_id)
     {
-        return 'কাজ চিলছে';
+        return 'কাজ চলছে';
     }
 
     public function getTestimonialSinglePDF($student_id)
     {
-        return 'কাজ চিলছে';
+        return 'কাজ চলছে';
     }
     
 }
