@@ -91,6 +91,18 @@
                   </select>
                 </div>
             </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                  <strong>বিদ্যালয় কোডঃ</strong>
+                  {!! Form::text('school_code', null, array('placeholder' => 'বিদ্যালয় কোড','class' => 'form-control', 'required' => '')) !!}
+              </div>
+            </div>
+            <div class="col-md-3">
+              <div class="form-group">
+                  <strong>প্রতিষ্ঠানের সচল যোগাযোগের নম্বরঃ</strong>
+                  {!! Form::text('contact', null, array('placeholder' => 'যোগাযোগের নম্বর','class' => 'form-control', 'required' => '')) !!}
+              </div>
+            </div>
         </div> 
         <div class="row">
             <div class="col-md-3">

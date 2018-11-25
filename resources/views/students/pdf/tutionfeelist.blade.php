@@ -96,24 +96,38 @@
       <td>{{ $student->student_id }}</td>
       <td rowspan="2">{{ $student->name }}</td>
       <td>টাকা</td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
-      <td rowspan="2"></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     <tr>
       <td>{{ $student->contact }}</td>
       <td>রশিদ নং</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
     </tr>
     @if($counter%12 == 0)
      </table>

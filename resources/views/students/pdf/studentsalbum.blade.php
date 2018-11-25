@@ -59,7 +59,7 @@
         <tr>
           <td width="45%">শ্রেণিঃ {{ bangla_class($data[1]) }},</td>
           <td width="40%">শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }},</td>
-          <td width="20%">ছাত্র সংখ্যাঃ {{ bangla(count($students->where("gender", "MALE"))) }} জন</td>
+          <td width="20%">শিক্ষার্থী সংখ্যাঃ {{ bangla(count($students)) }} জন</td>
         </tr>
       </table>
     </center>

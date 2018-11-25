@@ -18,6 +18,8 @@ class CreateSchoolsTable extends Migration
             $table->string('name');
             $table->string('name_bangla');
             $table->integer('eiin')->unique();
+            $table->integer('school_code');
+            $table->string('contact');
             $table->integer('sections')->unsigned();
             $table->integer('section_type')->unsigned();
             $table->integer('established');

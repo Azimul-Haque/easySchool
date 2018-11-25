@@ -34,6 +34,8 @@ class SettingController extends Controller
             'name_bangla' => 'required',
             'established' => 'required|integer',
             'eiin' => 'required|integer|unique:schools,eiin,'.$id,
+            'school_code' => 'required',
+            'contact' => 'required',
             'sections' => 'required',
             'address' => 'required',
             'currentsession' => 'required',
@@ -50,6 +52,8 @@ class SettingController extends Controller
         $school->name_bangla = $request->name_bangla;
         $school->established = $request->established;
         $school->eiin = $request->eiin;
+        $school->school_code = $request->school_code;
+        $school->contact = $request->contact;
         $school->sections = $request->sections;
         $school->address = $request->address;
         $school->currentsession = $request->currentsession;

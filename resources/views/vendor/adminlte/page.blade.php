@@ -342,6 +342,13 @@
                             <span>শিক্ষার্থী ব্যবস্থাপনা</span>
                         </a>
                     </li>
+
+                    <li class="{{ Request::is('search/student/*') ? 'active' : '' }}">
+                        <a href="{{ route('students.getsearch') }}">
+                            <i class="fa fa-fw fa-search"></i>
+                            <span>শিক্ষার্থী খুঁজুন</span>
+                        </a>
+                    </li>
                     
                   @endrole
 
