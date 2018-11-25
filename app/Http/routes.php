@@ -56,6 +56,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('students/cardregister/list/pdf/{session}/{class}/{section}',['as'=>'students.getcardregisterlistpdf','uses'=>'StudentController@getCardRegisterListPDF']);
 	Route::get('students/attendance/sheet/pdf/{session}/{class}/{section}',['as'=>'students.getattendancesheetpdf','uses'=>'StudentController@getAttendanceSheetPDF']);
 	Route::get('students/students/album/pdf/{session}/{class}/{section}',['as'=>'students.getstudentsalbumpdf','uses'=>'StudentController@getStudentsAlbumPDF']);
+	Route::get('students/single/info/pdf/{student_id}',['as'=>'students.getinfosingle','uses'=>'StudentController@getInfoSinglePDF']);
+	Route::get('students/single/testimonial/pdf/{student_id}',['as'=>'students.gettestimonialsingle','uses'=>'StudentController@getTestimonialSinglePDF']);
 
 
 

@@ -527,5 +527,15 @@ class StudentController extends Controller
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Students_Album.pdf';
         return $pdf->stream($fileName);
     }
+
+    public function getInfoSinglePDF($student_id)
+    {
+        return 'কাজ চিলছে';
+    }
+
+    public function getTestimonialSinglePDF($student_id)
+    {
+        return 'কাজ চিলছে';
+    }
     
 }

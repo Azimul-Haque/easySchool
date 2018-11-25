@@ -150,8 +150,8 @@
             @endif
 					</td>
 					<td>
-            <a class="btn btn-warning btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর তথ্য প্রিন্ট করুন"><i class="fa fa-print" aria-hidden="true"></i></a>
-            <a class="btn btn-brown btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর প্রশংসাপত্র প্রিন্ট করুন"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+            <a class="btn btn-warning btn-sm" href="{{ route('students.infosingle',$student->id) }}" title="{{ $student->name }}-এর তথ্য প্রিন্ট করুন" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <a class="btn btn-brown btn-sm" href="{{ route('students.testimonialsingle',$student->id) }}" title="{{ $student->name }}-এর প্রশংসাপত্র প্রিন্ট করুন" target="_blank"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
 						<a class="btn btn-primary btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর তথ্য সম্পাদনা করুন"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 				    {{-- delete modal--}}
 				    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $student->id }}" data-backdrop="static" disabled="" title="{{ $student->name }}-কে ডিলেট করুন"><i class="fa fa-trash" aria-hidden="true"></i></button>
