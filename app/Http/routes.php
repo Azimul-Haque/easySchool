@@ -23,6 +23,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('admission/form/submit/mark/',['as'=>'admissions.submitmark','uses'=>'AdmissionController@submitMarks']);
 	Route::post('admission/form/final/selection/',['as'=>'admissions.finalselection','uses'=>'AdmissionController@finalSelection']);
 	Route::get('admission/applicants/list/pdf/{class}',['as'=>'admissions.applicantslist','uses'=>'AdmissionController@pdfApplicantslist']);
+	Route::get('admission/result/list/pdf/{class}',['as'=>'admissions.admissionresult','uses'=>'AdmissionController@pdfAdmissionResult']);
 	Route::get('admission/applications/pdf/{class}',['as'=>'admissions.pdfallapplications','uses'=>'AdmissionController@pdfAllApplications']);
 	Route::get('admission/admitcards/pdf/{class}',['as'=>'admissions.pdfalladmitcards','uses'=>'AdmissionController@pdfAllAdmitCards']);
 	Route::get('admission/seatplan/pdf/{class}',['as'=>'admissions.pdfadmissionseatplan','uses'=>'AdmissionController@pdfAdmissionSeatPlan']);
@@ -49,10 +50,17 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
 	Route::post('students/promote/bulk',['as'=>'students.promotebulk','uses'=>'StudentController@promoteBulk']);
 	Route::get('students/getlist/pdf/{session}/{class}/{section}',['as'=>'students.getstudentlistpdf','uses'=>'StudentController@getStudentListPDF']);
+	Route::get('students/infolist/pdf/{session}/{class}/{section}',['as'=>'students.getinfolistpdf','uses'=>'StudentController@getInfoListPDF']);
+	Route::get('students/book/distribution/list/pdf/{session}/{class}/{section}',['as'=>'students.getbookdistrolistpdf','uses'=>'StudentController@getBoookDistroListPDF']);
+	Route::get('students/tutionfee/list/pdf/{session}/{class}/{section}',['as'=>'students.gettutionfeelistpdf','uses'=>'StudentController@getTutionFeeListPDF']);
+	Route::get('students/cardregister/list/pdf/{session}/{class}/{section}',['as'=>'students.getcardregisterlistpdf','uses'=>'StudentController@getCardRegisterListPDF']);
+	Route::get('students/attendance/sheet/pdf/{session}/{class}/{section}',['as'=>'students.getattendancesheetpdf','uses'=>'StudentController@getAttendanceSheetPDF']);
+	Route::get('students/students/album/pdf/{session}/{class}/{section}',['as'=>'students.getstudentsalbumpdf','uses'=>'StudentController@getStudentsAlbumPDF']);
 
 
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
+	Route::get('sms/test',['as'=>'sms.trest','uses'=>'StudentController@testSMS']);
 
 });
 

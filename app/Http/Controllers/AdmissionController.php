@@ -542,6 +542,18 @@ class AdmissionController extends Controller
                                  ->orderBy('mark_obtained', 'desc')
                                  ->get();
 
+        $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications], ['data' => [$class, $applications->count()]]);
+        $fileName = 'Class_'.$class.'_Applicants_List' . '.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function pdfAdmissionResult($class) {
+        $applications = Admission::where('school_id', Auth::user()->school_id)
+                                 ->where('session', Auth::user()->school->admission_session)
+                                 ->where('class', $class)
+                                 ->orderBy('mark_obtained', 'desc')
+                                 ->get();
+
         $appeared = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
                                  ->where('class', $class)
@@ -552,7 +564,7 @@ class AdmissionController extends Controller
                                  ->where('class', $class)
                                  ->having('merit_position', '>', 0)
                                  ->get();
-        $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications], ['data' => [$class, $applications->count(), $appeared->count(), $passed->count()]]);
+        $pdf = PDF::loadView('admissions.pdf.result', ['applications' => $applications], ['data' => [$class, $applications->count(), $appeared->count(), $passed->count()]]);
         $fileName = 'Class_'.$class.'_Applicants_List' . '.pdf';
         return $pdf->stream($fileName);
     }

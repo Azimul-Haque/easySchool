@@ -23,11 +23,11 @@
         <div class="row">
             <div class="col-md-3">
               <div class="form-group">
-                <label for="class">শ্রেণী</label>
+                <label for="class">শ্রেণি</label>
                 <div class="input-group">
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
                     <select class="form-control" name="class" id="class" required="">
-                      <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
+                      <option value="" selected disabled>শ্রেণি নির্ধারণ করুন</option>
                       @for($clss = 1;$clss<=10;$clss++)
                         <option value="{{ $clss }}" @if($student->class == $clss) selected="" @endif>Class {{ $clss }}</option>
                       @endfor

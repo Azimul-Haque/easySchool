@@ -428,6 +428,22 @@ class StudentController extends Controller
         }
     }
 
+    public function testSMS()
+    {
+        $students = Student::where('class', 7)
+                           ->where('session', 2019)
+                           ->where('section', 1)
+                           ->get();
+        $message = '';
+        foreach ($students as $student) {
+            $number = '88'.$student->contact;
+            $text = urlencode($student->remarks);
+            //$message = file_get_contents("//");
+            echo $message;
+        }
+        
+    }
+
     public function getStudentListPDF($session, $class, $section)
     {
         $students = Student::where('school_id', Auth::user()->school_id)
@@ -435,8 +451,81 @@ class StudentController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->get();
-        $pdf = PDF::loadView('students.pdf.studentslist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
-        $fileName = $session.'_'.$class.'_'.$section.'.pdf';
+        $pdf = PDF::loadView('students.pdf.studentslist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'.pdf';
         return $pdf->stream($fileName);
     }
+
+    public function getInfoListPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.infocollection', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Information_Collection_List.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getBoookDistroListPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.bookdistribution', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Information_Collection_List.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getTutionFeeListPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.tutionfeelist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Tution_Fee_List.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getCardRegisterListPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.cardregister', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Cards_Register.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getAttendanceSheetPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.attendancesheet', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Attendance_Sheet.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getStudentsAlbumPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.studentsalbum', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4', 'margin_top' => 35]);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Students_Album.pdf';
+        return $pdf->stream($fileName);
+    }
+    
 }

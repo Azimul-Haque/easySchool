@@ -25,7 +25,12 @@ function bangla_class($str){
       $en = array(1,2,3,4,5,6,7,8,9,10);
       $bn = array('প্রথম','দ্বিতীয়','তৃতীয়','চতুর্থ','পঞ্চম','ষষ্ঠ','সপ্তম','অষ্টম','নবম','দশম');
       $str = str_replace($en, $bn, $str);
-      return $str;
+      if($str == 'প্রথম0') {
+          return 'দশম';
+      } else {
+          return $str;
+      }
+      
 }
 function bangla_section($section_type, $class, $section){
       if($section_type == 1) {

@@ -13,12 +13,17 @@
 @section('content_header')
     <h1>
     	শিক্ষার্থী তালিকাঃ <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
-    	<div class="pull-right">
-          <a href="{{ route('students.getstudentlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-warning btn-sm" title="শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }} তৈরি করুন" target="_blank">
+    	<div class="pull-right btn-group">
+          @if($classsearch > 7)
+          <a href="{{ route('students.getcardregisterlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-warning btn-sm" title="@if($classsearch == 8) JSC @elseif($classsearch > 8) SSC @endif  রেজিঃ কার্ড, এডমিট কার্ড, মার্কশিট, সার্টিফিকেট ডেলিভারি রেজিস্টার প্রিন্ট করুন" target="_blank">
+            <i class="fa fa-print"></i> @if($classsearch == 8) JSC @elseif($classsearch > 8) SSC @endif কার্ড ডেলিভারি রেজিস্টার
+          </a>
+          @endif
+          <a href="{{ route('students.getstudentlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-success btn-sm" title="শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }} তৈরি করুন" target="_blank">
             <i class="fa fa-print"></i> শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }}
           </a>
-	        <a class="btn btn-success btn-sm" href="{{ route('students.create') }}"><i class="fa fa-user-plus"></i>  সরাসরি শিক্ষার্থী ভর্তি</a>
-	        <button class="btn btn-primary btn-sm" id="showCheckbox" disabled=""><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button>
+	        <a class="btn btn-primary btn-sm" href="{{ route('students.create') }}"><i class="fa fa-user-plus"></i>  সরাসরি শিক্ষার্থী ভর্তি</a>
+	        {{-- <button class="btn btn-primary btn-sm" id="showCheckbox" disabled=""><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button> --}}
 	    </div>	
     </h1>
 @stop
@@ -90,6 +95,20 @@
 				<button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
 			</div>
 	</div>
+  <div class="row">
+    <div class="col-md-12">
+      <div></div>
+      <div class="pull-right btn-group">
+        <button type="button" class="btn btn-sm btn-dark" title="কাজ চলছে"><i class="fa fa-print"></i> কাজ চলছে...</button>
+        <button type="button" class="btn btn-sm btn-violet" title="কাজ চলছে"><i class="fa fa-print"></i> কাজ চলছে...</button>
+        <a href="{{ route('students.getstudentsalbumpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-brown" title="শিক্ষার্থী অ্যালবাম তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী অ্যালবাম</a>
+        <a href="{{ route('students.getattendancesheetpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-warning" title="উপস্থিতি তালিকা (হাজিরা খাতা) তৈরি করুন" target="_blank"><i class="fa fa-print"></i> উপস্থিতি তালিকা</a>
+        <a href="{{ route('students.gettutionfeelistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-grey" title="বেতন আদায় রেজিস্টার তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বেতন আদায় রেজিস্টার</a>
+        <a href="{{ route('students.getbookdistrolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-primary" title="বই বিতরণ তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বই বিতরণ তালিকা</a>
+        <a href="{{ route('students.getinfolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-info" title="শিক্ষার্থী তথ্য সংগ্রহ তালিকা/ টাকা আদায়ের তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> তথ্য সংগ্রহ তালিকা</a>
+      </div>
+    </div>
+  </div>
 
 	<div class="table-responsive" style="margin-top: 5px;">
 		@if($students == true)
@@ -97,12 +116,13 @@
 			<thead>
 				<tr>
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
+          <th>আইডি</th>
           <th>ক্লাস</th>
-					<th>আইডি</th>
+          <th>শাখা</th>
           <th>রোল</th>
           <th>নাম</th>
-					<th>নাম (ইংরেজি)</th>
-					<th>শাখা</th>
+          <th>পিতার নাম</th>
+					<th>মাতার নাম</th>
 					<th>ছবি</th>
 					<th>Action</th>
 				</tr>
@@ -113,14 +133,15 @@
 					<td class="hiddenCheckbox" id="hiddenCheckbox">
 						<input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}">
 					</td>
-          <td>{{ $student->class }}</td>
 					<td>{{ $student->student_id }}</td>
-					<td>{{ $student->roll }}</td>
-          <td>{{ $student->name_bangla }}</td>
-					<td>{{ $student->name }}</td>
-					<td>
+          <td>{{ $student->class }}</td>
+          <td>
               {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}
           </td>
+					<td>{{ $student->roll }}</td>
+          <td>{{ $student->name }}</td>
+          <td>{{ $student->father }}</td>
+					<td>{{ $student->mother }}</td>
 					<td>
 						@if($student->image != null || $student->image != '')
             <img src="{{ asset('images/admission-images/'.$student->image) }}" style="width: 35px;">
@@ -129,9 +150,11 @@
             @endif
 					</td>
 					<td>
-						<a class="btn btn-primary btn-sm" href="{{ route('students.edit',$student->id) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+            <a class="btn btn-warning btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর তথ্য প্রিন্ট করুন"><i class="fa fa-print" aria-hidden="true"></i></a>
+            <a class="btn btn-brown btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর প্রশংসাপত্র প্রিন্ট করুন"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+						<a class="btn btn-primary btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর তথ্য সম্পাদনা করুন"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 				    {{-- delete modal--}}
-				    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $student->id }}" data-backdrop="static"><i class="fa fa-trash" aria-hidden="true"></i></button>
+				    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $student->id }}" data-backdrop="static" disabled="" title="{{ $student->name }}-কে ডিলেট করুন"><i class="fa fa-trash" aria-hidden="true"></i></button>
 				      	<!-- Trigger the modal with a button -->
 			        	<!-- Modal -->
 				        <div class="modal fade" id="deleteModal{{ $student->id }}" role="dialog">
@@ -228,7 +251,7 @@
   	    'ordering'    : true,
   	    'info'        : true,
   	    'autoWidth'   : true,
-  	    'order': [[ 2, "asc" ]],
+  	    'order': [[ 4, "asc" ]],
 	       // columnDefs: [
 	       //    { targets: [5], type: 'date'}
 	       // ]

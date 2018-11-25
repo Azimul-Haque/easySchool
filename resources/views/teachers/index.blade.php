@@ -19,7 +19,6 @@
       <p>{{ $message }}</p>
     </div>
   @endif --}}
-  <h4>Super Admin</h4>
   <div class="table-responsive">
     <table class="table">
       <thead>

@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Applicants List | PDF</title>
+  <title>Admission Result | PDF</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="icon" sizes="192x192" href="{{ asset('images/pdf-icon.png') }}">
   <style>
@@ -40,7 +40,7 @@
               {{ Auth::user()->school->address }}, {{ Auth::user()->school->upazilla }}, {{ Auth::user()->school->district }} <br/>
               স্থাপিতঃ {{ bangla(Auth::user()->school->established) }} ইংরেজি | ইআইআইএনঃ {{ bangla(Auth::user()->school->eiin) }}<br/><br/>
               <span style="font-size: 22px;">
-                <b><u>আবেদনকারীদের তালিকা</u></b>
+                <b><u>ভর্তি পরীক্ষার ফলাফল</u></b>
               </span><br/><br/>
               <span style="font-size: 18px;">
                 <u>{{ bangla_class($data[0]) }} শ্রেণিতে ভর্তি পরীক্ষা-{{ bangla(Auth::user()->school->admission_session) }} খ্রিঃ</u>
@@ -54,21 +54,39 @@
   </table>
   <table class="maintable">
     <tr>
+      <td width="25%">মোট আবেদনকারীঃ {{ bangla($data[1]) }} জন</td>
+      <td width="25%">অংশগ্রহণকারীঃ {{ bangla($data[2]) }} জন</td>
+      <td width="25%">পাশঃ {{ bangla($data[3]) }} জন</td>
+      <td width="25%">ফেইলঃ {{ bangla($data[2] - $data[3]) }} জন</td>
+    </tr>
+  </table><br/>
+  <table class="maintable">
+    <tr>
       <th>আইডি</th>
       <th>প. রোল</th>
+      <th>নাম</th>
       <th>ইংরেজি নাম</th>
       <th>পিতার নাম</th>
       <th>মাতার নাম</th>
-      <th>অভিভাবকের মো. নম্বর</th>
+      <th>প্রাপ্ত নম্বর</th>
+      <th>মেরিট পজিশন</th>
     </tr>
     @foreach($applications as $application)
     <tr>
       <td>{{ $application->application_id }}</td>
       <td>{{ $application->application_roll }}</td>
+      <td>{{ $application->name_bangla }}</td>
       <td>{{ $application->name }}</td>
       <td>{{ $application->father }}</td>
       <td>{{ $application->mother }}</td>
-      <td>{{ $application->contact }}</td>
+      <td>{{ $application->mark_obtained }}</td>
+      <td>
+        @if($application->merit_position == -1)
+          <span style="color: #FF0000;">Failed</span>
+        @else
+          {{ $application->merit_position }}
+        @endif
+      </td>
     </tr>
     @endforeach
   </table>

@@ -5,8 +5,9 @@
 @section('content_header')
     <h1>
     	অ্যাডমিশনঃ (ভর্তি প্রক্রিয়া) <span style="color: #008000;">[{{ bangla_class($class) }} শ্রেণি]</span>
-	    <div class="pull-right">
+	    <div class="pull-right btn-group">
         <a class="btn btn-warning btn-sm" href="{{ route('admissions.applicantslist', $class) }}" target="_blank"><i class="fa fa-print"></i> আবেদনকারীর তালিকা</a>
+        <a class="btn btn-info btn-sm" href="{{ route('admissions.admissionresult', $class) }}" target="_blank"><i class="fa fa-print"></i> ভর্তি পরীক্ষার ফলাফল</a>
 			  <a class="btn btn-success btn-sm" href="{{ route('admissions.create') }}" target="_blank"><i class="fa fa-plus"></i> আবেদন সংযোজন</a>
 			</div>
 		</h1>
@@ -25,14 +26,14 @@
 	</div>
 
 	<h4 style="margin-bottom: 15px;">আবেদনগুলো
-	<div class="pull-right">
+	<div class="pull-right btn-group">
     <a href="{{ route('admissions.pdfadmissionseatplan', $class) }}" class="btn btn-brown btn-sm" title="সিটপ্ল্যান জেনারেট করুন" target="_blank">
       <i class="fa fa-print"></i> সিটপ্ল্যান জেনারেট
     </a>
     <a href="{{ route('admissions.pdfallapplications', $class) }}" class="btn btn-warning btn-sm" title="সকল আবেদনপত্র প্রিন্ট করুন" target="_blank">
       <i class="fa fa-print"></i> সকল আবেদনপত্র প্রিন্ট
     </a>
-    <a href="{{ route('admissions.pdfalladmitcards', $class) }}" class="btn btn-warning btn-grey btn-sm" title="সকল এডমিট কার্ড প্রিন্ট করুন" target="_blank">
+    <a href="{{ route('admissions.pdfalladmitcards', $class) }}" class="btn btn-grey btn-sm" title="সকল এডমিট কার্ড প্রিন্ট করুন" target="_blank">
       <i class="fa fa-print"></i> সকল এডমিট কার্ড প্রিন্ট
     </a>
 		<button class="btn btn-success btn-sm" id="showCheckbox"><i class="fa fa-check-square-o"></i> পেমেন্ট</button>
