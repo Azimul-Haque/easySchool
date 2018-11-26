@@ -539,7 +539,7 @@ class AdmissionController extends Controller
         $applications = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
                                  ->where('class', $class)
-                                 ->orderBy('mark_obtained', 'desc')
+                                 ->orderBy('application_roll', 'asc')
                                  ->get();
 
         $pdf = PDF::loadView('admissions.pdf.applicantslist', ['applications' => $applications], ['data' => [$class, $applications->count()]]);

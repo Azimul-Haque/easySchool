@@ -109,6 +109,9 @@
     <div class="col-md-12">
       <div></div>
       <div class="pull-right btn-group">
+        @if($classsearch > 8)
+        <a href="{{ route('students.gettestimonialsall', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-success" title="প্রত্যয়ন পত্র তৈরি করুন" target="_blank"><i class="fa fa-print"></i> প্রত্যয়ন পত্র</a>
+        @endif
         <a href="{{ route('students.getseatplanpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-dark" title="সিটপ্ল্যান তৈরি করুন" target="_blank"><i class="fa fa-print"></i> সিটপ্ল্যান</a>
         <a href="{{ route('students.getadmitcardpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-violet" title="এডমিট কার্ড তৈরি করুন" target="_blank"><i class="fa fa-print"></i> এডমিট কার্ড</a>
         <a href="{{ route('students.getstudentsalbumpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-brown" title="শিক্ষার্থী অ্যালবাম তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী অ্যালবাম</a>
@@ -161,7 +164,9 @@
 					</td>
 					<td>
             <a class="btn btn-warning btn-sm" href="{{ route('students.getinfosingle',$student->id) }}" title="{{ $student->name }}-এর তথ্য প্রিন্ট করুন" target="_blank"><i class="fa fa-print" aria-hidden="true"></i></a>
-            <a class="btn btn-brown btn-sm" href="{{ route('students.gettestimonialsingle',$student->id) }}" title="{{ $student->name }}-এর প্রশংসাপত্র প্রিন্ট করুন" target="_blank"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+            @if($classsearch > 8)
+            <a class="btn btn-brown btn-sm" href="{{ route('students.gettestimonialsingle',$student->student_id) }}" title="{{ $student->name }}-এর প্রশংসাপত্র প্রিন্ট করুন" target="_blank"><i class="fa fa-graduation-cap" aria-hidden="true"></i></a>
+            @endif
 						<a class="btn btn-primary btn-sm" href="{{ route('students.edit',$student->id) }}" title="{{ $student->name }}-এর তথ্য সম্পাদনা করুন"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 				    {{-- delete modal--}}
 				    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $student->id }}" data-backdrop="static" disabled="" title="{{ $student->name }}-কে ডিলেট করুন"><i class="fa fa-trash" aria-hidden="true"></i></button>

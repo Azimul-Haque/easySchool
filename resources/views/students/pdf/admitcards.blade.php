@@ -42,12 +42,12 @@
                 <tr>
                   <td width="70%">
                     <span style="font-size: 22px; font-weight: bold;">
-                      {{ $student->school->name }}<br/>
+                      {{ strtoupper($student->school->name) }}<br/>
                       <span style="font-size: 15px;">
-                        {{ $student->school->address }}, 
-                        {{ $student->school->upazilla }}, 
-                        {{ $student->school->district }}<br/>
-                        {{ $student->school->currentexam }}-{{ $student->school->currentsession }}<br/>
+                        {{ strtoupper($student->school->address) }}, 
+                        {{ strtoupper($student->school->upazilla) }}, 
+                        {{ strtoupper($student->school->district) }}<br/>
+                        {{ strtoupper($student->school->currentexam) }}-{{ $student->school->currentsession }}<br/>
                         <u>ADMIT CARD</u>
                       </span>
                     </span>
@@ -68,30 +68,30 @@
               <table>
                 <tr>
                   <td width="20%"></td>
-                  <td width="40%">Class: {{ $student->class }}</td>
-                  <td width="30%">Section/ Group: {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}</td>
+                  <td width="40%">CLASS: {{ $student->class }}</td>
+                  <td width="30%">SECTION/ GROUP: {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}</td>
                   <td width="10%"></td>
                 </tr>
               </table>
               <table class="maintable">
                 <tr>
-                  <td width="30%">Roll</td>
+                  <td width="30%">ROLL</td>
                   <td style="padding-left: 10px;">{{ str_pad($student->roll, 2, 0, STR_PAD_LEFT) }}</td>
                 </tr>
                 <tr>
-                  <td width="30%">Name</td>
+                  <td width="30%">NAME</td>
                   <td style="padding-left: 10px;">{{ $student->name }}</td>
                 </tr>
                 <tr>
-                  <td width="30%">Father's Name</td>
+                  <td width="30%">FATHER'S NAME</td>
                   <td style="padding-left: 10px;">{{ $student->father }}</td>
                 </tr>
                 <tr>
-                  <td width="30%">Mother's Name</td>
+                  <td width="30%">MOTHER'S NAME</td>
                   <td style="padding-left: 10px;">{{ $student->mother }}</td>
                 </tr>
                 <tr>
-                  <td width="30%">Date of Birth</td>
+                  <td width="30%">DATE OF BIRTH</td>
                   <td style="padding-left: 10px;">{{ date('d-m-Y', strtotime($student->dob)) }}</td>
                 </tr>
               </table>
@@ -99,9 +99,8 @@
               <table>
                 <tr>
                   <td width="10%"></td>
-                  <td width="60%">
-                    <span style="color: #FFFFFF;">teacher sign</span><br/>
-                    Class Teacher
+                  <td width="60%" valign="bottom">
+                    CLASS TEACHER
                   </td>
                   <td width="30%">
                     <center>
@@ -109,7 +108,7 @@
                         <img src="{{ public_path('images/schools/signs/'.Auth::user()->school->headmaster_sign) }}" height="40">
                       @endif
                     </center>
-                    Head Master
+                    HEAD MASTER
                   </td>
                 </tr>
               </table>

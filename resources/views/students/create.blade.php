@@ -326,31 +326,31 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="jsc_registration_no">JSC রেজিস্ট্রেশন নম্বর</label>
-                        {!! Form::text('jsc_registration_no', null, array('placeholder' => 'JSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'jsc_registration_no', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('jsc_registration_no', null, array('placeholder' => 'JSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'jsc_registration_no')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="jsc_roll">JSC রোল নম্বর</label>
-                        {!! Form::text('jsc_roll', null, array('placeholder' => 'JSC রোল নম্বর','class' => 'form-control', 'id' => 'jsc_roll', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('jsc_roll', null, array('placeholder' => 'JSC রোল নম্বর','class' => 'form-control', 'id' => 'jsc_roll')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="jsc_session">JSC বোর্ড সেশন</label>
-                        {!! Form::text('jsc_session', null, array('placeholder' => 'JSC বোর্ড সেশন','class' => 'form-control', 'id' => 'jsc_session', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('jsc_session', null, array('placeholder' => 'JSC বোর্ড সেশন','class' => 'form-control', 'id' => 'jsc_session')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="jsc_result">JSC ফলাফল (GPA)</label>
-                        {!! Form::text('jsc_result', null, array('placeholder' => 'JSC ফলাফল','class' => 'form-control', 'id' => 'jsc_result', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('jsc_result', null, array('placeholder' => 'JSC ফলাফল','class' => 'form-control', 'id' => 'jsc_result')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="jsc_fourth_subject_code">JSC ৪র্থ বিষয় কোড</label>
-                        {!! Form::text('jsc_fourth_subject_code', null, array('placeholder' => 'JSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'jsc_fourth_subject_code', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('jsc_fourth_subject_code', null, array('placeholder' => 'JSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'jsc_fourth_subject_code')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
@@ -366,31 +366,31 @@
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="ssc_registration_no">SSC রেজিস্ট্রেশন নম্বর</label>
-                        {!! Form::text('ssc_registration_no', null, array('placeholder' => 'SSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'ssc_registration_no', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('ssc_registration_no', null, array('placeholder' => 'SSC রেজিস্ট্রেশন নম্বর','class' => 'form-control', 'id' => 'ssc_registration_no')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="ssc_roll">SSC রোল নম্বর</label>
-                        {!! Form::text('ssc_roll', null, array('placeholder' => 'SSC রোল নম্বর','class' => 'form-control', 'id' => 'ssc_roll', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('ssc_roll', null, array('placeholder' => 'SSC রোল নম্বর','class' => 'form-control', 'id' => 'ssc_roll')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="ssc_session">SSC বোর্ড সেশন</label>
-                        {!! Form::text('ssc_session', null, array('placeholder' => 'SSC বোর্ড সেশন','class' => 'form-control', 'id' => 'ssc_session', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('ssc_session', null, array('placeholder' => 'SSC বোর্ড সেশন','class' => 'form-control', 'id' => 'ssc_session')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="ssc_result">SSC ফলাফল (GPA)</label>
-                        {!! Form::text('ssc_result', null, array('placeholder' => 'SSC ফলাফল','class' => 'form-control', 'id' => 'ssc_result', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('ssc_result', null, array('placeholder' => 'SSC ফলাফল','class' => 'form-control', 'id' => 'ssc_result')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">
                       <div class="form-group">
                         <label for="ssc_fourth_subject_code">SSC ৪র্থ বিষয় কোড</label>
-                        {!! Form::text('ssc_fourth_subject_code', null, array('placeholder' => 'SSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'ssc_fourth_subject_code', 'autocomplete' => 'off')) !!}
+                        {!! Form::text('ssc_fourth_subject_code', null, array('placeholder' => 'SSC ৪র্থ বিষয় কোড','class' => 'form-control', 'id' => 'ssc_fourth_subject_code')) !!}
                       </div>
                     </div>
                     <div class="col-md-2">

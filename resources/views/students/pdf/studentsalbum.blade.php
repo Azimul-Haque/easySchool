@@ -57,9 +57,10 @@
     <center>
       <table class="">
         <tr>
-          <td width="45%">শ্রেণিঃ {{ bangla_class($data[1]) }},</td>
-          <td width="40%">শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }},</td>
-          <td width="20%">শিক্ষার্থী সংখ্যাঃ {{ bangla(count($students)) }} জন</td>
+          <th width="25%">শ্রেণিঃ {{ bangla_class($data[1]) }},</th>
+          <th width="25%">শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }},</th>
+          <th width="25%">শিক্ষার্থী সংখ্যাঃ {{ bangla(count($students)) }} জন,</th>
+          <th width="25%">শিক্ষাবর্ষ {{ bangla($data[0]) }}</th>
         </tr>
       </table>
     </center>

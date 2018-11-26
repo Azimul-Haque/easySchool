@@ -25,7 +25,7 @@
 <body>
   <table class="">
     <tr>
-      <td width="18%">
+      <td width="15%">
         @if(Auth::user()->school->monogram != null || Auth::user()->school->monogram != '')
           <img src="{{ public_path('images/schools/monograms/'.Auth::user()->school->monogram) }}" height="70" width="70" style="float: left !important;">
         @else
@@ -43,7 +43,7 @@
           </center>
         </p>
       </td>
-      <td width="18%"></td>
+      <td width="15%"></td>
     </tr>
     <tr>
       <td colspan="3">
@@ -54,6 +54,8 @@
         </center>
       </td>
     </tr>
+  </table>
+  <table class="">
     <tr>
       <td>
         শ্রেণিঃ {{ bangla_class($data[1]) }}
@@ -61,7 +63,7 @@
       <td>
         শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }}
       </td>
-      <td>
+      <td width="20%">
         মোট শিক্ষার্থীঃ {{ bangla($students->count()) }}
       </td>
     </tr>
@@ -70,10 +72,10 @@
         শ্রেণি শিক্ষকের নামঃ
       </td>
       <td>
-        ............................................
+        তারিখঃ
       </td>
       <td>
-        তারিখঃ {{ bangla(date('d-m-Y')) }}
+        শিক্ষাবর্ষঃ {{ bangla($data[0]) }}
       </td>
     </tr>
   </table>

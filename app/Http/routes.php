@@ -56,12 +56,13 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('students/cardregister/list/pdf/{session}/{class}/{section}',['as'=>'students.getcardregisterlistpdf','uses'=>'StudentController@getCardRegisterListPDF']);
 	Route::get('students/attendance/sheet/pdf/{session}/{class}/{section}',['as'=>'students.getattendancesheetpdf','uses'=>'StudentController@getAttendanceSheetPDF']);
 	Route::get('students/students/album/pdf/{session}/{class}/{section}',['as'=>'students.getstudentsalbumpdf','uses'=>'StudentController@getStudentsAlbumPDF']);
-	Route::get('students/single/info/pdf/{student_id}',['as'=>'students.getinfosingle','uses'=>'StudentController@getInfoSinglePDF']);
 	Route::get('students/tot/list/8/pdf/{session}/{class}/{section}',['as'=>'students.gettotlist8pdf','uses'=>'StudentController@getTotList8PDF']);
 	Route::get('students/tot/list/9/pdf/{session}/{class}/{section}',['as'=>'students.gettotlist9pdf','uses'=>'StudentController@getTotList9PDF']);
 	Route::get('students/admit/cards/pdf/{session}/{class}/{section}',['as'=>'students.getadmitcardpdf','uses'=>'StudentController@getAdmitCardPDF']);
 	Route::get('students/seat/plan/pdf/{session}/{class}/{section}',['as'=>'students.getseatplanpdf','uses'=>'StudentController@getSeatPlanPDF']);
+	Route::get('students/all/testimonials/pdf/{session}/{class}/{section}',['as'=>'students.gettestimonialsall','uses'=>'StudentController@getTestimonialAllPDF']);
 	Route::get('students/single/testimonial/pdf/{student_id}',['as'=>'students.gettestimonialsingle','uses'=>'StudentController@getTestimonialSinglePDF']);
+	Route::get('students/single/info/pdf/{student_id}',['as'=>'students.getinfosingle','uses'=>'StudentController@getInfoSinglePDF']);
 	Route::get('search/student',['as'=>'students.getsearch','uses'=>'StudentController@getSearchStudent']);
 	Route::get('search/student/result',['as'=>'students.search','uses'=>'StudentController@searchStudent']);
 

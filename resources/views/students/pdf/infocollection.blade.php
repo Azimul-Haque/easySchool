@@ -54,6 +54,8 @@
         </center>
       </td>
     </tr>
+  </table>
+  <table>
     <tr>
       <td>
         শ্রেণিঃ {{ bangla_class($data[1]) }}
@@ -61,7 +63,7 @@
       <td>
         শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }}
       </td>
-      <td>
+      <td width="20%">
         মোট শিক্ষার্থীঃ {{ bangla($students->count()) }}
       </td>
     </tr>
@@ -70,10 +72,10 @@
         শ্রেণি শিক্ষকের নামঃ
       </td>
       <td>
-        ............................................
+        তারিখঃ
       </td>
       <td>
-        তারিখঃ {{ bangla(date('d-m-Y')) }}
+        শিক্ষাবর্ষঃ {{ bangla($data[0]) }}
       </td>
     </tr>
   </table>

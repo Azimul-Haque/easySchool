@@ -535,7 +535,7 @@ class StudentController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->get();
-        $pdf = PDF::loadView('students.pdf.admitcard', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $pdf = PDF::loadView('students.pdf.admitcards', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admit_Cards.pdf';
         return $pdf->stream($fileName);
     }
@@ -576,6 +576,33 @@ class StudentController extends Controller
         return $pdf->stream($fileName);
     }
 
+    public function getTestimonialAllPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.alltestimonials', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_All_Testimonials.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getTestimonialSinglePDF($student_id)
+    {
+        $student = Student::where('school_id', Auth::user()->school_id)
+                           ->where('student_id', $student_id)
+                           ->first();
+        $pdf = PDF::loadView('students.pdf.singletestimonial', ['student' => $student], ['data' => [$student->class, $student->section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $fileName = $student_id.'_Testimonial.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getInfoSinglePDF($student_id)
+    {
+        return 'কাজ চলছে';
+    }
+
     public function getSearchStudent()
     {
         return view('students.search');
@@ -599,15 +626,4 @@ class StudentController extends Controller
         }
         
     }
-
-    public function getInfoSinglePDF($student_id)
-    {
-        return 'কাজ চলছে';
-    }
-
-    public function getTestimonialSinglePDF($student_id)
-    {
-        return 'কাজ চলছে';
-    }
-    
 }
