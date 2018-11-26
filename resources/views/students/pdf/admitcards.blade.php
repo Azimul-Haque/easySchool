@@ -5,7 +5,7 @@
   <link rel="icon" sizes="192x192" href="{{ asset('images/pdf-icon.png') }}">
   <style>
   body {
-    font-family: 'kalpurush', sans-serif;
+    font-family: 'roboto', sans-serif;
   }
   table {
       border-collapse: collapse;
@@ -17,7 +17,7 @@
   }
   .maintable tr th, .maintable tr td{
     padding: 5px;
-    font-family: 'kalpurush', sans-serif;
+    font-family: 'roboto', sans-serif;
     font-size: 12px;
   }
   
@@ -43,13 +43,13 @@
                   <td width="70%">
                     <span style="font-size: 22px; font-weight: bold;">
                       {{ strtoupper($student->school->name) }}<br/>
-                      <span style="font-size: 15px;">
-                        {{ strtoupper($student->school->address) }}, 
-                        {{ strtoupper($student->school->upazilla) }}, 
-                        {{ strtoupper($student->school->district) }}<br/>
-                        {{ strtoupper($student->school->currentexam) }}-{{ $student->school->currentsession }}<br/>
-                        <u>ADMIT CARD</u>
-                      </span>
+                    </span>
+                    <span style="font-size: 15px;">
+                      {{ strtoupper($student->school->address) }}, 
+                      {{ strtoupper($student->school->upazilla) }}, 
+                      {{ strtoupper($student->school->district) }}<br/>
+                      {{ strtoupper($student->school->currentexam) }}-{{ $student->school->currentsession }}<br/>
+                      <u><b>ADMIT CARD</b></u>
                     </span>
                   </td>
                   <td width="30%">
