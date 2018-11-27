@@ -32,6 +32,7 @@ class CreateStudentsTable extends Migration
             $table->string('nationality');
             $table->string('blood_group');
             $table->datetime('dob');
+            $table->datetime('admission_date');
             $table->string('gender', 10);
             $table->string('cocurricular');
             $table->integer('facility');
@@ -42,6 +43,7 @@ class CreateStudentsTable extends Migration
             $table->string('contact');
             $table->string('contact_2');
             $table->string('previous_school');
+            $table->string('previous_school_address');
             $table->string('pec_result');
             $table->string('image');
             

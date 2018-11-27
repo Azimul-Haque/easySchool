@@ -588,11 +588,48 @@ class StudentController extends Controller
         return $pdf->stream($fileName);
     }
 
+    public function getInfoAllPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.allinfo', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_All_Testimonials.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getInfoAdmissionPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->where('admission_date', '>', Auth::user()->school->admission_test_datetime)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.admissioninfo', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admission_Information.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getIDCardsPDF($session, $class, $section)
+    {
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $session)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $pdf = PDF::loadView('students.pdf.idcards', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admission_Information.pdf';
+        return $pdf->stream($fileName);
+    }
+
     public function getTestimonialSinglePDF($student_id)
     {
         $student = Student::where('school_id', Auth::user()->school_id)
-                           ->where('student_id', $student_id)
-                           ->first();
+                          ->where('student_id', $student_id)
+                          ->first();
         $pdf = PDF::loadView('students.pdf.singletestimonial', ['student' => $student], ['data' => [$student->class, $student->section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
         $fileName = $student_id.'_Testimonial.pdf';
         return $pdf->stream($fileName);
@@ -600,7 +637,22 @@ class StudentController extends Controller
 
     public function getInfoSinglePDF($student_id)
     {
-        return 'কাজ চলছে';
+        $student = Student::where('school_id', Auth::user()->school_id)
+                          ->where('student_id', $student_id)
+                          ->first();
+        $pdf = PDF::loadView('students.pdf.singleinfo', ['student' => $student], ['data' => [$student->class, $student->section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $student_id.'_Information.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function getIDCardSinglePDF($student_id)
+    {
+        $student = Student::where('school_id', Auth::user()->school_id)
+                          ->where('student_id', $student_id)
+                          ->first();
+        $pdf = PDF::loadView('students.pdf.singleidcard', ['student' => $student], ['data' => [$student->class, $student->section]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = $student_id.'_Information.pdf';
+        return $pdf->stream($fileName);
     }
 
     public function getSearchStudent()

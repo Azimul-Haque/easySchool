@@ -265,6 +265,10 @@
             @else
                 {!! Form::hidden('section_to_final_admit', 0) !!}
             @endif
+            <div class="form-group">
+                <strong>ভর্তির তারিখ</strong>
+                {!! Form::text('admission_date', null, ['class' => 'form-control', 'id' => 'admission_date', 'required' => '']) !!}
+            </div>
             <br/>
             <b><big><span style="color: #FF0000;">সতর্কীকরণঃ</span></big></b><br/>
             আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের চূড়ান্তভাবে ভর্তি করতে চান?
@@ -293,6 +297,17 @@
 @stop
 
 @section('js')
+  {!!Html::script('js/bootstrap-datepicker.min.js')!!}
+  <script type="text/javascript">
+      $(function() {
+        $("#admission_date").datepicker({
+          format: 'MM dd, yyyy',
+          todayHighlight: true,
+          autoclose: true,
+          container: '#finalSelectionModal'
+        });
+      });
+  </script>
   <script type="text/javascript">
     $(function(){
      $('a[title]').tooltip();
@@ -466,6 +481,7 @@
 
 @section('css')
   <link rel="stylesheet" type="text/css" href="{{ asset('vendor/adminlte/plugins/iCheck/square/blue.css') }}">
+  {!!Html::style('css/bootstrap-datepicker.min.css')!!}
 	<style>
 	.switch {
 	  position: relative;

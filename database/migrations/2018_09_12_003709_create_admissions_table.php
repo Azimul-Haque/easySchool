@@ -40,6 +40,7 @@ class CreateAdmissionsTable extends Migration
             $table->string('contact');
             $table->string('contact_2');
             $table->string('previous_school');
+            $table->string('previous_school_address');
             $table->string('pec_result');
             $table->string('image');
 

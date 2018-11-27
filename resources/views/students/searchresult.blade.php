@@ -73,6 +73,52 @@
     <table class="table">
       <thead>
         <tr>
+          <th colspan="12"><i class="fa fa-fw fa-graduation-cap"></i> বিগত বছরের ফলাফল</th>
+        </tr>
+        <tr>
+          <td align="center"><b>ক্র.<br/>নং</b></td>
+          <td align="center"><b>শিক্ষাবর্ষ</b></td>
+          <td align="center"><b>শ্রেণি</b></td>
+          <td align="center"><b>শাখা</b></td>
+          <td align="center"><b>রোল</b></td>
+          <td align="center"><b>অর্ধবার্ষিক/প্রাক নির্বাচনীপরীঃ ফলাফল(মেরিট পজিসন)</b></td>
+          <td align="center"><b>বার্ষিক/টেষ্ট পরীঃফলাফল(মেরিট পজিসন)</b></td>
+          <td align="center"><b>সুবিধা ভোগী</b></td>
+          <td align="center"><b>মোট কার্যদিবস</b></td>
+          <td align="center"><b>মোট উপস্থিতি</b></td>
+          <td align="center"><b>এই বিদ্যলয়ে ভর্তির তারিখ</b></td>
+          <td align="center"><b>প্রধান শিক্ষকের মন্তব্য</b></td>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <center>
+      @if(file_exists(asset('images/admission-images/'.$student->image)))
+        <img src="{{ asset('images/admission-images/'.$student->image) }}" class="image150 shadow">
+      @else
+        <img src="{{ asset('images/dummy_student.jpg') }}" class="image150 shadow">
+      @endif
+    </center><br/>
+    <table class="table">
+      <thead>
+        <tr>
           <th colspan="2"><i class="fa fa-fw fa-book"></i> অ্যাকাডেমিক তথ্য</th>
         </tr>
       </thead>
@@ -89,28 +135,17 @@
           <th>রোল</th>
           <td>{{ bangla($student->roll) }}</td>
         </tr>
-      </tbody>
-    </table>
-  </div>
-  <div class="col-md-4">
-    <center>
-      @if(file_exists(public_path('images/admission-images/'.$student->image)))
-        <img src="{{ asset('images/admission-images/'.$student->image) }}" class="image150 shadow">
-      @else
-        <img src="{{ asset('images/dummy_student.jpg') }}" class="image150 shadow">
-      @endif
-    </center><br/>
-
-    <table class="table">
-      <thead>
         <tr>
-          <th colspan="2"><i class="fa fa-fw fa-graduation-cap"></i> বিগত বছরের ফলাফল</th>
+          <th>আইডি</th>
+          <td>{{ bangla($student->student_id) }}</td>
         </tr>
-      </thead>
-      <tbody>
         <tr>
-          <th></th>
-          <td></td>
+          <th>জেএসসি রোল</th>
+          <td>{{ bangla($student->jsc_roll) }}</td>
+        </tr>
+        <tr>
+          <th>এসএসসি রোল</th>
+          <td>{{ bangla($student->ssc_roll) }}</td>
         </tr>
       </tbody>
     </table>

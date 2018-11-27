@@ -427,6 +427,7 @@ class AdmissionController extends Controller
             'application_ids_to_admit' => 'required',
             'class' => 'required',
             'section_to_final_admit' => 'required',
+            'admission_date' => 'required',
         ]);
         $application_ids = explode(',', $request->application_ids_to_admit);
         $ids_array = [];
@@ -481,6 +482,7 @@ class AdmissionController extends Controller
             $student->nationality = $application->nationality;
             $student->blood_group = $application->blood_group;
             $student->dob = $application->dob;
+            $student->admission_date = \Carbon\Carbon::parse($request->admission_date);
             $student->gender = $application->gender;
             $student->cocurricular = $application->cocurricular;
             $student->village = $application->village;

@@ -19,9 +19,9 @@
     border: 0px solid black;
   }
   table tr th, table tr td{
-    padding: 5px;
+    padding: 4px;
     font-family: 'roboto', sans-serif;
-    font-size: 15px !important;
+    font-size: 16px !important;
   }
   .page-border{
        width: 100%;
@@ -51,18 +51,18 @@
     </table>
     <table class="">
       <tr>
-        <td width="20%">Book No-</td>
+        <td width="20%"></td>
         <td width="60%" align="center">
           <span style="font-size: 25px;"><u>TESTIMONIAL</u></span><br/>
           <span style="font-size: 20px;">
             @if($data[0] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}
             @elseif($data[0] == 10)
-            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
+            SSC EXAMINATION - {{ substr($student->ssc_session, 0, 4) + 2 }}
             @endif
           </span>
         </td>
-        <td width="20%" align="center">Sl No-</td>
+        <td width="20%" align="center">Sl No-{{ $student->student_id }}</td>
       </tr>
       <tr>
         <td colspan="3" style="display: block; line-height: 1.7;">
@@ -83,7 +83,7 @@
 
           &ensp;&ensp;&ensp;&ensp;I know that he/she did not take part in any subversive activities of the state while studying in this institution.<br/>
           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;I wish his/her every success in life.
-          <br/><br/><br/>
+          <br/><br/><br/><br/><br/>
         </td>
       </tr>
       <tr>
@@ -93,11 +93,6 @@
         </td>
         <td></td>
         <td align="right">
-          <center>
-            @if(Auth::user()->school->headmaster_sign != null && Auth::user()->school->headmaster_sign != '')
-              <img src="{{ public_path('images/schools/signs/'.Auth::user()->school->headmaster_sign) }}" height="50">
-            @endif
-          </center>
           ({{ Auth::user()->name }})<br/>
           Head Teacher
         </td>

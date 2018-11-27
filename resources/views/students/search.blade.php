@@ -19,7 +19,7 @@
   <div class="col-md-12">
     {!! Form::open(array('route' => 'students.search','method'=>'GET', 'class' => '')) !!}
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-8">
           <div class="form-group">
               <div class="input-group">
                 <span class="input-group-addon"><i class="fa fa-user"></i></span>
