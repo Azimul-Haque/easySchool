@@ -259,7 +259,6 @@
                     {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
                     @permission('developer-control')
                     <li class="header">Developer Control</li>
-                    @endpermission
                     <li class="{{ Request::is('schools') ? 'active menu-open' : '' }} {{ Request::is('schools/*') ? 'active menu-open' : '' }} {{ Request::is('users') ? 'active menu-open' : '' }} {{ Request::is('users/*') ? 'active menu-open' : '' }} {{ Request::is('roles') ? 'active menu-open' : '' }} {{ Request::is('roles/*') ? 'active menu-open' : '' }} {{ Request::is('subjects') ? 'active menu-open' : '' }} {{ Request::is('subjects/*') ? 'active menu-open' : '' }} treeview">
                         <a href="#">
                             <i class="fa fa-fw fa-code"></i>
@@ -311,6 +310,7 @@
                           @endpermission
                         </ul>
                     </li>
+                    @endpermission
 
                   @role('headmaster')
                     @permission('school-settings')
