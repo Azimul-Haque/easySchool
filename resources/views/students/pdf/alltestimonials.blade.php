@@ -54,12 +54,12 @@
       <tr>
         <td width="20%" align="center"></td>
         <td width="60%">
-          <span style="font-size: 25px;"><u>TESTIMONIAL</u></span>
+          <span style="font-size: 25px;" align="center"><u>TESTIMONIAL</u></span>
         </td>
         <td width="20%" align="center">Sl No - {{ $student->student_id }}</td>
       </tr>
       <tr>
-        <td colspan="3">
+        <td colspan="3" align="center">
           <span style="font-size: 20px;">
             @if($data[1] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}
