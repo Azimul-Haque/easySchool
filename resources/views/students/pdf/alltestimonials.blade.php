@@ -54,7 +54,7 @@
       <tr>
         <td width="20%"></td>
         <td width="60%" align="center">
-          <span style="font-size: 25px; line-height: 2em;"><u>TESTIMONIAL</u></span><br/>
+          <span style="font-size: 25px;"><u>TESTIMONIAL</u></span><br/><br/>
           <span style="font-size: 20px;">
             @if($data[1] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}
