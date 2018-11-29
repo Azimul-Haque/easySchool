@@ -52,24 +52,22 @@
     </table>
     <table class="">
       <tr>
-        <td width="20%"></td>
+        <td width="20%" align="center"></td>
         <td width="60%">
           <span style="font-size: 25px;"><u>TESTIMONIAL</u></span>
         </td>
         <td width="20%" align="center">Sl No - {{ $student->student_id }}</td>
       </tr>
       <tr>
-        <td width="20%"></td>
-        <td width="60%">
+        <td colspan="3">
           <span style="font-size: 20px;">
-            @if($data[0] == 9)
+            @if($data[1] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}
-            @elseif($data[0] == 10)
-            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
+            @elseif($data[1] == 10)
+            SSC EXAMINATION-{{ substr($student->ssc_session, 1, 4) + 2 }}
             @endif
           </span>
         </td>
-        <td width="20%"></td>
       </tr>
       <tr>
         <td colspan="3" style="display: block; line-height: 1.7;">
