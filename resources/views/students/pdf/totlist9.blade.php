@@ -37,7 +37,7 @@
           <p style="text-align: center; font-size: 15px;">
             <center>
               <span>টটলিস্ট {{ bangla_class($data[1]) }}-{{ bangla($data[0]) }}</span><br/>
-              Zilaa Code: _ _ _, Zilla Name: {{ Auth::user()->school->district }}, Upazilla: {{ Auth::user()->school->upazilla }}, Post Office: {{ Auth::user()->school->address }}, Mobile No: {{ Auth::user()->school->contact }}<br/>
+              Zila Code: _ _ _, Zilla Name: {{ Auth::user()->school->district }}, Upazilla: {{ Auth::user()->school->upazilla }}, Post Office: {{ Auth::user()->school->address }}, Mobile No: {{ Auth::user()->school->contact }}<br/>
               CENTRE CODE: _ _ _, CENTRE NAME: _ _ _ _ _ _ _ _ _ _ _ _ _, EMAIL-ADDRESS: _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ <br/>
               EIIN NO: {{ Auth::user()->school->eiin }} SCHOOL CODE: {{ Auth::user()->school->school_code }} SCHOOL NAME: <big>{{ Auth::user()->school->name }}</big>
             </center>
