@@ -11,6 +11,8 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::resource('users','UserController');
 	Route::resource('schools','SchoolController');
+	Route::resource('subjects','SubjectController');
+	Route::resource('exams','ExamController');
 
 	Route::resource('teachers','TeacherController');
 	Route::put('teachers/resetpassword/{id}',['as'=>'teachers.resetpassword','uses'=>'TeacherController@resetPassword']);

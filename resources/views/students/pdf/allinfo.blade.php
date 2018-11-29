@@ -50,6 +50,7 @@
         <td colspan="3">
           <center>
             <span style="font-size: 20px;">
+              <br/>
               শিক্ষার্থী তথ্য
             </span>
           </center>

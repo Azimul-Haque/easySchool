@@ -8,6 +8,7 @@ use Zizaco\Entrust\Traits\EntrustUserTrait;
 class User extends Authenticatable
 {
     use EntrustUserTrait;
+    
     public function school() {
         return $this->belongsTo('App\School');
     }

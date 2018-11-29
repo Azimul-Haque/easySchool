@@ -260,48 +260,71 @@
                     @permission('developer-control')
                     <li class="header">Developer Control</li>
                     @endpermission
-                    @permission('school-management-crud')
-                    <li class="{{ Request::is('schools') ? 'active' : '' }}">
-                        <a href="/schools">
-                            <i class="fa fa-fw fa-university"></i>
-                            <span>School Management</span>
+                    <li class="{{ Request::is('schools') ? 'active menu-open' : '' }} {{ Request::is('schools/*') ? 'active menu-open' : '' }} {{ Request::is('users') ? 'active menu-open' : '' }} {{ Request::is('users/*') ? 'active menu-open' : '' }} {{ Request::is('roles') ? 'active menu-open' : '' }} {{ Request::is('roles/*') ? 'active menu-open' : '' }} {{ Request::is('subjects') ? 'active menu-open' : '' }} {{ Request::is('subjects/*') ? 'active menu-open' : '' }} treeview">
+                        <a href="#">
+                            <i class="fa fa-fw fa-code"></i>
+                            <span>Developer Control</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
                         </a>
+                        <ul class="treeview-menu">
+                          @permission('school-management-crud')
+                          <li class="{{ Request::is('schools') ? 'active' : '' }}">
+                              <a href="/schools">
+                                  <i class="fa fa-fw fa-university"></i>
+                                  <span>School Management</span>
+                              </a>
+                          </li>
+                          @endpermission
+                          @permission('user-crud')
+                          <li class="{{ Request::is('users') ? 'active' : '' }}">
+                              <a href="/users">
+                                  <i class="fa fa-fw fa-user"></i>
+                                  <span>User Management</span>
+                              </a>
+                          </li>
+                          @endpermission
+                          @permission('role-crud')
+                          <li class="{{ Request::is('roles') ? 'active' : '' }}">
+                              <a href="/roles">
+                                  <i class="fa fa-fw fa-list"></i>
+                                  <span>Roles</span>
+                              </a>
+                          </li>
+                          @endpermission
+                          @permission('universal-subjects')
+                          <li class="{{ Request::is('subjects') ? 'active' : '' }}">
+                              <a href="/subjects">
+                                  <i class="fa fa-fw fa-book"></i>
+                                  <span>Subject</span>
+                              </a>
+                          </li>
+                          @endpermission
+                          @permission('role-crud') {{-- for the time being role-crud is used --}}
+                          <li class="{{ Request::is('sms') ? 'active' : '' }}">
+                              <a href="/#">
+                                  <i class="fa fa-envelope-o"></i>
+                                  <span>SMS</span>
+                              </a>
+                          </li>
+                          @endpermission
+                        </ul>
                     </li>
-                    @endpermission
-                    @permission('user-crud')
-                    <li class="{{ Request::is('users') ? 'active' : '' }}">
-                        <a href="/users">
-                            <i class="fa fa-fw fa-user"></i>
-                            <span>User Management</span>
-                        </a>
-                    </li>
-                    @endpermission
-                    @permission('role-crud')
-                    <li class="{{ Request::is('roles') ? 'active' : '' }}">
-                        <a href="/roles">
-                            <i class="fa fa-fw fa-list"></i>
-                            <span>Roles</span>
-                        </a>
-                    </li>
-                    @endpermission
-                    @permission('role-crud') {{-- for the time being role-crud is used --}}
-                    <li class="{{ Request::is('sms') ? 'active' : '' }}">
-                        <a href="/#">
-                            <i class="fa fa-envelope-o"></i>
-                            <span>SMS</span>
-                        </a>
-                    </li>
-                    @endpermission
 
                   @role('headmaster')
-
                     @permission('school-settings')
                     <li class="header">প্লাটফর্ম সেটিংস</li>
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">
-                        <a href="{{ route('settings.edit') }}">
-                            <i class="fa fa-fw fa-cogs"></i>
-                            <span>স্কুল সেটিংস</span>
-                        </a>
+                      <a href="{{ route('settings.edit') }}">
+                          <i class="fa fa-fw fa-cogs"></i>
+                          <span>স্কুল সেটিংস</span>
+                      </a>
+                    </li>
+                    <li class="{{ Request::is('exams/settings') ? 'active' : '' }}">
+                      <a href="{{ route('exams.index') }}">
+                        <i class="fa fa-cog"></i> পরীক্ষার সেটিংস
+                      </a>
                     </li>
                     @endpermission
 
@@ -348,6 +371,21 @@
                             <i class="fa fa-fw fa-search"></i>
                             <span>শিক্ষার্থী খুঁজুন</span>
                         </a>
+                    </li>
+                    
+                    <li class="header">পরীক্ষা সংক্রান্ত</li>
+                    <li class="{{ Request::is('exams') ? 'active menu-open' : '' }} {{ Request::is('exams/*') ? 'active menu-open' : '' }} treeview">
+                        <a href="#">
+                            <i class="fa fa-fw fa-pencil-square-o"></i>
+                            <span>স্কুল পরীক্ষা ব্যবস্থাপনা</span>
+                            <span class="pull-right-container">
+                              <i class="fa fa-angle-left pull-right"></i>
+                            </span>
+                        </a>
+                        <ul class="treeview-menu">
+                          <li class="{{ Request::is('exams') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-list-ol"></i> পরীক্ষার তালিকা</a></li>
+                          <li class="{{ Request::is('exams/settings') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-cog"></i> পরীক্ষার সেটিংস</a></li>
+                        </ul>
                     </li>
                     
                   @endrole

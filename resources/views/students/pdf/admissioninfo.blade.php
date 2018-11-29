@@ -64,7 +64,7 @@
   <table class="maintable">
     <tr>
       <th>ক্র.<br/>নং</th>
-      <th>আইডি<br/>শাখা<br/>রোল</th>
+      <th>আইডি<br/>রোল<br/>মোবাইল নং</th>
       <th>ছবি</th>
       <th>শিক্ষার্থীর নাম<br/>পিতার নাম<br/>মাতার নাম</th>
       <th>গ্রাম<br/>ডাকঘর<br/>উপজেলা</th>
@@ -80,7 +80,7 @@
     @foreach($students as $student)
     <tr>
       <td>{{ $counter }}</td>
-      <td>{{ $student->student_id }}<br/>{{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}<br/>{{ $student->roll }}</td>
+      <td>{{ $student->student_id }}<br/>{{ $student->roll }}<br/>{{ $student->contact }}</td>
       <td>
         @if($student->image != null && $student->image != '')
         <img src="{{ public_path('images/admission-images/'.$student->image) }}" height="40" width="40">
@@ -102,7 +102,7 @@
      <table class="maintable">
          <tr>
            <th>ক্র.<br/>নং</th>
-           <th>আইডি<br/>শাখা<br/>রোল</th>
+           <th>আইডি<br/>রোল<br/>মোবাইল নং</th>
            <th>ছবি</th>
            <th>শিক্ষার্থীর নাম<br/>পিতার নাম<br/>মাতার নাম</th>
            <th>গ্রাম<br/>ডাকঘর<br/>উপজেলা</th>

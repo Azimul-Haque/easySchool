@@ -39,8 +39,8 @@
         <td width="5%"></td>
         <td width="90%" align="center">
           <span style="font-size: 30px;"><b>{{ Auth::user()->school->name }}</b></span><br/>
-          P.O: {{ Auth::user()->school->address }}, Upazilla: {{ Auth::user()->school->upazilla }}, District: {{ Auth::user()->school->district }}, Estd: {{ Auth::user()->school->established }}, School Code: {{ Auth::user()->school->school_code }}<br/>
-            EIIN: {{ Auth::user()->school->eiin }}, Email: {{ Auth::user()->school->contact }}, Phone: {{ Auth::user()->school->contact }}
+          P.O: {{ Auth::user()->school->address }}, Upazilla: {{ Auth::user()->school->upazilla }}, District: {{ Auth::user()->school->district }}, Estd: {{ Auth::user()->school->established }}<br/>
+            EIIN: {{ Auth::user()->school->eiin }}, School Code: {{ Auth::user()->school->school_code }}, Website: 
           <br/>
           @if(Auth::user()->school->monogram != null && Auth::user()->school->monogram != '')
           <img src="{{ public_path('images/schools/monograms/'.Auth::user()->school->monogram) }}" width="80" height="80" style="padding: 5px;">
@@ -58,11 +58,11 @@
             @if($data[0] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}
             @elseif($data[0] == 10)
-            SSC EXAMINATION - {{ substr($student->ssc_session, 0, 4) + 2 }}
+            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
             @endif
           </span>
         </td>
-        <td width="20%" align="center">Sl No-{{ $student->student_id }}</td>
+        <td width="20%" align="center">Sl No - {{ $student->student_id }}</td>
       </tr>
       <tr>
         <td colspan="3" style="display: block; line-height: 1.7;">
@@ -76,14 +76,14 @@
         <td colspan="3" style="text-align: justify; text-justify: inter-character;display: block; line-height: 1.7;">
           &ensp;&ensp;&ensp;&ensp;Son/Daughter of <u>{{ $student->father }}</u> &amp;  Mother’s name   <u>{{ $student->mother }}</u>,  Vill- <u>{{ $student->village }}</u>, P.O- <u>{{ $student->post_office }}</u>,  Up-zilla- <u>{{ $student->upazilla }}</u>, Zilla- <u>{{ $student->district }}</u>. He/She has passed the 
           @if($data[0] == 9)
-            JSC EXAMINATION-{{ $student->jsc_session }}, Roll Number <u>{{ $student->jsc_roll }}</u>, Registration Number <u>{{ $student->jsc_registration_no }}</u>  &amp; Session <u>{{ $student->session }}</u>  from this school under the Board of Intermediate and Secondary Education, Dinajpur. He/She was securing G.P.A  <u>{{ $student->jsc_gpa }}</u>, in the scale of 5.00, as a regular student of this school.
+            JSC EXAMINATION-{{ $student->jsc_session }}, Roll Number <u>{{ $student->jsc_roll }}</u>, Registration Number <u>{{ $student->jsc_registration_no }}</u>  &amp; Session <u>{{ $student->jsc_session }}</u>  from this school under the Board of Intermediate and Secondary Education, Dinajpur. He/She was securing G.P.A  <u>{{ $student->jsc_gpa }}</u>, in the scale of 5.00, as a regular student of this school.
           @elseif($data[0] == 10)
-            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}, in <u>{{ english_section(Auth::user()->school->section_type, $data[0], $data[1]) }}</u> Group, Roll Number <u>{{ $student->ssc_roll }}</u>, Registration Number <u>{{ $student->ssc_registration_no }}</u>  &amp; Session <u>{{ $student->session }}</u>  from this school under the Board of Intermediate and Secondary Education, Dinajpur. He/She was securing G.P.A  <u>{{ $student->ssc_gpa }}</u>, in the scale of 5.00, as a regular student of this school.
+            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}, in <u>{{ english_section(Auth::user()->school->section_type, $data[0], $data[1]) }}</u> Group, Roll Number <u>{{ $student->ssc_roll }}</u>, Registration Number <u>{{ $student->ssc_registration_no }}</u>  &amp; Session <u>{{ $student->ssc_session }}</u>  from this school under the Board of Intermediate and Secondary Education, Dinajpur. He/She was securing G.P.A  <u>{{ $student->ssc_gpa }}</u>, in the scale of 5.00, as a regular student of this school.
           @endif His/Her date of birth is <u>{{ date('d-m-Y', strtotime($student->dob)) }}</u>.<br/>
 
           &ensp;&ensp;&ensp;&ensp;I know that he/she did not take part in any subversive activities of the state while studying in this institution.<br/>
           &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;I wish his/her every success in life.
-          <br/><br/><br/><br/><br/>
+          <br/><br/><br/><br/>
         </td>
       </tr>
       <tr>
