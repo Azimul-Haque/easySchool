@@ -52,24 +52,28 @@
     <table class="">
       <tr>
         <td width="20%" align="center"></td>
-        <td width="60%">
-          <span style="font-size: 25px;" align="center"><u>TESTIMONIAL</u></span>
+        <td width="60%" align="center">
+          <center>
+            <span style="font-size: 25px;"><u>TESTIMONIAL</u></span>
+          </center>
         </td>
         <td width="20%" align="center">Sl No - {{ $student->student_id }}</td>
       </tr>
       <tr>
         <td colspan="3" align="center">
-          <span style="font-size: 20px;">
-            @if($data[0] == 9)
-            JSC EXAMINATION-{{ $student->jsc_session }}
-            @elseif($data[0] == 10)
-            SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
-            @endif
-          </span>
+          <center>
+            <span style="font-size: 20px;">
+              @if($data[0] == 9)
+              JSC EXAMINATION-{{ $student->jsc_session }}
+              @elseif($data[0] == 10)
+              SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
+              @endif
+            </span>
+          </center>
         </td>
       </tr>
       <tr>
-        <td colspan="3" style="display: block; line-height: 1.7;">
+        <td colspan="3" style="display: block; line-height: 1.7;" align="center">
           <center><br/>
             This is to certify that<br/>
             <big><u>{{ $student->name }}</u></big>
