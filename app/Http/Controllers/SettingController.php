@@ -42,7 +42,6 @@ class SettingController extends Controller
             'classes' => 'required',
             'payment_method' => 'required',
             'isresultpublished' => 'required',
-            'currentexam' => 'sometimes',
             'monogram' => 'sometimes|image|max:100'
         ]);
 
@@ -60,7 +59,7 @@ class SettingController extends Controller
         $school->classes = implode (",", $request->classes);
         $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
-        $school->currentexam = $request->currentexam;
+        // $school->currentexam = $request->currentexam; // ommited
 
         // sign upload
         if($request->hasFile('headmaster_sign')) {

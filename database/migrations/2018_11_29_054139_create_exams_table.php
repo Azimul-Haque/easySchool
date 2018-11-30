@@ -20,7 +20,7 @@ class CreateExamsTable extends Migration
             $table->integer('exam_session');
             $table->datetime('exam_start_date');
             $table->datetime('exam_end_date');
-            $table->integer('total_subjects');
+            $table->string('total_subjects');
             $table->timestamps();
         });
     }

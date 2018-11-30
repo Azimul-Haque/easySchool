@@ -104,7 +104,7 @@
 			<div class="col-md-2">
 				<button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
 			</div>
-	</div>
+	</div><br/>
   <div class="row">
     <div class="col-md-12">
       <div></div>

@@ -22,8 +22,8 @@ class CreateExamsubjectsTable extends Migration
             $table->string('mcq_pass_mark');
             $table->string('practical');
             $table->string('practical_pass_mark');
-            $table->string('ca');
             $table->string('total_percentage');
+            $table->string('ca');
             $table->string('total');
             $table->string('pass_mark');
             $table->timestamps();

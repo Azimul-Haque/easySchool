@@ -186,16 +186,6 @@
                         </div> 
                     </div>
                     <div class="col-md-4">
-                        <div class="form-group">
-                          <strong>চলতি পরীক্ষার নাম নির্ধারণ করুন</strong>
-                          <select class="form-control" name="currentexam">
-                            <option selected disabled>চলতি পরীক্ষার নাম নির্ধারণ করুন</option>
-                            <option value="halfyearly">অর্ধবার্ষিকী/প্রাক-নির্বাচনী পরীক্ষা</option>
-                            <option value="final">বার্ষিক/নির্বাচনী পরীক্ষা</option>
-                          </select>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-8">
                                 <div class="form-group">

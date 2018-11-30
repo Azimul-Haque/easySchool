@@ -71,3 +71,11 @@ function english_section($section_type, $class, $section){
       }
       return $section;
 }
+
+function random_string($length){
+      $pool = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+      $random_string = substr(str_shuffle(str_repeat($pool, $length)), 0, $length);
+
+      return $random_string;
+}

@@ -68,7 +68,6 @@ class SchoolController extends Controller
             'isadmissionon' => 'required',
             'payment_method' => 'required',
             'isresultpublished' => 'required',
-            'currentexam' => 'sometimes',
             'monogram' => 'sometimes'
         ]);
 
@@ -95,7 +94,7 @@ class SchoolController extends Controller
         $school->isadmissionon = $request->isadmissionon;
         $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
-        $school->currentexam = $request->currentexam;
+        // $school->currentexam = $request->currentexam; // ommited
 
         // image upload
         if($request->hasFile('monogram')) {
@@ -167,7 +166,6 @@ class SchoolController extends Controller
             'classes' => 'required',
             'payment_method' => 'required',
             'isresultpublished' => 'required',
-            'currentexam' => 'sometimes',
 
             'admission_form_fee' => 'sometimes',
             'admission_total_marks' => 'sometimes',
@@ -199,7 +197,7 @@ class SchoolController extends Controller
         $school->classes = implode (",", $request->classes);
         $school->payment_method = $request->payment_method;
         $school->isresultpublished = $request->isresultpublished;
-        $school->currentexam = $request->currentexam;
+        // $school->currentexam = $request->currentexam; // ommited
         
         $school->admission_session = $request->admission_session;
         $school->admission_form_fee = $request->admission_form_fee;

@@ -18,3 +18,10 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+php_value max_input_vars 20000
+php_value suhosin.post.max_vars 20000
+php_value suhosin.request.max_vars 20000
+php_value max_file_uploads  100
+php_value suhosin.upload.max_uploads 100
+php_value max_input_nesting_level 100

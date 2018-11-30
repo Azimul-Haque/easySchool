@@ -324,6 +324,31 @@ ul.errorlist > li {
     -moz-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
+.exam_subject_add {
+    border: 1px solid #999;
+    border-radius: 0px;
+    padding: 10px;
+    margin-bottom: 10px;
+}
+.marginbottom10 {
+    margin-bottom: 10px;
+}
+.box {
+    -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+.table-shadow {
+    -webkit-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    -moz-box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    box-shadow: 1px 1px 2px 0px rgba(0,0,0,0.5) !important;
+    border-radius: 0px !important;
+}
+.tooltip-inner {
+  white-space:nowrap;
+  max-width:none;
+}
 
 
 
