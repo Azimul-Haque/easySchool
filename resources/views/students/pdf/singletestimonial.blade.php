@@ -66,7 +66,7 @@
               @if($data[0] == 9)
               JSC EXAMINATION-{{ $student->jsc_session }}
               @elseif($data[0] == 10)
-              SSC EXAMINATION-{{ substr($student->ssc_session, 0, 4) + 2 }}
+              SSC EXAMINATION-{{ (int)substr($student->ssc_session, 0, 4) + 2 }}
               @endif
             </span>
           </center>
