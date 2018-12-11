@@ -21,6 +21,7 @@ class CreateExamsTable extends Migration
             $table->datetime('exam_start_date');
             $table->datetime('exam_end_date');
             $table->string('total_subjects');
+            $table->integer('currentexam');
             $table->timestamps();
         });
     }

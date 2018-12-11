@@ -78,6 +78,7 @@
                         {{-- Bill Payment Notification --}}
                         @if(Auth::check() && Auth::User()->school->due == 0)
                         <li class="dropdown tasks-menu">
+                            @role('headmaster')
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
                                 <span class="label label-success">1</span>
@@ -98,9 +99,11 @@
                                       </h4>
                                       <p>Why not buy a new awesome theme?</p>
                                     </a>
-                                  </li>                                </ul>
+                                  </li>
+                                </ul>
                               </li>
                             </ul>
+                            @endrole
                         </li>
                         @endif
                         {{-- Bill Payment Notification --}}
@@ -311,7 +314,7 @@
                         </ul>
                     </li>
                     @endpermission
-
+                  
                   @role('headmaster')
                     @permission('school-settings')
                     <li class="header">প্লাটফর্ম সেটিংস</li>
@@ -321,11 +324,12 @@
                           <span>স্কুল সেটিংস</span>
                       </a>
                     </li>
-                    <li class="{{ Request::is('exams/settings') ? 'active' : '' }}">
+                    {{-- <li class="{{ Request::is('exams/settings') ? 'active' : '' }}">
                       <a href="{{ route('exams.index') }}">
-                        <i class="fa fa-cog"></i> পরীক্ষার সেটিংস
+                        <i class="fa fa-fw fa-cog"></i>
+                        <span>পরীক্ষার সেটিংস</span>
                       </a>
-                    </li>
+                    </li> --}}
                     @endpermission
 
                     <li class="header">প্রশাসনিক</li>
@@ -372,9 +376,9 @@
                             <span>শিক্ষার্থী খুঁজুন</span>
                         </a>
                     </li>
-                    
+                  @endrole
                     <li class="header">পরীক্ষা সংক্রান্ত</li>
-                    <li class="{{ Request::is('exams') ? 'active menu-open' : '' }} {{ Request::is('exams/*') ? 'active menu-open' : '' }} treeview">
+                    <li class="{{ Request::is('exams') ? 'active menu-open' : '' }} {{ Request::is('exams/*') ? 'active menu-open' : '' }} {{ Request::is('exam/*') ? 'active menu-open' : '' }} treeview">
                         <a href="#">
                             <i class="fa fa-fw fa-pencil-square-o"></i>
                             <span>স্কুল পরীক্ষা ব্যবস্থাপনা</span>
@@ -383,14 +387,13 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
+                          @role('headmaster')
                           <li class="{{ Request::is('exams') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-list-ol"></i> পরীক্ষার তালিকা</a></li>
-                          <li class="{{ Request::is('exams/settings') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-cog"></i> পরীক্ষার সেটিংস</a></li>
+                          <li class="{{ Request::is('exam/subject/allocation') ? 'active' : '' }}"><a href="{{ route('exam.getsubjectallocation') }}"><i class="fa fa-cog"></i> শিক্ষকদের বিষয় বণ্টন</a></li>
+                          @endrole
+                          <li class="{{ Request::is('exam/subject/allocation') ? 'active' : '' }}"><a href="{{ route('exam.getsubjectallocation') }}"><i class="fa fa-cog"></i> নম্বর প্রদান</a></li>
                         </ul>
                     </li>
-                    
-                  @endrole
-
-                    
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

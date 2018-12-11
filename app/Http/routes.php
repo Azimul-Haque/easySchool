@@ -73,6 +73,11 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('search/student/result',['as'=>'students.search','uses'=>'StudentController@searchStudent']);
 
 
+	Route::patch('exam/make/current/{id}',['as'=>'exam.makecurrent','uses'=>'ExamController@makeCurrent']);
+	Route::get('exam/subject/allocation',['as'=>'exam.getsubjectallocation','uses'=>'ExamController@getSubjectallocation']);
+	Route::post('exam/subject/allocation',['as'=>'exam.postsubjectallocation','uses'=>'ExamController@storeSubjectallocation']);
+	Route::post('exam/mark/submission/page',['as'=>'exam.getsubmissionpage','uses'=>'ExamController@getSubmissionPage']);
+
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 	Route::get('sms/test',['as'=>'sms.trest','uses'=>'StudentController@testSMS']);

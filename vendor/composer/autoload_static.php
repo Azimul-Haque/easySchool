@@ -343,6 +343,7 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
     );
 
     public static $classMap = array (
+        'AddExamToUsers' => __DIR__ . '/../..' . '/database/migrations/2018_12_10_013255_add_exam_to_users.php',
         'AddSchoolToUsers' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_035613_add_school_to_users.php',
         'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha' => __DIR__ . '/..' . '/anhskohbo/no-captcha/src/Facades/NoCaptcha.php',
         'Anhskohbo\\NoCaptcha\\NoCaptcha' => __DIR__ . '/..' . '/anhskohbo/no-captcha/src/NoCaptcha.php',
@@ -386,6 +387,7 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
         'App\\School' => __DIR__ . '/../..' . '/app/School.php',
         'App\\Student' => __DIR__ . '/../..' . '/app/Student.php',
         'App\\Subject' => __DIR__ . '/../..' . '/app/Subject.php',
+        'App\\Subjectallocation' => __DIR__ . '/../..' . '/app/Subjectallocation.php',
         'App\\Upazilla' => __DIR__ . '/../..' . '/app/Upazilla.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Carbon\\Carbon' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -423,6 +425,7 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
         'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_005647_create_schools_table.php',
         'CreateSettingsTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_30_233231_create_settings_table.php',
         'CreateStudentsTable' => __DIR__ . '/../..' . '/database/migrations/2017_10_23_235407_create_students_table.php',
+        'CreateSubjectallocationsTable' => __DIR__ . '/../..' . '/database/migrations/2018_12_10_202412_create_subjectallocations_table.php',
         'CreateSubjectsTable' => __DIR__ . '/../..' . '/database/migrations/2018_11_29_030906_create_subjects_table.php',
         'CreateUpazillasTable' => __DIR__ . '/../..' . '/database/migrations/2018_11_12_182117_create_upazillas_table.php',
         'CreateUsersTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_000000_create_users_table.php',

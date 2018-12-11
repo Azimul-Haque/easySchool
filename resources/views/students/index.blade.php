@@ -45,6 +45,26 @@
 			<p>{{ $message }}</p>
 		</div>
 	@endif --}}
+  <div class="row">
+    <div class="col-md-12">
+      <div></div>
+      <div class="pull-right btn-group">
+        @if($classsearch > 8)
+        <a href="{{ route('students.gettestimonialsall', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-success" title="প্রশংসা পত্র তৈরি করুন" target="_blank"><i class="fa fa-print"></i> প্রশংসা পত্র</a>
+        @endif
+        <a href="{{ route('students.getidcards', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-warning" title="আইডি কার্ড তৈরি করুন" target="_blank"><i class="fa fa-fw fa-id-card-o"></i> আইডি কার্ড</a>
+        <a href="{{ route('students.getadmissioninfo', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-primary" title="ভর্তি রেজিস্টার তৈরি করুন" target="_blank"><i class="fa fa-print"></i> ভর্তি রেজিস্টার</a>
+        <a href="{{ route('students.getinfoall', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-info" title="শিক্ষার্থী তথ্য তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী তথ্য</a>
+        <a href="{{ route('students.getseatplanpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-dark" title="সিটপ্ল্যান তৈরি করুন" target="_blank"><i class="fa fa-print"></i> সিটপ্ল্যান</a>
+        <a href="{{ route('students.getadmitcardpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-violet" title="এডমিট কার্ড তৈরি করুন" target="_blank"><i class="fa fa-print"></i> এডমিট কার্ড</a>
+        <a href="{{ route('students.getstudentsalbumpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-brown" title="শিক্ষার্থী অ্যালবাম তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী অ্যালবাম</a>
+        <a href="{{ route('students.getattendancesheetpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-warning" title="উপস্থিতি তালিকা (হাজিরা খাতা) তৈরি করুন" target="_blank"><i class="fa fa-print"></i> হাজিরা খাতা</a>
+        <a href="{{ route('students.gettutionfeelistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-grey" title="বেতন আদায় রেজিস্টার তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বেতন আদায় রেজিস্টার</a>
+        <a href="{{ route('students.getbookdistrolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-primary" title="বই বিতরণ তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বই বিতরণ তালিকা</a>
+        <a href="{{ route('students.getinfolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-info" title="শিক্ষার্থী তথ্য সংগ্রহ তালিকা/ টাকা আদায়ের তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> তথ্য সংগ্রহ তালিকা</a>
+      </div>
+    </div>
+  </div><br/>
 	<div class="row">
 			<div class="col-md-2">
 				<select class="form-control" id="search_class">
@@ -104,27 +124,7 @@
 			<div class="col-md-2">
 				<button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
 			</div>
-	</div><br/>
-  <div class="row">
-    <div class="col-md-12">
-      <div></div>
-      <div class="pull-right btn-group">
-        @if($classsearch > 8)
-        <a href="{{ route('students.gettestimonialsall', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-success" title="প্রশংসা পত্র তৈরি করুন" target="_blank"><i class="fa fa-print"></i> প্রশংসা পত্র</a>
-        @endif
-        <a href="{{ route('students.getidcards', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-warning" title="আইডি কার্ড তৈরি করুন" target="_blank"><i class="fa fa-fw fa-id-card-o"></i> আইডি কার্ড</a>
-        <a href="{{ route('students.getadmissioninfo', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-primary" title="ভর্তি রেজিস্টার তৈরি করুন" target="_blank"><i class="fa fa-print"></i> ভর্তি রেজিস্টার</a>
-        <a href="{{ route('students.getinfoall', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-info" title="শিক্ষার্থী তথ্য তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী তথ্য</a>
-        <a href="{{ route('students.getseatplanpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-dark" title="সিটপ্ল্যান তৈরি করুন" target="_blank"><i class="fa fa-print"></i> সিটপ্ল্যান</a>
-        <a href="{{ route('students.getadmitcardpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-violet" title="এডমিট কার্ড তৈরি করুন" target="_blank"><i class="fa fa-print"></i> এডমিট কার্ড</a>
-        <a href="{{ route('students.getstudentsalbumpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-brown" title="শিক্ষার্থী অ্যালবাম তৈরি করুন" target="_blank"><i class="fa fa-print"></i> শিক্ষার্থী অ্যালবাম</a>
-        <a href="{{ route('students.getattendancesheetpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-warning" title="উপস্থিতি তালিকা (হাজিরা খাতা) তৈরি করুন" target="_blank"><i class="fa fa-print"></i> হাজিরা খাতা</a>
-        <a href="{{ route('students.gettutionfeelistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-grey" title="বেতন আদায় রেজিস্টার তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বেতন আদায় রেজিস্টার</a>
-        <a href="{{ route('students.getbookdistrolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-primary" title="বই বিতরণ তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> বই বিতরণ তালিকা</a>
-        <a href="{{ route('students.getinfolistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-sm btn-info" title="শিক্ষার্থী তথ্য সংগ্রহ তালিকা/ টাকা আদায়ের তালিকা তৈরি করুন" target="_blank"><i class="fa fa-print"></i> তথ্য সংগ্রহ তালিকা</a>
-      </div>
-    </div>
-  </div>
+	</div>
 
 	<div class="table-responsive" style="margin-top: 5px;">
 		@if($students == true)

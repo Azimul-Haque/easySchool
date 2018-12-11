@@ -434,15 +434,71 @@ class StudentController extends Controller
                            ->where('session', 2019)
                            ->where('section', 1)
                            ->get();
-        $message = '';
-        foreach ($students as $student) {
-            $number = '88'.$student->contact;
-            $text = urlencode($student->remarks);
-            //$message = file_get_contents("//");
-            echo $message;
+
+        $smssuccesscount = 0;
+        $url = "http://66.45.237.70/api.php";
+        // array of curl handles
+        $multiCurl = array();
+        // data to be returned
+        $result = array();
+        // multi handle
+        $mh = curl_multi_init();
+        // sms data
+        $smsdata = [];
+        foreach ($students as $i => $student) {
+            if(strlen($student->contact) == 11) {
+                $mobile_number = '88'.$student->contact;
+            } elseif(strlen($student->contact) > 11) {
+                if (strpos($student->contact, '+') !== false) {
+                    $mobile_number = substr($student->contact,0,1);
+                }
+            }
+            $smsdata[$i] = array(
+            'username'=>"01837409842",
+            'password'=>"7AC2USVQ",
+            'number'=> $mobile_number,
+            'message'=>$student->remarks
+            );
+            $multiCurl[$i] = curl_init(); // Initialize cURL
+            curl_setopt($multiCurl[$i], CURLOPT_URL, $url);
+            curl_setopt($multiCurl[$i], CURLOPT_HEADER, 0);
+            curl_setopt($multiCurl[$i], CURLOPT_POSTFIELDS, http_build_query($smsdata[$i]));
+            curl_setopt($multiCurl[$i], CURLOPT_RETURNTRANSFER, 1);
+            curl_multi_add_handle($mh, $multiCurl[$i]);
+
+            // $ch = curl_init(); // Initialize cURL
+            // curl_setopt($ch, CURLOPT_URL,$url);
+            // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            // $smsresult = curl_exec($ch);
+            // $p = explode("|",$smsresult);
+            // $sendstatus = $p[0];
+            // if($sendstatus == 1101) {
+            //     $smssuccesscount++;
+            // }
         }
+        $index=null;
+        do {
+          curl_multi_exec($mh,$index);
+        } while($index > 0);
+        // get content and remove handles
+        foreach($multiCurl as $k => $ch) {
+          $result[$k] = curl_multi_getcontent($ch);
+          curl_multi_remove_handle($mh, $ch);
+          $p = explode("|",$result[$k]);
+          $sendstatus = $p[0];
+          if($sendstatus == 1101) {
+              $smssuccesscount++;
+          }
+        }
+        // close
+        curl_multi_close($mh);
+
+        return redirect()->route('dashboard')
+                     ->with('success', bangla($smssuccesscount).' টি SMS সফলভাবে প্রেরণ করা হয়েছে!');
         
     }
+
 
     public function getStudentListPDF($session, $class, $section)
     {

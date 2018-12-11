@@ -79,3 +79,22 @@ function random_string($length){
 
       return $random_string;
 }
+
+function exam($exam_name){
+      if($exam_name == 'first_term') {
+            $exam = 'প্রথম সাময়িক';
+      } elseif ($exam_name == 'second_term') {
+            $exam = 'দ্বিতীয় সাময়িক';
+      } elseif ($exam_name == 'halfyearly') {
+            $exam = 'অর্ধবার্ষিক';
+      } elseif ($exam_name == 'final') {
+            $exam = 'বার্ষিক';
+      } elseif ($exam_name == 'first_term_preparation') {
+            $exam = 'প্রথম সাময়িক পূর্ব প্রস্তুতি';
+      } elseif ($exam_name == 'second_term_preparation') {
+            $exam = 'দ্বিতীয় সাময়িক পূর্ব প্রস্তুতি';
+      }  elseif ($exam_name == 'final_preparation') {
+            $exam = 'বার্ষিক পূর্ব প্রস্তুতি';
+      } 
+      return $exam;
+}

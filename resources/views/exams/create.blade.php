@@ -21,7 +21,7 @@
 @stop
 
 @section('content')
-  {!! Form::open(array('route' => 'exams.store','method'=>'POST', 'enctype' => 'multipart/form-data')) !!}
+  {!! Form::open(array('route' => 'exams.store','method'=>'POST')) !!}
   <div class="row">
       <div class="col-md-12">
           <div class="well">
@@ -37,7 +37,7 @@
                         <option value="final">বার্ষিক (Final)</option>
                         <option value="first_term_preparation">প্রথম সাময়িক পূর্ব প্রস্তুতি (First Term Preparation)</option>
                         <option value="second_term_preparation">দ্বিতীয় সাময়িক পূর্ব প্রস্তুতি (Second Term Preparation)</option>
-                        <option value="final_preparation">বার্ষিক সাময়িক পূর্ব প্রস্তুতি (Final Preparation)</option>
+                        <option value="final_preparation">বার্ষিক পূর্ব প্রস্তুতি (Final Preparation)</option>
                       </select>
                     </div>
                   </div>

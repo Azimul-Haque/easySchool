@@ -15,6 +15,7 @@ class CreateExamsubjectsTable extends Migration
         Schema::create('examsubjects', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('exam_id');
+            $table->integer('class');
             $table->integer('subject_id');
             $table->string('written');
             $table->string('written_pass_mark');

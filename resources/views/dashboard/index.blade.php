@@ -3,10 +3,15 @@
 @section('title', 'Easy School')
 
 @section('content_header')
-    <h1>Dashboard</h1>
+    @if(count(Auth::user()->roles) > 1)
+    <h1>ড্যাশবোর্ড</h1>
+    @else
+    <h1>শিক্ষকের প্রোফাইল</h1>
+    @endif
 @stop
 
 @section('content')
+    @permission('school-settings')
     <div class="container">
       <div class="row">
           <div class="col-md-8 col-md-offset-1" style="background-color:;" align="center">
@@ -88,12 +93,61 @@
           </div>
       </div>
     </div>
+    @endpermission
+
+    @if(count(Auth::user()->roles) == 1)
+      <div class="row">
+        <div class="col-md-9">
+          <h4>
+            নামঃ {{ Auth::user()->name }}<br/>
+          </h4>
+          <h4>
+            বিদ্যালয়ের নামঃ {{ Auth::user()->school->name }}
+          </h4>
+          <h4>
+            <p style="margin-bottom: 5px;">প্রাপ্ত বিষয়সমূহঃ</p>
+            @if(count(Auth::user()->subjectallocations) > 0)
+              @foreach(Auth::user()->subjectallocations as $allocatedsubject)
+              <span>
+                {!! Form::open(array('route' => 'exam.getsubmissionpage','method'=>'POST', 'style' => 'float: left; margin-right: 5px; margin-bottom: 5px;')) !!}
+                {!! Form::hidden('user_id', Auth::user()->id) !!}
+                {!! Form::hidden('school_id', Auth::user()->school_id) !!}
+                {!! Form::hidden('exam_id', Auth::user()->exam_id) !!}
+                {!! Form::hidden('subject_id', $allocatedsubject->subject_id) !!}
+                {!! Form::hidden('class', $allocatedsubject->class) !!}
+                {!! Form::hidden('section', $allocatedsubject->section) !!}
+                <button class="btn btn-primary btn-sm" title="{{ bangla_class($allocatedsubject->class) }} {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }} {{ $allocatedsubject->subject->name_bangla }}-এ নম্বর প্রদান করুন">
+                  {{ bangla_class($allocatedsubject->class) }}
+                  {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
+                  {{ $allocatedsubject->subject->name_bangla }}
+                </button>
+                {!! Form::close() !!}
+              </span>
+              @endforeach
+            @endif
+          </h4>
+
+          <br/><br/>
+        </div>
+        <div class="col-md-3">
+          <center>
+            <img src="{{ asset('images/dummy_student.jpg') }}" class="image150 shadow">
+          </center>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          
+        </div>
+      </div>
+    @endif
 @stop
 
 @section('js')
 <script type="text/javascript">
   $(function(){
    $('a[title]').tooltip();
+   $('button[title]').tooltip();
   });
 </script>
 @stop

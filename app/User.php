@@ -12,6 +12,14 @@ class User extends Authenticatable
     public function school() {
         return $this->belongsTo('App\School');
     }
+
+    public function exam() {
+        return $this->belongsTo('App\Exam');
+    }
+
+    public function subjectallocations() {
+        return $this->hasMany('App\Subjectallocation');
+    }
     /**
      * The attributes that are mass assignable.
      *

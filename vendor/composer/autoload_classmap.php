@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'AddExamToUsers' => $baseDir . '/database/migrations/2018_12_10_013255_add_exam_to_users.php',
     'AddSchoolToUsers' => $baseDir . '/database/migrations/2018_09_08_035613_add_school_to_users.php',
     'Anhskohbo\\NoCaptcha\\Facades\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/Facades/NoCaptcha.php',
     'Anhskohbo\\NoCaptcha\\NoCaptcha' => $vendorDir . '/anhskohbo/no-captcha/src/NoCaptcha.php',
@@ -49,6 +50,7 @@ return array(
     'App\\School' => $baseDir . '/app/School.php',
     'App\\Student' => $baseDir . '/app/Student.php',
     'App\\Subject' => $baseDir . '/app/Subject.php',
+    'App\\Subjectallocation' => $baseDir . '/app/Subjectallocation.php',
     'App\\Upazilla' => $baseDir . '/app/Upazilla.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Carbon\\Carbon' => $vendorDir . '/nesbot/carbon/src/Carbon/Carbon.php',
@@ -86,6 +88,7 @@ return array(
     'CreateSchoolsTable' => $baseDir . '/database/migrations/2018_09_08_005647_create_schools_table.php',
     'CreateSettingsTable' => $baseDir . '/database/migrations/2017_10_30_233231_create_settings_table.php',
     'CreateStudentsTable' => $baseDir . '/database/migrations/2017_10_23_235407_create_students_table.php',
+    'CreateSubjectallocationsTable' => $baseDir . '/database/migrations/2018_12_10_202412_create_subjectallocations_table.php',
     'CreateSubjectsTable' => $baseDir . '/database/migrations/2018_11_29_030906_create_subjects_table.php',
     'CreateUpazillasTable' => $baseDir . '/database/migrations/2018_11_12_182117_create_upazillas_table.php',
     'CreateUsersTable' => $baseDir . '/database/migrations/2014_10_12_000000_create_users_table.php',

@@ -15,18 +15,29 @@ use Illuminate\Support\Facades\DB;
 use App\Subject;
 use App\Exam;
 use App\Examsubject;
+use App\User;
+use App\Role;
+use App\Subjectallocation;
+use App\Student;
 
 class ExamController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    public function __construct(){
+        $this->middleware('role:headmaster', ['except' => ['getSubmissionPage']]);
+        //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
+    }
+
     public function index()
     {
         $subjects = Subject::all();
-        return view('exams.index')->withSubjects($subjects);
+        $exams = Exam::where('school_id', Auth::user()->school_id)
+                     ->orderBy('id', 'desc')
+                     ->get();
+        $currentexam = Exam::where('currentexam', 1)->first();
+        return view('exams.index')
+                    ->withExams($exams)
+                    ->withSubjects($subjects)
+                    ->withCurrentexam($currentexam);
     }
 
     /**
@@ -62,7 +73,7 @@ class ExamController extends Controller
                     ->first();
         if($exam != null) {
             Session::flash('warning', 'এই পরীক্ষাটি ইতোমধ্যে তৈরি করা আছে!');
-            return redirect()->route('exams.index');
+            return redirect()->route('exams.create');
         } else {
             $exam = new Exam;
         }
@@ -101,6 +112,7 @@ class ExamController extends Controller
                     //dd($request['subject_id_'.$class.'_'.$subject->id]);
                     $examsubject = new Examsubject;
                     $examsubject->exam_id = $exam->id;
+                    $examsubject->class = $class;
                     $examsubject->subject_id = $request['subject_id_'.$class.'_'.$subject->id];
 
                     // if the value is present and is not empty it will be inserted
@@ -139,17 +151,123 @@ class ExamController extends Controller
             }
         }
 
-
+        Session::flash('success', 'পরীক্ষাটি সংযুক্ত করা হয়েছে!');
+        return redirect()->route('exams.index');
 
         
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    public function makeCurrent(Request $request, $id)
+    {
+        $oldExam = Exam::where('currentexam', 1)->first();
+        if(($oldExam != null) && ($oldExam->count() > 0)) {
+            $oldExam->currentexam = 0;
+            $oldExam->save();
+        }
+        $exam = Exam::find($id);
+        $exam->currentexam = 1;
+        $exam->save();
+
+        // update all teachers current exam
+        $users = DB::table('users')->where('school_id', Auth::user()->school_id)->update(array('exam_id' => $id));
+
+        Session::flash('success', 'পরীক্ষাটিকে চলতি পরীক্ষা হিসাবে নির্ধারণ করা হয়েছে!');
+        return redirect()->route('exams.index');
+    }
+
+    public function getSubjectallocation()
+    {
+        $superadmins = User::whereHas('roles', function($query) {
+                            $query->where('name', '=', 'superadmin');
+                          })
+                        ->where('school_id', Auth::user()->school_id)
+                        ->get();
+        $teachers = User::whereHas('roles', function($query) {
+                            $query->where('name', '=', 'teacher');
+                          })
+                        ->where('school_id', Auth::user()->school_id)
+                        ->orderBy('id', 'asc')
+                        ->get();
+
+        foreach ($superadmins as $superadmin) {
+            $remove_id = $superadmin->id;
+            $teachers = $teachers->reject(function ($value, $key) use($remove_id) {
+                return $value->id == $remove_id;
+            });
+        }
+
+        return view('exams.subjectallocation')->withTeachers($teachers);
+    }
+
+    public function storeSubjectallocation( Request $request)
+    {
+        $this->validate($request, [
+            'user_id'    => 'required',
+            'school_id'  => 'required',
+            'exam_id'    => 'required',
+            'subjects'   => 'required'
+        ]);
+
+        $oldallocations = Subjectallocation::where('user_id', $request->user_id)
+                                           ->where('school_id', $request->school_id)
+                                           ->get();
+        if($oldallocations->count() > 0) {
+            foreach ($oldallocations as $oldallocation) {
+                DB::table('subjectallocations')
+                        ->where('user_id', $oldallocation->user_id)
+                        ->where('school_id', $oldallocation->school_id)
+                        ->delete();
+            }
+        }
+        foreach ($request->subjects as $subject) {
+            $allocation = new Subjectallocation;
+            $allocation->user_id = $request->user_id;
+            $allocation->school_id = $request->school_id;
+            $allocation->exam_id = $request->exam_id;
+
+            $subject_data = explode(':', $subject);
+
+            $allocation->subject_id = $subject_data[0];
+            $allocation->class = $subject_data[1];
+            if(count($subject_data) > 2) {
+                $allocation->section = $subject_data[2];
+            } else {
+                $allocation->section = 0;
+            }
+            $allocation->save();
+        }
+        Session::flash('success', 'বিষয় বণ্টন সফলভাবে সম্পন্ন হয়েছে!');
+        return redirect()->route('exam.getsubjectallocation');
+    }
+
+    public function getSubmissionPage(Request $request)
+    {
+        $this->validate($request, [
+            'user_id'      => 'required',
+            'school_id'    => 'required',
+            'exam_id'      => 'required',
+            'subject_id'   => 'required',
+            'class'        => 'required',
+            'section'      => 'required'
+        ]);
+
+
+        $students = Student::where('school_id', $request->school_id)
+                           ->where('class', $request->class)
+                           ->where('section', $request->section)
+                           ->where('session', Auth::user()->exam->exam_session)
+                           ->get();
+        $examsubject = Examsubject::where('exam_id', $request->exam_id)
+                                  ->where('subject_id', $request->subject_id)
+                                  ->where('subject_id', $request->subject_id)
+                                  ->where('class', $request->class)
+                                  ->first();
+        return view('exams.marksubmissionpage')
+                        ->withStudents($students)
+                        ->withExamsubject($examsubject)
+                        ->withSubjectdata($request);
+    }
+
     public function show($id)
     {
         //
