@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container">
+<div class="container-fluid">
     <div class="row">
       <div class="col-md-9">
         <div class="board">
@@ -18,21 +18,21 @@
             <ul class="nav nav-tabs shadow-without-bottom">
               <div class="liner"></div>
               <li class="active">
-                <a href="#home" data-toggle="tab" title="নীড়">
+                <a href="#home" data-toggle="tab" title="নীড় (Home)">
                  <span class="round-tabs one">
                         <i class="fa fa-home" aria-hidden="true"></i>
                  </span> 
                 </a>
               </li>
               <li>
-                <a href="#admission" data-toggle="tab" title="অ্যাডমিশন">
+                <a href="#admission" data-toggle="tab" title="ভর্তি প্রক্রিয়া (Admission)">
                  <span class="round-tabs two">
                      <i class="fa fa-file-text-o" aria-hidden="true"></i>
                  </span> 
                 </a>
               </li>
               <li>
-                <a href="#result" data-toggle="tab" title="ফলাফল">
+                <a href="#result" data-toggle="tab" title="ফলাফল (Result)">
                  <span class="round-tabs three">
                       <i class="fa fa-graduation-cap" aria-hidden="true"></i>
                  </span>
@@ -40,7 +40,7 @@
               </li>
 
               <li>
-                  <a href="#notice" data-toggle="tab" title="নোটিশ">
+                  <a href="#notice" data-toggle="tab" title="নোটিশ (Notice)">
                    <span class="round-tabs four">
                         <i class="fa fa-bullhorn" aria-hidden="true"></i>
                    </span> 
@@ -48,7 +48,7 @@
               </li>
 
               <li>
-                <a href="#others" data-toggle="tab" title="অন্যান্য">
+                <a href="#others" data-toggle="tab" title="অন্যান্য (Others)">
                  <span class="round-tabs five">
                       <i class="fa fa-pagelines" aria-hidden="true"></i>
                  </span>
@@ -74,15 +74,16 @@
                 </p>
                 
                 <p class="text-center">
-                    <a href="{{ route('admissions.apply', $school->id)  }}" class="btn btn-success btn-outline-rounded green"> আবেদন করুন <span style="margin-left:10px;" class="glyphicon glyphicon-send"></span></a>
+                    <a href="{{ route('admissions.apply', $school->id)  }}" class="btn btn-success btn-outline-rounded green"><i class="fa fa-paper-plane-o"></i> আবেদন করুন</a>
+                    <a href="{{ route('admissions.searchpayment')  }}" class="btn btn-primary btn-outline-rounded"><i class="fa fa-file-text-o"></i> আবেদন স্ট্যাটাস ও এডমিট কার্ড</a>
+                    <a href="#!" class="btn btn-info btn-outline-rounded"><i class="fa fa-graduation-cap"></i> ভর্তি পরীক্ষার ফলাফল</a>
                 </p>
                 @else
                 @endif
             </div>
             <div class="tab-pane fade" id="result">
                 <div class="row">
-                  <div class="col-md-6">admission result</div>
-                  <div class="col-md-6">regular result</div>
+                  <div class="col-md-12">ফলাফল প্রদর্শন</div>
                 </div>
             </div>
             <div class="tab-pane fade" id="notice">
@@ -107,6 +108,13 @@
         <div class="panel panel-success">
             <div class="panel-heading">স্কুলের তথ্য</div>
             <div class="panel-body">
+              <center>
+                @if($school->monogram != null & $school->monogram != '')
+                <img src="{{ asset('images/schools/monograms/'.$school->monogram) }}" class="data-box-monogram">
+                @else
+                <img src="http://placehold.it/35x35" class="data-box-monogram">
+                @endif
+              </center>
               <table width="100%">
                 <tr>
                   <th width="40%">স্থাপিত</th>

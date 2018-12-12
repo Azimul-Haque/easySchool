@@ -15,7 +15,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1" style="min-height: 400px;">
             <div class="panel panel-default">
                 <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | পেমেন্ট ও এডমিট কার্ড</u></h3></center></div>
                 <div class="panel-body">

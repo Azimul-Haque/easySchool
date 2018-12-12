@@ -21,7 +21,7 @@
 </head>
 <body id="app-layout">
     <nav class="navbar navbar-default navbar-fixed-top">
-        <div class="container">
+        <div class="container-fluid">
             <div class="navbar-header">
 
                 <!-- Collapsed Hamburger -->
@@ -33,7 +33,7 @@
                 </button>
 
                 <!-- Branding Image -->
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/school/'.$school->token) }}">
                     @if($school->monogram != null & $school->monogram != '')
                     <img src="{{ asset('images/schools/monograms/'.$school->monogram) }}" class="img-circle school-thumnail">
                     @else
@@ -45,22 +45,23 @@
 
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
-                @if (Auth::check())
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/dashboard') }}">Dashboard</a></li>
+                    <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a></li>
                 </ul>
-                @endif
                 
 
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
                     <!-- Authentication Links -->
+                    @if (Auth::check())
+                        <li><a href="{{ url('/dashboard') }}"><i class="fa fa-tachometer"></i> ড্যাশবোর্ড</a></li>
+                    @endif
                     @if (Auth::guest())
-                        <li><a href="{{ url('/login') }}">Login</a></li>
+                        <li><a href="{{ url('/login') }}"><i class="fa fa-sign-in"></i> Login</a></li>
                     @else
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                <i class="fa fa-user"></i> {{ Auth::user()->name }} <span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu" role="menu">
@@ -74,6 +75,39 @@
     </nav>
 
     @yield('content')
+    
+    <footer class="container-fluid footer">
+      <div class="row">
+        <div class="col-md-4 wow fadeInUp" data-wow-duration="300ms">
+            <a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a><br/>
+            <a href="{{ url('/#pricingsection') }}"><i class="fa fa-diamond"></i> খরচ</a><br/>
+            <a href="{{ url('/#contactsection') }}"><i class="fa fa-envelope-o"></i> যোগাযোগ</a><br/>
+            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a><br/>
+        </div>
+        <div class="col-md-4 wow fadeInUp" data-wow-duration="600ms">
+            <h5>আপনার ইমেইল অথবা ফোন নম্বরটি দিন</h5>
+            <div class="form-inline">
+                <input type="" name="" class="form-control">
+                <button class="btn btn-success">সাবস্ক্রাইব</button>
+            </div><br/>
+        </div>
+        <div class="col-md-4">
+            {{-- social icons --}}
+            <p class="wow fadeInUp" data-wow-duration="900ms">
+                <a href="https://www.facebook.com/easyschool.xyz" class="fa fa-social fa-facebook facebook-footer"></a>
+                <a href="#!" class="fa fa-social fa-twitter twitter-footer"></a>
+                <a href="#!" class="fa fa-social fa-google google-footer"></a>
+                <a href="#!" class="fa fa-social fa-linkedin linkedin-footer"></a>
+                <a href="#!" class="fa fa-social fa-youtube youtube-footer"></a>
+                <a href="#!" class="fa fa-social fa-instagram instagram-footer"></a>
+            </p>
+            <br/><br/>
+            <p class="wow fadeInUp" data-wow-duration="1200ms">
+                &copy; @php echo date('Y'); @endphp <b>Easy</b>School.XYZ, All Rights Reserved.
+            </p>
+        </div>
+      </div>
+    </footer>
 
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>

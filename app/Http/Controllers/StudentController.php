@@ -479,7 +479,7 @@ class StudentController extends Controller
         }
         $index=null;
         do {
-          curl_multi_exec($mh,$index);
+          curl_multi_exec($mh, $index);
         } while($index > 0);
         // get content and remove handles
         foreach($multiCurl as $k => $ch) {
