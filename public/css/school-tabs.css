@@ -167,7 +167,7 @@ li.active span.round-tabs.five{
 .tab-pane{
    position: relative;
    padding-top: 10px;
-   height: 300px;
+   min-height: 300px;
 }
 .tab-content .head{
     font-family: 'Roboto Condensed', sans-serif;

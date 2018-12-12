@@ -11,7 +11,7 @@
 @section('content')
 <div class="container-fluid">
     <div class="row">
-      <div class="col-md-9">
+      <div class="col-md-9 wow fadeInUp" data-wow-duration="300ms">
         <div class="board">
           <!-- <h2>Welcome to IGHALO!<sup>™</sup></h2>-->
           <div class="board-inner">
@@ -76,6 +76,7 @@
                 <p class="text-center">
                     <a href="{{ route('admissions.apply', $school->id)  }}" class="btn btn-success btn-outline-rounded green"><i class="fa fa-paper-plane-o"></i> আবেদন করুন</a>
                     <a href="{{ route('admissions.searchpayment')  }}" class="btn btn-primary btn-outline-rounded"><i class="fa fa-file-text-o"></i> আবেদন স্ট্যাটাস ও এডমিট কার্ড</a>
+                    <a href="{{ route('admissions.retrieveid')  }}" class="btn btn-warning btn-outline-rounded"><i class="fa fa-lock"></i> আবেদন আইডি হারিয়ে গেলে</a>
                     <a href="#!" class="btn btn-info btn-outline-rounded"><i class="fa fa-graduation-cap"></i> ভর্তি পরীক্ষার ফলাফল</a>
                 </p>
                 @else
@@ -104,7 +105,7 @@
         </div>
       </div>
 
-      <div class="col-md-3">
+      <div class="col-md-3 wow fadeInUp" data-wow-duration="600ms">
         <div class="panel panel-success">
             <div class="panel-heading">স্কুলের তথ্য</div>
             <div class="panel-body">

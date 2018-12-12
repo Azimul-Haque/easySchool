@@ -92,7 +92,7 @@
             <a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a><br/>
             <a href="{{ url('/#pricingsection') }}"><i class="fa fa-diamond"></i> খরচ</a><br/>
             <a href="{{ url('/#contactsection') }}"><i class="fa fa-envelope-o"></i> যোগাযোগ</a><br/>
-            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a><br/>
+            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a>
         </div>
         <div class="col-md-4 wow fadeInUp" data-wow-duration="600ms">
             <h5>আপনার ইমেইল অথবা ফোন নম্বরটি দিন</h5>
@@ -100,6 +100,7 @@
                 <input type="" name="" class="form-control">
                 <button class="btn btn-success">সাবস্ক্রাইব</button>
             </div>
+            <br/>
         </div>
         <div class="col-md-4">
             {{-- social icons --}}

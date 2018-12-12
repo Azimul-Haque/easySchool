@@ -5,7 +5,7 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-10 col-md-offset-1 full-width-col">
+        <div class="col-md-10 col-md-offset-1 full-width-col wow fadeIn">
             <div class="panel panel-default">
                 <div class="panel-heading"><center><h3><u>ভর্তির আবেদন | আবেদন সফলভাবে করা হয়েছে</u></h3></center></div>
                 <div class="panel-body">

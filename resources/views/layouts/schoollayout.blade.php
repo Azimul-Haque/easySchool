@@ -16,6 +16,7 @@
     {{-- <link href="{{ elixir('css/app.css') }}" rel="stylesheet"> --}}
     {!!Html::style('css/select2.min.css')!!}
     <link rel="stylesheet" type="text/css" href="{{ asset('css/public.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/animate.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/adminlte/dist/css/AdminLTE.min.css') }}">
     @yield('css')
 </head>
@@ -82,14 +83,15 @@
             <a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a><br/>
             <a href="{{ url('/#pricingsection') }}"><i class="fa fa-diamond"></i> খরচ</a><br/>
             <a href="{{ url('/#contactsection') }}"><i class="fa fa-envelope-o"></i> যোগাযোগ</a><br/>
-            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a><br/>
+            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a>
         </div>
         <div class="col-md-4 wow fadeInUp" data-wow-duration="600ms">
             <h5>আপনার ইমেইল অথবা ফোন নম্বরটি দিন</h5>
             <div class="form-inline">
                 <input type="" name="" class="form-control">
                 <button class="btn btn-success">সাবস্ক্রাইব</button>
-            </div><br/>
+            </div>
+            <br/>
         </div>
         <div class="col-md-4">
             {{-- social icons --}}
@@ -112,7 +114,10 @@
     <!-- JavaScripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.3/jquery.min.js" integrity="sha384-I6F5OKECLVtK/BL+8iSLDEHowSAfUo76ZL9+kGAgTRdiByINKJaqTPH/QVNS1VDb" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
-    {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
+    <script src="{{ asset('js/wow.min.js') }}"></script>
+    <script>
+      new WOW().init();
+    </script>
     @yield('js')
     @include('partials._messages')
     <script type="text/javascript">

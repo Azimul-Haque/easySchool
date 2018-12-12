@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layouts.schoollayout')
 
 @section('title', 'Easy School | Admission Form')
 
@@ -34,7 +34,7 @@
 <div class="container">
     <div class="row">
         @if($school->isadmissionon == 1)
-        <div class="col-md-10 col-md-offset-1">
+        <div class="col-md-10 col-md-offset-1 wow fadeInUp">
             <center>
                 @if(isset($school))
                 <h2>{{ $school->name_bangla }}</h2>
