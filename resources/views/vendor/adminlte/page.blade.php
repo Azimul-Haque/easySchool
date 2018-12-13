@@ -71,7 +71,7 @@
                 <div class="navbar-custom-menu">
                     <ul class="nav navbar-nav">
                         <li class="tasks-menu">
-                            <a href="../../../" title="View Home Page">
+                            <a href="{{ url('/') }}" title="ওয়েবসাইট দেখুন" data-placement="bottom">
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </li>
