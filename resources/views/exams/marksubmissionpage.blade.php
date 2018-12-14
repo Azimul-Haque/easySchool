@@ -26,10 +26,15 @@
         <table class="table">
           <thead>
             <tr>
-              <th width="">রোল</th>
-              <th width="">নাম</th>
+              <th width="5%">রোল</th>
+              <th width="25%">নাম</th>
               <th width="">আইডি</th>
-              <th width="">প্রাপ্ত নম্বর</th>
+              <th width="">লিখিত ({{ $examsubject->written }})</th>
+              <th width="">নৈর্ব্যক্তিক ({{ $examsubject->mcq }})</th>
+              <th width="">ব্যবহারিক ({{ $examsubject->practical }})</th>
+              <th width="">CA/ SBA ({{ $examsubject->ca }})</th>
+              <th width="">মো
+                ট ({{ $examsubject->total }})</th>
             </tr>
           </thead>
           <tbody>
@@ -38,6 +43,10 @@
                 <td>{{ $student->roll }}</td>
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->student_id }}</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td></td>
               </tr>
             @endforeach

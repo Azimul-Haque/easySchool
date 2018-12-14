@@ -315,6 +315,13 @@
                     </li>
                     @endpermission
                   
+                  <li class="header">ড্যাশবোর্ড</li>
+                  <li class="{{ Request::is('dashboard') ? 'active' : '' }}">
+                    <a href="{{ route('dashboard') }}">
+                        <i class="fa fa-fw fa-tachometer"></i>
+                        <span>ড্যাশবোর্ড</span>
+                    </a>
+                  </li>
                   @role('headmaster')
                     @permission('school-settings')
                     <li class="header">প্লাটফর্ম সেটিংস</li>
