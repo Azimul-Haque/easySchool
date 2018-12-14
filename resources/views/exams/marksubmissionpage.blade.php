@@ -22,6 +22,17 @@
 @section('content')
   <div class="row">
     <div class="col-md-8">
+      <div class="panel panel-danger">
+        <div class="panel-heading">
+          <i class="fa fa-exclamation-triangle"></i> গুরুত্বপূর্ণ নির্দেশাবলী
+        </div>
+        <div class="panel-body">
+          <ul>
+            <li>সঠিক ঘরে নম্বর প্রদান করুন</li>
+            <li>নম্বর প্রদান হয়ে গেলে পাশের ঘরের নীল 'নম্বর দাখিল করুন' বাটনে ক্লিক করুন</li>
+          </ul>
+        </div>
+      </div>
       <div class="table-responsive">
         <table class="table">
           <thead>
@@ -33,8 +44,7 @@
               <th width="">নৈর্ব্যক্তিক ({{ $examsubject->mcq }})</th>
               <th width="">ব্যবহারিক ({{ $examsubject->practical }})</th>
               <th width="">CA/ SBA ({{ $examsubject->ca }})</th>
-              <th width="">মো
-                ট ({{ $examsubject->total }})</th>
+              <th width="">মোট ({{ $examsubject->total }})</th>
             </tr>
           </thead>
           <tbody>
@@ -43,10 +53,25 @@
                 <td>{{ $student->roll }}</td>
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->student_id }}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td>
+                  @if($examsubject->written > 0)
+                  <input type="text" name="" class="form-control">
+                  @endif
+                </td>
+                <td>
+                  @if($examsubject->mcq > 0)
+                  <input type="text" name="" class="form-control">
+                  @endif
+                <td>
+                  @if($examsubject->practical > 0)
+                  <input type="text" name="" class="form-control">
+                  @endif
+                </td>
+                <td>
+                  @if($examsubject->ca > 0)
+                  <input type="text" name="" class="form-control">
+                  @endif
+                </td>
                 <td></td>
               </tr>
             @endforeach
@@ -58,11 +83,35 @@
       <div class="box box-primary">
         <div class="box-header with-border text-blue">
           <i class="fa fa-fw fa-bar-chart"></i>
-          <h3 class="box-title">নম্বর প্রদান রিপোর্ট</h3>
+          <h3 class="box-title">নম্বর প্রদান কার্যক্রম</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          test
+          <button class="btn btn-primary" data-toggle="modal" data-target="#submitMarks" data-backdrop="static">নম্বর দাখিল করুন</button>
+          {{-- submit marks modal --}}
+          <!-- Modal -->
+          <div class="modal fade" id="submitMarks" role="dialog">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header modal-header-primary">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">চূড়ান্ত নম্বর দাখিল</h4>
+                </div>
+                {!! Form::open(array('route' => 'exam.storemakrs','method'=>'POST')) !!}
+                <div class="modal-body">
+                  আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত আবেদনকারীদের পেমেন্ট দাখিল করতে চান?
+                  {!! Form::hidden('application_ids', null, ['id' => 'application_ids', 'required' => '']) !!}
+                  {!! Form::hidden('class', null) !!}
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-primary">Save</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                {!! Form::close() !!}
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- submit marks modal --}}
         </div>
         <!-- /.box-body -->
       </div>

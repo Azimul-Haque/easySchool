@@ -268,6 +268,16 @@ class ExamController extends Controller
                         ->withSubjectdata($request);
     }
 
+    public function storeMakrs(Request $request)
+    {
+        $this->validate($request, [
+            'user_id'      => 'required',
+            'user_id'      => 'required'
+        ]);
+
+        
+    }
+
     public function show($id)
     {
         //

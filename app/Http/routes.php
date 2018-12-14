@@ -77,6 +77,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/subject/allocation',['as'=>'exam.getsubjectallocation','uses'=>'ExamController@getSubjectallocation']);
 	Route::post('exam/subject/allocation',['as'=>'exam.postsubjectallocation','uses'=>'ExamController@storeSubjectallocation']);
 	Route::post('exam/mark/submission/page',['as'=>'exam.getsubmissionpage','uses'=>'ExamController@getSubmissionPage']);
+	Route::post('exam/marks/submit',['as'=>'exam.storemakrs','uses'=>'ExamController@storeMakrs']);
 
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
