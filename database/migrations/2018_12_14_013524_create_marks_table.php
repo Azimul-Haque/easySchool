@@ -15,17 +15,20 @@ class CreateMarksTable extends Migration
         Schema::create('marks', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id');
+            $table->integer('exam_id');
+            $table->integer('subject_id');
             $table->integer('student_id');
             $table->integer('class');
             $table->integer('section');
             $table->integer('roll');
-            $table->integer('exam_id');
-            $table->integer('subject_id');
             $table->string('written');
             $table->string('mcq');
             $table->string('practical');
             $table->string('ca');
+            $table->string('total_percentage');
             $table->string('total');
+            $table->string('grade_point');
+            $table->string('gpa');
             $table->timestamps();
         });
     }

@@ -23,6 +23,10 @@
     <link rel="icon" sizes="192x192" href="{{ asset('images/icon.png') }}">
     <meta name="google-site-verification" content="nhnhLU8mlJ-zxpw7sA0qVmtpwr_SM35a9xLIspLsJiw" />
     <title>@yield('title')</title>
+    
+    {{-- meta tags --}}
+    @include('partials._meta')
+    {{-- meta tags --}}
 
     <!-- Fonts -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css" integrity="sha384-XdYbMnZ/QjLh6iI4ogqCTaIjrFk87ip+ekIjefZch0Y+PvJ8CDYtEs1ipDmPorQ+" crossorigin="anonymous">

@@ -138,7 +138,7 @@
                   @if(count(Auth::user()->subjectallocations) > 0)
                     @foreach(Auth::user()->subjectallocations as $allocatedsubject)
                     <span>
-                      {!! Form::open(array('route' => 'exam.getsubmissionpage','method'=>'POST', 'style' => 'float: left; margin-right: 5px; margin-bottom: 5px;')) !!}
+                      {!! Form::open(array('route' => 'exam.getsubmissionpage','method'=>'GET', 'style' => 'float: left; margin-right: 5px; margin-bottom: 5px;')) !!}
                       {!! Form::hidden('user_id', Auth::user()->id) !!}
                       {!! Form::hidden('school_id', Auth::user()->school_id) !!}
                       {!! Form::hidden('exam_id', Auth::user()->exam_id) !!}

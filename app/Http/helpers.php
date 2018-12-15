@@ -98,3 +98,45 @@ function exam($exam_name){
       } 
       return $exam;
 }
+
+function grade_point($marks) {   
+      if($marks >= 80 && $marks<=100){
+            $gradepoint = '5.00'; 
+       }else if($marks >= 70 && $marks<=80){
+            $gradepoint = '4.00';  
+       }else if($marks >= 60 && $marks<=70){
+            $gradepoint = '3.50';  
+       }else if($marks >= 50 && $marks<=60){
+            $gradepoint = '3.00';  
+       }else if($marks >= 40 && $marks<=50){
+            $gradepoint = '2.00';  
+       }else if($marks >= 33 && $marks<=40){
+            $gradepoint = '1.00';  
+       }else if($marks >= 0 && $marks<33){
+            $gradepoint = '0.00';  
+       }else {
+            $gradepoint = 'N/A';  
+       }
+      return $gradepoint;
+}
+
+function gpa($marks) {  
+      if($marks >= 80 && $marks<=100){
+            $gradepointaverage = 'A+'; 
+       }else if($marks >= 70 && $marks<80){
+            $gradepointaverage = 'A';  
+       }else if($marks >= 60 && $marks<70){
+            $gradepointaverage = 'A-';  
+       }else if($marks >= 50 && $marks<60){
+            $gradepointaverage = 'B';  
+       }else if($marks >= 40 && $marks<50){
+            $gradepointaverage = 'C';  
+       }else if($marks >= 33 && $marks<40){
+            $gradepointaverage = 'D';  
+       }else if($marks >= 0 && $marks<33){
+            $gradepointaverage = 'F';  
+       }else {
+            $gradepointaverage = 'N/A';  
+       }
+      return $gradepointaverage;
+}

@@ -363,7 +363,9 @@ ul.errorlist > li {
     border: 1px solid #ACACAC !important;
 }
 
-
+.margin-top-10 {
+    margin-top: 10px;
+}
 /*
 You can add your own CSS here.
 

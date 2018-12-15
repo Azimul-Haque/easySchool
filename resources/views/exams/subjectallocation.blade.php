@@ -25,6 +25,7 @@
     <div class="col-md-6">
       <h4>
         চলতি পরীক্ষার নামঃ <b>{{ exam(Auth::user()->exam->name) }}-{{ bangla(Auth::user()->exam->exam_session) }}</b>
+        }
       </h4>
     </div>
     <div class="col-md-6"></div>
