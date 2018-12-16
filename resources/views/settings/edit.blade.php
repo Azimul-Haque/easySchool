@@ -195,7 +195,7 @@
                           <div class="input-group">
                               <span class="input-group-btn">
                                   <span class="btn btn-default btn-file">
-                                      ব্রাউজ করুন <input type="file" id="monogram" name="monogram">
+                                      ছবি সংযুক্ত করুন <input type="file" id="monogram" name="monogram">
                                   </span>
                               </span>
                               <input type="text" class="form-control" readonly>

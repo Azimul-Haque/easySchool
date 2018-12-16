@@ -165,7 +165,9 @@
       <div class="col-md-6 wow fadeInUp" data-wow-duration="900ms">
         <h3><i class="fa fa-envelope-o"></i> যোগাযোগ</h3>
         <p style="font-size: 20px;"><i class="fa fa-map-marker"></i> বাংলাদেশ</p>
-        <p style="font-size: 20px;"><i class="fa fa-phone"></i> <a href="tel:017********">017********</a></p>
+        <p style="font-size: 20px;"><i class="fa fa-phone"></i> 
+          <a href="tel:+8801717480909">+8801717480909</a>, <a href="tel:+8801521550989">+8801521550989</a>
+        </p>
         <p style="font-size: 20px;"><i class="fa fa-envelope"></i> <a href="mailto:info@easyschool.xyz">info@easyschool.xyz</a></p>
       </div>
     </div>

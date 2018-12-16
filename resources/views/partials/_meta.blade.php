@@ -12,18 +12,14 @@
 <meta name="author" content="A. H. M. Azimul Haque, orbachinujbuk@gmail.com">
 <meta name="designer" content="A. H. M. Azimul Haque">
 <meta name="reply-to" content="orbachinujbuk@gmail.com">
-<meta name="owner" content="A. H. M. Azimul Haque &amp; Ahasan Arefin">
-<meta name="url" content="http://www.websiteaddrress.com">
+<meta name="owner" content="A. H. M. Azimul Haque & Ahasan Arefin">
 <meta name="identifier-URL" content="http://easyschool.xyz/">
-<meta name="directory" content="submission">
+{{-- <meta name="directory" content="submission"> --}}
 <meta name="category" content="Education">
 <meta name="coverage" content="Worldwide">
 <meta name="distribution" content="Global">
 <meta name="rating" content="General">
 <meta name="revisit-after" content="7 days">
-
-
-
 
 
 
@@ -38,50 +34,50 @@
 <meta name="fb:page_id" content="1161070747365031" />
 
 <meta name="og:email" content="orbachinujbuk@gmail.com"/>
-<meta name="og:phone_number" content="+880"/>
+<meta name="og:phone_number" content="+8801717480909"/>
 
-<meta name="og:latitude" content="37.416343"/>
-<meta name="og:longitude" content="-122.153013"/>
-<meta name="og:street-address" content="1601 S California Ave"/>
-<meta name="og:locality" content="Palo Alto"/>
-<meta name="og:region" content="CA"/>
-<meta name="og:postal-code" content="94304"/>
-<meta name="og:country-name" content="USA"/>
+<meta name="og:latitude" content="23.762877"/>
+<meta name="og:longitude" content="90.357241"/>
+<meta name="og:street-address" content="95 Housing Sociecty, Mohammadpur, Dhaka-1207, Bangladesh"/>
+<meta name="og:locality" content="Dhaka"/>
+<meta name="og:region" content="Dhaka"/>
+<meta name="og:postal-code" content="1207"/>
+<meta name="og:country-name" content="Bangladesh"/>
 
-<meta property="og:type" content="game.achievement"/>
-<meta property="og:points" content="POINTS_FOR_ACHIEVEMENT"/>
+<meta property="og:type" content="school.management"/>
+{{-- <meta property="og:points" content="POINTS_FOR_ACHIEVEMENT"/> --}}
 
-<meta property="og:video" content="http://example.com/awesome.swf" />
+{{-- <meta property="og:video" content="http://example.com/awesome.swf" />
 <meta property="og:video:height" content="640" />
 <meta property="og:video:width" content="385" />
 <meta property="og:video:type" content="application/x-shockwave-flash" />
 <meta property="og:video" content="http://example.com/html5.mp4" />
 <meta property="og:video:type" content="video/mp4" />
 <meta property="og:video" content="http://example.com/fallback.vid" />
-<meta property="og:video:type" content="text/html" />
+<meta property="og:video:type" content="text/html" /> --}}
 
-<meta property="og:audio" content="http://example.com/amazing.mp3" />
+{{-- <meta property="og:audio" content="http://example.com/amazing.mp3" />
 <meta property="og:audio:title" content="Amazing Song" />
 <meta property="og:audio:artist" content="Amazing Band" />
 <meta property="og:audio:album" content="Amazing Album" />
-<meta property="og:audio:type" content="application/mp3" />
+<meta property="og:audio:type" content="application/mp3" /> --}}
 
 
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-status-bar-style" content="blue">
 <meta name="format-detection" content="telephone=no">
 <meta name= "viewport" content = "width = 320, initial-scale = 2.3, user-scalable = no">
 <meta name= "viewport" content = "width = device-width">
 <meta name = "viewport" content = "initial-scale = 1.0">
 <meta name = "viewport" content = "initial-scale = 2.3, user-scalable = no">
-<link rel="apple-touch-icon" href="touch-icon-iphone.png" />
-<link rel="apple-touch-icon" sizes="72x72" href="touch-icon-ipad.png" />
-<link rel="apple-touch-icon" sizes="114x114" href="touch-icon-iphone4.png" />
-<link rel="apple-touch-startup-image" href="/startup.png">
+<link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}" />
+<link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/icon.png') }}" />
+<link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/icon.png') }}" />
+<link rel="apple-touch-startup-image" href="{{ asset('images/cover.jpg') }}">
 
-<link rel="apple-touch-icon" type="image/png" href="/apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" href="{{ asset('images/icon.png') }}" />
 
-<link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/martini" />
+{{-- <link rel="alternate" type="application/rss+xml" title="RSS" href="http://feeds.feedburner.com/martini" />
 <link rel="shortcut icon" type="image/ico" href="/favicon.ico" />
 <link rel="fluid-icon" type="image/png" href="/fluid-icon.png" />
 <link rel="me" type="text/html" href="http://google.com/profiles/thenextweb"/>
@@ -103,6 +99,6 @@
 <link rel="canonical" href="http://smallbiztrends.com/2010/06/9-things-to-do-before-entering-social-media.html" />
 <link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://smallbiztrends.com/xmlrpc.php?rsd" />
 <link rel="pingback" href="http://smallbiztrends.com/xmlrpc.php" />
-<link media="only screen and (max-device-width: 480px)" href="http://wordpress.org/style/iphone.css" type="text/css" rel="stylesheet" />
+<link media="only screen and (max-device-width: 480px)" href="http://wordpress.org/style/iphone.css" type="text/css" rel="stylesheet" /> --}}
 
 

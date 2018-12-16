@@ -34,7 +34,7 @@
 					<th>ক্লাস</th>
 					<th>অ্যাাডমিশন</th>
 					<th>বকেয়া</th>
-					<th>Action</th>
+					<th>কার্যকলাপ</th>
 				</tr>
 			</thead>
 			<tbody>

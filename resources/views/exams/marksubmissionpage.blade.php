@@ -30,7 +30,8 @@
         <div class="panel-body">
           <ul>
             <li>সঠিক ঘরে নম্বর প্রদান করুন</li>
-            <li>নম্বর প্রদান হয়ে গেলে পাশের ঘরের নীল <big><b>'নম্বর দাখিল করুন'</b></big> বাটনে ক্লিক করুন</li>
+            <li>নম্বর প্রদান হয়ে গেলে পাশের ঘরের নীল রঙের <big><b>'নম্বর দাখিল করুন'</b></big> বাটনে ক্লিক করুন</li>
+            <li>নম্বর তালিকা প্রিন্ট করে নিরীক্ষা শেষ হলে এবং আপনি নিশ্চিত হলে কমলা রঙের <big><b>'চূড়ান্ত নম্বর দাখিল'</b></big> বাটনে ক্লিক করুন</li>
           </ul>
         </div>
       </div>
@@ -39,7 +40,7 @@
           <thead>
             <tr>
               <th width="5%">রোল</th>
-              <th width="25%">নাম</th>
+              <th width="20%">নাম</th>
               <th width="">আইডি</th>
               <th width="">লিখিত<br/>({{ $examsubject->written }})</th>
               <th width="">নৈর্ব্যক্তিক<br/>({{ $examsubject->mcq }})</th>
@@ -61,16 +62,16 @@
                 <td>{{ $student->name }}</td>
                 <td>{{ $student->student_id }}</td>
                 <td>
+                  @php
+                    $written = '';
+                    $mcq = '';
+                    $practical = '';
+                    $ca = '';
+                    $total = '';
+                    $grade_point = '';
+                    $gpa = '';
+                  @endphp
                   @if($examsubject->written > 0)
-                    @php
-                      $written = '';
-                      $mcq = '';
-                      $practical = '';
-                      $ca = '';
-                      $total = '';
-                      $grade_point = '';
-                      $gpa = '';
-                    @endphp
                     @if($marks->count() > 0)
                       @foreach($marks as $mark)
                         @if($student->student_id == $mark->student_id)
@@ -126,10 +127,11 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitMarks" data-backdrop="static">নম্বর দাখিল করুন</button>
-          
-          <button type="button" class="btn btn-success btn-block margin-top-10" data-toggle="modal" data-target="#submitMarks" data-backdrop="static">নম্বরপত্র প্রিন্ট করুন</button>
-          <button type="button" class="btn btn-warning btn-block margin-top-10" data-toggle="modal" data-target="#submitMarks" data-backdrop="static">নম্বর দাখিল করুন</button>
+          <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#submitMarks" data-backdrop="static" title="শিক্ষার্থীদের প্রাপ্ত নম্বর দাখিল করুন">নম্বর দাখিল করুন</button>
+          <br/>
+          <a href="{{ route('exam.pdfmarks', [Auth::user()->school_id, $subjectdata->exam_id, $subjectdata->subject_id, $subjectdata->class, $subjectdata->section]) }}" class="btn btn-success btn-block" target="_blank" title="দাখিলকৃত নম্বরের তালিকা প্রিন্ট করুন">নম্বর তালিকা প্রিন্ট করুন</a>
+          <br/>
+          <button type="button" class="btn btn-warning btn-block" data-toggle="modal" data-target="#confirmSubmitMarks" data-backdrop="static" title="চূড়ান্তভাবে প্রধানশিক্ষক বরাবর নম্বর দাখিল করুন">চূড়ান্ত নম্বর দাখিল</button>
 
           {{-- submit marks modal --}}
           <!-- Modal -->
@@ -138,7 +140,7 @@
               <div class="modal-content">
                 <div class="modal-header modal-header-primary">
                   <button type="button" class="close" data-dismiss="modal">&times;</button>
-                  <h4 class="modal-title">চূড়ান্ত নম্বর দাখিল</h4>
+                  <h4 class="modal-title">নম্বর দাখিল</h4>
                 </div>
                 
                 <div class="modal-body">
@@ -147,7 +149,7 @@
                   {!! Form::hidden('exam_id', $subjectdata->exam_id) !!}
                   {!! Form::hidden('subject_id', $subjectdata->subject_id) !!}
                   {!! Form::hidden('class', $subjectdata->class) !!}
-                  {!! Form::hidden('section', $subjectdata->class) !!}
+                  {!! Form::hidden('section', $subjectdata->section) !!}
                 </div>
                 <div class="modal-footer">
                   <button type="submit" class="btn btn-primary">দাখিল করুন</button>
@@ -158,6 +160,34 @@
             </div>
           </div>
           {{-- submit marks modal --}}
+
+          {{-- submit confirm modal --}}
+          <!-- Modal -->
+          <div class="modal fade" id="confirmSubmitMarks" role="dialog">
+            <div class="modal-dialog modal-md">
+              <div class="modal-content">
+                <div class="modal-header modal-header-warning">
+                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                  <h4 class="modal-title">চূড়ান্ত নম্বর দাখিল</h4>
+                </div>
+                
+                <div class="modal-body">
+                  আপনি কি নিশ্চিতভাবে নম্বর প্রদান করতে চান?
+                  {!! Form::hidden('school_id', Auth::user()->school_id) !!}
+                  {!! Form::hidden('exam_id', $subjectdata->exam_id) !!}
+                  {!! Form::hidden('subject_id', $subjectdata->subject_id) !!}
+                  {!! Form::hidden('class', $subjectdata->class) !!}
+                  {!! Form::hidden('section', $subjectdata->section) !!}
+                </div>
+                <div class="modal-footer">
+                  <button type="submit" class="btn btn-warning">দাখিল করুন</button>
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                
+                </div>
+              </div>
+            </div>
+          </div>
+          {{-- submit confirm modal --}}
         </div>
         <!-- /.box-body -->
       </div>

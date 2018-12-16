@@ -25,7 +25,6 @@
     <div class="col-md-6">
       <h4>
         চলতি পরীক্ষার নামঃ <b>{{ exam(Auth::user()->exam->name) }}-{{ bangla(Auth::user()->exam->exam_session) }}</b>
-        }
       </h4>
     </div>
     <div class="col-md-6"></div>
@@ -39,7 +38,7 @@
               <th width="20%">শিক্ষকের নাম</th>
               <th width="30%">বণ্টিত বিষয়</th>
               <th>বিষয় বণ্টন</th>
-              <th width="10%">Action</th>
+              <th width="10%">কার্যকলাপ</th>
             </tr>
           </thead>
           <tbody>
@@ -49,11 +48,11 @@
               <td>
                 @if(count($teacher->subjectallocations) > 0)
                   @foreach($teacher->subjectallocations as $allocatedsubject)
-                  <label class="badge badge-primary" style="font-size: 14px;">
+                  <a class="badge badge-primary" href="#!" style="font-size: 14px; padding: 3px; margin: 3px;">
                     {{ bangla_class($allocatedsubject->class) }}
                     {{ bangla_section($teacher->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
                     {{ $allocatedsubject->subject->name_bangla }}
-                  </label>
+                  </a>
                   @endforeach
                 @endif
               </td>

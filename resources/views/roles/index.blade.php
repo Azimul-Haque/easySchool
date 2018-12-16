@@ -25,7 +25,7 @@
 					<th>No</th>
 					<th>Name</th>
 					<th>Description</th>
-					<th width="280px">Action</th>
+					<th width="280px">কার্যকলাপ</th>
 				</tr>
 			</thead>
 			<tbody>

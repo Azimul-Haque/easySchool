@@ -138,19 +138,11 @@
                   @if(count(Auth::user()->subjectallocations) > 0)
                     @foreach(Auth::user()->subjectallocations as $allocatedsubject)
                     <span>
-                      {!! Form::open(array('route' => 'exam.getsubmissionpage','method'=>'GET', 'style' => 'float: left; margin-right: 5px; margin-bottom: 5px;')) !!}
-                      {!! Form::hidden('user_id', Auth::user()->id) !!}
-                      {!! Form::hidden('school_id', Auth::user()->school_id) !!}
-                      {!! Form::hidden('exam_id', Auth::user()->exam_id) !!}
-                      {!! Form::hidden('subject_id', $allocatedsubject->subject_id) !!}
-                      {!! Form::hidden('class', $allocatedsubject->class) !!}
-                      {!! Form::hidden('section', $allocatedsubject->section) !!}
-                      <button class="btn btn-primary btn-sm" title="{{ bangla_class($allocatedsubject->class) }} {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }} {{ $allocatedsubject->subject->name_bangla }}-এ নম্বর প্রদান করুন">
+                      <a class="btn btn-primary btn-sm" title="{{ bangla_class($allocatedsubject->class) }} {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }} {{ $allocatedsubject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $allocatedsubject->subject_id, $allocatedsubject->class, $allocatedsubject->section]) }}" style="float: left; margin-right: 5px; margin-bottom: 5px;">
                         {{ bangla_class($allocatedsubject->class) }}
                         {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
                         {{ $allocatedsubject->subject->name_bangla }}
-                      </button>
-                      {!! Form::close() !!}
+                      </a>
                     </span>
                     @endforeach
                   @endif

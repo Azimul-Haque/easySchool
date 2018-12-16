@@ -21,7 +21,7 @@
           <th>No</th>
           <th>নাম (বাংলায়)</th>
           <th>নাম (ইংরেজিতে)</th>
-          <th>Action</th>
+          <th>কার্যকলাপ</th>
         </tr>
       </thead>
       <tbody>

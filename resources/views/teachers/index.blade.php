@@ -23,11 +23,11 @@
     <table class="table">
       <thead>
         <tr>
-          <th>No</th>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Roles</th>
-          <th>Action</th>
+          <th>ক্র. নং</th>
+          <th>নাম</th>
+          <th>ইমেইল এড্রেস</th>
+          <th>ধরণ</th>
+          <th>কার্যকলাপ</th>
         </tr>
       </thead>
       <tbody>
@@ -54,6 +54,7 @@
             {{-- delete modal--}}
             <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $user->id }}" data-backdrop="static"
               @if($user->roles()->where('name', 'superadmin')->exists())  disabled="true"  @endif
+              @if($user->roles()->where('name', 'headmaster')->exists())  disabled="true"  @endif
               ><i class="fa fa-trash" aria-hidden="true"></i></button>
                 <!-- Trigger the modal with a button -->
                 <!-- Modal -->

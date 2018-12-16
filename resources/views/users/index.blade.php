@@ -28,7 +28,7 @@
 					<th>Name</th>
 					<th>Email</th>
 					<th>Roles</th>
-					<th width="280px">Action</th>
+					<th width="280px">কার্যকলাপ</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -154,7 +154,7 @@
 							<th>Email</th>
 							<th>Roles</th>
 							<th>School</th>
-							<th>Action</th>
+							<th>কার্যকলাপ</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -281,7 +281,7 @@
 							<th>Email</th>
 							<th>Roles</th>
 							<th>School</th>
-							<th>Action</th>
+							<th>কার্যকলাপ</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -420,7 +420,21 @@
     	    columnDefs: [
     	    		{ targets: [5], visible: true, searchable: false},
 			        { targets: '_all', visible: true, searchable: true }
-			    ]
+			    ],
+			     'language': {
+			        "lengthMenu": "প্রতি পৃষ্ঠায় _MENU_ টি রেকর্ড প্রদর্শন করুন",
+			        "zeroRecords": "কোন তথ্য পাওয়া যায়নি!",
+			        "info": "পৃষ্ঠা নম্বরঃ _PAGE_, মোট পৃষ্ঠাঃ _PAGES_ টি",
+			        "infoEmpty": "তথ্য পাওয়া যায়নি",
+			        "infoFiltered": "(মোট _MAX_ সংখ্যক রেকর্ড থেকে খুঁজে বের করা হয়েছে)",
+			        "search":         "খুঁজুনঃ",
+			        "paginate": {
+			            "first":      "প্রথম পাতা",
+			            "last":       "শেষ পাতা",
+			            "next":       "পরের পাতা",
+			            "previous":   "আগের পাতা"
+			        },
+			    }
     	  })
     	})
     	$(function () {
@@ -435,7 +449,21 @@
     	    columnDefs: [
     	    		{ targets: [5], visible: true, searchable: false},
 			        { targets: '_all', visible: true, searchable: true }
-			    ]
+			    ],
+			     'language': {
+			        "lengthMenu": "প্রতি পৃষ্ঠায় _MENU_ টি রেকর্ড প্রদর্শন করুন",
+			        "zeroRecords": "কোন তথ্য পাওয়া যায়নি!",
+			        "info": "পৃষ্ঠা নম্বরঃ _PAGE_, মোট পৃষ্ঠাঃ _PAGES_ টি",
+			        "infoEmpty": "তথ্য পাওয়া যায়নি",
+			        "infoFiltered": "(মোট _MAX_ সংখ্যক রেকর্ড থেকে খুঁজে বের করা হয়েছে)",
+			        "search":         "খুঁজুনঃ",
+			        "paginate": {
+			            "first":      "প্রথম পাতা",
+			            "last":       "শেষ পাতা",
+			            "next":       "পরের পাতা",
+			            "previous":   "আগের পাতা"
+			        },
+			    }
     	  })
     	})
 

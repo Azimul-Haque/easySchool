@@ -76,8 +76,11 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('exam/make/current/{id}',['as'=>'exam.makecurrent','uses'=>'ExamController@makeCurrent']);
 	Route::get('exam/subject/allocation',['as'=>'exam.getsubjectallocation','uses'=>'ExamController@getSubjectallocation']);
 	Route::post('exam/subject/allocation',['as'=>'exam.postsubjectallocation','uses'=>'ExamController@storeSubjectallocation']);
-	Route::get('exam/mark/submission/',['as'=>'exam.getsubmissionpage','uses'=>'ExamController@getSubmissionPage']);
+	Route::get('exam/mark/submission/{user_id}/{school_id}/{exam_id}/{subject_id}/{class}/{section}',['as'=>'exam.getsubmissionpage','uses'=>'ExamController@getSubmissionPage']);
 	Route::post('exam/marks/submit',['as'=>'exam.storemakrs','uses'=>'ExamController@storeMakrs']);
+	Route::get('exam/marks/pdf/{school_id}/{exam_id}/{subject_id}/{class}/{section}',['as'=>'exam.pdfmarks','uses'=>'ExamController@pdfMarksforTeacher']);
+
+	Route::get('exam/mark/submission/page/headmaster',['as'=>'exam.allclassmarksubmissionpage','uses'=>'ExamController@allClassMarkSubmissionPage']);
 
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);

@@ -75,20 +75,39 @@
                                 <i class="fa fa-eye" aria-hidden="true"></i>
                             </a>
                         </li>
+                        <li class="dropdown user user-menu">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true" title="শিক্ষার্থী খুঁজুন" data-placement="bottom">
+                            <span class="hidden-xs"><i class="fa fa-search fa-fw"></i></span>
+                            <span class="visible-xs-inline"><i class="fa fa-search fa-fw"></i></span>
+                          </a>
+                            <ul class="dropdown-menu" style="box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                              <!-- User image -->
+                              <li class="user-footer">
+                                {!! Form::open(array('route' => 'students.search','method'=>'GET', 'class' => '')) !!}
+                                <div class="input-group search_container">
+                                    {!! Form::text('student_id', null, array('class' => 'form-control', 'placeholder' => 'শিক্ষার্থীর আইডি লিখুন...', 'id' => 'student_id', 'required', 'style' => 'width: 100%;')) !!}
+                                    <span class="input-group-btn">
+                                        <button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+                                    </span>
+                                </div>
+                                {!! Form::close() !!}
+                              </li>
+                            </ul>
+                        </li>
                         {{-- Bill Payment Notification --}}
                         @if(Auth::check() && Auth::User()->school->due == 0)
                         <li class="dropdown tasks-menu">
                             @role('headmaster')
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                                <span class="label label-success">1</span>
+                                {{-- <span class="label label-success">1</span> --}}
                             </a>
                             <ul class="dropdown-menu">
                               <li class="header">বাৎসরিক বিল সংক্রান্ত বার্তা!</li>
                               <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                  <li>
+                                  {{-- <li>
                                     <a href="#">
                                       <div class="pull-left">
                                         
@@ -98,6 +117,11 @@
                                         <small><i class="fa fa-clock-o"></i> 5 mins</small>
                                       </h4>
                                       <p>Why not buy a new awesome theme?</p>
+                                    </a>
+                                  </li> --}}
+                                  <li>
+                                    <a href="#!">
+                                      <p>কোন বকেয়া নেই!</p>
                                     </a>
                                   </li>
                                 </ul>
@@ -110,14 +134,15 @@
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                 <i class="fa fa-envelope-o" aria-hidden="true"></i>
-                                <span class="label label-success">7</span>
+                                {{-- <span class="label label-success">১</span> --}}
                             </a>
                             <ul class="dropdown-menu">
-                              <li class="header">You have 4 messages</li>
+                              <li class="header">আপনার মেসেজ</li>
                               <li>
                                 <!-- inner menu: contains the actual data -->
                                 <ul class="menu">
-                                  <li><!-- start message -->
+                                  <!-- start message -->
+                                  {{-- <li>
                                     <a href="#">
                                       <div class="pull-left">
                                         <img src="{{ asset('images/img.jpg')}}" class="img-circle messenger-favicon" alt="User Image">
@@ -128,36 +153,34 @@
                                       </h4>
                                       <p>Why not buy a new awesome theme?</p>
                                     </a>
-                                  </li>
+                                  </li> --}}
                                   <!-- end message -->
                                   <li>
-                                    <a href="#">
-                                      <div class="pull-left">
-                                        <img src="{{ asset('images/img.jpg')}}" class="img-circle messenger-favicon" alt="User Image">
-                                      </div>
-                                      <h4>
-                                        AdminLTE Design Team
-                                        <small><i class="fa fa-clock-o"></i> 2 hours</small>
-                                      </h4>
-                                      <p>Why not buy a new awesome theme?</p>
+                                    <a href="#!">
+                                      <p>কোন মেসেজ নেই!</p>
                                     </a>
                                   </li>
                                 </ul>
                               </li>
-                              <li class="footer"><a href="#">See All Messages</a></li>
+                              <li class="footer"><a href="#">সকল মেসেজ দেখুন</a></li>
                             </ul>
                         </li>
                         <li class="dropdown tasks-menu">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                                <i class="fa fa-th" aria-hidden="true"></i>
-                                <span class="label label-warning">12</span>
+                                <i class="fa fa-bell-o" aria-hidden="true"></i>
+                                {{-- <span class="label label-warning">12</span> --}}
                             </a>
                                 <ul class="dropdown-menu">
-                                  <li class="header">You have 12 Modules</li>
+                                  <li class="header">আপনার নোটিফিকেশন</li>
                                   <li>
                                     <!-- inner menu: contains the actual data -->
                                     <ul class="menu">
                                       <li>
+                                        <a href="#">
+                                          <i class="fa fa-check text-aqua"></i> কোন নতুন নোটিফিকেশন নেই
+                                        </a>
+                                      </li>
+                                      {{-- <li>
                                         <a href="#">
                                           <i class="fa fa-users text-aqua"></i> 5 new members joined today
                                         </a>
@@ -182,26 +205,26 @@
                                         <a href="#">
                                           <i class="fa fa-user text-red"></i> You changed your username
                                         </a>
-                                      </li>
+                                      </li> --}}
                                     </ul>
                                   </li>
-                                  <li class="footer"><a href="{{ route('dashboard') }}">View all</a></li>
+                                  <li class="footer"><a href="#!">সব দেখুন</a></li>
                                 </ul>
                         </li>
                         <li class="dropdown user user-menu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
-                            <img src="{{ asset('images/img.jpg')}}" class="user-image" alt="User Image">
-                            {{ Auth::User()->name }}</a>
+                            <img src="{{ asset('images/demo_user.png')}}" class="user-image" alt="User Image">
+                            <span class="hidden-xs">{{ Auth::User()->name }}</a></span>
                             <ul class="dropdown-menu">
                               <!-- User image -->
                               <li class="user-header">
-                                <img src="{{ asset('images/img.jpg')}}" class="img-circle" alt="User Image">
+                                <img src="{{ asset('images/demo_user.png')}}" class="img-circle" alt="User Image">
                                 <p>
                                   {{ Auth::User()->name }}
-                                  <small>Member since Nov. 2012</small>
+                                  <small><b>Easy</b>School ব্যবহারকারীঃ {{ bangla(date('F d, Y', strtotime(Auth::user()->created_at))) }} হতে</small>
                                 </p>
                               </li>
-                              <!-- Menu Body -->
-                              <li class="user-body">
+
+                              {{-- <li class="user-body">
                                 <div class="row">
                                   <div class="col-xs-4 text-center">
                                     <a href="#">Followers</a>
@@ -213,8 +236,8 @@
                                     <a href="#">Friends</a>
                                   </div>
                                 </div>
-                                <!-- /.row -->
-                              </li>
+                              </li> --}}
+
                               <!-- Menu Footer-->
                               <li class="user-footer">
                                 <div class="pull-left">
@@ -384,6 +407,7 @@
                         </a>
                     </li>
                   @endrole
+                  @role('headmaster')
                     <li class="header">পরীক্ষা সংক্রান্ত</li>
                     <li class="{{ Request::is('exams') ? 'active menu-open' : '' }} {{ Request::is('exams/*') ? 'active menu-open' : '' }} {{ Request::is('exam/*') ? 'active menu-open' : '' }} treeview">
                         <a href="#">
@@ -394,13 +418,13 @@
                             </span>
                         </a>
                         <ul class="treeview-menu">
-                          @role('headmaster')
+                          
                           <li class="{{ Request::is('exams') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-list-ol"></i> পরীক্ষার তালিকা</a></li>
                           <li class="{{ Request::is('exam/subject/allocation') ? 'active' : '' }}"><a href="{{ route('exam.getsubjectallocation') }}"><i class="fa fa-cog"></i> শিক্ষকদের বিষয় বণ্টন</a></li>
-                          @endrole
-                          <li class="{{ Request::is('exam/subject/allocation') ? 'active' : '' }}"><a href="{{ route('exam.getsubjectallocation') }}"><i class="fa fa-cog"></i> নম্বর প্রদান</a></li>
+                          <li class="{{ Request::is('exam/mark/submission/page/headmaster') ? 'active' : '' }}"><a href="{{ route('exam.allclassmarksubmissionpage') }}"><i class="fa fa-check-square-o"></i> নম্বর প্রদান</a></li>
                         </ul>
                     </li>
+                  @endrole
                 </ul>
                 <!-- /.sidebar-menu -->
             </section>

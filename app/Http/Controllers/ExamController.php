@@ -21,10 +21,12 @@ use App\Subjectallocation;
 use App\Student;
 use App\Mark;
 
+use PDF;
+
 class ExamController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:headmaster', ['except' => ['getSubmissionPage', 'storeMakrs']]);
+        $this->middleware('role:headmaster', ['except' => ['getSubmissionPage', 'storeMakrs', 'pdfMarksforTeacher']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -245,41 +247,46 @@ class ExamController extends Controller
         return redirect()->route('exam.getsubjectallocation');
     }
 
-    public function getSubmissionPage(Request $request)
+    public function getSubmissionPage($user_id, $school_id, $exam_id, $subject_id, $class, $section)
     {
-        $this->validate($request, [
-            'user_id'      => 'required',
-            'school_id'    => 'required',
-            'exam_id'      => 'required',
-            'subject_id'   => 'required',
-            'class'        => 'required',
-            'section'      => 'required'
-        ]);
+        $request = new Request;
+        $request->user_id = $user_id;
+        $request->school_id = $school_id;
+        $request->exam_id = $exam_id;
+        $request->subject_id = $subject_id;
+        $request->class = $class;
+        $request->section = $section;
 
-
-        $students = Student::where('school_id', $request->school_id)
-                           ->where('class', $request->class)
-                           ->where('section', $request->section)
+        $students = Student::where('school_id', $school_id)
+                           ->where('class', $class)
+                           ->where('section', $section)
                            ->where('session', Auth::user()->exam->exam_session)
                            ->get();
-        $examsubject = Examsubject::where('exam_id', $request->exam_id)
-                                  ->where('subject_id', $request->subject_id)
-                                  ->where('class', $request->class)
+        $examsubject = Examsubject::where('exam_id', $exam_id)
+                                  ->where('subject_id', $subject_id)
+                                  ->where('class', $class)
                                   ->first();
-        $allocated = Subjectallocation::where('user_id', $request->user_id)
-                                      ->where('school_id', $request->school_id)
-                                      ->where('exam_id', $request->exam_id)
-                                      ->where('subject_id', $request->subject_id)
-                                      ->where('class', $request->class)
-                                      ->where('section', $request->section)
+        $allocated = Subjectallocation::where('user_id', $user_id)
+                                      ->where('school_id', $school_id)
+                                      ->where('exam_id', $exam_id)
+                                      ->where('subject_id', $subject_id)
+                                      ->where('class', $class)
+                                      ->where('section', $section)
                                       ->first();
-        $marks = Mark::where('school_id', $request->school_id)
-                     ->where('exam_id', $request->exam_id)
-                     ->where('subject_id', $request->subject_id)
-                     ->where('class', $request->class)
-                     ->where('section', $request->section)
+
+        $marks = Mark::where('school_id', $school_id)
+                     ->where('exam_id', $exam_id)
+                     ->where('subject_id', $subject_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
                      ->get();
-        if(($allocated != null) && ($request->user_id == Auth::user()->id)) {
+        if(($allocated != null) && ($user_id == Auth::user()->id) && ($examsubject->count() > 0)) {
+            return view('exams.marksubmissionpage')
+                            ->withStudents($students)
+                            ->withExamsubject($examsubject)
+                            ->withSubjectdata($request)
+                            ->withMarks($marks);
+        } elseif ((Auth::user()->hasRole('headmaster')) && ($school_id == Auth::user()->school_id) && ($examsubject->count() > 0)) {
             return view('exams.marksubmissionpage')
                             ->withStudents($students)
                             ->withExamsubject($examsubject)
@@ -356,6 +363,40 @@ class ExamController extends Controller
 
         Session::flash('success', 'মার্ক সফলভাবে দাখিল করা হয়েছে!');
         return back();
+    }
+
+    public function pdfMarksforTeacher($school_id, $exam_id, $subject_id, $class, $section)
+    {
+        $marks = Mark::where('school_id', $school_id)
+                     ->where('exam_id', $exam_id)
+                     ->where('subject_id', $subject_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->orderBy('roll', 'asc')
+                     ->get();
+        $attended = Mark::where('school_id', $school_id)
+                     ->where('exam_id', $exam_id)
+                     ->where('subject_id', $subject_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->where('total', '>', 0)
+                     ->count();
+        $passed = Mark::where('school_id', $school_id)
+                     ->where('exam_id', $exam_id)
+                     ->where('subject_id', $subject_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->where('gpa', '!=', 'F')
+                     ->count();
+
+        $pdf = PDF::loadView('exams.pdf.marksforteacher', ['marks' => $marks], ['data' => [$class, $section, $attended, $passed]]);
+        $fileName = 'Class_'.$class.'_'.$section.'_Mark_List' . '.pdf';
+        return $pdf->stream($fileName);
+    }
+
+    public function allClassMarkSubmissionPage()
+    {
+        return view('exams.allclassmarksubmissionpage');
     }
 
     public function show($id)

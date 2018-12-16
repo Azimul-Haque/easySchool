@@ -22,9 +22,22 @@ class TeacherController extends Controller
 
     public function index()
     {
+        $superadmins = User::whereHas('roles', function($query) {
+                            $query->where('name', '=', 'superadmin');
+                          })
+                        ->where('school_id', Auth::user()->school_id)
+                        ->get();
         $teachers = $users = User::where('school_id', Auth::user()->school_id)->whereHas('roles', function ($query) {
                 $query->where('name', '=', 'teacher');
             })->get();
+        
+        foreach ($superadmins as $superadmin) {
+            $remove_id = $superadmin->id;
+            $teachers = $teachers->reject(function ($value, $key) use($remove_id) {
+                return $value->id == $remove_id;
+            });
+        }
+
         $roles = Role::lists('display_name','id');
         $schools = School::lists('name','id');
         

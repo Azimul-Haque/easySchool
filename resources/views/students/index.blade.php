@@ -274,6 +274,20 @@
 	       // columnDefs: [
 	       //    { targets: [5], type: 'date'}
 	       // ]
+          'language': {
+             "lengthMenu": "প্রতি পৃষ্ঠায় _MENU_ টি রেকর্ড প্রদর্শন করুন",
+             "zeroRecords": "কোন তথ্য পাওয়া যায়নি!",
+             "info": "পৃষ্ঠা নম্বরঃ _PAGE_, মোট পৃষ্ঠাঃ _PAGES_ টি",
+             "infoEmpty": "তথ্য পাওয়া যায়নি",
+             "infoFiltered": "(মোট _MAX_ সংখ্যক রেকর্ড থেকে খুঁজে বের করা হয়েছে)",
+             "search":         "খুঁজুনঃ",
+             "paginate": {
+                 "first":      "প্রথম পাতা",
+                 "last":       "শেষ পাতা",
+                 "next":       "পরের পাতা",
+                 "previous":   "আগের পাতা"
+             },
+         }
   	  })
   	})
 	  $(document).ready(function() {
