@@ -730,7 +730,7 @@ class StudentController extends Controller
             return view('students.searchresult')->withStudent($student);
         } else {
             Session::flash('warning', 'পাওয়া যায়নি! আবার চেষ্টা করুন।');
-            return view('students.searchresult')->withStudent($student);
+            return redirect()->route('students.getsearch');
         }
         
     }

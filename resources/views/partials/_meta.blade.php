@@ -66,10 +66,6 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="blue">
 <meta name="format-detection" content="telephone=no">
-<meta name= "viewport" content = "width = 320, initial-scale = 2.3, user-scalable = no">
-<meta name= "viewport" content = "width = device-width">
-<meta name = "viewport" content = "initial-scale = 1.0">
-<meta name = "viewport" content = "initial-scale = 2.3, user-scalable = no">
 <link rel="apple-touch-icon" href="{{ asset('images/icon.png') }}" />
 <link rel="apple-touch-icon" sizes="72x72" href="{{ asset('images/icon.png') }}" />
 <link rel="apple-touch-icon" sizes="114x114" href="{{ asset('images/icon.png') }}" />
