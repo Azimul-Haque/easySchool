@@ -81,6 +81,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/marks/pdf/{school_id}/{exam_id}/{subject_id}/{class}/{section}',['as'=>'exam.pdfmarks','uses'=>'ExamController@pdfMarksforTeacher']);
 
 	Route::get('exam/mark/submission/page/headmaster',['as'=>'exam.allclassmarksubmissionpage','uses'=>'ExamController@allClassMarkSubmissionPage']);
+	Route::get('exam/result/generation/page',['as'=>'exam.getresultgenpage','uses'=>'ExamController@getResultGenPage']);
 
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);

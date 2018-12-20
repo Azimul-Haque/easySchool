@@ -422,6 +422,7 @@
                           <li class="{{ Request::is('exams') ? 'active' : '' }}"><a href="{{ route('exams.index') }}"><i class="fa fa-list-ol"></i> পরীক্ষার তালিকা</a></li>
                           <li class="{{ Request::is('exam/subject/allocation') ? 'active' : '' }}"><a href="{{ route('exam.getsubjectallocation') }}"><i class="fa fa-cog"></i> শিক্ষকদের বিষয় বণ্টন</a></li>
                           <li class="{{ Request::is('exam/mark/submission/page/headmaster') ? 'active' : '' }}"><a href="{{ route('exam.allclassmarksubmissionpage') }}"><i class="fa fa-check-square-o"></i> নম্বর প্রদান</a></li>
+                          <li class="{{ Request::is('exam/result/generation/page') ? 'active' : '' }}"><a href="{{ route('exam.getresultgenpage') }}"><i class="fa fa-graduation-cap"></i> ফলাফল তৈরি</a></li>
                         </ul>
                     </li>
                   @endrole

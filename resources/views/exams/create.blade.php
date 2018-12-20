@@ -85,15 +85,14 @@
                     </div>
                     <!-- /.box-header -->
                     <div class="box-body">
+                      <div class="form-group">
+                        <strong>{{ bangla_class($class) }} শ্রেণির মোট বিষয় সংখ্যা <a href="#!" title="যেমনঃ বাংলা ১ম ও ২য় মিলে ১টি বিষয় বুঝাবে, এ হিসেবে মোট বিষয় সংখ্যা"><i class="fa fa-question-circle"></i></a></strong>
+                        {!! Form::number('total_subjects_'.$class, null, array('placeholder' => 'শ্রেণির মোট বিষয় সংখ্যা','class' => 'form-control', 'id' => 'total_subjects_'.$class)) !!}
+                      </div>
                       <div id="subjectfieldscontainer{{ $class }}"></div>
                       <button type="button" class="btn btn-success btn-sm btn-block" id="addSubject{{ $class }}">
                         <i class="fa fa-plus"></i> বিষয় যোগ করুন
                       </button>
-                      <br/>
-                      <div class="form-group">
-                        <strong>{{ bangla_class($class) }} শ্রেণির মোট বিষয় সংখ্যা <a href="#!" title="যেমনঃ বাংলা ১ম ও ২য় মিলে ১টি বিষয় বুঝাবে, এ হিসেবে মোট বিষয় সংখ্যা"><i class="fa fa-question-circle"></a></i></strong>
-                        {!! Form::number('total_subjects_'.$class, null, array('placeholder' => 'শ্রেণির মোট বিষয় সংখ্যা','class' => 'form-control', 'id' => 'total_subjects_'.$class)) !!}
-                      </div>
                     </div>
                     <!-- /.box-body -->
                   </div>
@@ -143,7 +142,7 @@
     $("#addSubject{{ $class }}").click(function() {
         htlmFields += '<div id="subject_{{ $class }}_'+classcounter{{ $class }}+'" class="exam_subject_add">';
 
-        htlmFields += '  <button type="button" class="btn btn-danger btn-xs pull-right marginbottom10" onclick="removeSubject(subject_{{ $class }}_'+classcounter{{ $class }}+')"><i class="fa fa-trash"></i> মুছে দিন</button>';
+        htlmFields += '  <button type="button" class="btn btn-danger btn-xs pull-right marginbottom10" onclick="removeSubject(subject_{{ $class }}_'+classcounter{{ $class }}+', {{ $class }})"><i class="fa fa-trash"></i> মুছে দিন</button>';
         htlmFields += '  <div class="form-group">';
         htlmFields += '   <select id="subject_id_{{ $class }}_'+classcounter{{ $class }}+'" onchange="onchageSelect(this, {{ $class }}, '+classcounter{{ $class }}+')" class="form-control">';
         htlmFields += '      <option value="" selected="" disabled="">বিষয় নির্ধারণ করুন</option>';
@@ -195,14 +194,16 @@
 
         htlmFields += '</div>';
         $("#subjectfieldscontainer{{ $class }}").append(htlmFields);
+        $("#total_subjects_{{ $class }}").attr('required', true);
         htlmFields = '';
         classcounter{{ $class }}++;
     });
     @endforeach
 
-    function removeSubject(idofsubject) {
+    function removeSubject(idofsubject, classtoremove) {
       console.log(idofsubject);
       $(idofsubject).remove();
+      $("#total_subjects_"+classtoremove).removeAttr('required');
     }
 
     function onchageSelect(subject_id, subject_class, subject_counter) {

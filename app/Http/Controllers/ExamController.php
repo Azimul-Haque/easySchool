@@ -266,6 +266,7 @@ class ExamController extends Controller
                                   ->where('subject_id', $subject_id)
                                   ->where('class', $class)
                                   ->first();
+
         $allocated = Subjectallocation::where('user_id', $user_id)
                                       ->where('school_id', $school_id)
                                       ->where('exam_id', $exam_id)
@@ -280,18 +281,48 @@ class ExamController extends Controller
                      ->where('class', $class)
                      ->where('section', $section)
                      ->get();
+        // bangla 1st, 2nd and english 1st, 2nd | now go to storeMakrs method
+        $otherpaper_id = null;
+        if($subject_id == 1) {
+            $otherpaper_id = 2;
+        } elseif ($subject_id == 2) {
+            $otherpaper_id = 1;
+        }  elseif ($subject_id == 3) {
+            $otherpaper_id = 4;
+        }  elseif ($subject_id == 4) {
+            $otherpaper_id = 3;
+        }
+
+        $otherpaper_marks = null;
+        $othersubject = null;
+        if($otherpaper_id != null) {
+            $othersubject = Examsubject::where('exam_id', $exam_id)
+                                      ->where('subject_id', $otherpaper_id)
+                                      ->where('class', $class)
+                                      ->first();
+            $otherpaper_marks = Mark::where('school_id', $school_id)
+                                    ->where('exam_id', $exam_id)
+                                    ->where('subject_id', $otherpaper_id)
+                                    ->where('class', $class)
+                                    ->where('section', $section)
+                                    ->get();
+        }
         if(($allocated != null) && ($user_id == Auth::user()->id) && ($examsubject->count() > 0)) {
             return view('exams.marksubmissionpage')
                             ->withStudents($students)
                             ->withExamsubject($examsubject)
                             ->withSubjectdata($request)
-                            ->withMarks($marks);
-        } elseif ((Auth::user()->hasRole('headmaster')) && ($school_id == Auth::user()->school_id) && ($examsubject->count() > 0)) {
+                            ->withMarks($marks)
+                            ->withOthersubject($othersubject)
+                            ->withOtherpapermarks($otherpaper_marks);
+        } elseif ((Auth::user()->hasRole('headmaster')) && ($school_id == Auth::user()->school_id) && ($examsubject != null && $examsubject->count() > 0)) {
             return view('exams.marksubmissionpage')
                             ->withStudents($students)
                             ->withExamsubject($examsubject)
                             ->withSubjectdata($request)
-                            ->withMarks($marks);
+                            ->withMarks($marks)
+                            ->withOthersubject($othersubject)
+                            ->withOtherpapermarks($otherpaper_marks);
         } else {
             Session::flash('warning', 'আপনি ভুল পাতায় যাবার চেষ্টা করেছিলেন!');
             return redirect()->route('dashboard');
@@ -320,6 +351,18 @@ class ExamController extends Controller
                                   ->where('class', $request->class)
                                   ->first();
 
+        // bangla 1st, 2nd and english 1st, 2nd | now go to getSubmissionPage method
+        $otherpaper_id = null;
+        if($request->subject_id == 1) {
+            $otherpaper_id = 2;
+        } elseif ($request->subject_id == 2) {
+            $otherpaper_id = 1;
+        }  elseif ($request->subject_id == 3) {
+            $otherpaper_id = 4;
+        }  elseif ($request->subject_id == 4) {
+            $otherpaper_id = 3;
+        }
+
         foreach ($students as $student) {
             $student_marks = Mark::where('school_id', $request->school_id)
                                  ->where('exam_id', $request->exam_id)
@@ -329,17 +372,56 @@ class ExamController extends Controller
                                  ->where('section', $request->section)
                                  ->where('roll', $student->roll)
                                  ->first();
+
+            $otherpaper_marks = Mark::where('school_id', $request->school_id)
+                                 ->where('exam_id', $request->exam_id)
+                                 ->where('subject_id', $otherpaper_id)
+                                 ->where('student_id', $student->student_id)
+                                 ->where('class', $request->class)
+                                 ->where('section', $request->section)
+                                 ->where('roll', $student->roll)
+                                 ->first();
+
+            if($otherpaper_marks != null) {
+                $otherpaper_written = $otherpaper_marks->written;
+                $otherpaper_mcq = $otherpaper_marks->mcq;
+                $otherpaper_practical = $otherpaper_marks->practical;
+                $otherpaper_ca = $otherpaper_marks->ca;
+            } else {
+                $otherpaper_written = 0;
+                $otherpaper_mcq = 0;
+                $otherpaper_practical = 0;
+                $otherpaper_ca = 0;
+            }
+
             if($student_marks != null) {
                 $student_marks->roll = $request['roll'.$student->student_id];
                 $student_marks->written = $request['written'.$student->student_id] ?: 0;
                 $student_marks->mcq = $request['mcq'.$student->student_id] ?: 0;
                 $student_marks->practical = $request['practical'.$student->student_id] ?: 0;
                 $student_marks->ca = $request['ca'.$student->student_id] ?: 0;
-                $student_marks->total_percentage = ($student_marks->written+$student_marks->mcq+$student_marks->practical+$student_marks->ca)*(($examsubject->total_percentage ?: 100)/100);
-                $student_marks->total = $student_marks->total_percentage + $student_marks->ca;
-                $student_marks->grade_point = grade_point($student_marks->total);
-                $student_marks->gpa = gpa($student_marks->total);
+
+                if($otherpaper_id != null) {
+                    $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
+                    $student_marks->total = $student_marks->total_percentage + $student_marks->ca + $otherpaper_ca;
+                    $mark_avg = $student_marks->total/2;
+                    $student_marks->grade_point = grade_point($mark_avg);
+                    $student_marks->gpa = gpa($mark_avg);
+                } else {
+                    $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
+                    $student_marks->total = $student_marks->total_percentage + $student_marks->ca;
+                    $student_marks->grade_point = grade_point($student_marks->total);
+                    $student_marks->gpa = gpa($student_marks->total);
+                }
                 $student_marks->save();
+
+                if($otherpaper_marks != null) {
+                    $otherpaper_marks->total_percentage = $student_marks->total_percentage;
+                    $otherpaper_marks->total = $student_marks->total;
+                    $otherpaper_marks->grade_point = $student_marks->grade_point;
+                    $otherpaper_marks->gpa = $student_marks->gpa;
+                    $otherpaper_marks->save();
+                }
             } else {
                 $new_student_marks = new Mark;
                 $new_student_marks->school_id = $request->school_id;
@@ -353,11 +435,28 @@ class ExamController extends Controller
                 $new_student_marks->mcq = $request['mcq'.$student->student_id] ?: 0;
                 $new_student_marks->practical = $request['practical'.$student->student_id] ?: 0;
                 $new_student_marks->ca = $request['ca'.$student->student_id] ?: 0;
-                $new_student_marks->total_percentage = ($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical+$new_student_marks->ca)*(($examsubject->total_percentage ?: 100)/100);
-                $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca;
-                $new_student_marks->grade_point = grade_point($new_student_marks->total);
-                $new_student_marks->gpa = gpa($new_student_marks->total);
+
+                if($otherpaper_id != null) {
+                    $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
+                    $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
+                    $mark_avg = $new_student_marks->total/2;
+                    $new_student_marks->grade_point = grade_point($mark_avg);
+                    $new_student_marks->gpa = gpa($mark_avg);
+                } else {
+                    $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
+                    $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca;
+                    $new_student_marks->grade_point = grade_point($new_student_marks->total);
+                    $new_student_marks->gpa = gpa($new_student_marks->total);
+                }
                 $new_student_marks->save();
+
+                if($otherpaper_marks != null) {
+                    $otherpaper_marks->total_percentage = $new_student_marks->total_percentage;
+                    $otherpaper_marks->total = $new_student_marks->total;
+                    $otherpaper_marks->grade_point = $new_student_marks->grade_point;
+                    $otherpaper_marks->gpa = $new_student_marks->gpa;
+                    $otherpaper_marks->save();
+                }
             }
         }
 
@@ -387,6 +486,7 @@ class ExamController extends Controller
                      ->where('class', $class)
                      ->where('section', $section)
                      ->where('gpa', '!=', 'F')
+                     ->where('gpa', '!=', 'N/A')
                      ->count();
 
         $pdf = PDF::loadView('exams.pdf.marksforteacher', ['marks' => $marks], ['data' => [$class, $section, $attended, $passed]]);
@@ -396,7 +496,14 @@ class ExamController extends Controller
 
     public function allClassMarkSubmissionPage()
     {
+        //$exam = Exam::where('id', Auth::user()->exam_id)->first();
+
         return view('exams.allclassmarksubmissionpage');
+    }
+
+    public function getResultGenPage()
+    {
+        return view('exams.resultgeneration');
     }
 
     public function show($id)

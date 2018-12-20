@@ -112,7 +112,7 @@ function grade_point($marks) {
             $gradepoint = '2.00';  
        }else if($marks >= 33 && $marks<=40){
             $gradepoint = '1.00';  
-       }else if($marks >= 0 && $marks<33){
+       }else if($marks > 0 && $marks<33){
             $gradepoint = '0.00';  
        }else {
             $gradepoint = 'N/A';  
@@ -133,7 +133,7 @@ function gpa($marks) {
             $gradepointaverage = 'C';  
        }else if($marks >= 33 && $marks<40){
             $gradepointaverage = 'D';  
-       }else if($marks >= 0 && $marks<33){
+       }else if($marks > 0 && $marks<33){
             $gradepointaverage = 'F';  
        }else {
             $gradepointaverage = 'N/A';  

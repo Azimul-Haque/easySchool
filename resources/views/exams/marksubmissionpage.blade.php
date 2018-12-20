@@ -7,6 +7,15 @@
     .hiddenCheckbox, .hiddenFinalSaveBtn {
       display:none;
     }
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        /* display: none; <- Crashes Chrome on hover */
+        -webkit-appearance: none;
+        margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+    }
+    input[type=number]{
+        width: 40px;
+    } 
   </style>
 @stop
 
@@ -46,6 +55,12 @@
               <th width="">নৈর্ব্যক্তিক<br/>({{ $examsubject->mcq }})</th>
               <th width="">ব্যবহারিক<br/>({{ $examsubject->practical }})</th>
               <th width="">CA/ SBA<br/>({{ $examsubject->ca }})</th>
+              @if($othersubject != null)
+              <th width="">লিখিত <br/>({{ $othersubject->subject->name_bangla }})</th>
+              <th width="">নৈর্ব্যক্তিক <br/>({{ $othersubject->subject->name_bangla }})</th>
+              <th width="">ব্যবহারিক <br/>({{ $othersubject->subject->name_bangla }})</th>
+              <th width="">CA/ SBA<br/>({{ $othersubject->subject->name_bangla }})</th>
+              @endif
               <th width="">মোট<br/>({{ $examsubject->total }})</th>
               <th width="">গ্রেড পয়েন্ট</th>
               <th width="">জিপিএ</th>
@@ -71,22 +86,22 @@
                     $grade_point = '';
                     $gpa = '';
                   @endphp
+                  @if($marks->count() > 0)
+                    @foreach($marks as $mark)
+                      @if($student->student_id == $mark->student_id)
+                        @php
+                          $written = $mark->written;
+                          $mcq = $mark->mcq;
+                          $practical = $mark->practical;
+                          $ca = $mark->ca;
+                          $total = $mark->total;
+                          $grade_point = $mark->grade_point;
+                          $gpa = $mark->gpa;
+                        @endphp
+                      @endif
+                    @endforeach
+                  @endif
                   @if($examsubject->written > 0)
-                    @if($marks->count() > 0)
-                      @foreach($marks as $mark)
-                        @if($student->student_id == $mark->student_id)
-                          @php
-                            $written = $mark->written;
-                            $mcq = $mark->mcq;
-                            $practical = $mark->practical;
-                            $ca = $mark->ca;
-                            $total = $mark->total;
-                            $grade_point = $mark->grade_point;
-                            $gpa = $mark->gpa;
-                          @endphp
-                        @endif
-                      @endforeach
-                    @endif
                     <input type="number" name="written{{ $student->student_id }}" value="{{ $written }}" class="form-control" min="0" max="{{ $examsubject->written }}" step="any">
                   @endif
                 </td>
@@ -104,6 +119,48 @@
                   <input type="number" name="ca{{ $student->student_id }}" value="{{ $ca }}" class="form-control" min="0" max="{{ $examsubject->ca }}" step="any">
                   @endif
                 </td>
+                @if($othersubject != null)
+                  @php
+                    $otherwritten = '';
+                    $othermcq = '';
+                    $otherpractical = '';
+                    $otherca = '';
+                  @endphp
+                  @if($otherpapermarks->count() > 0)
+                    @foreach($otherpapermarks as $mark)
+                      @if($student->student_id == $mark->student_id)
+                        @php
+                          $otherwritten = $mark->written;
+                          $othermcq = $mark->mcq;
+                          $otherpractical = $mark->practical;
+                          $otherpractical = $mark->practical;
+                          $otherca = $mark->ca;
+                        @endphp
+                      @endif
+                    @endforeach
+                  @endif
+                <td>
+                  @if($othersubject->written > 0)
+                    {{ $otherwritten }}
+                  @endif
+                </td>
+                <td>
+                  @if($othersubject->mcq > 0)
+                    {{ $othermcq }}
+                  @endif
+                </td>
+                <td>
+                  @if($othersubject->practical > 0)
+                    {{ $otherpractical }}
+                  @endif
+                </td>
+                <td>
+                  @if($othersubject->ca > 0)
+                    {{ $otherca }}
+                  @endif
+                </td>
+                @endif
+
                 <td>
                   {{ $total }}
                 </td>
