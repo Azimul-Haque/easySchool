@@ -29,7 +29,7 @@ return [
     |
     */
 
-    'host' => env('MAIL_HOST', 'smtp.gmail.com'),
+    'host' => env('MAIL_HOST', 'smtp.sendgrid.net'),
 
     /*
     |--------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
     |
     */
 
-    'from' => ['address' => 'info@easyschool.xyz', 'name' => 'EasySchool'],
+    'from' => ['address' => 'support@easyschool.xyz', 'name' => 'EasySchool'],
 
     /*
     |--------------------------------------------------------------------------
