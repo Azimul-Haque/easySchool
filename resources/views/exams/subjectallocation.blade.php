@@ -48,11 +48,13 @@
               <td>
                 @if(count($teacher->subjectallocations) > 0)
                   @foreach($teacher->subjectallocations as $allocatedsubject)
-                  <a class="badge badge-primary" href="#!" style="font-size: 14px; padding: 3px; margin: 3px;">
-                    {{ bangla_class($allocatedsubject->class) }}
-                    {{ bangla_section($teacher->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
-                    {{ $allocatedsubject->subject->name_bangla }}
-                  </a>
+                    @if($teacher->exam_id == $allocatedsubject->exam_id)
+                      <a class="badge badge-primary" href="#!" style="font-size: 14px; padding: 3px; margin: 3px;">
+                        {{ bangla_class($allocatedsubject->class) }}
+                        {{ bangla_section($teacher->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
+                        {{ $allocatedsubject->subject->name_bangla }}
+                      </a>
+                    @endif
                   @endforeach
                 @endif
               </td>

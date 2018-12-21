@@ -7,7 +7,7 @@
     @yield('css')
     <style type="text/css">
       .slimScrollBar {
-        background: none repeat scroll 0 0 #6b58cd !important;
+        background: none repeat scroll 0 0 #EBEFF4 !important;
         border-radius: 0;
         display: none;
         height: 702.936px;

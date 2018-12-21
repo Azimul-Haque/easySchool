@@ -137,13 +137,15 @@
                   <p style="margin-bottom: 5px;">প্রাপ্ত বিষয়সমূহঃ</p>
                   @if(count(Auth::user()->subjectallocations) > 0)
                     @foreach(Auth::user()->subjectallocations as $allocatedsubject)
-                    <span>
-                      <a class="btn btn-primary btn-sm" title="{{ bangla_class($allocatedsubject->class) }} {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }} {{ $allocatedsubject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $allocatedsubject->subject_id, $allocatedsubject->class, $allocatedsubject->section]) }}" style="float: left; margin-right: 5px; margin-bottom: 5px;">
-                        {{ bangla_class($allocatedsubject->class) }}
-                        {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
-                        {{ $allocatedsubject->subject->name_bangla }}
-                      </a>
-                    </span>
+                      @if(Auth::user()->exam_id == $allocatedsubject->exam_id)
+                        <span>
+                          <a class="btn btn-primary btn-sm" title="{{ bangla_class($allocatedsubject->class) }} {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }} {{ $allocatedsubject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $allocatedsubject->subject_id, $allocatedsubject->class, $allocatedsubject->section]) }}" style="float: left; margin-right: 5px; margin-bottom: 5px;">
+                            {{ bangla_class($allocatedsubject->class) }}
+                            {{ bangla_section(Auth::user()->school->section_type, $allocatedsubject->class, $allocatedsubject->section) }}
+                            {{ $allocatedsubject->subject->name_bangla }}
+                          </a>
+                        </span>
+                      @endif
                     @endforeach
                   @endif
                 </h4>
