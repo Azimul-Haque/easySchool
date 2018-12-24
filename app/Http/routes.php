@@ -3,6 +3,7 @@
 Route::get('/clear', ['as'=>'clear','uses'=>'IndexController@clear']);
 
 Route::get('/', ['as'=>'index','uses'=>'IndexController@index']);
+Route::post('email/contact/form', ['as'=>'index.emailcontactform','uses'=>'IndexController@emailContactForm']);
 
 Route::auth();
 
@@ -82,6 +83,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::get('exam/mark/submission/page/headmaster',['as'=>'exam.allclassmarksubmissionpage','uses'=>'ExamController@allClassMarkSubmissionPage']);
 	Route::get('exam/result/generation/page',['as'=>'exam.getresultgenpage','uses'=>'ExamController@getResultGenPage']);
+	Route::get('exam/result/list/generate/pdf/',['as'=>'exam.getresultlistpdf','uses'=>'ExamController@getResultListPDF']);
 
 
 	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);

@@ -496,14 +496,46 @@ class ExamController extends Controller
 
     public function allClassMarkSubmissionPage()
     {
-        //$exam = Exam::where('id', Auth::user()->exam_id)->first();
-
         return view('exams.allclassmarksubmissionpage');
     }
 
     public function getResultGenPage()
     {
-        return view('exams.resultgeneration');
+        $exams = Exam::where('school_id', Auth::user()->school_id)
+                     ->orderBy('currentexam', 'desc')
+                     ->get();
+        return view('exams.resultgeneration')->withExams($exams);
+    }
+
+    public function getResultListPDF(Request $request)
+    {
+        $this->validate($request, [
+            'exam_id'         => 'required',
+            'class_section'   => 'required'
+        ]);
+
+        $exam = Exam::where('id', $request->exam_id)->first();
+
+        $class_section_array = explode('_', $request->class_section);
+        $class   = $class_section_array[0];
+        $section = $class_section_array[1];
+        
+        $marks = Mark::where('exam_id', $request->exam_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->get();
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->get();
+        $examsubject = Examsubject::where('exam_id', $request->exam_id)
+                                  ->where('class', $class)
+                                  ->get();
+        
+        foreach ($students as $student) {
+            
+        }
+        
     }
 
     public function show($id)

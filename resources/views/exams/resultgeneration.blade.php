@@ -38,15 +38,34 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          {{-- {!! Form::open(['route' => 'reports.getcommoditypdf', 'method' => 'GET']) !!}
+          {!! Form::open(['route' => 'exam.getresultlistpdf', 'method' => 'GET', 'target' => '_blank']) !!}
             <div class="form-group">
-              {!! Form::text('from', null, array('class' => 'form-control text-blue', 'required' => '', 'placeholder' => 'Enter From Date', 'id' => 'fromcomexDate', 'autocomplete' => 'off')) !!}
+              <select name="exam_id" class="form-control" required="">
+                <option value="" selected="" disabled="">পরীক্ষার নাম নির্ধারণ করুন</option>
+                @foreach($exams as $exam)
+                <option value="{{ $exam->id }}">{{ exam($exam->name) }}-{{ bangla($exam->exam_session) }}</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
-              {!! Form::text('to', null, array('class' => 'form-control text-blue', 'required' => '', 'placeholder' => 'Enter To Date', 'id' => 'tocomexDate', 'autocomplete' => 'off')) !!}
+              <select name="class_section" class="form-control" required="">
+                <option value="" selected="" disabled="">শ্রেণি ও শাখা নির্ধারণ করুন</option>
+                @php
+                  $school_classes = explode(',', Auth::user()->school->classes)
+                @endphp
+                @foreach($school_classes as $class)
+                  @if(Auth::user()->school->sections > 0)
+                    @for($seccount=1; $seccount<=Auth::user()->school->sections; $seccount++)
+                      <option value="{{ $class }}_{{ $seccount }}">{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $seccount) }}</option>
+                    @endfor
+                  @else
+                    <option value="{{ $class }}_0">{{ bangla_class($class) }}</option>
+                  @endif
+                @endforeach
+              </select>
             </div>
-          <button class="btn btn-primary" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> Get Report</button>
-          {!! Form::close() !!} --}}
+          <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> ফলাফল তৈরি করুন</button>
+          {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
       </div>

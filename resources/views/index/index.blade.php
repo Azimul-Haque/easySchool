@@ -139,27 +139,38 @@
     <div class="row" style="" id="contactsection">
       <div class="col-md-6 wow fadeInUp" data-wow-duration="600ms">
         <h3><i class="fa fa-envelope-o"></i> যোগাযোগ ফর্ম</h3>
+        {!! Form::open(array('route' => 'index.emailcontactform','method'=>'POST')) !!}
         <div class="form-group">
-          <input type="text" name="" id="" class="form-control" placeholder="আপনার নাম লিখুন" required="">
+          <input type="text" name="name" id="" class="form-control" placeholder="আপনার নাম লিখুন" value="{{ old('name') }}" required="">
         </div>
         <div class="row">
           <div class="col-md-6">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="আপনার ইমেইল এড্রেস লিখুন" required="">
+              <input type="text" name="email" id="" class="form-control" placeholder="আপনার ইমেইল এড্রেস লিখুন" value="{{ old('email') }}" required="">
             </div>
           </div>
           <div class="col-md-6">
             <div class="form-group">
-              <input type="text" name="" id="" class="form-control" placeholder="আপনার ফোন নম্বরটি লিখুন" required="">
+              <input type="text" name="phone" id="" class="form-control" placeholder="আপনার ফোন নম্বরটি লিখুন" value="{{ old('phone') }}" required="">
             </div>
           </div>
         </div>
         <div class="form-group">
-          <textarea name="" id="" class="form-control" required="" placeholder="আমাদের যা লিখতে চান..." style="resize: none; height: 100px;"></textarea>
+          <textarea name="message" id="" class="form-control" required="" placeholder="আমাদের যা লিখতে চান..." style="resize: none; height: 80px;">{{ old('message') }}</textarea>
         </div>
         <div class="form-group">
-          <button type="button" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i> পাঠিয়ে দিন</button>
+          @php
+            $contact_num1 = rand(1,20);
+            $contact_num2 = rand(1,20);
+            $contact_sum_result_hidden = $contact_num1 + $contact_num2;
+          @endphp
+          <input type="hidden" name="contact_sum_result_hidden" value="{{ $contact_sum_result_hidden }}">
+          <input type="text" name="contact_sum_result" id="" class="form-control" placeholder="{{ $contact_num1 }} এবং {{ $contact_num2 }} এর যোগফল ইংরেজি সংখ্যায় লিখুন" required="">
         </div>
+        <div class="form-group">
+          <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i> পাঠিয়ে দিন</button>
+        </div>
+        {{ Form::close() }}
         <br/><br/>
       </div>
       <div class="col-md-6 wow fadeInUp" data-wow-duration="900ms">
