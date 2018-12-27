@@ -17,7 +17,7 @@ class CreateMarksTable extends Migration
             $table->integer('school_id');
             $table->integer('exam_id');
             $table->integer('subject_id');
-            $table->integer('student_id');
+            $table->string('student_id', 15);
             $table->integer('class');
             $table->integer('section');
             $table->integer('roll');
@@ -28,7 +28,7 @@ class CreateMarksTable extends Migration
             $table->string('total_percentage');
             $table->string('total');
             $table->string('grade_point');
-            $table->string('gpa');
+            $table->string('grade');
             $table->timestamps();
         });
     }

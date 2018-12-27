@@ -120,8 +120,8 @@ function grade_point($marks) {
       return $gradepoint;
 }
 
-function gpa($marks) {  
-      if($marks >= 80 && $marks<=100){
+function grade($marks) {  
+       if($marks >= 80 && $marks<=100){
             $gradepointaverage = 'A+'; 
        }else if($marks >= 70 && $marks<80){
             $gradepointaverage = 'A';  
@@ -138,5 +138,26 @@ function gpa($marks) {
        }else {
             $gradepointaverage = 'N/A';  
        }
-      return $gradepointaverage;
+       return $gradepointaverage;
+}
+
+function avg_grade($gpa) {  
+      if($gpa == 5){
+      $avg_grade = 'A+'; 
+      }else if($gpa >= 4 && $gpa < 5){
+      $avg_grade = 'A';  
+      }else if($gpa >= 3.5 && $gpa < 4){
+      $avg_grade = 'A-';  
+      }else if($gpa >= 3 && $gpa < 3.5){
+      $avg_grade = 'B';  
+      }else if($gpa >= 2 && $gpa < 3){
+      $avg_grade = 'C';  
+      }else if($gpa >= 1 && $gpa < 2){
+      $avg_grade = 'D';  
+      }else if($gpa >= 0 && $gpa < 1){
+      $avg_grade = 'F';  
+      }else {
+       $avg_grade = 'N/A';  
+      }
+      return $avg_grade;
 }

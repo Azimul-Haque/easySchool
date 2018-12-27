@@ -406,12 +406,12 @@ class ExamController extends Controller
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca + $otherpaper_ca;
                     $mark_avg = $student_marks->total/2;
                     $student_marks->grade_point = grade_point($mark_avg);
-                    $student_marks->gpa = gpa($mark_avg);
+                    $student_marks->grade = grade($mark_avg);
                 } else {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca;
                     $student_marks->grade_point = grade_point($student_marks->total);
-                    $student_marks->gpa = gpa($student_marks->total);
+                    $student_marks->grade = grade($student_marks->total);
                 }
                 $student_marks->save();
 
@@ -419,7 +419,7 @@ class ExamController extends Controller
                     $otherpaper_marks->total_percentage = $student_marks->total_percentage;
                     $otherpaper_marks->total = $student_marks->total;
                     $otherpaper_marks->grade_point = $student_marks->grade_point;
-                    $otherpaper_marks->gpa = $student_marks->gpa;
+                    $otherpaper_marks->grade = $student_marks->grade;
                     $otherpaper_marks->save();
                 }
             } else {
@@ -441,12 +441,12 @@ class ExamController extends Controller
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
                     $mark_avg = $new_student_marks->total/2;
                     $new_student_marks->grade_point = grade_point($mark_avg);
-                    $new_student_marks->gpa = gpa($mark_avg);
+                    $new_student_marks->grade = grade($mark_avg);
                 } else {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca;
                     $new_student_marks->grade_point = grade_point($new_student_marks->total);
-                    $new_student_marks->gpa = gpa($new_student_marks->total);
+                    $new_student_marks->grade = grade($new_student_marks->total);
                 }
                 $new_student_marks->save();
 
@@ -454,7 +454,7 @@ class ExamController extends Controller
                     $otherpaper_marks->total_percentage = $new_student_marks->total_percentage;
                     $otherpaper_marks->total = $new_student_marks->total;
                     $otherpaper_marks->grade_point = $new_student_marks->grade_point;
-                    $otherpaper_marks->gpa = $new_student_marks->gpa;
+                    $otherpaper_marks->grade = $new_student_marks->grade;
                     $otherpaper_marks->save();
                 }
             }
@@ -466,6 +466,8 @@ class ExamController extends Controller
 
     public function pdfMarksforTeacher($school_id, $exam_id, $subject_id, $class, $section)
     {
+        $exam = Exam::where('id', $exam_id)->first();
+
         $marks = Mark::where('school_id', $school_id)
                      ->where('exam_id', $exam_id)
                      ->where('subject_id', $subject_id)
@@ -485,11 +487,11 @@ class ExamController extends Controller
                      ->where('subject_id', $subject_id)
                      ->where('class', $class)
                      ->where('section', $section)
-                     ->where('gpa', '!=', 'F')
-                     ->where('gpa', '!=', 'N/A')
+                     ->where('grade', '!=', 'F')
+                     ->where('grade', '!=', 'N/A')
                      ->count();
 
-        $pdf = PDF::loadView('exams.pdf.marksforteacher', ['marks' => $marks], ['data' => [$class, $section, $attended, $passed]]);
+        $pdf = PDF::loadView('exams.pdf.marksforteacher', ['marks' => $marks], ['data' => [$class, $section, $attended, $passed, $exam->name, $exam->exam_session]]);
         $fileName = 'Class_'.$class.'_'.$section.'_Mark_List' . '.pdf';
         return $pdf->stream($fileName);
     }
@@ -511,7 +513,8 @@ class ExamController extends Controller
     {
         $this->validate($request, [
             'exam_id'         => 'required',
-            'class_section'   => 'required'
+            'class_section'   => 'required',
+            'subject_count'   => 'required'
         ]);
 
         $exam = Exam::where('id', $request->exam_id)->first();
@@ -527,15 +530,208 @@ class ExamController extends Controller
         $students = Student::where('school_id', Auth::user()->school_id)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'asc')
                            ->get();
-        $examsubject = Examsubject::where('exam_id', $request->exam_id)
+        $examsubjects = Examsubject::where('exam_id', $request->exam_id)
                                   ->where('class', $class)
                                   ->get();
-        
+
+        // skip if ban 2 or en 2, because numbers are counted in ban 1 and en 1
+        $ban_en_array = [2, 4];
         foreach ($students as $student) {
+            $total_marks = 0;
+            $total_grade_point = 0;
+            $sorting_sub_math = 0;
+            $sorting_sub_en = 0;
+            $sorting_sub_ban = 0;
+            foreach ($marks as $mark) {
+                if($student->student_id == $mark->student_id) {
+                    if(in_array($mark->subject_id, $ban_en_array)) {
+                        continue;
+                    } else {
+                        $total_marks = $total_marks + $mark->total;
+                        if($mark->grade_point != 'N/A') {
+                            $total_grade_point = $total_grade_point + $mark->grade_point;
+                        } else {
+                            $total_grade_point = 0;
+                            break 1;
+                        }
+                    }
+                    if($mark->subject_id == 1) {
+                        $sorting_sub_ban = $mark->total; // bangla
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_en = $mark->total; // english
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_math = $mark->total; // math
+                    }
+                }
+            }
+            $gpa = $total_grade_point/$request->subject_count;
+            if($gpa > 5.00) {
+                $gpa = 5.00;
+            }
+            $gpa = number_format($gpa, 2);
+            $grade = avg_grade($gpa);
+            if(($grade == 'F') || ($grade == 'N/A')) {
+                $gpa = number_format(0, 2);
+            }
+            $result_sub['gpa'] = (float)$gpa;
+            $result_sub['total_marks'] = (int)$total_marks;
+            $result_sub['sorting_sub_math'] = (int)$sorting_sub_math;
+            $result_sub['sorting_sub_en'] = (int)$sorting_sub_en;
+            $result_sub['sorting_sub_ban'] = (int)$sorting_sub_ban;
+            $result_sub['roll'] = (int)$student->roll;
+            $result_sub['student_id'] = $student->student_id;
+            $result_sub['grade'] = $grade;
+
+            $result_sub['school_id'] = Auth::user()->school_id;
+            $result_sub['exam_id'] = $request->exam_id;
+            $result_sub['class'] = $class;
+            $result_sub['section'] = $section;
+            $result_sub['name'] = $student->name;
             
+           
+            $results[$student->student_id] = $result_sub;
         }
         
+        //rsort($results);
+        foreach ($results as $key => $row)
+        {
+            $result_array_gpa[$key] = $row['gpa'];
+            $result_array_total_marks[$key] = $row['total_marks'];
+            $result_array_sorting_sub_math[$key] = $row['sorting_sub_math'];
+            $result_array_sorting_sub_en[$key] = $row['sorting_sub_en'];
+            $result_array_sorting_sub_ban[$key] = $row['sorting_sub_ban'];
+            $result_array_roll[$key] = $row['roll'];
+        }
+        array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results);
+        $results_coll = collect($results);
+        // dd($results_coll);
+
+        $pdf = PDF::loadView('exams.pdf.resultlist', ['results' => $results_coll], ['data' => [$exam->name, $exam->exam_session, $class, $section]]);
+        $fileName = 'Class_'.$class.'_'.$section.'_Result_List' . '.pdf';
+        return $pdf->stream($fileName);
+        
+    }
+
+    public function getTabulationSheetPDF(Request $request)
+    {
+        $this->validate($request, [
+            'exam_id'         => 'required',
+            'class_section'   => 'required',
+            'subject_count'   => 'required'
+        ]);
+
+        $exam = Exam::where('id', $request->exam_id)->first();
+
+        $class_section_array = explode('_', $request->class_section);
+        $class   = $class_section_array[0];
+        $section = $class_section_array[1];
+        
+        $marks = Mark::where('exam_id', $request->exam_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->get();
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->orderBy('roll', 'asc')
+                           ->get();
+        $examsubjects = Examsubject::where('exam_id', $request->exam_id)
+                                  ->where('class', $class)
+                                  ->orderBy('subject_id', 'asc')
+                                  ->get();
+
+        // skip if ban 2 or en 2, because numbers are counted in ban 1 and en 1
+        $ban_en_array = [2, 4];
+        foreach ($students as $student) {
+            $total_marks = 0;
+            $total_grade_point = 0;
+            $sorting_sub_math = 0;
+            $sorting_sub_en = 0;
+            $sorting_sub_ban = 0;
+            $subjects_marks = [];
+            $grade_array = [];
+            foreach ($marks as $mark) {
+                if($student->student_id == $mark->student_id) {
+                    $subject_mark['student_id'] = $mark->student_id;
+                    $subject_mark['subject_id'] = $mark->subject_id;
+                    $subject_mark['written'] = $mark->written;
+                    $subject_mark['mcq'] = $mark->mcq;
+                    $subject_mark['practical'] = $mark->practical;
+                    $subject_mark['ca'] = $mark->ca;
+                    $subject_mark['total'] = $mark->total;
+                    $subject_mark['grade'] = $mark->grade;
+                    $subjects_marks[] = $subject_mark;
+                    $grade_array[] = $subject_mark['grade'];
+
+                    if(in_array($mark->subject_id, $ban_en_array)) {
+                        continue;
+                    } else {
+                        $total_marks = $total_marks + $mark->total;
+                        if($mark->grade_point != 'N/A') {
+                            $total_grade_point = $total_grade_point + $mark->grade_point;
+                        } else {
+                            $total_grade_point = $total_grade_point * 0;
+                        }
+                    }
+                    if($mark->subject_id == 1) {
+                        $sorting_sub_ban = $mark->total; // bangla
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_en = $mark->total; // english
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_math = $mark->total; // math
+                    }
+                }
+            }
+            if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
+                $total_grade_point = 0;
+            }
+            $gpa = $total_grade_point/$request->subject_count;
+            if($gpa > 5.00) {
+                $gpa = 5.00;
+            }
+            $gpa = number_format($gpa, 2);
+            $grade = avg_grade($gpa);
+            if(($grade == 'F') || ($grade == 'N/A')) {
+                $gpa = number_format(0, 2);
+            }
+            $result_sub['gpa'] = (float)$gpa;
+            $result_sub['total_marks'] = (int)$total_marks;
+            $result_sub['sorting_sub_math'] = (int)$sorting_sub_math;
+            $result_sub['sorting_sub_en'] = (int)$sorting_sub_en;
+            $result_sub['sorting_sub_ban'] = (int)$sorting_sub_ban;
+            $result_sub['roll'] = (int)$student->roll;
+            $result_sub['student_id'] = $student->student_id;
+            $result_sub['grade'] = $grade;
+            $result_sub['subjects_marks'] = $subjects_marks;
+
+            $result_sub['school_id'] = Auth::user()->school_id;
+            $result_sub['exam_id'] = $request->exam_id;
+            $result_sub['class'] = $class;
+            $result_sub['section'] = $section;
+            $result_sub['name'] = $student->name;
+           
+            $results[$student->student_id] = $result_sub;
+        }
+        
+        //rsort($results);
+        foreach ($results as $key => $row)
+        {
+            $result_array_gpa[$key] = $row['gpa'];
+            $result_array_total_marks[$key] = $row['total_marks'];
+            $result_array_sorting_sub_math[$key] = $row['sorting_sub_math'];
+            $result_array_sorting_sub_en[$key] = $row['sorting_sub_en'];
+            $result_array_sorting_sub_ban[$key] = $row['sorting_sub_ban'];
+            $result_array_roll[$key] = $row['roll'];
+        }
+        array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results);
+        $results_coll = collect($results);
+        //dd($results_coll);
+
+        $pdf = PDF::loadView('exams.pdf.tabulationsheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'B4-L', 'margin_top' => 30]);
+        $fileName = 'Class_'.$class.'_'.$section.'_Tabulation_Sheet' . '.pdf';
+        return $pdf->stream($fileName);
     }
 
     public function show($id)

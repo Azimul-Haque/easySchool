@@ -84,7 +84,7 @@
                     $ca = '';
                     $total = '';
                     $grade_point = '';
-                    $gpa = '';
+                    $grade = '';
                   @endphp
                   @if($marks->count() > 0)
                     @foreach($marks as $mark)
@@ -96,7 +96,7 @@
                           $ca = $mark->ca;
                           $total = $mark->total;
                           $grade_point = $mark->grade_point;
-                          $gpa = $mark->gpa;
+                          $grade = $mark->grade;
                         @endphp
                       @endif
                     @endforeach
@@ -168,7 +168,7 @@
                   {{ $grade_point }}
                 </td>
                 <td>
-                  {{ $gpa }}
+                  {{ $grade }}
                 </td>
               </tr>
             @endforeach
