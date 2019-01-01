@@ -271,10 +271,10 @@
                   <div class="row">
                     <div class="col-md-4">
                       <div class="form-group">
-                          <label for="blood_group">রক্তের গ্রুপঃ (জানা না থাকলে এড়িয়ে যান)</label>
+                          <label for="blood_group">রক্তের গ্রুপঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-tint"></i></span>
-                            <select class="form-control" name="blood_group" id="blood_group">
+                            <select class="form-control" name="blood_group" id="blood_group" required="">
                               <option selected disabled>রক্তের গ্রুপ নির্ধারণ করুন</option>
                               <option value="A+" {{ (old("blood_group") == 'A+' ? "selected":"") }}>A+</option>
                               <option value="A-" {{ (old("blood_group") == 'A-' ? "selected":"") }}>A-</option>
@@ -284,6 +284,7 @@
                               <option value="AB-" {{ (old("blood_group") == 'AB-' ? "selected":"") }}>AB-</option>
                               <option value="O+" {{ (old("blood_group") == 'O+' ? "selected":"") }}>O+</option>
                               <option value="O-" {{ (old("blood_group") == 'O-' ? "selected":"") }}>O-</option>
+                              <option value="N/A" {{ (old("blood_group") == 'N/A' ? "selected":"") }}>জানা নেই</option>
                             </select>
                           </div>
                       </div>

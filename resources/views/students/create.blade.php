@@ -208,6 +208,7 @@
                               <option value="AB-">AB-</option>
                               <option value="O+">O+</option>
                               <option value="O-">O-</option>
+                              <option value="N/A">জানা নেই</option>
                             </select>
                           </div>
                       </div>

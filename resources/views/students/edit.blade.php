@@ -211,6 +211,7 @@
                       <option value="AB-" @if($student->blood_group == "AB-") selected="" @endif>AB-</option>
                       <option value="O+" @if($student->blood_group == "O+") selected="" @endif>O+</option>
                       <option value="O-" @if($student->blood_group == "O-") selected="" @endif>O-</option>
+                      <option value="N/A" @if($student->blood_group == "N/A") selected="" @endif>জানা নেই</option>
                     </select>
                   </div>
               </div>
