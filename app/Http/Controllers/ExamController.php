@@ -36,7 +36,9 @@ class ExamController extends Controller
         $exams = Exam::where('school_id', Auth::user()->school_id)
                      ->orderBy('id', 'desc')
                      ->get();
-        $currentexam = Exam::where('currentexam', 1)->first();
+        $currentexam = Exam::where('currentexam', 1)
+                           ->where('school_id', Auth::user()->school_id)
+                           ->first();
         return view('exams.index')
                     ->withExams($exams)
                     ->withSubjects($subjects)
@@ -162,7 +164,9 @@ class ExamController extends Controller
 
     public function makeCurrent(Request $request, $id)
     {
-        $oldExam = Exam::where('currentexam', 1)->first();
+        $oldExam = Exam::where('school_id', Auth::user()->school_id)
+                       ->where('currentexam', 1)
+                       ->first();
         if(($oldExam != null) && ($oldExam->count() > 0)) {
             $oldExam->currentexam = 0;
             $oldExam->save();
@@ -498,7 +502,12 @@ class ExamController extends Controller
 
     public function allClassMarkSubmissionPage()
     {
-        return view('exams.allclassmarksubmissionpage');
+        if(Auth::user()->exam != null) {
+            return view('exams.allclassmarksubmissionpage');
+        } else {
+            return redirect()->route('exams.index')->with('success', 'কোন পরীক্ষা সংযোজন করা হয়নি; অথবা সংযোজিত পরীক্ষা থেকে চলতি পরীক্ষা নির্ধারণ করা হয়নি!');
+        }
+        
     }
 
     public function getResultGenPage()
@@ -506,7 +515,11 @@ class ExamController extends Controller
         $exams = Exam::where('school_id', Auth::user()->school_id)
                      ->orderBy('currentexam', 'desc')
                      ->get();
-        return view('exams.resultgeneration')->withExams($exams);
+        if(Auth::user()->exam != null) {
+            return view('exams.resultgeneration')->withExams($exams);
+        } else {
+            return redirect()->route('exams.index')->with('success', 'কোন পরীক্ষা সংযোজন করা হয়নি; অথবা সংযোজিত পরীক্ষা থেকে চলতি পরীক্ষা নির্ধারণ করা হয়নি!');
+        }
     }
 
     public function getResultListPDF(Request $request)

@@ -23,7 +23,12 @@
   <div class="row">
     <div class="col-md-6">
       <h4>
-        চলতি পরীক্ষার নামঃ <b>{{ exam($currentexam->name) }}-{{ bangla($currentexam->exam_session) }}</b>
+        চলতি পরীক্ষার নামঃ 
+        <b>
+          @if($currentexam != null)
+            {{ exam($currentexam->name) }}-{{ bangla($currentexam->exam_session) }}
+          @endif
+        </b>
       </h4>
     </div>
     <div class="col-md-6"></div>
