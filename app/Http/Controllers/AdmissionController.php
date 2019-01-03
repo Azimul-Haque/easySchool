@@ -397,13 +397,14 @@ class AdmissionController extends Controller
         arsort($newidmarks_array);
         //dd($newidmarks_array);
         $merit_position = 1;
+
         foreach ($newidmarks_array as $key => $value) {
           try {
             $application = Admission::where('application_id', $key)
                                     ->where('class', $request->class)
                                     ->first();
             $application->mark_obtained = $value;
-            if(Auth::user()->school->admission_pass_mark > $value) {
+            if($value < Auth::user()->school->admission_pass_mark) {
               $application->merit_position = -1;
             } else {
               $application->merit_position = $merit_position;
