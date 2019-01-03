@@ -449,7 +449,8 @@
     	  $('#example1').DataTable()
     	  $('#datatable-admissions').DataTable({
     	    'paging'      : true,
-    	    'pageLength'  : 100,
+    	    'pageLength'  : 300,
+          'lengthMenu': [ 50, 100, 300, 500 ],
     	    'lengthChange': true,
     	    'searching'   : true,
     	    'ordering'    : true,
