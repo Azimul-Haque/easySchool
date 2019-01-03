@@ -408,15 +408,15 @@ class AdmissionController extends Controller
               $application->merit_position = -1;
             } else {
               $application->merit_position = $merit_position;
+              $merit_position++;
             }
             $application->save();
-
-            $merit_position++;
           }
           catch (\Exception $e) {
             // do nothing
           }
         }
+        //dd($application->all());
         
         Session::flash('success', 'আবেদনকারীদের প্রাপ্ত নম্বর দাখিল করা হয়েছে!');
         return redirect()->route('admissions.getclasswise', $request->class);
