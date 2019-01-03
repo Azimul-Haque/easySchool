@@ -554,7 +554,8 @@ class AdmissionController extends Controller
         $applications = Admission::where('school_id', Auth::user()->school_id)
                                  ->where('session', Auth::user()->school->admission_session)
                                  ->where('class', $class)
-                                 ->orderBy('mark_obtained', 'desc')
+                                 ->orderBy('mark_obtained', 'asc')
+                                 ->orderBy('merit_position', 'asc')
                                  ->orderBy('application_roll', 'asc')
                                  ->get();
 
