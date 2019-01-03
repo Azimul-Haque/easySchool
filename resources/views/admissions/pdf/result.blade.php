@@ -92,7 +92,7 @@
         @if($application->merit_position == -1)
           <span style="color: #FF0000;">Failed</span>
         @else
-          {{ $application->merit_position }}
+          {{ $counter }}
         @endif
       </td>
       <td></td>
