@@ -21,7 +21,7 @@
             <div class="info-box-content">
               <span class="info-box-text">Actual Balance</span>
               <span class="info-box-number">
-                ৳ {{ $actualbalance }}
+                ৳ {{ $actualbalance }} (<span id="currentBalance"></span>)
               </span>
               <span class="info-box-text">Available SMS: {{ (int) ($actualbalance / 0.20) }}</span>
             </div>
@@ -294,6 +294,25 @@
    $('a[title]').tooltip();
    $('button[title]').tooltip();
   });
+</script>
+
+<script type="text/javascript">
+  function currentBalanceInquery(data) {
+   $.ajax({
+       url: "http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123",
+       type: "GET",
+       data: {},
+       success: function (data) {
+           var balance = data;
+           if(balance < 0) {
+            balance = 0;
+           }
+           $("#currentBalance").text(balance);
+       }
+   });
+  }
+  setTimeout(currentBalanceInquery(), 1000*1);
+  setInterval(currentBalanceInquery, 1000*30);
 </script>
 
 @stop

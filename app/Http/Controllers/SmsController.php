@@ -33,10 +33,10 @@ class SmsController extends Controller
             // $result=curl_exec($ch);
             // curl_close($ch);
 
-            $actualbalance = number_format((float) $result, 2, '.', '');
+            // $actualbalance = number_format((float) $result, 2, '.', '');
             
         } catch (\Exception $e) {
-            return $e;
+            // return $e;
         }
 
         $schools = School::all();
