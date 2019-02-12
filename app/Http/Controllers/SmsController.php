@@ -35,7 +35,7 @@ class SmsController extends Controller
             $actualbalance = number_format((float) $result, 2, '.', '');
             
         } catch (\Exception $e) {
-            $actualbalance = $e;
+            return $e;
         }
 
         $schools = School::all();
