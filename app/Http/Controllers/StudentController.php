@@ -31,7 +31,7 @@ class StudentController extends Controller
                     ->withSessionsearch(null)
                     ->withClasssearch(null)
                     ->withSectionsearch(null)
-                    ->withStudents($students);
+                    ->withStudents(null);
     }
 
     public function getStudents($session, $class, $section)
@@ -446,6 +446,7 @@ class StudentController extends Controller
         // sms data
         $smsdata = [];
         foreach ($students as $i => $student) {
+            $mobile_number = 0;
             if(strlen($student->contact) == 11) {
                 $mobile_number = '88'.$student->contact;
             } elseif(strlen($student->contact) > 11) {
@@ -454,10 +455,10 @@ class StudentController extends Controller
                 }
             }
             $smsdata[$i] = array(
-            'username'=>"01837409842",
-            'password'=>"7AC2USVQ",
-            'number'=> $mobile_number,
-            'message'=>$student->remarks
+                'username'=>"01837409842",
+                'password'=>"Bd.Bulk.Sms.123",
+                'number'=> $mobile_number,
+                'message'=>$student->remarks
             );
             $multiCurl[$i] = curl_init(); // Initialize cURL
             curl_setopt($multiCurl[$i], CURLOPT_URL, $url);

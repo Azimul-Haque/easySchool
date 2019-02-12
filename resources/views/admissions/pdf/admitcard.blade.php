@@ -25,6 +25,10 @@
     border-radius: 5px;
     padding: 5px;
   }
+  @page {
+    header: page-header;
+    footer: page-footer;
+  }
   </style>
 </head>
 <body>
@@ -116,5 +120,9 @@
       </tr>
     </table>
   </div>
+
+  <htmlpagefooter name="page-footer">
+    <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small>
+  </htmlpagefooter>
 </body>
 </html>

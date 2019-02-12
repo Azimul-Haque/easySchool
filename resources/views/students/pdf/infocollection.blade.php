@@ -20,6 +20,10 @@
     font-family: 'kalpurush', sans-serif;
     font-size: 14px;
   }
+  @page {
+    header: page-header;
+    footer: page-footer;
+  }
   </style>
 </head>
 <body>
@@ -101,5 +105,9 @@
     </tr>
     @endforeach
   </table>
+
+  <htmlpagefooter name="page-footer">
+    <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small>
+  </htmlpagefooter>
 </body>
 </html>

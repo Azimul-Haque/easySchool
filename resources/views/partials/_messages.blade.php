@@ -10,7 +10,7 @@
 	  "positionClass": "toast-bottom-right",
 	  "preventDuplicates": false,
 	  "onclick": null,
-	  "showDuration": "400",
+	  "showDuration": "1000",
 	  "hideDuration": "1000",
 	  "timeOut": "5000",
 	  "extendedTimeOut": "1000",

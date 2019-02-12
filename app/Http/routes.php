@@ -87,9 +87,17 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/tabulation/sheet/generate/pdf/',['as'=>'exam.gettabulationsheetpdf','uses'=>'ExamController@getTabulationSheetPDF']);
 
 
-	Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
-	Route::get('sms/test',['as'=>'sms.trest','uses'=>'StudentController@testSMS']);
+	// Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
+	// Route::get('sms/test',['as'=>'sms.trest','uses'=>'StudentController@testSMS']);
+	Route::get('sms/admin',['as'=>'sms.admin','uses'=>'SmsController@getAdmin']);
+	Route::post('sms/admin/add',['as'=>'sms.rechargeschoolsms','uses'=>'SmsController@rechargeSchoolSMS']);
 
+	Route::get('sms',['as'=>'sms.index','uses'=>'SmsController@getIndex']);
+	Route::get('sms/client/recharge/{smscount}/{token}/{tk}',['as'=>'sms.clientrecharge','uses'=>'SmsController@getClientRecharge']);
+	Route::post('sms/recharge/request',['as'=>'sms.rechargerequest','uses'=>'SmsController@storeRechargeRequest']);
+
+	Route::delete('sms/recharge/request/delete/{id}',['as'=>'sms.destroy.history','uses'=>'SmsController@destroyRechargeReqHistory']);
+	Route::patch('sms/recharge/request/update/{id}',['as'=>'sms.update.history','uses'=>'SmsController@updateRechargeReqHistory']);
 });
 
 // public gets, posts and so on

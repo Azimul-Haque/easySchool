@@ -285,7 +285,7 @@
                     {{-- @each('adminlte::partials.menu-item', $adminlte->menu(), 'item') --}}
                     @permission('developer-control')
                     <li class="header">Developer Control</li>
-                    <li class="{{ Request::is('schools') ? 'active menu-open' : '' }} {{ Request::is('schools/*') ? 'active menu-open' : '' }} {{ Request::is('users') ? 'active menu-open' : '' }} {{ Request::is('users/*') ? 'active menu-open' : '' }} {{ Request::is('roles') ? 'active menu-open' : '' }} {{ Request::is('roles/*') ? 'active menu-open' : '' }} {{ Request::is('subjects') ? 'active menu-open' : '' }} {{ Request::is('subjects/*') ? 'active menu-open' : '' }} treeview">
+                    <li class="{{ Request::is('schools') ? 'active menu-open' : '' }} {{ Request::is('schools/*') ? 'active menu-open' : '' }} {{ Request::is('users') ? 'active menu-open' : '' }} {{ Request::is('users/*') ? 'active menu-open' : '' }} {{ Request::is('roles') ? 'active menu-open' : '' }} {{ Request::is('roles/*') ? 'active menu-open' : '' }} {{ Request::is('subjects') ? 'active menu-open' : '' }} {{ Request::is('subjects/*') ? 'active menu-open' : '' }} {{ Request::is('sms/admin') ? 'active' : '' }} treeview">
                         <a href="#">
                             <i class="fa fa-fw fa-code"></i>
                             <span>Developer Control</span>
@@ -327,8 +327,8 @@
                           </li>
                           @endpermission
                           @permission('role-crud') {{-- for the time being role-crud is used --}}
-                          <li class="{{ Request::is('sms') ? 'active' : '' }}">
-                              <a href="/#">
+                          <li class="{{ Request::is('sms/admin') ? 'active' : '' }}">
+                              <a href="{{ route('sms.admin') }}">
                                   <i class="fa fa-envelope-o"></i>
                                   <span>SMS</span>
                               </a>
@@ -367,6 +367,12 @@
                         <a href="{{ route('teachers.index') }}">
                             <i class="fa fa-fw fa-address-book"></i>
                             <span>শিক্ষক ব্যবস্থাপনা</span>
+                        </a>
+                    </li>
+                    <li class="{{ Request::is('sms') ? 'active' : '' }}">
+                        <a href="{{ route('sms.index') }}">
+                            <i class="fa fa-fw fa-envelope-o"></i>
+                            <span>এসএমএস মডিউল</span>
                         </a>
                     </li>
 

@@ -20,6 +20,11 @@ class School extends Model
   {
       return $this->hasMany('App\Admission');
   }
+  
+  public function smsrechargehistories()
+  {
+      return $this->hasMany('App\Smsrechargehistory');
+  }
 
   protected $fillable = ['name', 'eiin', 'established', 'address', 'currentsession', 'classes', 'isadmissionon', 'isresultpublished', 'due', 'currentexam', 'monogram'];
 }

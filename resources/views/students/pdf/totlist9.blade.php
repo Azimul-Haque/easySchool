@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Students List | PDF</title>
+  <title>TOT List | PDF</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="icon" sizes="192x192" href="{{ asset('images/pdf-icon.png') }}">
   <style>
@@ -118,5 +118,8 @@
     @endphp
     @endforeach
   </table>
+  <htmlpagefooter name="page-footer">
+    <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small>
+  </htmlpagefooter>
 </body>
 </html>

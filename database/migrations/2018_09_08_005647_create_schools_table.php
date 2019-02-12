@@ -50,6 +50,8 @@ class CreateSchoolsTable extends Migration
             $table->datetime('admit_card_texts')->nullable();
             $table->string('headmaster_sign')->nullable();
             $table->string('monogram')->nullable();
+            $table->integer('smsbalance')->default('0');
+            $table->string('smsrate')->default('0.35');
             $table->timestamps();
         });
     }
