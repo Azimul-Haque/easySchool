@@ -22,18 +22,15 @@ class SmsController extends Controller
     public function getAdmin() {
         $actualbalance = 0;
         try {
-            $actualbalance = number_format((float) file_get_contents('http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123'), 2, '.', '');
-            // $url = 'http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123';
-            // $url = urlencode($url);
+            // $actualbalance = number_format((float) file_get_contents('http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123'), 2, '.', '');
             
-            // //  Initiate curl
-            // $ch = curl_init();
-            // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            // curl_setopt($ch, CURLOPT_URL,$url);
-            // $result=curl_exec($ch);
-            // curl_close($ch);
+            $ch = curl_init("http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+            curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+            $result = strip_tags(curl_exec($ch));
+            curl_close($ch);
 
-            // $actualbalance = number_format((float) $result, 2, '.', '');
+            $actualbalance = number_format((float) $result, 2, '.', '');
             
         } catch (\Exception $e) {
             // return $e;
