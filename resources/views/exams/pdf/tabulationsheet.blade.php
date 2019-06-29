@@ -165,7 +165,7 @@
       <td>{{ $result['gpa'] }}</td>
       <td>{{ $result['grade'] }}</td>>
     </tr>
-    @if($counter%12 == 0)
+    @if($counter%15 == 0)
      </table>
      <pagebreak></pagebreak> 
      <table class="maintable">

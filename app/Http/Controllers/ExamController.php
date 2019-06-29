@@ -357,6 +357,7 @@ class ExamController extends Controller
 
         // bangla 1st, 2nd and english 1st, 2nd | now go to getSubmissionPage method
         $otherpaper_id = null;
+
         if($request->subject_id == 1) {
             $otherpaper_id = 2;
         } elseif ($request->subject_id == 2) {
@@ -365,6 +366,14 @@ class ExamController extends Controller
             $otherpaper_id = 4;
         }  elseif ($request->subject_id == 4) {
             $otherpaper_id = 3;
+        }
+
+        $othersubject = null;
+        if($otherpaper_id != null) {
+            $othersubject = Examsubject::where('exam_id', $request->exam_id)
+                                       ->where('subject_id', $otherpaper_id)
+                                       ->where('class', $request->class)
+                                       ->first();
         }
 
         foreach ($students as $student) {
@@ -385,7 +394,6 @@ class ExamController extends Controller
                                  ->where('section', $request->section)
                                  ->where('roll', $student->roll)
                                  ->first();
-
             if($otherpaper_marks != null) {
                 $otherpaper_written = $otherpaper_marks->written;
                 $otherpaper_mcq = $otherpaper_marks->mcq;
@@ -408,7 +416,7 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca + $otherpaper_ca;
-                    $mark_avg = $student_marks->total/2;
+                    $mark_avg = ($student_marks->total/($examsubject->total + $othersubject->total)) * 100; // correction June, 2019
                     $student_marks->grade_point = grade_point($mark_avg);
                     $student_marks->grade = grade($mark_avg);
                 } else {
@@ -439,11 +447,10 @@ class ExamController extends Controller
                 $new_student_marks->mcq = $request['mcq'.$student->student_id] ?: 0;
                 $new_student_marks->practical = $request['practical'.$student->student_id] ?: 0;
                 $new_student_marks->ca = $request['ca'.$student->student_id] ?: 0;
-
                 if($otherpaper_id != null) {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
-                    $mark_avg = $new_student_marks->total/2;
+                    $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; // correction June, 2019
                     $new_student_marks->grade_point = grade_point($mark_avg);
                     $new_student_marks->grade = grade($mark_avg);
                 } else {
@@ -724,7 +731,7 @@ class ExamController extends Controller
             $result_sub['class'] = $class;
             $result_sub['section'] = $section;
             $result_sub['name'] = $student->name;
-           
+            
             $results[$student->student_id] = $result_sub;
         }
         
@@ -742,7 +749,7 @@ class ExamController extends Controller
         $results_coll = collect($results);
         //dd($results_coll);
 
-        $pdf = PDF::loadView('exams.pdf.tabulationsheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'B4-L', 'margin_top' => 30]);
+        $pdf = PDF::loadView('exams.pdf.tabulationsheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
         $fileName = 'Class_'.$class.'_'.$section.'_Tabulation_Sheet' . '.pdf';
         return $pdf->stream($fileName);
     }

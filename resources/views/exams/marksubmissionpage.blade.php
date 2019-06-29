@@ -137,7 +137,14 @@
           <th width="">ব্যবহারিক <br/>({{ $othersubject->subject->name_bangla }})</th>
           <th width="">CA/ SBA<br/>({{ $othersubject->subject->name_bangla }})</th>
           @endif
-          <th width="">মোট<br/>({{ $examsubject->total }})</th>
+          <th width="">
+            মোট<br/>
+            @if($othersubject != null)
+              ({{ $examsubject->total + $othersubject->total }})
+            @else
+              ({{ $examsubject->total }})
+            @endif
+          </th>
           <th width="">গ্রেড পয়েন্ট</th>
           <th width="">জিপিএ</th>
         </tr>
@@ -208,7 +215,6 @@
                     @php
                       $otherwritten = $mark->written;
                       $othermcq = $mark->mcq;
-                      $otherpractical = $mark->practical;
                       $otherpractical = $mark->practical;
                       $otherca = $mark->ca;
                     @endphp
