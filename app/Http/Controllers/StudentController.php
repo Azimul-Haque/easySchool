@@ -455,8 +455,8 @@ class StudentController extends Controller
                 }
             }
             $smsdata[$i] = array(
-                'username'=>"01837409842",
-                'password'=>"Bd.Bulk.Sms.123",
+                'username'=>config('sms.username'),
+                'password'=>config('sms.password'),
                 'number'=> $mobile_number,
                 'message'=>$student->remarks
             );
