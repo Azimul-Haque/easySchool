@@ -564,6 +564,7 @@ class ExamController extends Controller
             $sorting_sub_math = 0;
             $sorting_sub_en = 0;
             $sorting_sub_ban = 0;
+            $grade_array = [];
             foreach ($marks as $mark) {
                 if($student->student_id == $mark->student_id) {
                     if(in_array($mark->subject_id, $ban_en_array)) {
@@ -574,6 +575,7 @@ class ExamController extends Controller
                             $total_grade_point = $total_grade_point + $mark->grade_point;
                         } else {
                             $total_grade_point = $total_grade_point * 0;
+                            break;
                         }
                     }
                     if($mark->subject_id == 1) {
