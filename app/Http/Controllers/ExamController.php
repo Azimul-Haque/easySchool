@@ -575,7 +575,6 @@ class ExamController extends Controller
                             $total_grade_point = $total_grade_point + $mark->grade_point;
                         } else {
                             $total_grade_point = $total_grade_point * 0;
-                            break;
                         }
                     }
                     if($mark->subject_id == 1) {
@@ -585,7 +584,13 @@ class ExamController extends Controller
                     } elseif($mark->subject_id == 3) {
                         $sorting_sub_math = $mark->total; // math
                     }
+
+                    // grade array...
+                    $grade_array[] = $mark->grade;
                 }
+            }
+            if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
+                $total_grade_point = 0;
             }
             $gpa = $total_grade_point/$request->subject_count;
             if($gpa > 5.00) {
