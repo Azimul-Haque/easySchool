@@ -573,8 +573,7 @@ class ExamController extends Controller
                         if($mark->grade_point != 'N/A') {
                             $total_grade_point = $total_grade_point + $mark->grade_point;
                         } else {
-                            $total_grade_point = 0;
-                            break 1;
+                            $total_grade_point = $total_grade_point * 0;
                         }
                     }
                     if($mark->subject_id == 1) {
