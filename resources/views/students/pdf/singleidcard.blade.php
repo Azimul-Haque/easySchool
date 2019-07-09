@@ -61,7 +61,7 @@
   </style>
 </head>
 <body>
-  <div style="height: 290px; width: 200px; background: #183172; border: 1px solid #183172; float: left; margin-bottom: 15px;">
+  <div style="height: 290px; width: 200px; background: #183172; border: 1px solid #183172; float: left; margin-bottom: 20px;">
     <div style="height: 290px; width: 200px; background: #fff; border-radius: 50px 0px 50px 0px; padding: 10px 5px 10px 5px;">
       <center><p style="font-size: 15px; margin-top: 10px; text-align: center; margin: auto;"><b>{{ Auth::user()->school->name }}</b></p></center>
       <p style="font-size: 9px; font-family: times; padding: 0px; margin-top: 1px; text-align: center;">
@@ -127,7 +127,7 @@
       
     </div>
   </div>
-  <div style="height: 290px; width: 10px; float: left; padding: 0px;"></div>
+  <div style="height: 290px; width: 20px; float: left; padding: 0px;"></div>
   
   
 
