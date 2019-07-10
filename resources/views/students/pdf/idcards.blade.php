@@ -23,7 +23,7 @@
   .nostyletd {
     border: 0px solid white !important;
   }
-  .thumb1 { 
+/*  .thumb1 { 
     width: 100%;
     height: 95px !important;
     margin: 5px;
@@ -35,9 +35,9 @@
   .thumb2 { 
     width: 60px;
     height: 60px !important;
-    /*margin: 5px;*/
+    margin: 5px;
     float: left;
-  }
+  }*/
   
 
   .containerTable tr td, .containerTable tr th {
@@ -67,20 +67,20 @@
     @foreach($students as $student)
       <div style="height: 290px; width: 200px; background: #183172; border: 1px solid #183172; float: left; margin-bottom: 20px;">
         <div style="height: 290px; width: 200px; background: #fff; border-radius: 50px 0px 50px 0px; padding: 10px 5px 10px 5px;">
-          <center><p style="font-size: 15px; margin-top: 10px; text-align: center; margin: auto;"><b>{{ Auth::user()->school->name }}</b></p></center>
-          <p style="font-size: 9px; font-family: times; padding: 0px; margin-top: 1px; text-align: center;">
+          <p style="font-size: 15px; margin-top: 10px; text-align: center; margin: auto; color: #183172;"><b>{{ Auth::user()->school->name }}</b></p>
+          <p style="font-size: 9px; font-family: times; padding: 0px; margin-top: 1px; text-align: center;  color: #183172;">
             <b>{{ Auth::user()->school->upazilla }}, {{ Auth::user()->school->district }}</b>
           </p>
           <table>
             <tr>
               <td width="60%" style="padding: 5px;">
                 @if($student->image == '')
-                    <img src="{{ public_path('images/dummy_student.jpg') }}" style="height:95px; border: 2px solid #000;" alt="N/A">
+                    <img src="{{ public_path('images/dummy_student.jpg') }}" style="height:100px; border: 2px solid #000;" alt="N/A">
                 @else
                   @if(file_exists(public_path('images/admission-images/'.$student->image))) 
-                    <img src="{{ public_path('images/admission-images/'.$student->image) }}" style="height:95px; border: 2px solid #000;" alt="N/A">
+                    <img src="{{ public_path('images/admission-images/'.$student->image) }}" style="height:100px; border: 2px solid #000;" alt="N/A">
                   @else
-                    <img src="{{ public_path('images/dummy_student.jpg') }}" style="height:95px; border: 2px solid #000;" alt="N/A">
+                    <img src="{{ public_path('images/dummy_student.jpg') }}" style="height:100px; border: 2px solid #000;" alt="N/A">
                   @endif
                 @endif
               </td>
