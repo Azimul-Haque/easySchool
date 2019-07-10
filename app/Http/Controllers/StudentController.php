@@ -328,8 +328,12 @@ class StudentController extends Controller
         // image upload
         if($student->image != null || $student->image != '') {
             if($request->hasFile('image')) {
+                $image_path = public_path('/images/admission-images/'. $student->image);
+                if(File::exists($image_path)) {
+                    File::delete($image_path);
+                }
                 $image      = $request->file('image');
-                $filename   = $student->image;
+                $filename   = $student->student_id. time() . '.' . $image->getClientOriginalExtension();
                 $location   = public_path('images/admission-images/'. $filename);
                 Image::make($image)->resize(200, 200)->save($location);
                 $student->image = $filename;
@@ -337,7 +341,7 @@ class StudentController extends Controller
         } else {
             if($request->hasFile('image')) {
                 $image      = $request->file('image');
-                $filename   = $student->student_id. '.' . $image->getClientOriginalExtension();
+                $filename   = $student->student_id. time() . '.' . $image->getClientOriginalExtension();
                 $location   = public_path('images/admission-images/'. $filename);
                 Image::make($image)->resize(200, 200)->save($location);
                 $student->image = $filename;

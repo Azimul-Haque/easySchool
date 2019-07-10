@@ -435,7 +435,7 @@
             </div>
             <div class="col-md-3">
                 <div class="form-group">
-                    <label>আবেদনকারীর ছবি</label>
+                    <label>শিক্ষার্থীর ছবি</label>
                     <div class="input-group">
                         <span class="input-group-btn">
                             <span class="btn btn-default btn-file">
