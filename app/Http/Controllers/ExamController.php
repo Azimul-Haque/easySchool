@@ -422,8 +422,9 @@ class ExamController extends Controller
                 } else {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca;
-                    $student_marks->grade_point = grade_point($student_marks->total);
-                    $student_marks->grade = grade($student_marks->total);
+                    $mark_avg = ($student_marks->total / $examsubject->total) * 100;
+                    $student_marks->grade_point = grade_point($mark_avg);
+                    $student_marks->grade = grade($mark_avg);
                 }
                 $student_marks->save();
 
