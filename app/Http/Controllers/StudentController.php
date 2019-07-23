@@ -333,7 +333,7 @@ class StudentController extends Controller
                     File::delete($image_path);
                 }
                 $image      = $request->file('image');
-                $filename   = $student->student_id. time() . '.' . $image->getClientOriginalExtension();
+                $filename   = $student->student_id. random_string(4) . '.' . $image->getClientOriginalExtension();
                 $location   = public_path('images/admission-images/'. $filename);
                 Image::make($image)->resize(200, 200)->save($location);
                 $student->image = $filename;
