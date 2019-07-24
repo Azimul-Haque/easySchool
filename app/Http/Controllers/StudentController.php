@@ -619,6 +619,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.totlist8', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 35, 'margin_bottom' => 20]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Tot_List.pdf';
@@ -631,6 +632,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.totlist9', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30, 'margin_bottom' => 20]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Tot_List.pdf';
