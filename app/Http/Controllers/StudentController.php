@@ -511,6 +511,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.studentslist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'.pdf';
@@ -523,6 +524,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.infocollection', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Information_Collection_List.pdf';
@@ -535,6 +537,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.bookdistribution', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Information_Collection_List.pdf';
@@ -547,6 +550,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.tutionfeelist', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Tution_Fee_List.pdf';
@@ -559,6 +563,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.cardregister', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Cards_Register.pdf';
@@ -571,6 +576,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.attendancesheet', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4', 'margin_top' => 45]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Attendance_Sheet.pdf';
@@ -583,6 +589,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.studentsalbum', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4', 'margin_top' => 35]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Students_Album.pdf';
@@ -595,6 +602,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.admitcards', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admit_Cards.pdf';
@@ -607,6 +615,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.seatplan', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Seat_Plan.pdf';
@@ -645,6 +654,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.alltestimonials', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_All_Testimonials.pdf';
@@ -657,6 +667,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.allinfo', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_All_Testimonials.pdf';
@@ -670,6 +681,7 @@ class StudentController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->where('admission_date', '>', Auth::user()->school->admission_test_datetime)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.admissioninfo', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admission_Information.pdf';
@@ -682,6 +694,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.idcards', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = $session.'_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Admission_Information.pdf';
