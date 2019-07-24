@@ -71,7 +71,7 @@
       $counter = 1;
     @endphp
     @foreach($students as $student)
-      <td>
+      <td width="25%" style="width: 25% !important;">
         <center>
           @if($student->image != null && $student->image != '')
           <img src="{{ public_path('images/admission-images/'.$student->image) }}" height="135" width="135" style="margin-top: 13px;">
