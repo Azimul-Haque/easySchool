@@ -104,7 +104,7 @@
         @endif
       </td>
       <td width="10%"></td>
-      <td width="10%" align="center">
+      <td width="10%" align="center" style="text-align: center;">
         @if($data[1] == 8)
           {{ $student->jsc_result }}
         @elseif($data[1] > 8)
