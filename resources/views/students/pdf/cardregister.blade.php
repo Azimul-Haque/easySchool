@@ -104,7 +104,13 @@
         @endif
       </td>
       <td width="10%"></td>
-      <td width="10%"></td>
+      <td width="10%">
+        @if($data[1] == 8)
+          {{ $student->jsc_result }}
+        @elseif($data[1] > 8)
+          {{ $student->ssc_result }}
+        @endif
+      </td>
       <td width="10%"></td>
       <td width="10%"></td>
     </tr>
