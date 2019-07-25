@@ -569,7 +569,7 @@ class ExamController extends Controller
             foreach ($marks as $mark) {
                 if($student->student_id == $mark->student_id) {
                     if(in_array($mark->subject_id, $ban_en_array)) {
-                        // continue;
+                        continue;
                     } else {
                         $total_marks = $total_marks + $mark->total;
                         if($mark->grade_point != 'N/A') {
