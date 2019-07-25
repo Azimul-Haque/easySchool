@@ -79,7 +79,7 @@
           ({{ $result['f_count'] }})
         @endif --}}
         <br/>
-        {{ $result['f_count'] }}
+        {{ implode(" ", $result['f_count']) }}
       </th>
       <th>
         @if($result['grade'] == 'F')
