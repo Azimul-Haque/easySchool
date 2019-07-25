@@ -569,7 +569,7 @@ class ExamController extends Controller
             foreach ($marks as $mark) {
                 if($student->student_id == $mark->student_id) {
                     if(in_array($mark->subject_id, $ban_en_array)) {
-                        continue;
+                        // continue;
                     } else {
                         $total_marks = $total_marks + $mark->total;
                         if($mark->grade_point != 'N/A') {
@@ -610,7 +610,7 @@ class ExamController extends Controller
             $result_sub['roll'] = (int)$student->roll;
             $result_sub['student_id'] = $student->student_id;
             $result_sub['grade'] = $grade;
-            $result_sub['f_count'] = $grade_array; //count(array_keys($grade_array, 'F'));
+            $result_sub['f_count'] = count(array_keys($grade_array, 'F'));
 
             $result_sub['school_id'] = Auth::user()->school_id;
             $result_sub['exam_id'] = $request->exam_id;
