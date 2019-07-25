@@ -75,9 +75,11 @@
       <th>{{ number_format($result['gpa'], 2) }}</th>
       <th>
         {{ $result['grade'] }}
-        @if($result['f_count'] > 0)
+        {{-- @if($result['f_count'] > 0)
           ({{ $result['f_count'] }})
-        @endif
+        @endif --}}
+        <br/>
+        {{ $result['f_count'] }}
       </th>
       <th>
         @if($result['grade'] == 'F')
