@@ -73,7 +73,12 @@
       <td>{{ $result['name'] }}</td>
       <th>{{ $result['total_marks'] }}</th>
       <th>{{ number_format($result['gpa'], 2) }}</th>
-      <th>{{ $result['grade'] }}</th>
+      <th>
+        {{ $result['grade'] }}
+        @if($result['f_count'] > 0)
+          ({{ $result['f_count'] }})
+        @endif
+      </th>
       <th>
         @if($result['grade'] == 'F')
           N/A
