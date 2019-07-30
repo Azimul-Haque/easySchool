@@ -85,6 +85,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/result/generation/page',['as'=>'exam.getresultgenpage','uses'=>'ExamController@getResultGenPage']);
 	Route::get('exam/result/list/generate/pdf/',['as'=>'exam.getresultlistpdf','uses'=>'ExamController@getResultListPDF']);
 	Route::get('exam/tabulation/sheet/generate/pdf/',['as'=>'exam.gettabulationsheetpdf','uses'=>'ExamController@getTabulationSheetPDF']);
+	Route::get('exam/excel/generate/',['as'=>'exam.getresultexcelforsms','uses'=>'ExamController@getExcelForSMS']);
 
 
 	// Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
