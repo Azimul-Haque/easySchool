@@ -1,10 +1,10 @@
 <table>
-    <thead>
+    {{-- <thead>
     <tr>
         <th>Mobile</th>
         <th>Message</th>
     </tr>
-    </thead>
+    </thead> --}}
     <tbody>
     @foreach($results as $result)
         <tr>
