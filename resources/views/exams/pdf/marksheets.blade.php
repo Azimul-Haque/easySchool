@@ -357,6 +357,7 @@
         </td>
       </tr>
     </table>
+    <small style="color: #C7CBD1;">Powered by: EasySchool.XYZ</small>
   </htmlpagefooter>
 </body>
 </html>
