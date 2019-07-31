@@ -133,7 +133,7 @@
       <th>Total</th>
       <th>Total%</th>
       <th width="6%">CA%</th>
-      <th width="13%">Grand Total</th>
+      <th width="9%">G. Total</th>
       <th width="8%">Highest</th>
       <th width="6%">GP</th>
       <th>Grade</th>
