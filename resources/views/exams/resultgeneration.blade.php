@@ -153,7 +153,7 @@
             <div class="form-group">
                 <input type="number" name="subject_count" class="form-control" placeholder="মোট বিষয় সংখ্যা" title="বাংলা ১ম ও ২য় মিলে একটি বিষয় এভাবে সর্বমোট বিষয় হিসাব করতে হবে">
             </div>
-          <button class="btn btn-warning btn-block" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> ট্যাবুলেশন শিট তৈরি করুন</button>
+          <button class="btn btn-warning btn-block" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> নম্বরপত্র (মার্কশিট) শিট তৈরি করুন</button>
           {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
