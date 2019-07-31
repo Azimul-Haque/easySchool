@@ -812,7 +812,7 @@ class ExamController extends Controller
                     $subject_mark['ca'] = $mark->ca;
                     $subject_mark['total_percentage'] = $mark->total_percentage;
                     $subject_mark['total'] = $mark->total;
-                    $subject_mark['grade_point'] = $mark->grade;
+                    $subject_mark['grade_point'] = $mark->grade_point;
                     $subject_mark['grade'] = $mark->grade;
                     $subjects_marks[] = $subject_mark;
                     $grade_array[] = $subject_mark['grade'];
