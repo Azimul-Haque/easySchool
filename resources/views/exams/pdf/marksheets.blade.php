@@ -176,9 +176,21 @@
                 {{ $subject_marks['ca'] }}
               @endif
             </td>
-            <td align="center">{{ $subject_marks['total'] }}</td>
-            <td align="center">{{ $subject_marks['grade_point'] }}</td>
-            <td align="center">{{ $subject_marks['grade'] }}</td>
+            @if(in_array($subject->subject_id, $ban_en_single_array))
+              <td align="center" rowspan="2">{{ $subject_marks['total'] }}</td>
+            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+              <td align="center">{{ $subject_marks['total'] }}</td>
+            @endif
+            @if(in_array($subject->subject_id, $ban_en_single_array))
+              <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
+            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+              <td align="center">{{ $subject_marks['grade_point'] }}</td>
+            @endif
+            @if(in_array($subject->subject_id, $ban_en_single_array))
+              <td align="center" rowspan="2">{{ $subject_marks['grade'] }}</td>
+            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+              <td align="center">{{ $subject_marks['grade'] }}</td>
+            @endif
           @endif
         @endforeach
         @if($key == 0)
