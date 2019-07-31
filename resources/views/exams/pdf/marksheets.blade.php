@@ -156,7 +156,21 @@
               @endif
             </td>
             <td align="center">{{ $subject_marks['written'] + $subject_marks['mcq'] + $subject_marks['practical'] }}</td>
-            <td align="center">{{ $subject_marks['total_percentage'] }}</td>
+            @php
+              $ban_en_array = [1, 2, 3, 4];
+              $ban_en_single_array = [1, 3];
+              $ban_en_single_array_for_gr = [2, 4];
+              $rowspan_general = 2;
+              if(in_array($subject->subject_id, $ban_en_array)) {
+                $rowspan_general = 3;
+              }
+            @endphp
+            @if(in_array($subject->subject_id, $ban_en_single_array))
+              <td align="center" rowspan="2">{{ $subject_marks['total_percentage'] }}</td>
+            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+              <td align="center">{{ $subject_marks['total_percentage'] }}</td>
+            @endif
+            
             <td align="center">
               @if($subject->ca > 0)
                 {{ $subject_marks['ca'] }}
