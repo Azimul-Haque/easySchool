@@ -639,7 +639,7 @@ class ExamController extends Controller
         // dd($results_coll);
 
         $pdf = PDF::loadView('exams.pdf.resultlist', ['results' => $results_coll], ['data' => [$exam->name, $exam->exam_session, $class, $section]]);
-        $fileName = 'Class_'.$class.'_'.$section.'_Result_List' . '.pdf';
+        $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Result_List' . '.pdf';
         return $pdf->stream($fileName);
         
     }
@@ -760,7 +760,7 @@ class ExamController extends Controller
         //dd($results_coll);
 
         $pdf = PDF::loadView('exams.pdf.tabulationsheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
-        $fileName = 'Class_'.$class.'_'.$section.'_Tabulation_Sheet' . '.pdf';
+        $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Tabulation_Sheet' . '.pdf';
         return $pdf->stream($fileName);
     }
 
@@ -885,7 +885,7 @@ class ExamController extends Controller
         //dd($results_coll);
 
         $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'A4']);
-        $fileName = 'Class_'.$class.'_'.$section.'_Mark_Sheets' . '.pdf';
+        $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Mark_Sheets' . '.pdf';
         return $pdf->stream($fileName);
 
         // taking only 10... see 789

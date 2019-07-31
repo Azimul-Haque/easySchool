@@ -121,7 +121,7 @@
   </table>
   <table>
     <tr>
-      <td align="center" style="padding-top: 10px; padding-bottom: 5px;"><b>SUBJECT-WISE GRADE & MARK SHEET</b></td>
+      <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>SUBJECT-WISE GRADE & MARK SHEET</b></td>
     </tr>
   </table>
   <table class="markstable">
@@ -167,15 +167,6 @@
             <td align="center">{{ $subject_marks['grade'] }}</td>
           @endif
         @endforeach
-        {{-- <td align="center">Written</td>
-        <td align="center">MCQ</td>
-        <td align="center">Practical</td>
-        <td align="center">Total</td>
-        <td align="center">Total %</td>
-        <td align="center">CA %</td>
-        <td align="center">Grand Total</td>
-        <td align="center">GP</td>
-        <td align="center">Grade</td> --}}
         @if($key == 0)
           <td rowspan="{{ count($data[3]) }}" align="center">{{ $result['gpa'] }}</td>
           <td rowspan="{{ count($data[3]) }}" align="center">{{ $result['grade'] }}</td>
@@ -189,6 +180,139 @@
       <th colspan="4"></th>
     </tr>
   </table>
+  <table>
+    <tr>
+      <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>ATTENDANCE REPORT</b></td>
+    </tr>
+  </table>
+  <table class="markstable">
+    <tr>
+      <th width="15%">Month</th>
+      <th>Jan</th>
+      <th>Feb</th>
+      <th>Mar</th>
+      <th>Apr</th>
+      <th>May</th>
+      <th>Jun</th>
+      <th>Jul</th>
+      <th>Aug</th>
+      <th>Sep</th>
+      <th>Oct</th>
+      <th>Nov</th>
+      <th>Dec</th>
+    </tr>
+    <tr>
+      <td align="center">Working Days</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td align="center">Presence</td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+      <td></td>
+    </tr>
+  </table>
+  <div style="width: 50%; float: left;">
+    <table>
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>OVERALL REPORT</b></td>
+      </tr>
+    </table>
+    <table class="markstable" style="margin-right: 10px;">
+      <tr>
+        <th>Subject Code</th>
+        <th>Total Marks</th>
+        <th>GP</th>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <td style="height: 16px;"></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <tr>
+        <th>Total</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </table>
+  </div>
+  <div style="width: 50%; float: left;">
+    <table>
+      <tr>
+        <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>EXTRA ACTIVITIES</b></td>
+      </tr>
+    </table>
+    <table class="markstable" style="margin-left: 10px;">
+      <tr>
+        <td width="60%" align="center">Cultural activity/ Dramatic Performance</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td align="center">Scout/BNCC /Red Crescent</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td align="center">Games and Sports</td>
+        <td></td>
+      </tr>
+      <tr>
+        <td align="center">Math / Science Olympiad</td>
+        <td></td>
+      </tr>
+      <tr>
+        <th colspan="2">ACHIEVEMENT</th>
+      </tr>
+      <tr>
+        <th>Examination : 1 / 2</th>
+        <td></td>
+      </tr>
+    </table>
+  </div>
   <pagebreak></pagebreak>
   @php
     $merit_counter++;
