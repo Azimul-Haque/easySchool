@@ -27,7 +27,7 @@
   .markstable tr th, .markstable tr td{
     padding: 2px;
     font-family: Calibri, sans-serif;
-    font-size: 13px;
+    font-size: 12px;
   }
   .nostyletd {
     border: 0px solid white !important;
