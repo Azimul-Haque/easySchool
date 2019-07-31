@@ -182,7 +182,11 @@
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
               <td align="center">{{ $subject_marks['total'] }}</td>
             @endif
-            <td align="center">{{ $subject_marks['total'] }}</td>
+            @if(in_array($subject->subject_id, $ban_en_single_array))
+              <td align="center" rowspan="2">{{ $subject_marks['total'] }}</td>
+            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+              <td align="center">{{ $subject_marks['total'] }}</td>
+            @endif
             @if(in_array($subject->subject_id, $ban_en_single_array))
               <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
