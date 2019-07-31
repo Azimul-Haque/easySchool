@@ -134,7 +134,7 @@
       <th>Total %</th>
       <th>CA %</th>
       <th>Grand Total</th>
-      <th>GP</th>
+      <th width="6%">GP</th>
       <th>Grade</th>
       <th>GPA</th>
       <th>Grade</th>
@@ -142,25 +142,50 @@
     @foreach($data[3] as $key => $subject)
       <tr>
         <td align="center">{{ $subject->subject->name_english }}</td>
-        <td>Written</td>
-        <td>MCQ</td>
-        <td>Practical</td>
-        <td>Total</td>
-        <td>Total %</td>
-        <td>CA %</td>
-        <td>Grand Total</td>
-        <td>GP</td>
-        <td>Grade</td>
+        @foreach($result['subjects_marks'] as $subject_marks)
+          @if($subject->subject_id == $subject_marks['subject_id'])
+            <td align="center">{{ $subject_marks['written'] }}</td>
+            <td align="center">
+              @if($subject->mcq > 0)
+                {{ $subject_marks['mcq'] }}
+              @endif
+            </td>
+            <td align="center">
+              @if($subject->practical > 0)
+                {{ $subject_marks['practical'] }}
+              @endif
+            </td>
+            <td align="center">{{ $subject_marks['written'] + $subject_marks['mcq'] + $subject_marks['practical'] }}</td>
+            <td align="center">{{ $subject_marks['total_percentage'] }}</td>
+            <td align="center">
+              @if($subject->ca > 0)
+                {{ $subject_marks['ca'] }}
+              @endif
+            </td>
+            <td align="center">{{ $subject_marks['total'] }}</td>
+            <td align="center">{{ $subject_marks['grade_point'] }}</td>
+            <td align="center">{{ $subject_marks['grade'] }}</td>
+          @endif
+        @endforeach
+        {{-- <td align="center">Written</td>
+        <td align="center">MCQ</td>
+        <td align="center">Practical</td>
+        <td align="center">Total</td>
+        <td align="center">Total %</td>
+        <td align="center">CA %</td>
+        <td align="center">Grand Total</td>
+        <td align="center">GP</td>
+        <td align="center">Grade</td> --}}
         @if($key == 0)
-          <td rowspan="{{ count($data[3]) }}">GPA</td>
-          <td rowspan="{{ count($data[3]) }}">Grade</td>
+          <td rowspan="{{ count($data[3]) }}" align="center">{{ $result['gpa'] }}</td>
+          <td rowspan="{{ count($data[3]) }}" align="center">{{ $result['grade'] }}</td>
         @endif
       </tr>
     @endforeach
     <tr>
       <th>Total</th>
       <th colspan="6"></th>
-      <th></th>
+      <th>{{ $result['total_marks'] }}</th>
       <th colspan="4"></th>
     </tr>
   </table>
