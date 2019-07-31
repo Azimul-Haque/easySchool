@@ -132,7 +132,7 @@
       <th>Practical</th>
       <th>Total</th>
       <th>Total %</th>
-      <th>CA %</th>
+      <th width="6%">CA %</th>
       <th>Grand Total</th>
       <th width="6%">GP</th>
       <th>Grade</th>
