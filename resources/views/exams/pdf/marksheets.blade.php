@@ -126,7 +126,7 @@
   </table>
   <table class="markstable">
     <tr>
-      <th>Subject</th>
+      <th width="20%">Subject</th>
       <th>Written</th>
       <th>MCQ</th>
       <th>Practical</th>
