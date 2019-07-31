@@ -786,7 +786,7 @@ class ExamController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
-                           ->get()->take(10); // taking only 10
+                           ->get(); // taking only 10
         $examsubjects = Examsubject::where('exam_id', $request->exam_id)
                                   ->where('class', $class)
                                   ->orderBy('subject_id', 'asc')
@@ -882,9 +882,20 @@ class ExamController extends Controller
         }
         array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results); // $result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, 
         $results_coll = collect($results);
-        //dd($results_coll);
+        // dd($results_coll);
 
-        $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'A4']);
+        // get the highest marks each subjects
+        $highest = [];
+        foreach ($results as $result) {
+            foreach ($result['subjects_marks'] as $marks) {
+                $highest[$marks['subject_id']][] = $marks['total'];
+                rsort($highest[$marks['subject_id']]);
+            }
+        }
+        // dd($highest);
+        // get the highest marks each subjects
+
+        $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects, $highest]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Mark_Sheets' . '.pdf';
         return $pdf->stream($fileName);
 

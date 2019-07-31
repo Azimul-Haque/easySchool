@@ -182,11 +182,16 @@
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
               <td align="center">{{ $subject_marks['total'] }}</td>
             @endif
-            @if(in_array($subject->subject_id, $ban_en_single_array))
-              <td align="center" rowspan="2">{{ $subject_marks['total'] }}</td>
-            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-              <td align="center">{{ $subject_marks['total'] }}</td>
-            @endif
+
+            @foreach($data[4] as $highestkey => $highest)
+              @if($subject->subject_id == $highestkey)
+                @if(in_array($subject->subject_id, $ban_en_single_array))
+                  <td align="center" rowspan="2">{{ $highest[0] }}</td>
+                @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                  <td align="center">{{ $highest[0] }}</td>
+                @endif
+              @endif
+            @endforeach
             @if(in_array($subject->subject_id, $ban_en_single_array))
               <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
