@@ -131,9 +131,10 @@
       <th>MCQ</th>
       <th>Practical</th>
       <th>Total</th>
-      <th>Total %</th>
-      <th width="6%">CA %</th>
+      <th>Total%</th>
+      <th width="6%">CA%</th>
       <th width="13%">Grand Total</th>
+      <th width="8%">Highest</th>
       <th width="6%">GP</th>
       <th>Grade</th>
       <th>GPA</th>
@@ -181,6 +182,7 @@
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
               <td align="center">{{ $subject_marks['total'] }}</td>
             @endif
+            <td align="center">{{ $subject_marks['total'] }}</td>
             @if(in_array($subject->subject_id, $ban_en_single_array))
               <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
             @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
@@ -203,7 +205,7 @@
       <th>Total</th>
       <th colspan="6"></th>
       <th>{{ $result['total_marks'] }}</th>
-      <th colspan="4"></th>
+      <th colspan="5"></th>
     </tr>
   </table>
   <table>
@@ -357,7 +359,7 @@
         </td>
       </tr>
     </table>
-    <small style="color: #C7CBD1;">Powered by: EasySchool.XYZ</small>
+    <span style="color: #999A9C; font-size: 10px;">Powered by: EasySchool.XYZ</span>
   </htmlpagefooter>
 </body>
 </html>
