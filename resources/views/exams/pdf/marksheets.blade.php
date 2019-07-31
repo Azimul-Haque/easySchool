@@ -36,7 +36,8 @@
     width: 85px;
   }
   .grade_table {
-    width: 180px;
+    width: 175px;
+    height: auto;
   }
   @page {
     header: page-header;
@@ -77,7 +78,6 @@
       </td>
     </tr>
   </table>
-  <br/>
   <table>
     <tr>
       <td>Class: {{ en_class($data[1]) }}</td>
@@ -121,7 +121,7 @@
   </table>
   <table>
     <tr>
-      <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>SUBJECT-WISE GRADE & MARK SHEET</b></td>
+      <td align="center" style="padding-top: 8px; padding-bottom: 3px;"><b>SUBJECT-WISE GRADE & MARK SHEET</b></td>
     </tr>
   </table>
   <table class="markstable">
@@ -182,7 +182,7 @@
   </table>
   <table>
     <tr>
-      <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>ATTENDANCE REPORT</b></td>
+      <td align="center" style="padding-top: 8px; padding-bottom: 3px;"><b>ATTENDANCE REPORT</b></td>
     </tr>
   </table>
   <table class="markstable">
@@ -235,7 +235,7 @@
   <div style="width: 50%; float: left;">
     <table>
       <tr>
-        <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>OVERALL REPORT</b></td>
+        <td align="center" style="padding-top: 8px; padding-bottom: 3px;"><b>OVERALL REPORT</b></td>
       </tr>
     </table>
     <table class="markstable" style="margin-right: 10px;">
@@ -284,7 +284,7 @@
   <div style="width: 50%; float: left;">
     <table>
       <tr>
-        <td align="center" style="padding-top: 10px; padding-bottom: 3px;"><b>EXTRA ACTIVITIES</b></td>
+        <td align="center" style="padding-top: 8px; padding-bottom: 3px;"><b>EXTRA ACTIVITIES</b></td>
       </tr>
     </table>
     <table class="markstable" style="margin-left: 10px;">
