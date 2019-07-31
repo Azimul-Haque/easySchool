@@ -95,7 +95,7 @@
     </tr>
     <tr>
       <td>Mother's Name: {{ $result['mother'] }}</td>
-      <td>GPA: {{ $result['roll'] }}</td>
+      <td>GPA: {{ $result['gpa'] }}</td>
     </tr>
     <tr>
       <td>Date of Birth: {{ date('F d, Y', strtotime($result['dob'])) }}</td>
