@@ -885,6 +885,7 @@ class ExamController extends Controller
         // dd($results_coll);
 
         // get the highest marks each subjects
+        // get the highest marks each subjects
         $highest = [];
         foreach ($results as $result) {
             foreach ($result['subjects_marks'] as $marks) {
@@ -894,16 +895,11 @@ class ExamController extends Controller
         }
         // dd($highest);
         // get the highest marks each subjects
+        // get the highest marks each subjects
 
         $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects, $highest]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Mark_Sheets' . '.pdf';
         return $pdf->stream($fileName);
-
-        // taking only 10... see 789
-        // taking only 10... see 789
-        // taking only 10... see 789
-        // taking only 10... see 789
-        // taking only 10... see 789
     }
 
     public function getExcelForSMS(Request $request)
