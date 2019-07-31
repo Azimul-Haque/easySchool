@@ -320,14 +320,12 @@
   @endforeach
 
   <htmlpagefooter name="page-footer">
-    <table class="markstable">
+    <table class="">
       <tr>
-        <td align="left" valign="bottom">.................................<br/>Signature (Guardian) </td>
-        <td align="center" valign="bottom">.........................................<br/>Signature (Class Teacher) </td>
-        <td align="right" valign="bottom">
-          <center>
-            <img class="grade_table" src="{{ public_path('images/schools/signs/'. Auth::user()->school->headmaster_sign) }}">
-          </center>
+        <td align="left" valign="bottom" width="33.33%">.................................<br/>Signature (Guardian) </td>
+        <td align="center" valign="bottom" width="33.33%">.........................................<br/>Signature (Class Teacher) </td>
+        <td align="right" valign="bottom" width="33.33%">
+          <img class="grade_table" src="{{ public_path('images/schools/signs/'. Auth::user()->school->headmaster_sign) }}">
           .......................................
           <br/>Signature (Head Master)
         </td>
