@@ -764,6 +764,135 @@ class ExamController extends Controller
         return $pdf->stream($fileName);
     }
 
+    public function getMarkSheetsPdf(Request $request)
+    {
+        $this->validate($request, [
+            'exam_id'         => 'required',
+            'class_section'   => 'required',
+            'subject_count'   => 'required'
+        ]);
+
+        $exam = Exam::where('id', $request->exam_id)->first();
+
+        $class_section_array = explode('_', $request->class_section);
+        $class   = $class_section_array[0];
+        $section = $class_section_array[1];
+        
+        $marks = Mark::where('exam_id', $request->exam_id)
+                     ->where('class', $class)
+                     ->where('section', $section)
+                     ->get();
+        $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('class', $class)
+                           ->where('section', $section)
+                           ->orderBy('roll', 'ASC')
+                           ->get()->take(10); // taking only 10
+        $examsubjects = Examsubject::where('exam_id', $request->exam_id)
+                                  ->where('class', $class)
+                                  ->orderBy('subject_id', 'asc')
+                                  ->get();
+
+        // skip if ban 2 or en 2, because numbers are counted in ban 1 and en 1
+        $ban_en_array = [2, 4];
+        foreach ($students as $student) {
+            $total_marks = 0;
+            $total_grade_point = 0;
+            $sorting_sub_math = 0;
+            $sorting_sub_en = 0;
+            $sorting_sub_ban = 0;
+            $subjects_marks = [];
+            $grade_array = [];
+            foreach ($marks as $mark) {
+                if($student->student_id == $mark->student_id) {
+                    $subject_mark['student_id'] = $mark->student_id;
+                    $subject_mark['subject_id'] = $mark->subject_id;
+                    $subject_mark['written'] = $mark->written;
+                    $subject_mark['mcq'] = $mark->mcq;
+                    $subject_mark['practical'] = $mark->practical;
+                    $subject_mark['ca'] = $mark->ca;
+                    $subject_mark['total'] = $mark->total;
+                    $subject_mark['grade'] = $mark->grade;
+                    $subjects_marks[] = $subject_mark;
+                    $grade_array[] = $subject_mark['grade'];
+
+                    if(in_array($mark->subject_id, $ban_en_array)) {
+                        continue;
+                    } else {
+                        $total_marks = $total_marks + $mark->total;
+                        if($mark->grade_point != 'N/A') {
+                            $total_grade_point = $total_grade_point + $mark->grade_point;
+                        } else {
+                            $total_grade_point = $total_grade_point * 0;
+                        }
+                    }
+                    if($mark->subject_id == 1) {
+                        $sorting_sub_ban = $mark->total; // bangla
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_en = $mark->total; // english
+                    } elseif($mark->subject_id == 3) {
+                        $sorting_sub_math = $mark->total; // math
+                    }
+                }
+            }
+            if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
+                $total_grade_point = 0;
+            }
+            $gpa = $total_grade_point/$request->subject_count;
+            if($gpa > 5.00) {
+                $gpa = 5.00;
+            }
+            $gpa = number_format($gpa, 2);
+            $grade = avg_grade($gpa);
+            if(($grade == 'F') || ($grade == 'N/A')) {
+                $gpa = number_format(0, 2);
+            }
+            $result_sub['gpa'] = (float)$gpa;
+            $result_sub['total_marks'] = (int)$total_marks;
+            $result_sub['sorting_sub_math'] = (int)$sorting_sub_math;
+            $result_sub['sorting_sub_en'] = (int)$sorting_sub_en;
+            $result_sub['sorting_sub_ban'] = (int)$sorting_sub_ban;
+            $result_sub['roll'] = (int)$student->roll;
+            $result_sub['student_id'] = $student->student_id;
+            $result_sub['grade'] = $grade;
+            $result_sub['subjects_marks'] = $subjects_marks;
+
+            $result_sub['school_id'] = Auth::user()->school_id;
+            $result_sub['exam_id'] = $request->exam_id;
+            $result_sub['class'] = $class;
+            $result_sub['section'] = $section;
+            $result_sub['name'] = $student->name;
+            $result_sub['father'] = $student->father;
+            $result_sub['mother'] = $student->mother;
+            $result_sub['dob'] = $student->dob;
+            
+            $results[$student->student_id] = $result_sub;
+        }
+        
+        //rsort($results);
+        foreach ($results as $key => $row)
+        {
+            $result_array_gpa[$key] = $row['gpa'];
+            $result_array_total_marks[$key] = $row['total_marks'];
+            $result_array_sorting_sub_math[$key] = $row['sorting_sub_math'];
+            $result_array_sorting_sub_en[$key] = $row['sorting_sub_en'];
+            $result_array_sorting_sub_ban[$key] = $row['sorting_sub_ban'];
+            $result_array_roll[$key] = $row['roll'];
+        }
+        array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results); // $result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, 
+        $results_coll = collect($results);
+        //dd($results_coll);
+
+        $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = 'Class_'.$class.'_'.$section.'_Mark_Sheets' . '.pdf';
+        return $pdf->stream($fileName);
+
+        // taking only 10... see 789
+        // taking only 10... see 789
+        // taking only 10... see 789
+        // taking only 10... see 789
+        // taking only 10... see 789
+    }
+
     public function getExcelForSMS(Request $request)
     {
         $this->validate($request, [

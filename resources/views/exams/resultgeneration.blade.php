@@ -124,15 +124,37 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          {{-- {!! Form::open(['route' => 'reports.getcommoditypdf', 'method' => 'GET']) !!}
+          {!! Form::open(['route' => 'exam.getmarksheetspdf', 'method' => 'GET', 'target' => '_blank']) !!}
             <div class="form-group">
-              {!! Form::text('from', null, array('class' => 'form-control text-orange', 'required' => '', 'placeholder' => 'Enter From Date', 'id' => 'fromcomexDate', 'autocomplete' => 'off')) !!}
+              <select name="exam_id" class="form-control" required="">
+                <option value="" selected="" disabled="">পরীক্ষার নাম নির্ধারণ করুন</option>
+                @foreach($exams as $exam)
+                <option value="{{ $exam->id }}">{{ exam($exam->name) }}-{{ bangla($exam->exam_session) }}</option>
+                @endforeach
+              </select>
             </div>
             <div class="form-group">
-              {!! Form::text('to', null, array('class' => 'form-control text-orange', 'required' => '', 'placeholder' => 'Enter To Date', 'id' => 'tocomexDate', 'autocomplete' => 'off')) !!}
+              <select name="class_section" class="form-control" required="">
+                <option value="" selected="" disabled="">শ্রেণি ও শাখা নির্ধারণ করুন</option>
+                @php
+                  $school_classes = explode(',', Auth::user()->school->classes)
+                @endphp
+                @foreach($school_classes as $class)
+                  @if(Auth::user()->school->sections > 0)
+                    @for($seccount=1; $seccount<=Auth::user()->school->sections; $seccount++)
+                      <option value="{{ $class }}_{{ $seccount }}">{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $seccount) }}</option>
+                    @endfor
+                  @else
+                    <option value="{{ $class }}_0">{{ bangla_class($class) }}</option>
+                  @endif
+                @endforeach
+              </select>
             </div>
-          <button class="btn btn-warning" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> Get Report</button>
-          {!! Form::close() !!} --}}
+            <div class="form-group">
+                <input type="number" name="subject_count" class="form-control" placeholder="মোট বিষয় সংখ্যা" title="বাংলা ১ম ও ২য় মিলে একটি বিষয় এভাবে সর্বমোট বিষয় হিসাব করতে হবে">
+            </div>
+          <button class="btn btn-warning btn-block" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> ট্যাবুলেশন শিট তৈরি করুন</button>
+          {!! Form::close() !!}
         </div>
         <!-- /.box-body -->
       </div>

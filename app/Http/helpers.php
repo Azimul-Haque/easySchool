@@ -32,6 +32,19 @@ function bangla_class($str){
       }
       
 }
+
+function en_class($str){
+      $en = array(1,2,3,4,5,6,7,8,9,10);
+      $bn = array('One','Two','Three','Four','Five','Six','Seven','Eight','Nine','Ten');
+      $str = str_replace($en, $bn, $str);
+      if($str == 'One0') {
+          return 'Ten';
+      } else {
+          return $str;
+      }
+      
+}
+
 function bangla_section($section_type, $class, $section){
       if($section_type == 1) {
             $en = array(0, 1, 2, 3, 4, 5);
@@ -95,6 +108,25 @@ function exam($exam_name){
             $exam = 'দ্বিতীয় সাময়িক পূর্ব প্রস্তুতি';
       }  elseif ($exam_name == 'final_preparation') {
             $exam = 'বার্ষিক পূর্ব প্রস্তুতি';
+      } 
+      return $exam;
+}
+
+function exam_en($exam_name){
+      if($exam_name == 'first_term') {
+            $exam = 'First Term';
+      } elseif ($exam_name == 'second_term') {
+            $exam = 'Second Term';
+      } elseif ($exam_name == 'halfyearly') {
+            $exam = 'Half Yearly';
+      } elseif ($exam_name == 'final') {
+            $exam = 'Final';
+      } elseif ($exam_name == 'first_term_preparation') {
+            $exam = 'First Term Preparation';
+      } elseif ($exam_name == 'second_term_preparation') {
+            $exam = 'Second Term Preparation';
+      }  elseif ($exam_name == 'final_preparation') {
+            $exam = 'Final Preparation';
       } 
       return $exam;
 }
