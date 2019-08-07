@@ -680,7 +680,7 @@ class StudentController extends Controller
                            ->where('session', $session)
                            ->where('class', $class)
                            ->where('section', $section)
-                           ->where('admission_date', '>', Auth::user()->school->admission_test_datetime)
+                           // ->where('admission_date', '>', Auth::user()->school->admission_test_datetime)
                            ->orderBy('roll', 'ASC')
                            ->get();
         $pdf = PDF::loadView('students.pdf.admissioninfo', ['students' => $students], ['data' => [$session, $class, $section]], ['mode' => 'utf-8', 'format' => 'A4-L', 'margin_top' => 30]);
