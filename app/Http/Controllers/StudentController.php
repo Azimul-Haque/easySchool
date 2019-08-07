@@ -151,6 +151,7 @@ class StudentController extends Controller
         $student = new Student;
         $student->school_id = Auth::user()->school_id;
         $student->student_id = $student_id;
+        $student->admission_date = date("Y-m-d H:i:s");
 
         $student->roll = $request->roll;
         $student->class = $request->class;
