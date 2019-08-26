@@ -123,3 +123,6 @@ Route::get('schools/getschools/api/{district}/{upazilla}',['as'=>'schools.getsch
 Route::get('admission/form/copy/pdf/{application_id}',['as'=>'admissions.pdfapplicantscopy','uses'=>'AdmissionController@pdfApplicantsCopy']);
 Route::get('admission/form/admitcard/pdf/{application_id}',['as'=>'admissions.pdfadmitcard','uses'=>'AdmissionController@pdfAdmitCard']);
 
+// Map Test
+Route::get('map/test',['as'=>'map.test','uses'=>'MapController@test']);
+

@@ -83,7 +83,7 @@ class SettingController extends Controller
               $filename = $school->monogram;
             }
             $location   = public_path('/images/schools/monograms/'. $filename);
-            Image::make($image)->resize(200, 200)->save($location);
+            Image::make($image)->resize(200, 200)->save($location); // ->opacity(50) diye arekta save korte hobe background er jonno...
             $school->monogram = $filename;
         }
         
