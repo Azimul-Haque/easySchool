@@ -12,7 +12,8 @@ class MapController extends Controller
 {
     public function test()
     {
-        Mapper::map(53.381128999999990000, -1.470085000000040000);
+        Mapper::map(23.777176, 90.399452, ['zoom' => 7.5]);
+        Mapper::marker(25.9948918,88.3330153);
 
     	return view('map.index');
     }
