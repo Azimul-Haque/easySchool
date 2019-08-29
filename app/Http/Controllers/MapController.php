@@ -7,14 +7,19 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use Mapper;
+use App\Districtscord;
 
 class MapController extends Controller
 {
+    public function __construct()
+    {
+        
+    }
+    
     public function test()
     {
-        Mapper::map(23.777176, 90.399452, ['zoom' => 7.5]);
-        Mapper::marker(25.9948918,88.3330153);
+        $districts = Districtscord::where('cordx', '>', 0)->get();
 
-    	return view('map.index');
+    	return view('map.index')->withDistricts($districts);
     }
 }
