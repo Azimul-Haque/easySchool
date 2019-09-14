@@ -133,6 +133,12 @@ function exam_en($exam_name){
             $exam = 'Second Term Preparation';
       }  elseif ($exam_name == 'final_preparation') {
             $exam = 'Final Preparation';
+      } elseif ($exam_name == 'model_test') {
+            $exam = 'Model Test';
+      } elseif ($exam_name == 'pre_test') {
+            $exam = 'Pre-Test';
+      } elseif ($exam_name == 'test_exam') {
+            $exam = 'Test';
       } 
       return $exam;
 }
