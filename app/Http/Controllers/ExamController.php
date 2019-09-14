@@ -281,6 +281,7 @@ class ExamController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->where('session', Auth::user()->exam->exam_session)
+                           ->orderBy('roll', 'asc')
                            ->get();
         $examsubject = Examsubject::where('exam_id', $exam_id)
                                   ->where('subject_id', $subject_id)
