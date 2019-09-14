@@ -38,6 +38,9 @@
                         <option value="first_term_preparation">প্রথম সাময়িক পূর্ব প্রস্তুতি (First Term Preparation)</option>
                         <option value="second_term_preparation">দ্বিতীয় সাময়িক পূর্ব প্রস্তুতি (Second Term Preparation)</option>
                         <option value="final_preparation">বার্ষিক পূর্ব প্রস্তুতি (Final Preparation)</option>
+                        <option value="model_test">মডেল টেস্ট (Model Test)</option>
+                        <option value="pre_test">প্রাক-নির্বাচনী (Pre-Test)</option>
+                        <option value="test_exam">নির্বাচনী (Test)</option>
                       </select>
                     </div>
                   </div>

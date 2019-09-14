@@ -108,6 +108,12 @@ function exam($exam_name){
             $exam = 'দ্বিতীয় সাময়িক পূর্ব প্রস্তুতি';
       }  elseif ($exam_name == 'final_preparation') {
             $exam = 'বার্ষিক পূর্ব প্রস্তুতি';
+      } elseif ($exam_name == 'model_test') {
+            $exam = 'মডেল টেস্ট';
+      } elseif ($exam_name == 'pre_test') {
+            $exam = 'প্রাক-নির্বাচনী';
+      } elseif ($exam_name == 'test_exam') {
+            $exam = 'নির্বাচনী';
       } 
       return $exam;
 }

@@ -158,9 +158,7 @@ class ExamController extends Controller
         }
 
         Session::flash('success', 'পরীক্ষাটি সংযুক্ত করা হয়েছে!');
-        return redirect()->route('exams.index');
-
-        
+        return redirect()->route('exams.index');        
     }
 
     public function makeCurrent(Request $request, $id)
@@ -182,6 +180,23 @@ class ExamController extends Controller
         Session::flash('success', 'পরীক্ষাটিকে চলতি পরীক্ষা হিসাবে নির্ধারণ করা হয়েছে!');
         return redirect()->route('exams.index');
     }
+
+    // public function removeCurrent(Request $request, $id)
+    // {
+    //     $oldExam = Exam::where('school_id', Auth::user()->school_id)
+    //                    ->where('currentexam', 1)
+    //                    ->first();
+    //     if(($oldExam != null) && ($oldExam->count() > 0)) {
+    //         $oldExam->currentexam = 0;
+    //         $oldExam->save();
+    //     }
+
+    //     // update all teachers current exam
+    //     $users = DB::table('users')->where('school_id', Auth::user()->school_id)->update(array('exam_id' => $id));
+
+    //     Session::flash('success', 'পরীক্ষাটিকে চলতি পরীক্ষা হিসাবে নির্ধারণ করা হয়েছে!');
+    //     return redirect()->route('exams.index');
+    // }
 
     public function getSubjectallocation()
     {

@@ -75,6 +75,7 @@ Route::group(['middleware' => ['auth']], function() {
 
 
 	Route::patch('exam/make/current/{id}',['as'=>'exam.makecurrent','uses'=>'ExamController@makeCurrent']);
+	// Route::patch('exam/remove/current/{id}',['as'=>'exam.removecurrent','uses'=>'ExamController@removeCurrent']);
 	Route::get('exam/subject/allocation',['as'=>'exam.getsubjectallocation','uses'=>'ExamController@getSubjectallocation']);
 	Route::post('exam/subject/allocation',['as'=>'exam.postsubjectallocation','uses'=>'ExamController@storeSubjectallocation']);
 	Route::get('exam/mark/submission/{user_id}/{school_id}/{exam_id}/{subject_id}/{class}/{section}',['as'=>'exam.getsubmissionpage','uses'=>'ExamController@getSubmissionPage']);
