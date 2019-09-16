@@ -2,8 +2,8 @@
 
 return [
   // SMS Gateway API Url
-  'url'      => env('SMS_GATEWAY_URL', 'http://66.45.237.70/api.php'),
+  'url'      => env('SMS_GATEWAY_URL'),
 
-  'username' => env('SMS_GATEWAY_USERNAME', '01751398392'),
-  'password' => env('SMS_GATEWAY_PASSWORD', 'Bulk.Sms.Bd.123'),
+  'username' => env('SMS_GATEWAY_USERNAME'),
+  'password' => env('SMS_GATEWAY_PASSWORD'),
 ];
