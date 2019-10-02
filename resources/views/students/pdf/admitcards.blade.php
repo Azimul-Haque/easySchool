@@ -67,10 +67,10 @@
               </table>
               <table>
                 <tr>
-                  <td width="20%"></td>
-                  <td width="40%">CLASS: {{ $student->class }}</td>
-                  <td width="30%">SECTION/ GROUP: {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}</td>
                   <td width="10%"></td>
+                  <td width="40%" align="center">CLASS: {{ $student->class }}</td>
+                  <td width="50%" align="center">SECTION/ GROUP: {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}</td>
+                  {{-- <td width="10%"></td> --}}
                 </tr>
               </table>
               <table class="maintable">
