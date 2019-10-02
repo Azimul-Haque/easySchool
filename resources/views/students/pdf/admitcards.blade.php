@@ -48,7 +48,7 @@
                       {{ strtoupper($student->school->address) }}, 
                       {{ strtoupper($student->school->upazilla) }}, 
                       {{ strtoupper($student->school->district) }}<br/>
-                      {{ strtoupper($student->school->currentexam) }}-{{ $student->school->currentsession }}<br/>
+                      {{ exam_en(Auth::user()->exam->name) }}-{{ $student->school->currentsession }}<br/>
                       <u><b>ADMIT CARD</b></u>
                     </span>
                   </td>
