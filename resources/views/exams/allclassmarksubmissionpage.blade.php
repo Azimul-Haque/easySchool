@@ -45,53 +45,84 @@
             $exam_classes_counter = 1;
           @endphp
           @foreach($exam_classes as $class)
-          <div class="col-md-6">
-            <div class="table-responsive">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th colspan="{{ Auth::user()->school->sections }}">
-                      <center><span style="font-size: 18px;">{{ bangla_class($class) }}</span></center>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <table class="table">
-                        <thead>
-                          <tr>
-                            @for($secscount = 1; $secscount <= Auth::user()->school->sections; $secscount++)
-                            <th>
-                              <center>
-                                {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }}
-                              </center>
-                            </th>
-                            @endfor
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr>
-                            @for($secscount = 1; $secscount <= Auth::user()->school->sections; $secscount++)
-                            <td>
-                              @foreach(Auth::user()->exam->examsubjects->where('class', (int)$class) as $subject)
+            <div class="col-md-6">
+              <div class="table-responsive">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th colspan="{{ Auth::user()->school->sections }}">
+                        <center><span style="font-size: 18px;">{{ bangla_class($class) }}</span></center>
+                      </th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <table class="table">
+                          <thead>
+                            <tr>
+                              @for($secscount = 1; $secscount <= Auth::user()->school->sections; $secscount++)
+                              <th>
                                 <center>
-                                  <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
-                                    {{ $subject->subject->name_bangla }}
-                                  </a><br/>
+                                  {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }}
                                 </center>
-                              @endforeach
-                            </td>
-                            @endfor
-                          </tr>
-                        </tbody>
-                      </table>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+                              </th>
+                              @endfor
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                              @for($secscount = 1; $secscount <= Auth::user()->school->sections; $secscount++)
+                              <td>
+                                @foreach(Auth::user()->exam->examsubjects->where('class', (int)$class) as $subject)
+                                  @if($class < 9)
+                                  <center>
+                                    <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
+                                      {{ $subject->subject->name_bangla }}
+                                    </a><br/>
+                                  </center>
+                                  @else
+                                    @php
+                                      $science_arts_array = [16, 17, 18, 22, 23, 24];
+                                      $science_commerce_array = [16, 17, 18, 27, 28, 29];
+                                      $arts_commerce_array = [22, 23, 24, 27, 28, 29];
+                                    @endphp
+                                    @if($secscount == 1 && !(in_array($subject->subject_id, $arts_commerce_array)))
+                                      {{-- for science --}}
+                                      <center>
+                                        <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
+                                          {{ $subject->subject->name_bangla }}
+                                        </a><br/>
+                                      </center>
+                                    @elseif($secscount == 2 && !(in_array($subject->subject_id, $science_commerce_array)))
+                                      {{-- for arts --}}
+                                      <center>
+                                        <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
+                                          {{ $subject->subject->name_bangla }}
+                                        </a><br/>
+                                      </center>
+                                    @elseif($secscount == 3 && !(in_array($subject->subject_id, $science_arts_array)))
+                                      {{-- for commerce --}}
+                                      <center>
+                                        <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
+                                          {{ $subject->subject->name_bangla }}
+                                        </a><br/>
+                                      </center>
+                                    @endif
+                                  
+                                  @endif
+                                @endforeach
+                              </td>
+                              @endfor
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
           @if($exam_classes_counter % 2 == 0)
           </div>
           <div class="row">
