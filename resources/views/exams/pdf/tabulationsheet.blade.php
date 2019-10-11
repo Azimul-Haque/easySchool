@@ -229,10 +229,10 @@
            @endif
          @endforeach
        </tr>
-    @endif
-    @php
-      $counter++;
-    @endphp
+       @endif
+       @php
+         $counter++;
+       @endphp
     @endforeach
   </table>
 
