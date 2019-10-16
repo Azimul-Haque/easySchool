@@ -12,7 +12,7 @@
         <tr>
             <td>{{ $result['mobile'] }}</td>
             <td>
-                Jamalpur H School:H. Yearly Result. {{ $result['name'] }}. GPA:{{ $result['gpa'] }},Details:
+                Jamalpur H School:{{ exam_en($result['exam']) }} Result. {{ $result['name'] }}. GPA:{{ $result['gpa'] }},Details:
                 
                 @php
                     $resultdetails = '';

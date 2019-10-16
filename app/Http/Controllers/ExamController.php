@@ -1017,7 +1017,7 @@ class ExamController extends Controller
             $result_sub['section'] = $section;
             $result_sub['name'] = $student->name;
             $result_sub['mobile'] = $student->contact;
-            $result_sub['exam'] = $student->contact;
+            $result_sub['exam'] = $exam->name;
             
             $results[$student->student_id] = $result_sub;
         }
