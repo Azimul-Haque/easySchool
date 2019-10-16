@@ -1,6 +1,6 @@
 <input type="text" id="filename" value="A" placeholder="Write file name">
 <button>Export to CSV file</button>
-<table>
+<table border="1">
     {{-- <thead>
     <tr>
         <th>Mobile</th>
@@ -10,7 +10,7 @@
     <tbody>
     @foreach($results as $result)
         <tr>
-            <td>88{{ $result['mobile'] }}</td>
+            <td>{{ $result['mobile'] }}</td>
             <td>
                 Jamalpur H School:H. Yearly Result. {{ $result['name'] }}. GPA:{{ $result['gpa'] }},Details:
                 
