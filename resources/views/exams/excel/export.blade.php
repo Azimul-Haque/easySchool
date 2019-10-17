@@ -17,11 +17,10 @@
             <td>
                 Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ $result['name'] }}.Merit:
                 @if($result['grade'] == 'F')
-                N/A
+                N/A,
                 @else
-                {{ $counter }}
-                @endif
-                ,GPA:{{ $result['gpa'] }},Details:
+                {{ $counter }},
+                @endif GPA:{{ $result['gpa'] }},Details:
                 @php
                     $resultdetails = '';
                 @endphp
