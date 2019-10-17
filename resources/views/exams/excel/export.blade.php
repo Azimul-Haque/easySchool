@@ -15,7 +15,7 @@
         <tr>
             <td>{{ $result['mobile'] }}</td>
             <td>
-                Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ $result['name'] }}.Merit:
+                Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ rtrim($result['name']) }}.Merit:
                 @if($result['grade'] == 'F')
                 N/A,
                 @else
