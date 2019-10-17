@@ -1032,8 +1032,9 @@ class ExamController extends Controller
             $result_array_sorting_sub_ban[$key] = $row['sorting_sub_ban'];
             $result_array_roll[$key] = $row['roll'];
         }
-        array_multisort($result_array_roll, SORT_ASC, $result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $results); // $result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, 
+        array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results);
         $results_coll = collect($results);
+
         // dd($results_coll);
 
         return view('exams.excel.export')->withResults($results_coll);
