@@ -15,14 +15,13 @@
         <tr>
             <td>{{ $result['mobile'] }}</td>
             <td>
-                Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ $result['name'] }}. Merit:
+                Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ $result['name'] }}.Merit:
                 @if($result['grade'] == 'F')
-                  N/A
+                N/A
                 @else
-                  {{ $counter }}
+                {{ $counter }}
                 @endif
                 ,GPA:{{ $result['gpa'] }},Details:
-                
                 @php
                     $resultdetails = '';
                 @endphp
