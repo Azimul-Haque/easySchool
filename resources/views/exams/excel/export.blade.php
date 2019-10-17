@@ -8,11 +8,14 @@
     </tr>
     </thead> --}}
     <tbody>
+    @php
+      $counter = 1;
+    @endphp
     @foreach($results as $result)
         <tr>
             <td>{{ $result['mobile'] }}</td>
             <td>
-                Jamalpur H School:{{ exam_en($result['exam']) }} Result. {{ $result['name'] }}. GPA:{{ $result['gpa'] }},Details:
+                Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ $result['name'] }}. Merit:{{ $counter }},GPA:{{ $result['gpa'] }},Details:
                 
                 @php
                     $resultdetails = '';
@@ -25,6 +28,9 @@
                 {{ rtrim($resultdetails, ',') }}
             </td>
         </tr>
+    @php
+      $counter++;
+    @endphp
     @endforeach
     </tbody>
 </table>
