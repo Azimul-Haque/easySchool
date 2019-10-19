@@ -136,7 +136,7 @@ class StudentController extends Controller
         }
         //dd($last_student);
         if($last_student != null) {
-            $student_id = $last_student->student_id + 1;
+            $student_id = $this->checkStudentIDDuplicacy($last_student->student_id + 1);
         } else {
             $first_id_for_student = str_pad(1, 3, '0', STR_PAD_LEFT);
             if(date('m') > 10) {
@@ -209,6 +209,16 @@ class StudentController extends Controller
 
         Session::flash('success', 'সফলভাবে শিক্ষার্থী ভর্তি করা হয়েছে!');
         return redirect()->route('students.getstudents', [$request->session, $request->class, $request->section]);
+    }
+
+    public function checkStudentIDDuplicacy($student_id) {
+        $last_student_check = Student::where('student_id', $student_id)->first();
+        if(!empty($last_student_check)) {
+            $student_id = $student_id + 1;
+            return $this->checkStudentIDDuplicacy($student_id);
+        } else {
+            return $student_id;
+        }
     }
 
     /**
