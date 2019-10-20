@@ -433,11 +433,12 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca + $otherpaper_ca;
+                    $mark_avg_single = (($student_marks->written+$student_marks->mcq+$student_marks->practical + $student_marks->ca)/($examsubject->total)) * 100; // jodi laage paper wise pass er jonno
                     $mark_avg = ($student_marks->total/($examsubject->total + $othersubject->total)) * 100;
 
                     // correction October, 2019
 
-                    if($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark || $mark_avg < 33 || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
+                    if($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
                         $student_marks->grade_point = 0.00;
                         $student_marks->grade = 'F';
                     } else {
@@ -460,9 +461,8 @@ class ExamController extends Controller
                         $student_marks->grade = grade($mark_avg);
                     }
                 }
-                
+
                 $student_marks->save();
-                dd($student_marks);
                 if($otherpaper_marks != null) {
                     $otherpaper_marks->total_percentage = $student_marks->total_percentage;
                     $otherpaper_marks->total = $student_marks->total;
@@ -486,10 +486,11 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
+                    $mark_avg_single = (($student_marks->written+$student_marks->mcq+$student_marks->practical + $student_marks->ca)/($examsubject->total)) * 100; // jodi laage paper wise pass er jonno
                     $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; 
 
                     // correction October, 2019
-                    if($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark || $student_marks->total < 33 || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
+                    if($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
                         $new_student_marks->grade_point = 0.00;
                         $new_student_marks->grade = 'F';
                     } else {
