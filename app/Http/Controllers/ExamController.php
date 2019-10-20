@@ -438,7 +438,7 @@ class ExamController extends Controller
 
                     // correction October, 2019
 
-                    if($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
+                    if(($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) && $mark_avg < 33) {
                         $student_marks->grade_point = 0.00;
                         $student_marks->grade = 'F';
                     } else {
@@ -490,7 +490,7 @@ class ExamController extends Controller
                     $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; 
 
                     // correction October, 2019
-                    if($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) {
+                    if(($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark || $otherpaper_written < $othersubject->written_pass_mark || $otherpaper_mcq < $othersubject->mcq_pass_mark || $otherpaper_practical < $othersubject->practical_pass_mark) && $mark_avg < 33) {
                         $new_student_marks->grade_point = 0.00;
                         $new_student_marks->grade = 'F';
                     } else {
