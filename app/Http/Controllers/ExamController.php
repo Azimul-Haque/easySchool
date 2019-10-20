@@ -433,15 +433,29 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca + $otherpaper_ca;
-                    $mark_avg = ($student_marks->total/($examsubject->total + $othersubject->total)) * 100; // correction June, 2019
-                    $student_marks->grade_point = grade_point($mark_avg);
-                    $student_marks->grade = grade($mark_avg);
+                    $mark_avg = ($student_marks->total/($examsubject->total + $othersubject->total)) * 100;
+
+                    // correction October, 2019
+                    if($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark) {
+                        $student_marks->grade_point = 0.00;
+                        $student_marks->grade = 'F';
+                    } else {
+                        $student_marks->grade_point = grade_point($mark_avg);
+                        $student_marks->grade = grade($mark_avg);
+                    }
                 } else {
                     $student_marks->total_percentage = round(($student_marks->written+$student_marks->mcq+$student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
                     $student_marks->total = $student_marks->total_percentage + $student_marks->ca;
                     $mark_avg = ($student_marks->total / $examsubject->total) * 100;
-                    $student_marks->grade_point = grade_point($mark_avg);
-                    $student_marks->grade = grade($mark_avg);
+                    
+                    // correction October, 2019
+                    if($student_marks->written < $examsubject->written_pass_mark || $student_marks->mcq < $examsubject->mcq_pass_mark || $student_marks->practical < $examsubject->practical_pass_mark) {
+                        $student_marks->grade_point = 0.00;
+                        $student_marks->grade = 'F';
+                    } else {
+                        $student_marks->grade_point = grade_point($mark_avg);
+                        $student_marks->grade = grade($mark_avg);
+                    }
                 }
                 $student_marks->save();
 
@@ -468,15 +482,29 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
-                    $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; // correction June, 2019
-                    $new_student_marks->grade_point = grade_point($mark_avg);
-                    $new_student_marks->grade = grade($mark_avg);
+                    $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; 
+
+                    // correction October, 2019
+                    if($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark) {
+                        $new_student_marks->grade_point = 0.00;
+                        $new_student_marks->grade = 'F';
+                    } else {
+                        $new_student_marks->grade_point = grade_point($mark_avg);
+                        $new_student_marks->grade = grade($mark_avg);
+                    }
                 } else {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca;
                     $mark_avg = ($new_student_marks->total / $examsubject->total) * 100;
-                    $new_student_marks->grade_point = grade_point($mark_avg);
-                    $new_student_marks->grade = grade($mark_avg);
+                    
+                    // correction October, 2019
+                    if($new_student_marks->written < $examsubject->written_pass_mark || $new_student_marks->mcq < $examsubject->mcq_pass_mark || $new_student_marks->practical < $examsubject->practical_pass_mark) {
+                        $new_student_marks->grade_point = 0.00;
+                        $new_student_marks->grade = 'F';
+                    } else {
+                        $new_student_marks->grade_point = grade_point($mark_avg);
+                        $new_student_marks->grade = grade($mark_avg);
+                    }
                 }
                 $new_student_marks->save();
 
