@@ -486,7 +486,7 @@ class ExamController extends Controller
                 if($otherpaper_id != null) {
                     $new_student_marks->total_percentage = round(($new_student_marks->written+$new_student_marks->mcq+$new_student_marks->practical + $otherpaper_written + $otherpaper_mcq + $otherpaper_practical)*(($examsubject->total_percentage ?: 100)/100));
                     $new_student_marks->total = $new_student_marks->total_percentage + $new_student_marks->ca + $otherpaper_ca;
-                    $mark_avg_single = (($student_marks->written+$student_marks->mcq+$student_marks->practical + $student_marks->ca)/($examsubject->total)) * 100; // jodi laage paper wise pass er jonno
+                    $mark_avg_single = (($new_student_marks->written + $new_student_marks->mcq + $new_student_marks->practical + $new_student_marks->ca)/($examsubject->total)) * 100; // jodi laage paper wise pass er jonno
                     $mark_avg = ($new_student_marks->total/($examsubject->total + $othersubject->total)) * 100; 
 
                     // correction October, 2019
