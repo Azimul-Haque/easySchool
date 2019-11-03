@@ -76,16 +76,18 @@
                               <td>
                                 @foreach(Auth::user()->exam->examsubjects->where('class', (int)$class) as $subject)
                                   @if($class < 9)
+                                  {{-- if class is less than 9 and 10 --}}
                                   <center>
                                     <a class="btn btn-success" title="{{ bangla_class($class) }} {{ bangla_section(Auth::user()->school->section_type, $class, $secscount) }} {{ $subject->subject->name_bangla }}-এ নম্বর প্রদান করুন" href="{{ route('exam.getsubmissionpage', [Auth::user()->id, Auth::user()->school_id, Auth::user()->exam_id, $subject->subject_id, $class, $secscount]) }}" style="margin: 3px;" target="_blank">
                                       {{ $subject->subject->name_bangla }}
                                     </a><br/>
                                   </center>
                                   @else
+                                  {{-- if class is 9 or 10 --}}
                                     @php
-                                      $science_arts_array = [16, 17, 18, 22, 23, 24];
-                                      $science_commerce_array = [16, 17, 18, 27, 28, 29];
-                                      $arts_commerce_array = [22, 23, 24, 27, 28, 29];
+                                      $science_arts_array = [16, 17, 18, 22, 23, 24]; // commerce
+                                      $science_commerce_array = [9, 16, 17, 18, 19, 27, 28, 29]; // arts
+                                      $arts_commerce_array = [8, 22, 23, 24, 27, 28, 29]; // science
                                     @endphp
                                     @if($secscount == 1 && !(in_array($subject->subject_id, $arts_commerce_array)))
                                       {{-- for science --}}

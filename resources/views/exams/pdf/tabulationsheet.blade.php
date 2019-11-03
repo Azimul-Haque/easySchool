@@ -71,6 +71,27 @@
         $ban_en_single_array = [1, 3];
         $ban_en_single_array_for_gr = [2, 4];
         $rowspan_general = 2;
+        // filter the subject number for science/arts/commerce
+        if($data[1] > 8) {
+          if($data[2] == 1) {
+            $sub_remove_array = [8, 22, 23, 24, 27, 28, 29]; // science
+          } elseif ($data[2] == 2) {
+            $sub_remove_array = [9, 16, 17, 18, 19, 27, 28, 29]; // arts
+          }elseif ($data[2] == 3) {
+            $sub_remove_array = [16, 17, 18, 22, 23, 24]; // commerce
+          } else {
+            $sub_remove_array = []; // other than 9/10
+          }
+          foreach($sub_remove_array as $sub_id) {
+            foreach($data[3] as $key => $value) {
+              if($value->subject_id == $sub_id) {
+                $data[3]->forget($key);
+              }
+            }
+          }
+        }
+        // filter the subject number for science/arts/commerce
+
         foreach($data[3] as $subject) {
           if(in_array($subject->subject_id, $ban_en_array)) {
             $rowspan_general = 3;
