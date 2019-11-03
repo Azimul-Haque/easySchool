@@ -173,11 +173,19 @@
         @else
           @foreach($result['subjects_marks'] as $subject_marks)
             @if($subject->subject_id == $subject_marks['subject_id'])
-              <td>{{ $subject_marks['written'] }}</td>
-              <td>{{ $subject_marks['mcq'] }}</td>
-              <td>{{ $subject_marks['practical'] }}</td>
-              <td>{{ $subject_marks['ca'] }}</td>
-              <td>{{ $subject_marks['grade'] }}</td>
+              @if(($data[1] > 8) && (($subject_marks['subject_id'] == 15 && $subject_marks['total'] == 0) || ($subject_marks['subject_id'] == 19 && $subject_marks['total'] == 0))) {{-- for class 9 and 10, consider higher math and agriculture  --}}
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              @else
+                <td>{{ $subject_marks['written'] }}</td>
+                <td>{{ $subject_marks['mcq'] }}</td>
+                <td>{{ $subject_marks['practical'] }}</td>
+                <td>{{ $subject_marks['ca'] }}</td>
+                <td>{{ $subject_marks['grade'] }}</td>
+              @endif
             @endif
           @endforeach
         @endif
