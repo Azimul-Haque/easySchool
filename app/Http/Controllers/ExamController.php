@@ -917,7 +917,7 @@ class ExamController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
-                           ->get(); // taking only 10
+                           ->get()->take(20); // taking only 10
         $examsubjects = Examsubject::where('exam_id', $request->exam_id)
                                   ->where('class', $class)
                                   ->orderBy('subject_id', 'asc')
@@ -946,25 +946,57 @@ class ExamController extends Controller
                     $subject_mark['grade_point'] = $mark->grade_point;
                     $subject_mark['grade'] = $mark->grade;
                     $subjects_marks[] = $subject_mark;
-                    $grade_array[] = $subject_mark['grade'];
 
-                    if(in_array($mark->subject_id, $ban_en_array)) {
-                        continue;
-                    } else {
-                        $total_marks = $total_marks + $mark->total;
-                        if($mark->grade_point != 'N/A') {
-                            $total_grade_point = $total_grade_point + $mark->grade_point;
+                    // for class 9 and 10, consider higher math and agriculture
+                    // for class 9 and 10, consider higher math and agriculture
+                    if($class > 8) {
+                        // adhoc somadhan, jehetu bojhar upay nai j student higher naki
+                        if(($mark->subject_id == 15 && $mark->total == 0) || ($mark->subject_id == 19 && $mark->total == 0)) { // agriculture
+                            // do nothing
                         } else {
-                            $total_grade_point = $total_grade_point * 0;
+                            $grade_array[] = $subject_mark['grade'];
+
+                            if(in_array($mark->subject_id, $ban_en_array)) {
+                                continue;
+                            } else {
+                                $total_marks = $total_marks + $mark->total;
+                                if($mark->grade_point != 'N/A') {
+                                    $total_grade_point = $total_grade_point + $mark->grade_point;
+                                } else {
+                                    $total_grade_point = $total_grade_point * 0;
+                                }
+                            }
+                            if($mark->subject_id == 1) {
+                                $sorting_sub_ban = $mark->total; // bangla
+                            } elseif($mark->subject_id == 3) {
+                                $sorting_sub_en = $mark->total; // english
+                            } elseif($mark->subject_id == 3) {
+                                $sorting_sub_math = $mark->total; // math
+                            }
+                        }
+                        // adhoc somadhan, jehetu bojhar upay nai j student higher naki
+                    } else {
+                        $grade_array[] = $subject_mark['grade'];
+
+                        if(in_array($mark->subject_id, $ban_en_array)) {
+                            continue;
+                        } else {
+                            $total_marks = $total_marks + $mark->total;
+                            if($mark->grade_point != 'N/A') {
+                                $total_grade_point = $total_grade_point + $mark->grade_point;
+                            } else {
+                                $total_grade_point = $total_grade_point * 0;
+                            }
+                        }
+                        if($mark->subject_id == 1) {
+                            $sorting_sub_ban = $mark->total; // bangla
+                        } elseif($mark->subject_id == 3) {
+                            $sorting_sub_en = $mark->total; // english
+                        } elseif($mark->subject_id == 3) {
+                            $sorting_sub_math = $mark->total; // math
                         }
                     }
-                    if($mark->subject_id == 1) {
-                        $sorting_sub_ban = $mark->total; // bangla
-                    } elseif($mark->subject_id == 3) {
-                        $sorting_sub_en = $mark->total; // english
-                    } elseif($mark->subject_id == 3) {
-                        $sorting_sub_math = $mark->total; // math
-                    }
+                    
                 }
             }
             if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {

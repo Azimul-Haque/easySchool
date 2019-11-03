@@ -140,67 +140,102 @@
       <th>GPA</th>
       <th>Grade</th>
     </tr>
+    @php
+      // filter the subject number for science/arts/commerce
+      if($data[1] > 8) {
+        if($data[2] == 1) {
+          $sub_remove_array = [8, 22, 23, 24, 27, 28, 29]; // science
+        } elseif ($data[2] == 2) {
+          $sub_remove_array = [9, 16, 17, 18, 19, 27, 28, 29]; // arts
+        }elseif ($data[2] == 3) {
+          $sub_remove_array = [16, 17, 18, 22, 23, 24]; // commerce
+        } else {
+          $sub_remove_array = []; // other than 9/10
+        }
+        foreach($sub_remove_array as $sub_id) {
+          foreach($data[3] as $key => $value) {
+            if($value->subject_id == $sub_id) {
+              $data[3]->forget($key);
+            }
+          }
+        }
+      }
+      // filter the subject number for science/arts/commerce
+    @endphp
     @foreach($data[3] as $key => $subject)
       <tr>
         <td align="center">{{ $subject->subject->name_english }}</td>
         @foreach($result['subjects_marks'] as $subject_marks)
           @if($subject->subject_id == $subject_marks['subject_id'])
-            <td align="center">{{ $subject_marks['written'] }}</td>
-            <td align="center">
-              @if($subject->mcq > 0)
-                {{ $subject_marks['mcq'] }}
-              @endif
-            </td>
-            <td align="center">
-              @if($subject->practical > 0)
-                {{ $subject_marks['practical'] }}
-              @endif
-            </td>
-            <td align="center">{{ $subject_marks['written'] + $subject_marks['mcq'] + $subject_marks['practical'] }}</td>
-            @php
-              $ban_en_array = [1, 2, 3, 4];
-              $ban_en_single_array = [1, 3];
-              $ban_en_single_array_for_gr = [2, 4];
-              $rowspan_general = 2;
-              if(in_array($subject->subject_id, $ban_en_array)) {
-                $rowspan_general = 3;
-              }
-            @endphp
-            @if(in_array($subject->subject_id, $ban_en_single_array))
-              <td align="center" rowspan="2">{{ $subject_marks['total_percentage'] }}</td>
-            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-              <td align="center">{{ $subject_marks['total_percentage'] }}</td>
-            @endif
-            
-            <td align="center">
-              @if($subject->ca > 0)
-                {{ $subject_marks['ca'] }}
-              @endif
-            </td>
-            @if(in_array($subject->subject_id, $ban_en_single_array))
-              <td align="center" rowspan="2">{{ $subject_marks['total'] }}</td>
-            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-              <td align="center">{{ $subject_marks['total'] }}</td>
-            @endif
-
-            @foreach($data[4] as $highestkey => $highest)
-              @if($subject->subject_id == $highestkey)
-                @if(in_array($subject->subject_id, $ban_en_single_array))
-                  <td align="center" rowspan="2">{{ $highest[0] }}</td>
-                @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-                  <td align="center">{{ $highest[0] }}</td>
+            @if(($subject->subject_id == 15 && $subject_marks['total'] == 0) || ($subject->subject_id == 19 && $subject_marks['total'] == 0))
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            @else
+              <td align="center">{{ $subject_marks['written'] }}</td>
+              <td align="center">
+                @if($subject->mcq > 0)
+                  {{ $subject_marks['mcq'] }}
                 @endif
+              </td>
+              <td align="center">
+                @if($subject->practical > 0)
+                  {{ $subject_marks['practical'] }}
+                @endif
+              </td>
+              <td align="center">{{ $subject_marks['written'] + $subject_marks['mcq'] + $subject_marks['practical'] }}</td>
+              @php
+                $ban_en_array = [1, 2, 3, 4];
+                $ban_en_single_array = [1, 3];
+                $ban_en_single_array_for_gr = [2, 4];
+                $rowspan_general = 2;
+                if(in_array($subject->subject_id, $ban_en_array)) {
+                  $rowspan_general = 3;
+                }
+              @endphp
+              @if(in_array($subject->subject_id, $ban_en_single_array))
+                <td align="center" rowspan="2">{{ $subject_marks['total_percentage'] }}</td>
+              @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                <td align="center">{{ $subject_marks['total_percentage'] }}</td>
               @endif
-            @endforeach
-            @if(in_array($subject->subject_id, $ban_en_single_array))
-              <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
-            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-              <td align="center">{{ $subject_marks['grade_point'] }}</td>
-            @endif
-            @if(in_array($subject->subject_id, $ban_en_single_array))
-              <td align="center" rowspan="2">{{ $subject_marks['grade'] }}</td>
-            @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
-              <td align="center">{{ $subject_marks['grade'] }}</td>
+              
+              <td align="center">
+                @if($subject->ca > 0)
+                  {{ $subject_marks['ca'] }}
+                @endif
+              </td>
+              @if(in_array($subject->subject_id, $ban_en_single_array))
+                <td align="center" rowspan="2">{{ $subject_marks['total'] }}</td>
+              @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                <td align="center">{{ $subject_marks['total'] }}</td>
+              @endif
+
+              @foreach($data[4] as $highestkey => $highest)
+                @if($subject->subject_id == $highestkey)
+                  @if(in_array($subject->subject_id, $ban_en_single_array))
+                    <td align="center" rowspan="2">{{ $highest[0] }}</td>
+                  @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                    <td align="center">{{ $highest[0] }}</td>
+                  @endif
+                @endif
+              @endforeach
+              @if(in_array($subject->subject_id, $ban_en_single_array))
+                <td align="center" rowspan="2">{{ $subject_marks['grade_point'] }}</td>
+              @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                <td align="center">{{ $subject_marks['grade_point'] }}</td>
+              @endif
+              @if(in_array($subject->subject_id, $ban_en_single_array))
+                <td align="center" rowspan="2">{{ $subject_marks['grade'] }}</td>
+              @elseif(!in_array($subject->subject_id, $ban_en_single_array_for_gr))
+                <td align="center">{{ $subject_marks['grade'] }}</td>
+              @endif
             @endif
           @endif
         @endforeach
