@@ -1112,6 +1112,17 @@ class ExamController extends Controller
                         if(($mark->subject_id == 15 && $mark->total == 0) || ($mark->subject_id == 19 && $mark->total == 0)) { // agriculture
                             // do nothing
                         } else {
+                            $subject_mark['student_id'] = $mark->student_id;
+                            $subject_mark['subject_id'] = $mark->subject_id;
+                            $subject_mark['subject_name'] = substr($mark->subject->name_english, 0, 1);
+                            $subject_mark['written'] = $mark->written;
+                            $subject_mark['mcq'] = $mark->mcq;
+                            $subject_mark['practical'] = $mark->practical;
+                            $subject_mark['ca'] = $mark->ca;
+                            $subject_mark['total'] = $mark->total;
+                            $subject_mark['grade'] = $mark->grade;
+                            $subjects_marks[] = $subject_mark;
+
                             if(in_array($mark->subject_id, $ban_en_array)) {
                                 continue;
                             } else {
@@ -1134,6 +1145,17 @@ class ExamController extends Controller
                         }
                         // adhoc somadhan, jehetu bojhar upay nai j student higher naki
                     } else {
+                        $subject_mark['student_id'] = $mark->student_id;
+                        $subject_mark['subject_id'] = $mark->subject_id;
+                        $subject_mark['subject_name'] = substr($mark->subject->name_english, 0, 1);
+                        $subject_mark['written'] = $mark->written;
+                        $subject_mark['mcq'] = $mark->mcq;
+                        $subject_mark['practical'] = $mark->practical;
+                        $subject_mark['ca'] = $mark->ca;
+                        $subject_mark['total'] = $mark->total;
+                        $subject_mark['grade'] = $mark->grade;
+                        $subjects_marks[] = $subject_mark;
+                        
                         if(in_array($mark->subject_id, $ban_en_array)) {
                             continue;
                         } else {
@@ -1154,18 +1176,6 @@ class ExamController extends Controller
                         // grade array...
                         $grade_array[] = $mark->grade;
                     }
-                    
-                    // $subject_mark['student_id'] = $mark->student_id;
-                    // $subject_mark['subject_id'] = $mark->subject_id;
-                    // $subject_mark['subject_name'] = substr($mark->subject->name_english, 0, 1);
-                    // $subject_mark['written'] = $mark->written;
-                    // $subject_mark['mcq'] = $mark->mcq;
-                    // $subject_mark['practical'] = $mark->practical;
-                    // $subject_mark['ca'] = $mark->ca;
-                    // $subject_mark['total'] = $mark->total;
-                    // $subject_mark['grade'] = $mark->grade;
-                    // $subjects_marks[] = $subject_mark;
-                    // $grade_array[] = $subject_mark['grade'];
 
                     // if(in_array($mark->subject_id, $ban_en_array)) {
                     //     continue;
