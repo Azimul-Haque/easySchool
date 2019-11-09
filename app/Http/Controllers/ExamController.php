@@ -917,7 +917,7 @@ class ExamController extends Controller
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
-                           ->get()->take(20); // taking only 10
+                           ->get();
         $examsubjects = Examsubject::where('exam_id', $request->exam_id)
                                   ->where('class', $class)
                                   ->orderBy('subject_id', 'asc')
