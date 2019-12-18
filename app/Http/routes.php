@@ -101,6 +101,10 @@ Route::group(['middleware' => ['auth']], function() {
 
 	Route::delete('sms/recharge/request/delete/{id}',['as'=>'sms.destroy.history','uses'=>'SmsController@destroyRechargeReqHistory']);
 	Route::patch('sms/recharge/request/update/{id}',['as'=>'sms.update.history','uses'=>'SmsController@updateRechargeReqHistory']);
+
+	// Class Promotion
+	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
+	Route::get('students/{session}/{class}/{section}',['as'=>'students.getstudents','uses'=>'StudentController@getStudents']);
 });
 
 // public gets, posts and so on
