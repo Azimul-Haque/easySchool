@@ -397,19 +397,6 @@ class StudentController extends Controller
                         ->with('success','Student deleted successfully');
     }
 
-    public function promoteBulk(Request $request)
-    {
-        $student_ids = explode(',', $request->student_ids);
-        foreach ($student_ids as $student_id) {
-            $student = Student::find($student_id);
-            $student->class = $request->promotion_class;
-            $student->session = $request->promotion_session;
-            $student->save();
-        }
-        return redirect()->route('students.index')
-                     ->with('success','সফলভাবে উন্নীত করা হয়েছে!');
-    }
-
     public function sendsms()
     {
         try{

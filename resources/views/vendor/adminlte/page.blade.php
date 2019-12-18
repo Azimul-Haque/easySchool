@@ -399,10 +399,17 @@
                         </ul>
                     </li>
 
-                    <li class="{{ Request::is('students/*') ? 'active' : '' }}">
+                    <li class="{{ Request::is('students') ? 'active' : '' }} {{ Request::is('students/*') ? 'active' : '' }}">
                         <a href="{{ route('students.index') }}">
                             <i class="fa fa-fw fa-users"></i>
                             <span>শিক্ষার্থী ব্যবস্থাপনা</span>
+                        </a>
+                    </li>
+
+                    <li class="{{ Request::is('promotion') ? 'active' : '' }} {{ Request::is('promotion/*') ? 'active' : '' }}">
+                        <a href="{{ route('promotion.index') }}">
+                            <i class="fa fa-fw fa-hand-o-up"></i>
+                            <span>শিক্ষার্থী উচ্চশ্রেণিতে উন্নীতকরণ</span>
                         </a>
                     </li>
 

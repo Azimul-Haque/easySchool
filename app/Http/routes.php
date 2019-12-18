@@ -51,7 +51,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('students/{id}/edit',['as'=>'students.edit','uses'=>'StudentController@edit']);
 	Route::patch('students/{id}',['as'=>'students.update','uses'=>'StudentController@update']);
 	Route::delete('students/{id}',['as'=>'students.destroy','uses'=>'StudentController@destroy']);
-	Route::post('students/promote/bulk',['as'=>'students.promotebulk','uses'=>'StudentController@promoteBulk']);
+	
 	Route::get('students/getlist/pdf/{session}/{class}/{section}',['as'=>'students.getstudentlistpdf','uses'=>'StudentController@getStudentListPDF']);
 	Route::get('students/infolist/pdf/{session}/{class}/{section}',['as'=>'students.getinfolistpdf','uses'=>'StudentController@getInfoListPDF']);
 	Route::get('students/book/distribution/list/pdf/{session}/{class}/{section}',['as'=>'students.getbookdistrolistpdf','uses'=>'StudentController@getBoookDistroListPDF']);
@@ -103,8 +103,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::patch('sms/recharge/request/update/{id}',['as'=>'sms.update.history','uses'=>'SmsController@updateRechargeReqHistory']);
 
 	// Class Promotion
-	Route::get('students',['as'=>'students.index','uses'=>'StudentController@index']);
-	Route::get('students/{session}/{class}/{section}',['as'=>'students.getstudents','uses'=>'StudentController@getStudents']);
+	Route::get('promotion/',['as'=>'promotion.index','uses'=>'PromotionController@index']);
+	Route::get('promotion/{session}/{class}/{section}',['as'=>'promotion.getstudents','uses'=>'PromotionController@getStudents']);
+	Route::post('promotion/students/promote/bulk',['as'=>'students.promotebulk','uses'=>'PromotionController@promoteBulk']);
 });
 
 // public gets, posts and so on
