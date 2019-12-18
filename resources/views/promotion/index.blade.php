@@ -81,9 +81,11 @@
 	</div><br/>
   <div class="row">
     <div class="col-md-12">
-      <button class="btn btn-success hiddenFinalSaveBtn" id="hiddenFinalSaveBtn" data-toggle="modal" data-target="#promoteModal" data-backdrop="static">নতুন ক্লাসে উন্নীত করুন</button>
+      @if(!empty($students))
+      <button class="btn btn-success promoteBtn" id="promoteBtn" data-toggle="modal" data-target="#promoteModal" data-backdrop="static">নতুন ক্লাসে উন্নীত করুন</button>
+      @endif
     </div>
-  </div>
+  </div><br/>
 
 	<div class="table-responsive" style="margin-top: 5px;">
 		@if($students == true)
@@ -101,7 +103,7 @@
 				</tr>
 			</thead>
 			<tbody>
-			@foreach ($students as $key => $student)
+			@foreach($students as $key => $student)
 				<tr>
 					<td>{{ $student->student_id }}</td>
           <td>{{ $student->roll }}</td>
@@ -117,7 +119,7 @@
             @endif
 					</td>
 					<td>
-            <input type="text" class="form-control" style="width: 50px;" id="new_roll{{ $student->student_id }}" tabindex="{{ $student->roll }}">
+            <input type="text" class="form-control" style="width: 60px;" id="new_roll{{ $student->student_id }}" value="" tabindex="{{ $student->roll }}">
 					</td>
 				</tr>
 			@endforeach
@@ -184,7 +186,6 @@
 </script>
 <script type="text/javascript">
 	$(function () {
-  	  $('#example1').DataTable()
   	  $('#datatable-students').DataTable({
   	    'paging'      : true,
   	    'pageLength'  : 100,
@@ -226,6 +227,27 @@
           window.location.href = window.location.protocol + "//" + window.location.host + "/promotion/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section";
         @endif
 	  	})
+
+      $('#promoteBtn').click(function() {
+        var promotion_ids_with_new_roll = [];
+        @foreach($students as $student)
+          var new_roll = $('#new_roll{{ $student->student_id }}').val();
+          var id = {{ $student->student_id }};
+          if(($('#new_roll{{ $student->student_id }}').val() != '') && ($('#new_roll{{ $student->student_id }}').val() != null) && ($('#new_roll{{ $student->student_id }}').val() != undefined)) {
+            promotion_ids_with_new_roll.push(id+':'+new_roll);
+            new_roll = '';
+          }
+        @endforeach
+        $('#student_ids').val(promotion_ids_with_new_roll);
+        if($('#student_ids').val() == '') {
+          toastr.warning('অন্তত একজন শিক্ষার্থীর নতুন রোল প্রদান করুন!', 'Warning').css('width','400px');
+          
+          setTimeout(function() {
+            $('#promoteModal').modal('hide');
+          }, 1000);
+        }
+        console.log(promotion_ids_with_new_roll);
+      });
 	  })
 </script>
 <script type="text/javascript">
