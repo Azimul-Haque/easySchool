@@ -141,19 +141,52 @@
             </div>
             {!! Form::open(array('route' => 'students.promotebulk','method'=>'POST')) !!}
             <div class="modal-body">
-              আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত শিক্ষার্থীদের চূড়ান্তভাবে নিম্ননির্ধারিত শ্রেণিতে উন্নীত করতে চান?
+              আপনি কি নিশ্চিতভাবে রোল দেওয়া শিক্ষার্থীদের চূড়ান্তভাবে নিম্ননির্ধারিত শ্রেণিতে উন্নীত করতে চান?
               {!! Form::hidden('student_ids', null, ['id' => 'student_ids', 'required' => '']) !!}
               <div class="form-group">
-              	<label for="promotion_class"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
-								<select class="form-control" id="promotion_class" name="promotion_class">
-									<option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
-									@php
-										$classes = explode(',', Auth::user()->school->classes);
-									@endphp
-									@foreach($classes as $class)
-									<option value="{{ $class }}">Class {{ $class }}</option>
-									@endforeach
-								</select>
+                <label for="promotion_class"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
+                <select class="form-control" id="promotion_class" name="promotion_class">
+                  <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
+                  @php
+                    $classes = explode(',', Auth::user()->school->classes);
+                  @endphp
+                  @foreach($classes as $class)
+                  <option value="{{ $class }}">Class {{ $class }}</option>
+                  @endforeach
+                </select>
+              </div>
+              <div class="form-group">
+                @if(Auth::user()->school->sections > 0)
+                <label for="promotion_class"><strong> শাখা নির্ধারণ করুন</strong></label>
+                <select class="form-control" id="promotion_section" name="promotion_section">
+                  <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
+                  @if($classsearch < 9)
+                    <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+                    <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+                    @if(Auth::user()->school->sections == 3)
+                    <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+                    @endif
+                  @else
+                    @if(Auth::user()->school->section_type == 1)
+                        <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+                        <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+                        @if(Auth::user()->school->sections >2)
+                        <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+                        @endif
+                    @elseif(Auth::user()->school->section_type == 2)
+                        <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
+                        <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
+                        @if(Auth::user()->school->sections >2)
+                        <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
+                        <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
+                        <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
+                        @endif
+                    @endif
+                  @endif
+                </select>
+                @else
+                <input type="hidden" name="promotion_section" value="0">
+                @endif
 							</div>	
 							<div class="form-group">
 								<label for="promotion_session"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
@@ -284,6 +317,44 @@
         $('#search_section').append('<option value="'+3+'">COMMERCE</option>');
         $('#search_section').append('<option value="'+4+'">VOCATIONAL</option>');
         $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
+      @endif
+    }
+  });
+</script>
+<script type="text/javascript">
+  $('#promotion_class').on('change', function() {
+    $('#promotion_section').prop('disabled', true);
+    $('#promotion_section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+
+    if($('#promotion_class').val() < 9) {
+      $('#promotion_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+      $('#promotion_section').append('<option value="'+1+'">A</option>');
+      $('#promotion_section').append('<option value="'+2+'">B</option>');
+      $('#promotion_section').append('<option value="'+3+'">C</option>');
+    } else {
+      $('#promotion_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+      @if(Auth::user()->school->section_type == 1)
+        $('#promotion_section').append('<option value="'+1+'">A</option>');
+        $('#promotion_section').append('<option value="'+2+'">B</option>');
+        $('#promotion_section').append('<option value="'+3+'">C</option>');
+      @elseif(Auth::user()->school->section_type == 2)
+        $('#promotion_section').append('<option value="'+1+'">SCIENCE</option>');
+        $('#promotion_section').append('<option value="'+2+'">ARTS</option>');
+        $('#promotion_section').append('<option value="'+3+'">COMMERCE</option>');
+        $('#promotion_section').append('<option value="'+4+'">VOCATIONAL</option>');
+        $('#promotion_section').append('<option value="'+5+'">TECHNICAL</option>');
       @endif
     }
   });
