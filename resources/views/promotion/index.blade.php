@@ -88,7 +88,7 @@
   </div><br/>
 
 	<div class="table-responsive" style="margin-top: 5px;">
-		@if($students == true)
+		@if(!empty($students))
 		<table class="table" id="datatable-students">
 			<thead>
 				<tr>
@@ -145,7 +145,7 @@
               {!! Form::hidden('student_ids', null, ['id' => 'student_ids', 'required' => '']) !!}
               <div class="form-group">
                 <label for="promotion_class"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
-                <select class="form-control" id="promotion_class" name="promotion_class">
+                <select class="form-control" id="promotion_class" name="promotion_class" required="">
                   <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
                   @php
                     $classes = explode(',', Auth::user()->school->classes);
@@ -158,39 +158,16 @@
               <div class="form-group">
                 @if(Auth::user()->school->sections > 0)
                 <label for="promotion_class"><strong> শাখা নির্ধারণ করুন</strong></label>
-                <select class="form-control" id="promotion_section" name="promotion_section">
+                <select class="form-control" id="promotion_section" name="promotion_section" required="">
                   <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-                  @if($classsearch < 9)
-                    <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-                    <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-                    @if(Auth::user()->school->sections == 3)
-                    <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-                    @endif
-                  @else
-                    @if(Auth::user()->school->section_type == 1)
-                        <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-                        <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-                        @if(Auth::user()->school->sections >2)
-                        <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-                        @endif
-                    @elseif(Auth::user()->school->section_type == 2)
-                        <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
-                        <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
-                        @if(Auth::user()->school->sections >2)
-                        <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
-                        <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
-                        <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
-                        @endif
-                    @endif
-                  @endif
                 </select>
                 @else
-                <input type="hidden" name="promotion_section" value="0">
+                <input type="hidden" name="promotion_section" value="0" required="">
                 @endif
 							</div>	
 							<div class="form-group">
 								<label for="promotion_session"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
-								<select class="form-control" id="promotion_session" name="promotion_session">
+								<select class="form-control" id="promotion_session" name="promotion_session" required="">
 									<option selected="" disabled="">শিক্ষাবর্ষ নির্ধারণ করুন</option>
 									@for($optionyear = (date('Y')+1) ; $optionyear>=(Auth::user()->school->established); $optionyear--)
 									<option value="{{ $optionyear }}" @if($optionyear == date('Y')) selected="" @endif>{{ $optionyear }}</option>
@@ -263,14 +240,16 @@
 
       $('#promoteBtn').click(function() {
         var promotion_ids_with_new_roll = [];
-        @foreach($students as $student)
-          var new_roll = $('#new_roll{{ $student->student_id }}').val();
-          var id = {{ $student->student_id }};
-          if(($('#new_roll{{ $student->student_id }}').val() != '') && ($('#new_roll{{ $student->student_id }}').val() != null) && ($('#new_roll{{ $student->student_id }}').val() != undefined)) {
-            promotion_ids_with_new_roll.push(id+':'+new_roll);
-            new_roll = '';
-          }
-        @endforeach
+        @if(!empty($students))
+          @foreach($students as $student)
+            var new_roll = $('#new_roll{{ $student->student_id }}').val();
+            var id = {{ $student->student_id }};
+            if(($('#new_roll{{ $student->student_id }}').val() != '') && ($('#new_roll{{ $student->student_id }}').val() != null) && ($('#new_roll{{ $student->student_id }}').val() != undefined)) {
+              promotion_ids_with_new_roll.push(id+':'+new_roll);
+              new_roll = '';
+            }
+          @endforeach
+        @endif
         $('#student_ids').val(promotion_ids_with_new_roll);
         if($('#student_ids').val() == '') {
           toastr.warning('অন্তত একজন শিক্ষার্থীর নতুন রোল প্রদান করুন!', 'Warning').css('width','400px');
