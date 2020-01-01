@@ -1,19 +1,19 @@
 <input type="text" id="filename" value="A" placeholder="Write file name">
 <button>Export to CSV file</button>
 <table border="1">
-    <thead>
+    {{-- <thead>
     <tr>
         <th>Mobile</th>
         <th>Message</th>
     </tr>
-    </thead>
+    </thead> --}}
     <tbody>
     @php
       $counter = 1;
     @endphp
     @foreach($results as $result)
         <tr>
-            <td>+88{{ $result['mobile'] }}</td>
+            <td>{{ $result['mobile'] }}</td>
             <td>
                 Jamalpur H School:{{ exam_en($result['exam']) }} Result.{{ rtrim($result['name']) }}.Merit:
                 @if($result['grade'] == 'F')
