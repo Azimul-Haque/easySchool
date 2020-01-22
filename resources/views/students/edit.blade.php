@@ -80,7 +80,7 @@
                     <span class="input-group-addon"><i class="fa fa-tags"></i></span>
                     <select class="form-control" name="session" id="session" required="">
                       <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
-                      @for($session_year = date('Y'); $session_year < (date('Y') + 3); $session_year++)
+                      @for($session_year = date('Y') - 2; $session_year < (date('Y') + 3); $session_year++)
                       <option value="{{ $session_year }}" @if($student->session == $session_year) selected="" @endif>{{ $session_year }}</option>
                       @endfor
                     </select>
