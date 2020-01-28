@@ -44,7 +44,7 @@
         <td width="90%" align="center">
           <span style="font-size: 30px;"><b>{{ Auth::user()->school->name }}</b></span><br/>
           P.O: {{ Auth::user()->school->address }}, Upazilla: {{ Auth::user()->school->upazilla }}, District: {{ Auth::user()->school->district }}, Estd: {{ Auth::user()->school->established }}<br/>
-            EIIN: {{ Auth::user()->school->eiin }}, School Code: {{ Auth::user()->school->school_code }}, Website: 
+            EIIN: {{ Auth::user()->school->eiin }}, School Code: {{ Auth::user()->school->school_code }}, Website: {{ url('/') }}
           <br/>
           @if(Auth::user()->school->monogram != null && Auth::user()->school->monogram != '')
           <img src="{{ public_path('images/schools/monograms/'.Auth::user()->school->monogram) }}" width="80" height="80" style="padding: 5px;">
@@ -80,7 +80,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3" style="display: block; line-height: 1.7;" align="center">
+        <td colspan="3" style="display: block; line-height: 1.7; font-size: 18px;" align="center">
           <center><br/>
             This is to certify that<br/>
             <big><u>{{ $student->name }}</u></big>
