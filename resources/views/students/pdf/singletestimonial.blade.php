@@ -67,7 +67,7 @@
         <td colspan="3" align="center">
           <center>
             <span style="font-size: 20px;">
-              @if($data[0] == 9)
+              @if($data[0] < 10)
               JSC EXAMINATION-{{ $student->jsc_session }}
               @elseif($data[0] == 10)
               SSC EXAMINATION-
@@ -80,7 +80,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3" style="display: block; line-height: 1.7; font-size: 18px;" align="center">
+        <td colspan="3" style="display: block; line-height: 1.2; font-size: 18px;" align="center">
           <center><br/>
             This is to certify that<br/>
             <big><u>{{ $student->name }}</u></big>
