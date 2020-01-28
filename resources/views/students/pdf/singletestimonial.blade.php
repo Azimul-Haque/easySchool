@@ -80,7 +80,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3" style="display: block; line-height: 1.1; font-size: 18px;" align="center">
+        <td colspan="3" style="display: block; line-height: 1.15; font-size: 18px;" align="center">
           <center><br/>
             This is to certify that<br/>
             <big><u>{{ $student->name }}</u></big>
