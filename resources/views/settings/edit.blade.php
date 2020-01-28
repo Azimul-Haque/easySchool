@@ -147,6 +147,12 @@
                   > দেওয়া হয়েছে</label>
                 </div> 
             </div>
+            <div class="col-md-3">
+                <div class="form-group">
+                    <strong>ওয়েবসাইটঃ</strong>
+                    {!! Form::text('website', null, array('placeholder' => 'ওয়েবসাইট','class' => 'form-control')) !!}
+                </div>
+            </div>
         </div>
         <div class="form-group">
           <strong>ক্লাসঃ</strong>

@@ -42,7 +42,8 @@ class SettingController extends Controller
             'classes' => 'required',
             'payment_method' => 'required',
             'isresultpublished' => 'required',
-            'monogram' => 'sometimes|image|max:100'
+            'monogram' => 'sometimes|image|max:100',
+            'website' => 'sometimes'
         ]);
 
 
@@ -85,6 +86,11 @@ class SettingController extends Controller
             $location   = public_path('/images/schools/monograms/'. $filename);
             Image::make($image)->resize(200, 200)->save($location); // ->opacity(50) diye arekta save korte hobe background er jonno...
             $school->monogram = $filename;
+        }
+        
+        // website update
+        if(!empty($request->website)) {
+            $school->website = $request->website;
         }
         
         $school->save();
