@@ -88,7 +88,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="3" style="text-align: justify; text-justify: inter-word; display: block; line-height: 1.7;">
+        <td colspan="3" style="text-align: justify; text-justify: inter-word; display: block; line-height: 1.5; font-size: 18px;">
           &ensp;&ensp;&ensp;&ensp;Son/Daughter of <u>{{ $student->father }}</u> &amp;  Mother’s name   <u>{{ $student->mother }}</u>,  Village- <u>{{ $student->village }}</u>, P.O- <u>{{ $student->post_office }}</u>,  Up-zilla- <u>{{ $student->upazilla }}</u>, Zilla- <u>{{ $student->district }}</u>. He/She has passed the 
           @if($data[0] == 9)
             JSC EXAMINATION-{{ $student->jsc_session }}, Roll Number <u>{{ $student->jsc_roll }}</u>, Registration Number <u>{{ $student->jsc_registration_no }}</u>  &amp; Session <u>{{ $student->jsc_session }}</u>  from this school under the Board of Intermediate and Secondary Education, Dinajpur. He/She was securing G.P.A  <u>{{ $student->jsc_result }}</u>, in the scale of 5.00, as a regular student of this school.
