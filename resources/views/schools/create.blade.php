@@ -117,18 +117,6 @@
                     </div>
                 </div> 
                 <div class="row">
-                  <div class="col-md-3">
-                      <div class="form-group">
-                        <strong>ভর্তি প্রক্রিয়াঃ</strong>
-                        <br/>
-                        <label style="margin-right: 40px;">
-                        <input type="radio" name="isadmissionon" value="0" required> বন্ধ</label>
-                        <label style="margin-right: 40px;">
-                        <input type="radio" name="isadmissionon" value="1"> চলছে</label>
-                      </div> 
-                  </div>
-                </div>
-                <div class="row">
                     <div class="col-md-3">
                         <div class="form-group">
                             <strong>ঠিকানাঃ</strong>

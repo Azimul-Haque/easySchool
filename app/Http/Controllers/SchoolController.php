@@ -63,7 +63,7 @@ class SchoolController extends Controller
             'upazilla' => 'required',
             'address' => 'required',
             'currentsession' => 'required',
-            'admission_session' => 'required',
+            'admission_session' => 'sometimes',
             'classes' => 'required',
             'isadmissionon' => 'required',
             'payment_method' => 'required',
