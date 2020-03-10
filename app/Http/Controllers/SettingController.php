@@ -65,11 +65,10 @@ class SettingController extends Controller
         // sign upload
         if($request->hasFile('headmaster_sign')) {
             $image = $request->file('headmaster_sign');
-            if($school->headmaster_sign == null || $school->headmaster_sign == '') {
-              $filename   = 'sign_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
-            } else {
-              $filename = $school->headmaster_sign;
+            if(file_exists(public_path('/images/schools/signs/' . $school->headmaster_sign))) {
+                unlink(public_path('/images/schools/signs/' . $school->headmaster_sign));
             }
+            $filename   = 'sign_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             $location   = public_path('/images/schools/signs/'. $filename);
             Image::make($image)->resize(300, 80)->save($location);
             $school->headmaster_sign = $filename;
@@ -78,11 +77,10 @@ class SettingController extends Controller
         // monogram upload
         if($request->hasFile('monogram')) {
             $image = $request->file('monogram');
-            if($school->monogram == null || $school->monogram == '') {
-              $filename   = 'monogram_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
-            } else {
-              $filename = $school->monogram;
+            if(file_exists(public_path('/images/schools/monograms/' . $school->monogram))) {
+                unlink(public_path('/images/schools/monograms/' . $school->monogram));
             }
+            $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             $location   = public_path('/images/schools/monograms/'. $filename);
             Image::make($image)->resize(200, 200)->save($location); // ->opacity(50) diye arekta save korte hobe background er jonno...
             $school->monogram = $filename;

@@ -222,7 +222,7 @@ class SchoolController extends Controller
         }
         // monogram upload
         if($request->hasFile('monogram')) {
-            $image      = $request->file('monogram');
+            $image = $request->file('monogram');
             if(file_exists(public_path('/images/schools/monograms/' . $school->monogram))) {
                 unlink(public_path('/images/schools/monograms/' . $school->monogram));
             }
