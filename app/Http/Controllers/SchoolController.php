@@ -99,11 +99,7 @@ class SchoolController extends Controller
         // image upload
         if($request->hasFile('monogram')) {
             $image      = $request->file('monogram');
-            if($school->monogram == null || $school->monogram == '') {
-              $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
-            } else {
-              $filename = $school->monogram;
-            }
+            $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             $location   = public_path('images/schools/monograms/'. $filename);
             Image::make($image)->resize(200, 200)->save($location);
             $school->monogram = $filename;
@@ -227,11 +223,10 @@ class SchoolController extends Controller
         // monogram upload
         if($request->hasFile('monogram')) {
             $image      = $request->file('monogram');
-            if($school->monogram == null || $school->monogram == '') {
-              $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
-            } else {
-              $filename = $school->monogram;
+            if(file_exists(public_path('/images/schools/monograms'))) {
+                unlink(public_path('/images/schools/monograms'));
             }
+            $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             $location   = public_path('/images/schools/monograms/'. $filename);
             Image::make($image)->resize(200, 200)->save($location);
             $school->monogram = $filename;
