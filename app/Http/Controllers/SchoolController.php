@@ -89,7 +89,7 @@ class SchoolController extends Controller
         $school->district = $request->district;
         $school->upazilla = $request->upazilla;
         $school->currentsession = $request->currentsession;
-        $school->admission_session = $request->admission_session;
+        $school->admission_session = $request->admission_session ? $request->admission_session : $request->currentsession;;
         $school->classes = implode (",", $request->classes);
         $school->isadmissionon = $request->isadmissionon;
         $school->payment_method = $request->payment_method;
