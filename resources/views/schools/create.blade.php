@@ -34,13 +34,13 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <strong>প্রতিষ্ঠানের নামঃ (বাংলায়)</strong>
-                            {!! Form::text('name', null, array('placeholder' => 'বাংলায় নাম','class' => 'form-control', 'required' => '')) !!}
+                            {!! Form::text('name_bangla', null, array('placeholder' => 'বাংলায় নাম','class' => 'form-control', 'required' => '')) !!}
                         </div>
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
                             <strong>প্রতিষ্ঠানের নামঃ (ইংরেজিতে)</strong>
-                            {!! Form::text('name_bangla', null, array('placeholder' => 'ইংরেজিতে নাম','class' => 'form-control', 'required' => '')) !!}
+                            {!! Form::text('name', null, array('placeholder' => 'ইংরেজিতে নাম','class' => 'form-control', 'required' => '')) !!}
                         </div>
                     </div>
                     <div class="col-md-3">
