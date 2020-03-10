@@ -211,11 +211,10 @@ class SchoolController extends Controller
         // sign upload
         if($request->hasFile('headmaster_sign')) {
             $image      = $request->file('headmaster_sign');
-            if($school->headmaster_sign == null || $school->headmaster_sign == '') {
-              $filename   = 'sign_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
-            } else {
-              $filename = $school->headmaster_sign;
+            if(file_exists(public_path('/images/schools/signs/' . $school->headmaster_sign))) {
+                unlink(public_path('/images/schools/signs/' . $school->headmaster_sign));
             }
+            $filename   = 'sign_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             $location   = public_path('/images/schools/signs/'. $filename);
             Image::make($image)->resize(300, 80)->save($location);
             $school->headmaster_sign = $filename;
