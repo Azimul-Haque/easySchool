@@ -228,7 +228,7 @@ class SchoolController extends Controller
         if($request->hasFile('monogram')) {
             $image      = $request->file('monogram');
             if($school->monogram == null || $school->monogram == '') {
-              $filename   = 'monogram_'.str_replace(' ', '_', $school->name).'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
+              $filename   = 'monogram_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();
             } else {
               $filename = $school->monogram;
             }
