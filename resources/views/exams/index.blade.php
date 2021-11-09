@@ -63,32 +63,72 @@
           <td>
             {{-- make current exam modal--}}
             <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#makeCurrentExamModal{{ $exam->id }}" data-backdrop="static" title="এই পরীক্ষাটিকে চলতি পরীক্ষা হিসেবে নির্ধারণ করুন"><i class="fa fa-flash" aria-hidden="true"></i></button>
-                <!-- Trigger the modal with a button -->
-                <!-- Modal -->
-                <div class="modal fade" id="makeCurrentExamModal{{ $exam->id }}" role="dialog">
-                  <div class="modal-dialog modal-md">
-                    <div class="modal-content">
-                      <div class="modal-header modal-header-success">
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        <h4 class="modal-title">চলতি পরীক্ষা নিশ্চিতকরণ</h4>
-                      </div>
-                      <div class="modal-body">
-                        <b>{{ exam($exam->name) }}</b>-কে চলতি পরীক্ষা করতে চান?<br/><br/>
-                        <b><span style="color: #FF0000;">সতর্কীকরণঃ</span></b><br/>
-                        <ul>
-                          <li>চলতি পরীক্ষা করা হলে শিক্ষকেরা শুধুমাত্র এই পরীক্ষার নম্বর প্রদান করতে পারবেন</li>
-                        </ul>
-                      </div>
-                      <div class="modal-footer">
-                        {!! Form::model($exam, ['route' => ['exam.makecurrent', $exam->id], 'method' => 'PATCH']) !!}
-                            <button type="submit" class="btn btn-success">নিশ্চিত করছি</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                        {!! Form::close() !!}
-                      </div>
+              <!-- Trigger the modal with a button -->
+              <!-- Modal -->
+              <div class="modal fade" id="makeCurrentExamModal{{ $exam->id }}" role="dialog">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                    <div class="modal-header modal-header-success">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">চলতি পরীক্ষা নিশ্চিতকরণ</h4>
+                    </div>
+                    <div class="modal-body">
+                      <b>{{ exam($exam->name) }}</b>-কে চলতি পরীক্ষা করতে চান?<br/><br/>
+                      <b><span style="color: #FF0000;">সতর্কীকরণঃ</span></b><br/>
+                      <ul>
+                        <li>চলতি পরীক্ষা করা হলে শিক্ষকেরা শুধুমাত্র এই পরীক্ষার নম্বর প্রদান করতে পারবেন</li>
+                      </ul>
+                    </div>
+                    <div class="modal-footer">
+                      {!! Form::model($exam, ['route' => ['exam.makecurrent', $exam->id], 'method' => 'PATCH']) !!}
+                          <button type="submit" class="btn btn-success">নিশ্চিত করছি</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal">ফিরে যান</button>
+                      {!! Form::close() !!}
                     </div>
                   </div>
                 </div>
+              </div>
             {{-- make current exam modal--}}
+            {{-- delete exam modal--}}
+            <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteExamModal{{ $exam->id }}" data-backdrop="static" title="এই পরীক্ষাটিকে ডিলেট করুন!"><i class="fa fa-trash" aria-hidden="true"></i></button>
+              <!-- Trigger the modal with a button -->
+              <!-- Modal -->
+              <div class="modal fade" id="deleteExamModal{{ $exam->id }}" role="dialog">
+                <div class="modal-dialog modal-md">
+                  <div class="modal-content">
+                    <div class="modal-header modal-header-danger">
+                      <button type="button" class="close" data-dismiss="modal">&times;</button>
+                      <h4 class="modal-title">পরীক্ষা ডিলেট নিশ্চিতকরণ</h4>
+                    </div>
+                    {!! Form::model($exam, ['route' => ['exams.destroy', $exam->id], 'method' => 'DELETE']) !!}
+                    <div class="modal-body">
+                      <b>{{ exam($exam->name) }}</b> পরীক্ষাটিকে নিশ্চিতভাবে ডিলেট করতে চান?<br/><br/>
+                      <b><span style="color: #FF0000;">সতর্কীকরণঃ</span></b><br/>
+                      <ul>
+                        <li>এই পরীক্ষাটি একবার ডিলেট করা হলে এর তথ্য আর ফিরে পাওয়া যাবে না!</li>
+                        <li>পরীক্ষাটি ডিলেট করা হলে পরীক্ষাটির ফলাফল তৈরি করা যাবে না</li>
+                        <li>তবে পুনরায় অনুরুপ একটি পরীক্ষা তৈরি করা যাবে</li>
+                      </ul><br/><br/>
+                      নিশ্চায়ন প্রক্রিয়া সম্পন্ন করতে নিচের যোগফলটি ফাঁকা ঘরে ইংরেজি অংকে বসানঃ<br/>
+                      @php
+                        $contact_num1 = rand(1,20);
+                        $contact_num2 = rand(1,20);
+                        $contact_sum_result_hidden = $contact_num1 + $contact_num2;
+                      @endphp
+                      <input type="hidden" name="contact_sum_result_hidden" value="{{ $contact_sum_result_hidden }}">
+                      <center>
+                        <input type="text" name="contact_sum_result" id="" class="form-control" placeholder="{{ $contact_num1 }} + {{ $contact_num2 }} = ?" required="">
+                      </center>
+                    </div>
+                    <div class="modal-footer">
+                          <button type="submit" class="btn btn-danger" id="deleteExamModal{{ $exam->id }}"><i class="fa fa-trash" aria-hidden="true"></i> নিশ্চিত করছি</button>
+                          <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times" aria-hidden="true"></i> ফিরে যান</button>
+                    </div>
+                    {!! Form::close() !!}
+                  </div>
+                </div>
+              </div>
+            {{-- delete exam modal--}}
           </td>
         </tr>
       @endforeach

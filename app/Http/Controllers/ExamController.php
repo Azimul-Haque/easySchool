@@ -200,10 +200,28 @@ class ExamController extends Controller
 
     public function getSubjectallocation()
     {
-        $superadmins = User::whereHas('roles', function($query) {
+        // $allteachers = User::where('school_id', Auth::user()->school_id)->get();
+
+        // $superadmins = $allteachers;
+        // foreach ($allteachers as $allteacher) {
+        //     $remove_id = $allteacher->id;
+
+        //     // if(in_array('superadmin', $allteacher->roles()['name'])) {
+
+        //     // } else {
+        //     //     $superadmins = $superadmins->reject(function ($value, $key) use($remove_id) {
+        //     //         return $value->id == $remove_id;
+        //     //     });
+        //     // }
+        //     dd($allteacher->roles());
+        // }
+
+        // dd($superadmins);
+        
+        $superadmins = User::where('school_id', Auth::user()->school_id)
+                        ->whereHas('roles', function($query) {
                             $query->where('name', '=', 'superadmin');
                           })
-                        ->where('school_id', Auth::user()->school_id)
                         ->get();
         $teachers = User::whereHas('roles', function($query) {
                             $query->where('name', '=', 'teacher');
@@ -1286,8 +1304,34 @@ class ExamController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        //
+        $this->validate($request,array(
+            'contact_sum_result_hidden'   => 'required',
+            'contact_sum_result'   => 'required'
+        ));
+
+        if($request->contact_sum_result_hidden == $request->contact_sum_result) {
+            $exam = Exam::findOrFail($id);
+
+            // delete from subjects table
+            $examsubjects = Examsubject::where('exam_id', $id)->get();
+            foreach($examsubjects as $examsubject) {
+                $examsubject->delete();
+            }
+
+            // delete from marksheet table
+            $marks = Mark::where('exam_id', $id)->get();
+            foreach($marks as $mark) {
+                $mark->delete();
+            }
+
+            $exam->delete();
+
+            Session::flash('success', 'পরীক্ষাটি ও তৎসংশ্লিষ্ট তথ্যাদি ডিলেট করা হয়েছে!');
+            return redirect()->route('exams.index');
+        } else {
+            return redirect()->route('exams.index')->with('warning', 'যোগফল সঠিক নয়, আবার চেষ্টা করুন।');
+        }        
     }
 }
