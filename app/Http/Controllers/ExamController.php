@@ -618,6 +618,7 @@ class ExamController extends Controller
                      ->where('section', $section)
                      ->get();
         $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'asc')
