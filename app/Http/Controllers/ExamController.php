@@ -782,6 +782,7 @@ class ExamController extends Controller
         // filter the subject number for science/arts/commerce
 
         $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
@@ -933,6 +934,7 @@ class ExamController extends Controller
                      ->where('section', $section)
                      ->get();
         $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
