@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
 use App\School;
+use App\Student;
 use App\Smsrechargehistory;
 use Session, Auth, Config;
 
@@ -110,6 +111,77 @@ class SmsController extends Controller
         // send sms
 
         Session::flash('success', 'আপনার পেমেন্ট ভেরিফাই করা হবে এবং রিচার্জ করা হবে। ধন্যবাদ। দয়া করে ঘন্টাখানিক অপেক্ষা করুন।');
+        return redirect()->route('sms.index');
+    }
+
+    public function sendSMSClassWise(Request $request) 
+    {
+        $this->validate($request, array(
+          'search_class'     => 'required',
+          'search_section'   => 'sometimes',
+          'search_session'   => 'required',
+          'message'          => 'required'
+        ));
+
+        if(!empty($request->search_section) && $request->search_section != 'ALL') {
+            $students = Student::where('school_id', Auth::user()->school_id)
+                               ->where('session', $request->search_session)
+                               ->where('class', $request->search_class)
+                               ->where('section', $request->search_section)
+                               ->orderBy('id','DESC')->get();
+
+        } else {
+            $students = Student::where('school_id', Auth::user()->school_id)
+                               ->where('session', $request->search_session)
+                               ->where('class', $request->search_class)
+                               ->orderBy('id','DESC')->get();
+        } 
+        // dd($students);
+
+        // send sms
+        $numbersarray = [];
+        foreach ($students as $student) {
+            $mobile_number = 0;
+            if(strlen($student->contact) == 11) {
+                $mobile_number = $student->contact;
+            } elseif(strlen($student->contact) > 11) {
+                if (strpos($student->contact, '+') !== false) {
+                    $mobile_number = substr($student->contact, -11);
+                }
+            }
+            $numbersarray[] = $mobile_number;
+        }
+        $numbersstr = implode (",", $numbersarray);
+        // dd($numbersstr);
+        
+        $url = config('sms.url');
+        $number = $mobile_number;
+        $text = $request->message; // . ' Customs and VAT Co-operative Society (CVCS).';
+        $data= array(
+            'username'=>config('sms.username'),
+            'password'=>config('sms.password'),
+            'number'=>"$numbersstr",
+            'message'=>"$text",
+        );
+        // initialize send status
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this is important
+        $smsresult = curl_exec($ch);
+
+        // $sendstatus = $result = substr($smsresult, 0, 3);
+        $p = explode("|",$smsresult);
+        $sendstatus = $p[0];
+        // send sms
+        if($sendstatus == 1101) {
+            Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
+        } elseif($sendstatus == 1006) {
+            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
+        } else {
+            Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        }
         return redirect()->route('sms.index');
     }
 

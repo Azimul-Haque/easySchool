@@ -101,6 +101,9 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('sms/client/recharge/{smscount}/{token}/{tk}',['as'=>'sms.clientrecharge','uses'=>'SmsController@getClientRecharge']);
 	Route::post('sms/recharge/request',['as'=>'sms.rechargerequest','uses'=>'SmsController@storeRechargeRequest']);
 
+	// SMS Sending
+	Route::post('sms/send/classwise',['as'=>'sms.sendclasswise','uses'=>'SmsController@sendSMSClassWise']);
+
 	Route::delete('sms/recharge/request/delete/{id}',['as'=>'sms.destroy.history','uses'=>'SmsController@destroyRechargeReqHistory']);
 	Route::patch('sms/recharge/request/update/{id}',['as'=>'sms.update.history','uses'=>'SmsController@updateRechargeReqHistory']);
 
