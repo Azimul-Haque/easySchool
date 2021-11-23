@@ -137,10 +137,15 @@ class SmsController extends Controller
                                ->where('class', $request->search_class)
                                ->orderBy('id','DESC')->get();
         }
+        
+        // CHECK SMS BALANCE
+        // CHECK SMS BALANCE
         if(count($students) * $request->smscount > Auth::user()->school->smsbalance) {
             Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্স!');
             return redirect()->route('sms.index');
         }
+        // CHECK SMS BALANCE
+        // CHECK SMS BALANCE
         // dd($students);
 
         // send sms
