@@ -91,8 +91,8 @@
             </select><br/>
                 
             <div class="form-group">
-              <label for="singlemessage">Message:</label>
-              <textarea type="text" name="message" id="singlemessage" class="form-control textarea" required="" placeholder="Write message"></textarea>
+              <label for="singlemessage">মেসেজ:</label>
+              <textarea type="text" name="message" id="singlemessage" class="form-control textarea" required="" placeholder="মেসেজ লিখুন"></textarea>
             </div>
             <table class="table">
               <tr id="smstestresult">
@@ -138,7 +138,7 @@
     $('#singlemessage').keyup(function() {
         $('#smscounthidden').val($('#smscount').text());
     });
-        
+
     $('#smsamountbtn').click(function() {
         var smsamount = $('#smsamount').val();
         if(smsamount < 500) {
