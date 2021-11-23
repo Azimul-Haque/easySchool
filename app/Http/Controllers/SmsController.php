@@ -157,7 +157,7 @@ class SmsController extends Controller
             $numbersarray[] = $mobile_number;
         }
         $numbersstr = implode(",", $numbersarray);
-        // dd($numbersstr);
+        dd($numbersstr);
         
         $url = config('sms.url');
         $number = $mobile_number;
