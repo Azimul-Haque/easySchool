@@ -120,7 +120,8 @@ class SmsController extends Controller
           'search_class'     => 'required',
           'search_section'   => 'sometimes',
           'search_session'   => 'required',
-          'message'          => 'required'
+          'message'          => 'required',
+          'smscount'         => 'required'
         ));
 
         if(!empty($request->search_section) && $request->search_section != 'ALL') {
@@ -135,7 +136,11 @@ class SmsController extends Controller
                                ->where('session', $request->search_session)
                                ->where('class', $request->search_class)
                                ->orderBy('id','DESC')->get();
-        } 
+        }
+        if(count($students) * $request->smscount > Auth::user()->school->smsbalance) {
+            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্স!');
+            return redirect()->route('sms.index');
+        }
         // dd($students);
 
         // send sms
@@ -151,7 +156,7 @@ class SmsController extends Controller
             }
             $numbersarray[] = $mobile_number;
         }
-        $numbersstr = implode (",", $numbersarray);
+        $numbersstr = implode(",", $numbersarray);
         // dd($numbersstr);
         
         $url = config('sms.url');
@@ -177,6 +182,8 @@ class SmsController extends Controller
         // send sms
         if($sendstatus == 1101) {
             Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
+            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+            Auth::user()->school->save();
         } elseif($sendstatus == 1006) {
             Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
         } else {

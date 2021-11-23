@@ -103,8 +103,8 @@
               </tr>
             </table>
             <input type="hidden" name="smscount" id="smscounthidden" required="">
-            <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send SMS</button>
-              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendBulkModal" data-backdrop="static"><i class="fa fa-paper-plane" aria-hidden="true"></i> Send SMS</button>
+            {{-- <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send SMS</button> --}}
+              <button type="button" class="btn btn-success" data-toggle="modal" data-target="#sendBulkModal" data-backdrop="static"><i class="fa fa-paper-plane" aria-hidden="true"></i> SMS পাঠান</button>
               <div class="modal fade" id="sendBulkModal" role="dialog">
                 <div class="modal-dialog modal-md">
                   <div class="modal-content">
@@ -113,11 +113,11 @@
                       <h4 class="modal-title"><i class="fa fa-envelope-o" aria-hidden="true"></i> SMS Sending Confirmation</h4>
                     </div>
                     <div class="modal-body">
-                      Are you sure to send SMS to <b>{{-- {{ $memberscount }} --}} persons?</b>
+                      আপনি কি নিশ্চিতভাবে SMS মেসেজ পাঠাতে চান?
                     </div>
                     <div class="modal-footer">
-                      <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> Send SMS</button>
-                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                      <button type="submit" class="btn btn-success"><i class="fa fa-paper-plane"></i> SMS পাঠান</button>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">ফিরে যান</button>
                     </div>
                   </div>
                 </div>
@@ -134,6 +134,11 @@
 @section('js')
   <script type="text/javascript" src="{{ asset('js/smscounter.js') }}"></script>
   <script type="text/javascript">
+    $('#singlemessage').countSms('#smstestresult');
+    $('#singlemessage').keyup(function() {
+        $('#smscounthidden').val($('#smscount').text());
+    });
+        
     $('#smsamountbtn').click(function() {
         var smsamount = $('#smsamount').val();
         if(smsamount < 500) {
