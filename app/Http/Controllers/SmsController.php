@@ -140,10 +140,10 @@ class SmsController extends Controller
         
         // CHECK SMS BALANCE
         // CHECK SMS BALANCE
-        // if(count($students) * $request->smscount > Auth::user()->school->smsbalance) {
-        //     Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্স!');
-        //     return redirect()->route('sms.index');
-        // }
+        if(count($students) * $request->smscount > Auth::user()->school->smsbalance) {
+            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্স!');
+            return redirect()->route('sms.index');
+        }
         // CHECK SMS BALANCE
         // CHECK SMS BALANCE
         // dd($students);
@@ -162,7 +162,7 @@ class SmsController extends Controller
             $numbersarray[] = $mobile_number;
         }
         $numbersstr = implode(",", $numbersarray);
-        dd($numbersstr);
+        // dd($numbersstr);
         
         $url = config('sms.url');
         $number = $mobile_number;
