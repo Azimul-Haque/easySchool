@@ -87,10 +87,10 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/result/list/generate/pdf/',['as'=>'exam.getresultlistpdf','uses'=>'ExamController@getResultListPDF']);
 	Route::get('exam/tabulation/sheet/generate/pdf/',['as'=>'exam.gettabulationsheetpdf','uses'=>'ExamController@getTabulationSheetPDF']);
 	Route::get('exam/marksheets/generate/pdf/',['as'=>'exam.getmarksheetspdf','uses'=>'ExamController@getMarkSheetsPdf']);
+	Route::get('exam/sms/send/result/',['as'=>'exam.sendsmsresult','uses'=>'ExamController@getSendSMSResult']);
 	Route::get('exam/excel/generate/',['as'=>'exam.getresultexcelforsms','uses'=>'ExamController@getExcelForSMS']);
 
 	// Route::post('exam/delete/{id}',['as'=>'exam.delete','uses'=>'ExamController@makeCurrent']);
-
 
 	// Route::get('sms',['as'=>'sms.index','uses'=>'StudentController@sendsms']);
 	// Route::get('sms/test',['as'=>'sms.trest','uses'=>'StudentController@testSMS']);
