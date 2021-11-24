@@ -1197,24 +1197,6 @@ class ExamController extends Controller
                         // grade array...
                         $grade_array[] = $mark->grade;
                     }
-
-                    // if(in_array($mark->subject_id, $ban_en_array)) {
-                    //     continue;
-                    // } else {
-                    //     $total_marks = $total_marks + $mark->total;
-                    //     if($mark->grade_point != 'N/A') {
-                    //         $total_grade_point = $total_grade_point + $mark->grade_point;
-                    //     } else {
-                    //         $total_grade_point = $total_grade_point * 0;
-                    //     }
-                    // }
-                    // if($mark->subject_id == 1) {
-                    //     $sorting_sub_ban = $mark->total; // bangla
-                    // } elseif($mark->subject_id == 3) {
-                    //     $sorting_sub_en = $mark->total; // english
-                    // } elseif($mark->subject_id == 3) {
-                    //     $sorting_sub_math = $mark->total; // math
-                    // }
                 }
             }
             if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
@@ -1379,24 +1361,6 @@ class ExamController extends Controller
                         // grade array...
                         $grade_array[] = $mark->grade;
                     }
-
-                    // if(in_array($mark->subject_id, $ban_en_array)) {
-                    //     continue;
-                    // } else {
-                    //     $total_marks = $total_marks + $mark->total;
-                    //     if($mark->grade_point != 'N/A') {
-                    //         $total_grade_point = $total_grade_point + $mark->grade_point;
-                    //     } else {
-                    //         $total_grade_point = $total_grade_point * 0;
-                    //     }
-                    // }
-                    // if($mark->subject_id == 1) {
-                    //     $sorting_sub_ban = $mark->total; // bangla
-                    // } elseif($mark->subject_id == 3) {
-                    //     $sorting_sub_en = $mark->total; // english
-                    // } elseif($mark->subject_id == 3) {
-                    //     $sorting_sub_math = $mark->total; // math
-                    // }
                 }
             }
             if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
@@ -1442,10 +1406,11 @@ class ExamController extends Controller
             $result_array_sorting_sub_ban[$key] = $row['sorting_sub_ban'];
             $result_array_roll[$key] = $row['roll'];
         }
+        // dd($results);
         array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results);
         $results_coll = collect($results);
 
-        // dd($results_coll);
+        dd($results_coll);
 
         return view('exams.excel.export')->withResults($results_coll);
     }
