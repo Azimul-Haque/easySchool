@@ -1105,6 +1105,7 @@ class ExamController extends Controller
                      ->where('section', $section)
                      ->get();
         $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
@@ -1269,6 +1270,7 @@ class ExamController extends Controller
                      ->where('section', $section)
                      ->get();
         $students = Student::where('school_id', Auth::user()->school_id)
+                           ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
                            ->orderBy('roll', 'ASC')
@@ -1410,7 +1412,72 @@ class ExamController extends Controller
         array_multisort($result_array_gpa, SORT_DESC, $result_array_total_marks, SORT_DESC, $result_array_sorting_sub_math, SORT_DESC, $result_array_sorting_sub_en, SORT_DESC, $result_array_sorting_sub_ban, SORT_DESC, $result_array_roll, SORT_ASC, $results);
         $results_coll = collect($results);
 
-        dd($results_coll);
+        $smsdata = [];
+        $counter = 1;
+        foreach ($results_coll as $i => $result) {
+            $resultdetails = '';
+            foreach($result['subjects_marks'] as $marks) {
+                $resultdetails .= $marks['subject_name'] .':'. $marks['grade'] . ',';
+            }
+
+            if($result['grade'] == 'F') {
+                $smstext = 'Jamalpur H School:' . exam_en($result['exam']) . ' Result. ' . rtrim($result['name']) . '.Merit:N/A,GPA:' . $result['gpa'] . ',Details:' . rtrim($resultdetails, ',');
+            } else {
+                $smstext = 'Jamalpur H School:' . exam_en($result['exam']) . ' Result. ' . rtrim($result['name']) . '.Merit:'. $counter . ',GPA:' . $result['gpa'] . ',Details:' . rtrim($resultdetails, ',');
+            }
+            $mobile_number = $result['mobile'];
+            $encodedtext = rawurlencode($smstext);
+            // $encodedtext = $text;
+            $smsdata[$i] = array(
+                // 'name'=>"$member->name",
+                // 'name_bangla'=>"$member->name_bangla",
+                // 'member_id'=>"$member->member_id",
+                'to'=>"$mobile_number",
+                'message'=>"$smstext", // $encodedtext
+                // 'joining_date'=>"$member->joining_date",
+                // 'due'=>"$member->totalpendingmonthly",
+            );
+
+            $counter++;
+        }
+        $smsdata = array_values($smsdata);
+        $smsjsondata = json_encode($smsdata);
+
+        // dd($smsdata);
+
+        // send sms
+        $url = config('sms.url');
+
+        $data= array(
+            'smsdata'=>"$smsjsondata",
+            'username'=>config('sms.username'),
+            'password'=>config('sms.password'),
+            // 'token'=>config('sms.gw_token'),
+        ); // Add parameters in key value
+        $ch = curl_init(); // Initialize cURL
+        curl_setopt($ch, CURLOPT_URL,$url);
+        curl_setopt($ch, CURLOPT_ENCODING, '');
+        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $smsresult = curl_exec($ch);
+
+        // $sendstatus = $result = substr($smsresult, 0, 3);
+        $p = explode("|",$smsresult);
+        $sendstatus = $p[0];
+        // send sms
+
+        dd($smsresult);
+        
+        if($sendstatus == 1101) {
+            Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
+            // Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+            // Auth::user()->school->save();
+        } elseif($sendstatus == 1006) {
+            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
+        } else {
+            Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        }
+        return redirect()->route('exam.getresultgenpage');
 
         return view('exams.excel.export')->withResults($results_coll);
     }

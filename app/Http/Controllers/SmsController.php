@@ -103,12 +103,16 @@ class SmsController extends Controller
             'message'=>"$text"
         );
 
-        $ch = curl_init(); // Initialize cURL
-        curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_exec($ch);
-        // send sms
+        try {
+            $ch = curl_init(); // Initialize cURL
+            curl_setopt($ch, CURLOPT_URL,$url);
+            curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_exec($ch);
+            // send sms
+        } catch (Exception $e) {
+            
+        }
 
         Session::flash('success', 'আপনার পেমেন্ট ভেরিফাই করা হবে এবং রিচার্জ করা হবে। ধন্যবাদ। দয়া করে ঘন্টাখানিক অপেক্ষা করুন।');
         return redirect()->route('sms.index');
