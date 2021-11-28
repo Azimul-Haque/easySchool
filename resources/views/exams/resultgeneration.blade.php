@@ -77,6 +77,30 @@
         <div class="box-header with-border text-blue">
           <i class="fa fa-fw fa-envelope"></i>
           <h3 class="box-title">ফলাফল SMS এ পাঠান</h3>
+          {{-- @php
+            $error = 0;
+            $actualgbbalance = 0;
+            try {
+                $grurl = 'http://api.greenweb.com.bd/g_api.php?token='. config('sms.gw_token') .'&balance';
+                
+                //  Initiate curl
+                $ch = curl_init();
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_URL,$grurl);
+                $result=curl_exec($ch);
+                curl_close($ch);
+
+                $actualgbbalance = number_format((float) $result, 2, '.', '');
+                          
+            } catch (\Exception $e) {
+              $error = 1;
+            }
+            if($error == 1) {
+              echo 'ব্যালেন্সঃ Error';
+            } else {
+              echo 'SMS ব্যালেন্সঃ ' . round($actualgbbalance / .30);
+            }
+          @endphp --}}
         </div>
         <!-- /.box-header -->
         <div class="box-body">

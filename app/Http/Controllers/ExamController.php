@@ -1280,6 +1280,15 @@ class ExamController extends Controller
                                   ->orderBy('subject_id', 'asc')
                                   ->get();
 
+        // CHECK SMS BALANCE
+        // CHECK SMS BALANCE
+        if(count($students) > Auth::user()->school->smsbalance) {
+          Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্স!');
+          return redirect()->route('exam.getresultgenpage');
+        }
+        // CHECK SMS BALANCE
+        // CHECK SMS BALANCE
+
         // skip if ban 2 or en 2, because numbers are counted in ban 1 and en 1
         $ban_en_array = [2, 4];
         foreach ($students as $student) {
@@ -1446,13 +1455,13 @@ class ExamController extends Controller
         // dd($smsdata);
 
         // send sms
-        $url = config('sms.url');
+        $url = config('sms.gw_url');
 
         $data= array(
             'smsdata'=>"$smsjsondata",
-            'username'=>config('sms.username'),
-            'password'=>config('sms.password'),
-            // 'token'=>config('sms.gw_token'),
+            // 'username'=>config('sms.username'),
+            // 'password'=>config('sms.password'),
+            'token'=>config('sms.gw_token'),
         ); // Add parameters in key value
         $ch = curl_init(); // Initialize cURL
         curl_setopt($ch, CURLOPT_URL,$url);
@@ -1462,24 +1471,22 @@ class ExamController extends Controller
         $smsresult = curl_exec($ch);
 
         // $sendstatus = $result = substr($smsresult, 0, 3);
-        $p = explode("|",$smsresult);
-        $sendstatus = $p[0];
+        $resultstr = substr($smsresult, 0, 6);
+        // dd($smsresult);
         // send sms
 
-        dd($smsresult);
-        
-        if($sendstatus == 1101) {
+        if($resultstr == '') {
             Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
-            // Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
-            // Auth::user()->school->save();
-        } elseif($sendstatus == 1006) {
-            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
+        } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') !== false) {
+            Session::flash('success', bangla(count($smsdata) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
+        } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') == false) {
+            Session::flash('info', 'দুঃখিত! SMS পাঠানো যায়নি!');
+            // Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
         } else {
-            Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+            // Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+            Session::flash('warning', 'কিছু কিছু নাম্বারে SMS পাঠানো যায়নি!');
         }
         return redirect()->route('exam.getresultgenpage');
-
-        return view('exams.excel.export')->withResults($results_coll);
     }
 
     public function export() 
