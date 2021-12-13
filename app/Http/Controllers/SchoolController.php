@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 
 use App\School;
 use App\Upazilla;
+use App\Exam;
 
 use Image;
 use Validator, Input, Redirect, Session, DB;
@@ -308,11 +309,16 @@ class SchoolController extends Controller
     }
 
     public function getSchoolResultPage($token) {
-        
         try {
           $school = School::where('token', $token)->first();
           if($school != null) {
-            return view('index.resultpage')->withSchool($school);
+            $exams = Exam::where('school_id', Auth::user()->school_id)
+                         ->orderBy('id', 'desc')
+                         ->get();
+
+            return view('index.resultpage')
+                        ->withExams($exams)
+                        ->withSchool($school);
           } else {
             return redirect()->route('index');
           }

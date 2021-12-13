@@ -86,7 +86,12 @@ s0.parentNode.insertBefore(s1,s0);
             <div class="collapse navbar-collapse" id="app-navbar-collapse">
                 <!-- Left Side Of Navbar -->
                 <ul class="nav navbar-nav">
-                    <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a></li>
+                    {{-- apatoto --}}
+                    {{-- apatoto --}}
+                    {{-- <li><a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a></li> --}}
+                    @if (!empty($school))
+                        <li><a href="{{ route('schools.getschool.resultpage', $school->token) }}"><i class="fa fa-tachometer"></i> ফলাফল ডাউনলোড</a></li>
+                    @endif
                 </ul>
                 
 
@@ -122,7 +127,7 @@ s0.parentNode.insertBefore(s1,s0);
             <a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a><br/>
             <a href="{{ url('/#pricingsection') }}"><i class="fa fa-diamond"></i> খরচ</a><br/>
             <a href="{{ url('/#contactsection') }}"><i class="fa fa-envelope-o"></i> যোগাযোগ</a><br/>
-            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a>
+            <a href="{{ url('/login') }}"><i class="fa fa-sign-in"></i> লগইন</a>
         </div>
         <div class="col-md-4 wow fadeInUp" data-wow-duration="600ms">
             <h5>আপনার ইমেইল অথবা ফোন নম্বরটি দিন</h5>

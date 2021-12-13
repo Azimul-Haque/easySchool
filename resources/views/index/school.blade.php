@@ -9,7 +9,7 @@
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid" style="min-height: 750px;">
     <div class="row">
       <div class="col-md-9 wow fadeInUp" data-wow-duration="300ms">
         <div class="board">
@@ -20,14 +20,14 @@
               <li class="active">
                 <a href="#home" data-toggle="tab" title="নীড় (Home)">
                  <span class="round-tabs one">
-                        <i class="fa fa-home" aria-hidden="true"></i>
+                    <i class="fa fa-home" aria-hidden="true"></i>
                  </span> 
                 </a>
               </li>
               <li>
                 <a href="#admission" data-toggle="tab" title="ভর্তি প্রক্রিয়া (Admission)">
                  <span class="round-tabs two">
-                     <i class="fa fa-file-text-o" aria-hidden="true"></i>
+                    <i class="fa fa-file-text-o" aria-hidden="true"></i>
                  </span> 
                 </a>
               </li>
@@ -84,7 +84,9 @@
             </div>
             <div class="tab-pane fade" id="result">
                 <div class="row">
-                  <div class="col-md-12">ফলাফল প্রদর্শন</div>
+                  <div class="col-md-12">
+                    <a href="{{ route('schools.getschool.resultpage', $school->token) }}">ফলাফল ডাউনলোড</a>
+                  </div>
                 </div>
             </div>
             <div class="tab-pane fade" id="notice">

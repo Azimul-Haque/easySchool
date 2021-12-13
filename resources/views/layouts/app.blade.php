@@ -59,7 +59,7 @@ s0.parentNode.insertBefore(s1,s0);
 })();
 </script>
 <!--End of Tawk.to Script-->
-<body id="app-layout">
+<body id="app-layout" style="min-height: 500px;">
     <!-- Google Tag Manager (noscript) -->
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KR9XJZP"
     height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
@@ -130,7 +130,7 @@ s0.parentNode.insertBefore(s1,s0);
             <a href="{{ url('/') }}"><i class="fa fa-home"></i> নীড় পাতা</a><br/>
             <a href="{{ url('/#pricingsection') }}"><i class="fa fa-diamond"></i> খরচ</a><br/>
             <a href="{{ url('/#contactsection') }}"><i class="fa fa-envelope-o"></i> যোগাযোগ</a><br/>
-            <a href="{{ url('/login') }}"<i class="fa fa-sign-in"></i> লগইন</a>
+            <a href="{{ url('/login') }}"><i class="fa fa-sign-in"></i> লগইন</a>
         </div>
         <div class="col-md-4 wow fadeInUp" data-wow-duration="600ms">
             <h5>আপনার ইমেইল অথবা ফোন নম্বরটি দিন</h5>
