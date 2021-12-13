@@ -1100,13 +1100,19 @@ class ExamController extends Controller
 
         $exam = Exam::where('id', $request->exam_id)->first();
 
-        $total_subjects_array = explode('_', $exam->total_subjects);
-        $class_subject = 0;
-        dd($total_subjects_array);
-
         $class_section_array = explode('_', $request->class_section);
         $class   = $class_section_array[0];
         $section = $class_section_array[1];
+
+        $class_subject_count = 0;
+        $total_subjects_array = explode(',', $exam->total_subjects);
+        foreach($total_subjects_array as $classarray) {
+            $classsubarr = explode(':', $classarray);
+            if($classsubarr[0] == $class) {
+                $class_subject_count = $classsubarr[1];
+            }
+        }
+        dd($class_subject_count);
         
         $marks = Mark::where('exam_id', $request->exam_id)
                      ->where('class', $class)

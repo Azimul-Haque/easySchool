@@ -18,12 +18,18 @@
             <div class="panel-body">
               {!! Form::open(['route' => 'exam.getsinglemarksheetspdf', 'method' => 'GET']) !!}
                 <div class="form-group">
-                  <select name="exam_id" class="form-control" required="">
-                    <option value="" selected="" disabled="">পরীক্ষার নাম নির্ধারণ করুন {{ $school->currentexam }}</option>
-                    @foreach($exams as $exam)
-                      <option value="{{ $exam->id }}" @if($exam->id == $school->currentexam) @endif>{{ exam($exam->name) }}-{{ bangla($exam->exam_session) }}</option>
-                    @endforeach
-                  </select>
+                  @php
+                    $currentexamid = '';
+                    $currentexamname = '';
+                    foreach($exams as $exam) {
+                      if($exam->id == $school->currentexam) {
+                        $currentexamid = $exam->id;
+                        $currentexamname = $exam->name;
+                      }
+                    }
+                  @endphp
+                  <input type="hidden" name="exam_id" class="form-control" value="{{ $currentexamid }}">
+                  <input type="text" name="currentexamname" class="form-control" value="{{ exam($currentexamname) }}-{{ bangla($exam->exam_session) }}" disabled>
                 </div>
                 <div class="form-group">
                   <select name="class_section" class="form-control" required="">

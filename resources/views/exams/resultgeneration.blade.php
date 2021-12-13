@@ -186,7 +186,7 @@
       <div class="box box-warning">
         <div class="box-header with-border text-orange">
           <i class="fa fa-fw fa-file-text-o"></i>
-          <h3 class="box-title">নম্বরপত্র (মার্কশিট) তৈরি করুন {{ $Auth::user()->school->currentexam }}</h3>
+          <h3 class="box-title">নম্বরপত্র (মার্কশিট) তৈরি করুন</h3>
         </div>
         <!-- /.box-header -->
         <div class="box-body">
@@ -195,7 +195,7 @@
               <select name="exam_id" class="form-control" required="">
                 <option value="" selected="" disabled="">পরীক্ষার নাম নির্ধারণ করুন</option>
                 @foreach($exams as $exam)
-                  <option value="{{ $exam->id }}" @if($exam->id == $Auth::user()->school->currentexam)>{{ exam($exam->name) }}-{{ bangla($exam->exam_session) }}</option>
+                  <option value="{{ $exam->id }}">{{ exam($exam->name) }}-{{ bangla($exam->exam_session) }}</option>
                 @endforeach
               </select>
             </div>
