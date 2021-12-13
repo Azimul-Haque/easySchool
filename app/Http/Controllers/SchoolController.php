@@ -312,7 +312,7 @@ class SchoolController extends Controller
         try {
           $school = School::where('token', $token)->first();
           if($school != null) {
-            $exams = Exam::where('school_id', Auth::user()->school_id)
+            $exams = Exam::where('school_id', $school->id)
                          ->orderBy('id', 'desc')
                          ->get();
 

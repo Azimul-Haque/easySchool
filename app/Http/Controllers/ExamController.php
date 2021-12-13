@@ -177,6 +177,10 @@ class ExamController extends Controller
         // update all teachers current exam
         $users = DB::table('users')->where('school_id', Auth::user()->school_id)->update(array('exam_id' => $id));
 
+        // update school table
+        Auth::user()->school->currentexam = $exam->id;
+        Auth::user()->school->save();
+
         Session::flash('success', 'পরীক্ষাটিকে চলতি পরীক্ষা হিসাবে নির্ধারণ করা হয়েছে!');
         return redirect()->route('exams.index');
     }
@@ -1095,6 +1099,10 @@ class ExamController extends Controller
         ]);
 
         $exam = Exam::where('id', $request->exam_id)->first();
+
+        $total_subjects_array = explode('_', $exam->total_subjects);
+        $class_subject = 0;
+        dd($total_subjects_array);
 
         $class_section_array = explode('_', $request->class_section);
         $class   = $class_section_array[0];
