@@ -190,7 +190,7 @@
         </div>
         <!-- /.box-header -->
         <div class="box-body">
-          {!! Form::open(['route' => 'exam.getmarksheetspdf', 'method' => 'GET', 'target' => '_blank']) !!}
+          {!! Form::open(['route' => 'exam.getsinglemarksheetspdf', 'method' => 'GET', 'target' => '_blank']) !!}
             <div class="form-group">
               <select name="exam_id" class="form-control" required="">
                 <option value="" selected="" disabled="">পরীক্ষার নাম নির্ধারণ করুন</option>

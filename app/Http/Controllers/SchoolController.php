@@ -18,7 +18,7 @@ use Carbon\Carbon;
 class SchoolController extends Controller
 {
     public function __construct(){
-        $this->middleware('role:superadmin', ['except' => ['getDistrictsAPI', 'getUpazillasAPI', 'getSchoolsAPI', 'getSchool']]);
+        $this->middleware('role:superadmin', ['except' => ['getDistrictsAPI', 'getUpazillasAPI', 'getSchoolsAPI', 'getSchool', 'getSchoolResultPage']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -297,6 +297,22 @@ class SchoolController extends Controller
           if($school != null) {
             return view('index.school')
                       ->withSchool($school);
+          } else {
+            return redirect()->route('index');
+          }
+
+        }
+        catch (\Exception $e) {
+          return redirect()->route('index');
+        }
+    }
+
+    public function getSchoolResultPage($token) {
+        
+        try {
+          $school = School::where('token', $token)->first();
+          if($school != null) {
+            return view('index.resultpage')->withSchool($school);
           } else {
             return redirect()->route('index');
           }

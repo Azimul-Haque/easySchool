@@ -87,6 +87,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/result/list/generate/pdf/',['as'=>'exam.getresultlistpdf','uses'=>'ExamController@getResultListPDF']);
 	Route::get('exam/tabulation/sheet/generate/pdf/',['as'=>'exam.gettabulationsheetpdf','uses'=>'ExamController@getTabulationSheetPDF']);
 	Route::get('exam/marksheets/generate/pdf/',['as'=>'exam.getmarksheetspdf','uses'=>'ExamController@getMarkSheetsPdf']);
+	Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetspdf','uses'=>'ExamController@getSingleMarkSheetsPdf']);
 	Route::get('exam/sms/send/result/',['as'=>'exam.sendsmsresult','uses'=>'ExamController@getSendSMSResult']);
 	Route::get('exam/excel/generate/',['as'=>'exam.getresultexcelforsms','uses'=>'ExamController@getExcelForSMS']);
 
@@ -120,6 +121,7 @@ Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'Ad
 Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
 Route::get('admission/form/retrieve',['as'=>'admissions.retrieveid','uses'=>'AdmissionController@retrieveApplicationId']);
 Route::get('school/{token}',['as'=>'schools.getschool','uses'=>'SchoolController@getSchool']);
+Route::get('school/{token}/resultpage',['as'=>'schools.getschool.resultpage','uses'=>'SchoolController@getSchoolResultPage']);
 
 // public APIs
 Route::get('getadmissionstatus/{id}',['as'=>'admissions.getstatus','uses'=>'AdmissionController@getAdmissionStatusAPI']);
