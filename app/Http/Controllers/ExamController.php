@@ -1105,14 +1105,28 @@ class ExamController extends Controller
         $section = $class_section_array[1];
 
         $class_subject_count = 0;
+        $classaray = [];
         $total_subjects_array = explode(',', $exam->total_subjects);
         foreach($total_subjects_array as $classarray) {
             $classsubarr = explode(':', $classarray);
             if($classsubarr[0] == $class) {
                 $class_subject_count = $classsubarr[1];
             }
+            $classaray[] = $classsubarr[0];
         }
-        dd($class_subject_count);
+        // dd($classaray);
+
+        $student = Student::where('student_id', $request->student_id)->first();
+        if(empty($student) || $student == null) {
+            Session::flash('info', 'তথ্য দিতে ভুল হচ্ছে! সঠিক তথ্য প্রদান করুন।');
+            return redirect()->back();
+        } elseif($student->class != $class || $student->section != $section || !in_array($student->class, $classaray)) {
+            Session::flash('info', 'তথ্য দিতে ভুল হচ্ছে! সঠিক তথ্য প্রদান করুন।');
+            return redirect()->back();
+        }
+
+        // dd($student);
+
         
         $marks = Mark::where('exam_id', $request->exam_id)
                      ->where('class', $class)
@@ -1208,7 +1222,7 @@ class ExamController extends Controller
             if(in_array('F', $grade_array) || in_array('N/A', $grade_array)) {
                 $total_grade_point = 0;
             }
-            $gpa = $total_grade_point/$request->subject_count;
+            $gpa = $total_grade_point/$class_subject_count;
             if($gpa > 5.00) {
                 $gpa = 5.00;
             }

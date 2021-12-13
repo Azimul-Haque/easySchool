@@ -49,7 +49,7 @@
                   </select>
                 </div>
                 <div class="form-group">
-                    <input type="number" name="student_id" class="form-control" placeholder="স্টুডেন্ট আইডি নম্বর" title="স্টুডেন্ট আইডি নম্বর">
+                    <input type="number" name="student_id" class="form-control" placeholder="স্টুডেন্ট আইডি নম্বর" title="স্টুডেন্ট আইডি নম্বর" required>
                 </div>
                 <button class="btn btn-primary btn-block" type="submit"><i class="fa fa-fw fa-file-pdf-o" aria-hidden="true"></i> নম্বরপত্র (মার্কশিট) ডাউনলোড করুন</button>
               {!! Form::close() !!}
