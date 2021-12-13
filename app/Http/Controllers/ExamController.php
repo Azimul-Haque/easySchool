@@ -1648,6 +1648,10 @@ class ExamController extends Controller
 
         if($resultstr == '') {
             Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
+            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - count($students);
+            // aro kaaj ache
+            // aro kaaj ache
+            Auth::user()->school->save();
         } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') !== false) {
             Session::flash('success', bangla(count($smsdata) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
         } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') == false) {
@@ -1656,6 +1660,10 @@ class ExamController extends Controller
         } else {
             // Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
             Session::flash('warning', 'কিছু কিছু নাম্বারে SMS পাঠানো যায়নি!');
+            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - count($students);
+            // aro kaaj ache
+            // aro kaaj ache
+            Auth::user()->school->save();
         }
         return redirect()->route('exam.getresultgenpage');
     }
