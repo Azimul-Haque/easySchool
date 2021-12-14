@@ -1285,7 +1285,7 @@ class ExamController extends Controller
         // get the highest marks each subjects
         ini_set("pcre.backtrack_limit", "5000000");
         $pdf = PDF::loadView('exams.pdf.marksheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects, $highest], 'school' => $school, 'student_id' => $request->student_id], ['mode' => 'utf-8', 'format' => 'A4']);
-        $fileName = 'Class_'.$class.'_'.english_section($school->section_type, $class, $section).'_'. $student->student_id .'_Mark_Sheets' . '.pdf';
+        $fileName = 'Class_'.$class.'_'.english_section($school->section_type, $class, $section).'_'. $request->student_id .'_Mark_Sheets' . '.pdf';
         return $pdf->stream($fileName);
     }
 
