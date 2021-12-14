@@ -12,6 +12,7 @@ use Validator, Input, Redirect, Session, File;
 use Auth;
 use Illuminate\Support\Facades\DB;
 
+use App\School;
 use App\Subject;
 use App\Exam;
 use App\Examsubject;
@@ -26,8 +27,8 @@ use Excel;
 
 class ExamController extends Controller
 {
-    public function __construct(){
-        $this->middleware('role:headmaster', ['except' => ['getSubmissionPage', 'storeMakrs', 'pdfMarksforTeacher', 'getSingleMarkSheetsPdf']]);
+    public function __construct() {
+        $this->middleware('role:headmaster', ['except' => ['getSubmissionPage', 'storeMakrs', 'pdfMarksforTeacher', 'getSingleMarkSheetPdf']]);
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
@@ -1090,13 +1091,16 @@ class ExamController extends Controller
         return $pdf->stream($fileName);
     }
 
-    public function getSingleMarkSheetsPdf(Request $request)
+    public function getSingleMarkSheetPdf(Request $request)
     {
         $this->validate($request, [
-            'exam_id'         => 'required',
-            'class_section'   => 'required',
-            'student_id'      => 'required',
+            'school_id'         => 'required',
+            'exam_id'           => 'required',
+            'class_section'     => 'required',
+            'student_id'        => 'required',
         ]);
+
+        $school = School::findOrFail($request->school_id);
 
         $exam = Exam::where('id', $request->exam_id)->first();
 
@@ -1132,7 +1136,7 @@ class ExamController extends Controller
                      ->where('class', $class)
                      ->where('section', $section)
                      ->get();
-        $students = Student::where('school_id', Auth::user()->school_id)
+        $students = Student::where('school_id', $school->id)
                            ->where('session', $exam->exam_session)
                            ->where('class', $class)
                            ->where('section', $section)
@@ -1241,7 +1245,7 @@ class ExamController extends Controller
             $result_sub['grade'] = $grade;
             $result_sub['subjects_marks'] = $subjects_marks;
 
-            $result_sub['school_id'] = Auth::user()->school_id;
+            $result_sub['school_id'] = $school->id;
             $result_sub['exam_id'] = $request->exam_id;
             $result_sub['class'] = $class;
             $result_sub['section'] = $section;
@@ -1280,8 +1284,8 @@ class ExamController extends Controller
         // get the highest marks each subjects
         // get the highest marks each subjects
         ini_set("pcre.backtrack_limit", "5000000");
-        $pdf = PDF::loadView('exams.pdf.marksheets', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects, $highest]], ['mode' => 'utf-8', 'format' => 'A4']);
-        $fileName = 'Class_'.$class.'_'.english_section(Auth::user()->school->section_type, $class, $section).'_Mark_Sheets' . '.pdf';
+        $pdf = PDF::loadView('exams.pdf.marksheet', ['results' => $results_coll], ['data' => [$exam, $class, $section, $examsubjects, $highest], 'school' => $school, 'student_id' => $request->student_id], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = 'Class_'.$class.'_'.english_section($school->section_type, $class, $section).'_'. $student->student_id .'_Mark_Sheets' . '.pdf';
         return $pdf->stream($fileName);
     }
 
@@ -1700,7 +1704,7 @@ class ExamController extends Controller
     {
         return Excel::download(new InvoicesExport, 'invoices.xlsx');
     }
-    
+        
     public function show($id)
     {
         //

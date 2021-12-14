@@ -87,7 +87,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('exam/result/list/generate/pdf/',['as'=>'exam.getresultlistpdf','uses'=>'ExamController@getResultListPDF']);
 	Route::get('exam/tabulation/sheet/generate/pdf/',['as'=>'exam.gettabulationsheetpdf','uses'=>'ExamController@getTabulationSheetPDF']);
 	Route::get('exam/marksheets/generate/pdf/',['as'=>'exam.getmarksheetspdf','uses'=>'ExamController@getMarkSheetsPdf']);
-	Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetspdf','uses'=>'ExamController@getSingleMarkSheetsPdf']);
 	Route::get('exam/sms/send/result/',['as'=>'exam.sendsmsresult','uses'=>'ExamController@getSendSMSResult']);
 	Route::get('exam/excel/generate/',['as'=>'exam.getresultexcelforsms','uses'=>'ExamController@getExcelForSMS']);
 
@@ -113,6 +112,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('promotion/{session}/{class}/{section}',['as'=>'promotion.getstudents','uses'=>'PromotionController@getStudents']);
 	Route::post('promotion/students/promote/bulk',['as'=>'students.promotebulk','uses'=>'PromotionController@promoteBulk']);
 });
+// just to avoid the Auth Middleware
+Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetpdf','uses'=>'ExamController@getSingleMarkSheetPdf']);
 
 // public gets, posts and so on
 Route::resource('admissions','AdmissionController');

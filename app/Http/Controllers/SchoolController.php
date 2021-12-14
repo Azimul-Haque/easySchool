@@ -23,7 +23,6 @@ class SchoolController extends Controller
         //$this->middleware('permission:theSpecificPermission', ['only' => ['create', 'store', 'edit', 'delete']]);
     }
 
-
     public function index()
     {
         $districts = Upazilla::orderBy('id', 'asc')->groupBy('district')->get()->pluck('district');

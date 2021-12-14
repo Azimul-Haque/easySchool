@@ -16,7 +16,7 @@
         <div class="panel panel-success">
             <div class="panel-heading"><i class="fa fa-download"></i> ফলাফল ডাউনলোড করুন</div>
             <div class="panel-body">
-              {!! Form::open(['route' => 'exam.getsinglemarksheetspdf', 'method' => 'GET']) !!}
+              {!! Form::open(['route' => 'exam.getsinglemarksheetpdf', 'method' => 'GET']) !!}
                 <div class="form-group">
                   @php
                     $currentexamid = '';
@@ -28,6 +28,7 @@
                       }
                     }
                   @endphp
+                  <input type="hidden" name="school_id" class="form-control" value="{{ $school->id }}">
                   <input type="hidden" name="exam_id" class="form-control" value="{{ $currentexamid }}">
                   <input type="text" name="currentexamname" class="form-control" value="{{ exam($currentexamname) }}-{{ bangla($exam->exam_session) }}" disabled>
                 </div>
