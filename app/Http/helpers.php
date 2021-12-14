@@ -94,6 +94,7 @@ function random_string($length){
 }
 
 function exam($exam_name){
+      $exam = '';
       if($exam_name == 'first_term') {
             $exam = 'প্রথম সাময়িক';
       } elseif ($exam_name == 'second_term') {
