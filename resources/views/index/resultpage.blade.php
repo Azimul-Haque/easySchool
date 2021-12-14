@@ -25,12 +25,13 @@
                       if($exam->id == $school->currentexam) {
                         $currentexamid = $exam->id;
                         $currentexamname = $exam->name;
+                        $currentexamsession = $exam->exam_session;
                       }
                     }
                   @endphp
                   <input type="hidden" name="school_id" class="form-control" value="{{ $school->id }}">
                   <input type="hidden" name="exam_id" class="form-control" value="{{ $currentexamid }}">
-                  <input type="text" name="currentexamname" class="form-control" value="{{ exam($currentexamname) }}-{{ bangla($exam->exam_session) }}" disabled>
+                  <input type="text" name="currentexamname" class="form-control" value="{{ exam($currentexamname) }}-{{ bangla($currentexamsession) }}" disabled>
                 </div>
                 <div class="form-group">
                   <select name="class_section" class="form-control" required="">
