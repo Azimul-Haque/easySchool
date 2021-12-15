@@ -1686,6 +1686,10 @@ class ExamController extends Controller
             Auth::user()->school->save();
         } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') !== false) {
             Session::flash('success', bangla(count($smsdata) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
+            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - count($students);
+            // aro kaaj ache
+            // aro kaaj ache
+            Auth::user()->school->save();
         } elseif($resultstr == 'Error:' && strpos($smsresult, 'Invalid Number !') == false) {
             Session::flash('info', 'দুঃখিত! SMS পাঠানো যায়নি!');
             // Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
