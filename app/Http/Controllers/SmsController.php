@@ -208,7 +208,7 @@ class SmsController extends Controller
             // aro kaaj ache
             Auth::user()->school->save();
         } elseif($resultstr == 'Er' && strpos($smsresult, 'Invalid Number !') !== false) {
-            Session::flash('success', bangla(count($smsdata) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
+            Session::flash('success', bangla(count($students) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
             Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
             // aro kaaj ache
             // aro kaaj ache
