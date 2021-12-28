@@ -12,9 +12,9 @@
         "maddhatter/laravel-fullcalendar": "^1.2",
         "intervention/image": "^2.4",
         "anhskohbo/no-captcha": "^2.3",
-        "niklasravnsborg/laravel-pdf": "^2.0",
         "maatwebsite/excel": "~2.1.0",
-        "cornford/googlmapper": "2.*"
+        "cornford/googlmapper": "2.*",
+        "niklasravnsborg/laravel-pdf": "^4.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
