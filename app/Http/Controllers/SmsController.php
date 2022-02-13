@@ -168,77 +168,78 @@ class SmsController extends Controller
         $numbersstr = implode(",", $numbersarray);
         // dd($numbersstr);
         
-        $url = config('sms.gw_url');
-        // $number = $mobile_number;
-        $text = $request->message; // . ' Customs and VAT Co-operative Society (CVCS).';
+        $url = config('sms.url');
+        $number = $mobile_number;
+        $text = $request->message;
         $data= array(
-            // 'username'=>config('sms.username'),
-            // 'password'=>config('sms.password'),
-            'to'=>"$numbersstr",
+            'username'=>config('sms.username'),
+            'password'=>config('sms.password'),
+            // 'to'=>"$numbersstr",
+            'number'=>"$numbersstr",  
             'message'=>"$text",
-            'token'=>config('sms.gw_token'),
-            // 'number'=>"$numbersstr",            
+            // 'token'=>config('sms.gw_token'),  
         );
         // initialize send status
-
-        // $ch = curl_init(); // Initialize cURL
-        // curl_setopt($ch, CURLOPT_URL,$url);
-        // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
-        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        // curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this is important
-        // $smsresult = curl_exec($ch);
+        // dd($data);
 
         $ch = curl_init(); // Initialize cURL
         curl_setopt($ch, CURLOPT_URL,$url);
-        curl_setopt($ch, CURLOPT_ENCODING, '');
         curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); // this is important
         $smsresult = curl_exec($ch);
+
+        // $ch = curl_init(); // Initialize cURL
+        // curl_setopt($ch, CURLOPT_URL,$url);
+        // curl_setopt($ch, CURLOPT_ENCODING, '');
+        // curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+        // curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        // $smsresult = curl_exec($ch);
 
         // $sendstatus = $result = substr($smsresult, 0, 3);
         
-        $resultstr = substr($smsresult, 0, 2);
+        // $resultstr = substr($smsresult, 0, 2);
         // dd($smsresult);
         // send sms
 
-        if($resultstr == 'Ok') {
-            Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
-            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
-            // aro kaaj ache
-            // aro kaaj ache
-            Auth::user()->school->save();
-        } elseif($resultstr == 'Er' && strpos($smsresult, 'Invalid Number !') !== false) {
-            Session::flash('success', bangla(count($students) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
-            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
-            // aro kaaj ache
-            // aro kaaj ache
-            Auth::user()->school->save();
-        } elseif($resultstr == 'Er' && strpos($smsresult, 'Invalid Number !') == false) {
-            Session::flash('info', 'দুঃখিত! SMS পাঠানো যায়নি!');
-            // Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
-        } else {
-            // Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
-            Session::flash('warning', 'কিছু কিছু নাম্বারে SMS পাঠানো যায়নি!');
-            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
-            // aro kaaj ache
-            // aro kaaj ache
-            Auth::user()->school->save();
-        }
-
-
-
-        // $p = explode("|",$smsresult);
-        // $sendstatus = $p[0];
-        // // send sms
-        // if($sendstatus == 1101) {
+        // if($resultstr == 'Ok') {
         //     Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
         //     Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+        //     // aro kaaj ache
+        //     // aro kaaj ache
         //     Auth::user()->school->save();
-        // } elseif($sendstatus == 1006) {
-        //     Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
+        // } elseif($resultstr == 'Er' && strpos($smsresult, 'Invalid Number !') !== false) {
+        //     Session::flash('success', bangla(count($students) - substr_count($smsresult, 'Invalid Number !')) . ' টি নাম্বারে SMS সফলভাবে পাঠানো হয়েছে! মোট ' . bangla(substr_count($smsresult, 'Invalid Number !')) . ' টি অকার্যকর নম্বর।');
+        //     Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+        //     // aro kaaj ache
+        //     // aro kaaj ache
+        //     Auth::user()->school->save();
+        // } elseif($resultstr == 'Er' && strpos($smsresult, 'Invalid Number !') == false) {
+        //     Session::flash('info', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        //     // Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
         // } else {
-        //     Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        //     // Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        //     Session::flash('warning', 'কিছু কিছু নাম্বারে SMS পাঠানো যায়নি!');
+        //     Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+        //     // aro kaaj ache
+        //     // aro kaaj ache
+        //     Auth::user()->school->save();
         // }
+
+
+
+        $p = explode("|",$smsresult);
+        $sendstatus = $p[0];
+        // send sms
+        if($sendstatus == 1101) {
+            Session::flash('success', 'SMS সফলভাবে পাঠানো হয়েছে!');
+            Auth::user()->school->smsbalance = Auth::user()->school->smsbalance - (count($students) * $request->smscount);
+            Auth::user()->school->save();
+        } elseif($sendstatus == 1006) {
+            Session::flash('warning', 'অপর্যাপ্ত SMS ব্যালেন্সের কারণে SMS পাঠানো যায়নি!');
+        } else {
+            Session::flash('warning', 'দুঃখিত! SMS পাঠানো যায়নি!');
+        }
         return redirect()->route('sms.index');
     }
 
