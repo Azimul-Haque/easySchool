@@ -180,7 +180,7 @@ class SmsController extends Controller
             // 'token'=>config('sms.gw_token'),  
         );
         // initialize send status
-        dd($data);
+        // dd($data);
 
         $ch = curl_init(); // Initialize cURL
         curl_setopt($ch, CURLOPT_URL,$url);
