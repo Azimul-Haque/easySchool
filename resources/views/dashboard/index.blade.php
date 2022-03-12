@@ -54,7 +54,7 @@
                 </a><br/>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">
-                <a class="btn btn-default btn-block shadow-light" title="কাজ চলছে" style="color: #3E5E99;">
+                <a href="{{ route('exam.getresultgenpage') }}" class="btn btn-default btn-block shadow-light" title="ফলাফল দেখুন" style="color: #3E5E99;">
                   <i class="fa fa-graduation-cap dashboard-icon" aria-hidden="true"></i><br/>ফলাফল
                 </a><br/>
               </div>
