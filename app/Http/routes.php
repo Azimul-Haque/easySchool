@@ -111,6 +111,12 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('promotion/',['as'=>'promotion.index','uses'=>'PromotionController@index']);
 	Route::get('promotion/{session}/{class}/{section}',['as'=>'promotion.getstudents','uses'=>'PromotionController@getStudents']);
 	Route::post('promotion/students/promote/bulk',['as'=>'students.promotebulk','uses'=>'PromotionController@promoteBulk']);
+
+	// Collection Management
+	// Collection Management
+	Route::get('collection/',['as'=>'collection.index','uses'=>'CollectionController@index']);
+	// Collection Management
+	// Collection Management
 });
 // just to avoid the Auth Middleware
 Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetpdf','uses'=>'ExamController@getSingleMarkSheetPdf']);

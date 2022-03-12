@@ -15,7 +15,7 @@
             <div class="row">
               <div class="col-md-3 col-sm-6 col-xs-6">
                 <a class="btn btn-default btn-block shadow-light shadow-light" title="কাজ চলছে">
-                  <i class="fa fa-user dashboard-icon" aria-hidden="true"></i><br/>প্রশাসনিক
+                  <i class="fa fa-university dashboard-icon" aria-hidden="true"></i><br/>প্রশাসনিক
                 </a><br/>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">
@@ -63,8 +63,8 @@
           <div class="col-md-12">
             <div class="row">
               <div class="col-md-3 col-sm-6 col-xs-6">
-                <a class="btn btn-default btn-block shadow-light" title="কাজ চলছে">
-                  <i class="fa fa-user dashboard-icon" aria-hidden="true"></i><br/>Text
+                <a href="{{ route('collection.index') }}" class="btn btn-default btn-block shadow-light" title="আদায় ব্যবস্থাপনা" style="color: #002466;">
+                  <i class="fa fa-money dashboard-icon" aria-hidden="true"></i><br/>আদায় ব্যবস্থাপনা
                 </a><br/>
               </div>
               <div class="col-md-3 col-sm-6 col-xs-6">

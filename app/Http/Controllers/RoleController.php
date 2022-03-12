@@ -18,15 +18,14 @@ class RoleController extends Controller
     public function index(Request $request)
     {
         $roles = Role::orderBy('id','DESC')->paginate(5);
-        return view('roles.index',compact('roles'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+        return view('roles.index')->withRoles($roles)->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     
     public function create()
     {
         $permission = Permission::get();
-        return view('roles.create',compact('permission'));
+        return view('roles.create')->withPermission($permission);
     }
 
     
@@ -61,7 +60,7 @@ class RoleController extends Controller
             ->where("permission_role.role_id",$id)
             ->get();
 
-        return view('roles.show',compact('role','rolePermissions'));
+        return view('roles.show')->withRole($role)->withRolePermissions($rolePermissions);
     }
 
     
@@ -72,7 +71,7 @@ class RoleController extends Controller
         $rolePermissions = DB::table("permission_role")->where("permission_role.role_id",$id)
             ->lists('permission_role.permission_id','permission_role.permission_id');
 
-        return view('roles.edit',compact('role','permission','rolePermissions'));
+        return view('roles.edit')->withRole($role)->withPermission($permission)->withRolePermissions($rolePermissions);;
     }
 
     

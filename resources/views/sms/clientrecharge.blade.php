@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Queen Island Kitchen | SMS Module')
+@section('title', 'Easy School | SMS Module')
 
 @section('content_header')
   <h1>

@@ -347,7 +347,7 @@
                   </li>
                   @role('headmaster')
                     @permission('school-settings')
-                    <li class="header">প্লাটফর্ম সেটিংস</li>
+                    {{-- <li class="header">প্লাটফর্ম সেটিংস</li> --}}
                     <li class="{{ Request::is('settings') ? 'active' : '' }}">
                       <a href="{{ route('settings.edit') }}">
                           <i class="fa fa-fw fa-cogs"></i>
@@ -369,6 +369,12 @@
                             <span>শিক্ষক ব্যবস্থাপনা</span>
                         </a>
                     </li>
+                    <li class="{{ Request::is('collection') ? 'active' : '' }}">
+                      <a href="{{ route('collection.index') }}">
+                          <i class="fa fa-fw fa-money"></i>
+                          <span>আদায় ব্যবস্থাপনা</span>
+                      </a>
+                  </li>
                     <li class="{{ Request::is('sms') ? 'active' : '' }}">
                         <a href="{{ route('sms.index') }}">
                             <i class="fa fa-fw fa-envelope-o"></i>
