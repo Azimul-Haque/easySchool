@@ -10,7 +10,7 @@
   {{-- @permission('school-settings') --}}
     <div class="row">
         <div class="col-lg-3 col-xs-6">
-            <a href="#" class="small-box bg-aqua">
+            <a href="{{ route('collection.input.form') }}" class="small-box bg-aqua">
                 <div class="inner">
                     <h3 style="font-size: 30px !important;">ইনপুট ফরম</h3>
                     <p>তথ্য ইনপুট দিতে ক্লিক করুন</p>
@@ -23,16 +23,16 @@
         </div>
 
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-green">
+            <a href="{{ route('collection.input.form') }}" class="small-box bg-green">
                 <div class="inner">
-                    <h3 style="font-size: 30px !important;">53<sup style="font-size: 20px">%</sup></h3>
-                    <p>Bounce Rate</p>
+                    <h3 style="font-size: 30px !important;">আদায় তালিকা</h3>
+                    <p>তারিখ অনুযায়ী আদায় তালিকা</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-stats-bars"></i>
+                    <i class="fa fa-list-ul"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            </a>
         </div>
 
         <div class="col-lg-3 col-xs-6">

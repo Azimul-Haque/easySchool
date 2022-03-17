@@ -27,6 +27,7 @@ class StudentController extends Controller
         $students = Student::where('school_id', Auth::user()->school_id)
                            ->where('session', Auth::user()->school->currentsession)
                            ->orderBy('created_at','DESC')->get();
+                           
         return view('students.index')
                     ->withSessionsearch(null)
                     ->withClasssearch(null)

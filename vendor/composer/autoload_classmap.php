@@ -13,6 +13,7 @@ return array(
     'CreateDistrictscordsTable' => $baseDir . '/database/migrations/2019_08_29_012311_create_districtscords_table.php',
     'CreateExamsTable' => $baseDir . '/database/migrations/2018_11_29_054139_create_exams_table.php',
     'CreateExamsubjectsTable' => $baseDir . '/database/migrations/2018_11_29_054315_create_examsubjects_table.php',
+    'CreateFeecollectionsTable' => $baseDir . '/database/migrations/2022_03_17_144439_create_feecollections_table.php',
     'CreateMarksTable' => $baseDir . '/database/migrations/2018_12_14_013524_create_marks_table.php',
     'CreatePasswordResetsTable' => $baseDir . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
     'CreateSchoolsTable' => $baseDir . '/database/migrations/2018_09_08_005647_create_schools_table.php',

@@ -15,6 +15,7 @@
     }
     input[type=number]{
         width: 45px;
+        padding: 5px;
         -moz-appearance:textfield; /* Firefox */
     } 
   </style>

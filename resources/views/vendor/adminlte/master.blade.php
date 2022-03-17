@@ -63,6 +63,18 @@
 
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+    <style type="text/css">
+        @font-face {
+          font-family: kalpurush;
+          src: url({{ asset('font/kalpurush.woff') }});
+        }
+        /* body, h1, h2, h3, h4, h5, h6, p, a, span, li, td, div {
+            font-family: kalpurush;
+        } */
+        .lang-bn {
+            font-family:kalpurush;
+        }
+    </style>
 </head>
 <body class="hold-transition @yield('body_class')">
     <!-- Google Tag Manager (noscript) -->

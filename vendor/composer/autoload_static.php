@@ -396,6 +396,7 @@ class ComposerStaticInit8e02009284f2782593670f742b824b20
         'CreateDistrictscordsTable' => __DIR__ . '/../..' . '/database/migrations/2019_08_29_012311_create_districtscords_table.php',
         'CreateExamsTable' => __DIR__ . '/../..' . '/database/migrations/2018_11_29_054139_create_exams_table.php',
         'CreateExamsubjectsTable' => __DIR__ . '/../..' . '/database/migrations/2018_11_29_054315_create_examsubjects_table.php',
+        'CreateFeecollectionsTable' => __DIR__ . '/../..' . '/database/migrations/2022_03_17_144439_create_feecollections_table.php',
         'CreateMarksTable' => __DIR__ . '/../..' . '/database/migrations/2018_12_14_013524_create_marks_table.php',
         'CreatePasswordResetsTable' => __DIR__ . '/../..' . '/database/migrations/2014_10_12_100000_create_password_resets_table.php',
         'CreateSchoolsTable' => __DIR__ . '/../..' . '/database/migrations/2018_09_08_005647_create_schools_table.php',

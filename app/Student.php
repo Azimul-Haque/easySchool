@@ -15,6 +15,11 @@ class Student extends Model
   {
       return $this->hasMany('App\Mark', 'student_id');
   }
+
+  public function feecollections()
+  {
+      return $this->hasMany('App\Feecollection', 'student_id');
+  }
   //public $fillable = ['name','class','roll','dob','father','mother','address','contact','session'];
 
 }
