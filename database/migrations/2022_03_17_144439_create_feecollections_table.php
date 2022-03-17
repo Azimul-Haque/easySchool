@@ -15,13 +15,13 @@ class CreateFeecollectionsTable extends Migration
         Schema::create('feecollections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id');
+            $table->string('session', 15);
             $table->integer('class');
-            $table->string('session');
             $table->integer('section');
             $table->integer('roll');
             $table->string('student_id', 15);
-            $table->string('fee_attribute');
-            $table->string('fee_value');
+            $table->string('fee_attribute', 50);
+            $table->string('fee_value', 15);
             // $table->string('admissio_session_fee');
             // $table->string('annual_sports_cultural');
             // $table->string('last_year_due');
@@ -33,8 +33,8 @@ class CreateFeecollectionsTable extends Migration
             // $table->string('scout_fee');
             // $table->string('develoment_donation');
             // $table->string('other_fee');
-            $table->string('collector');
-            $table->date('collection_date');
+            $table->string('collector', 50);
+            $table->date('collection_date', 50);
             $table->timestamps();
         });
     }

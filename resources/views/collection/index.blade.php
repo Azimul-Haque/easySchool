@@ -23,7 +23,7 @@
         </div>
 
         <div class="col-lg-3 col-xs-6">
-            <a href="{{ route('collection.input.form') }}" class="small-box bg-green">
+            <a href="{{ route('collection.list') }}" class="small-box bg-green">
                 <div class="inner">
                     <h3 style="font-size: 30px !important;">আদায় তালিকা</h3>
                     <p>তারিখ অনুযায়ী আদায় তালিকা</p>

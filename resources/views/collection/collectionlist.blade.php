@@ -1,6 +1,6 @@
 @extends('adminlte::page')
 
-@section('title', 'Easy School | Input Form')
+@section('title', 'Easy School | Collection List')
 
 @section('css')
   <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
@@ -24,29 +24,8 @@
 
 @section('content_header')
     <h1>
-        ইনপুট ফরম <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
-        <div class="pull-right btn-group">
-          {{-- @if($classsearch == 8)
-          <a href="{{ route('students.gettotlist8pdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-brown btn-sm" title="JSC  TOT List প্রিন্ট করুন" target="_blank">
-            <i class="fa fa-print"></i> JSC TOT List
-          </a>
-          @endif
-          @if($classsearch > 8)
-          <a href="{{ route('students.gettotlist9pdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-brown btn-sm" title="SSC  TOT List প্রিন্ট করুন" target="_blank">
-            <i class="fa fa-print"></i> SSC TOT List
-          </a>
-          @endif
-          @if($classsearch > 7)
-          <a href="{{ route('students.getcardregisterlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-warning btn-sm" title="@if($classsearch == 8) JSC @elseif($classsearch > 8) SSC @endif  রেজিঃ কার্ড, এডমিট কার্ড, মার্কশিট, সার্টিফিকেট প্রদান রেজিস্টার প্রিন্ট করুন" target="_blank">
-            <i class="fa fa-print"></i> @if($classsearch == 8) JSC @elseif($classsearch > 8) SSC @endif কার্ড প্রদান রেজিস্টার
-          </a>
-          @endif --}}
-          {{-- <a href="{{ route('students.getstudentlistpdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-success btn-sm" title="শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }} তৈরি করুন" target="_blank">
-            <i class="fa fa-print"></i> শিক্ষার্থী তালিকা-{{ bangla($sessionsearch) }}
-          </a>
-          <a class="btn btn-primary btn-sm" href="{{ route('students.create') }}"><i class="fa fa-user-plus"></i>  সরাসরি শিক্ষার্থী ভর্তি</a> --}}
-          {{-- <button class="btn btn-primary btn-sm" id="showCheckbox" disabled=""><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button> --}}
-        </div>	
+        আদায় তালিকা <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
+        <div class="pull-right btn-group"></div>	
     </h1>
 @stop
 
@@ -73,29 +52,29 @@
         <div class="col-md-2">
             <select class="form-control" id="search_section">
                 <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-      @if($classsearch < 9)
-                <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-                <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-        @if(Auth::user()->school->sections == 3)
-                <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-        @endif
-      @else
-        @if(Auth::user()->school->section_type == 1)
-            <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-            <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-            @if(Auth::user()->school->sections >2)
-            <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-            @endif
-        @elseif(Auth::user()->school->section_type == 2)
-            <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
-            <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
-            @if(Auth::user()->school->sections >2)
-            <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
-            <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
-            <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
-            @endif
-        @endif
-      @endif
+                @if($classsearch < 9)
+                        <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+                        <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+                    @if(Auth::user()->school->sections == 3)
+                        <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+                    @endif
+                @else
+                    @if(Auth::user()->school->section_type == 1)
+                        <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+                        <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+                        @if(Auth::user()->school->sections >2)
+                            <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
+                        @endif
+                    @elseif(Auth::user()->school->section_type == 2)
+                            <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
+                            <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
+                        @if(Auth::user()->school->sections >2)
+                            <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
+                            <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
+                            <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
+                        @endif
+                    @endif
+                @endif
             </select>
         </div>
       @endif
