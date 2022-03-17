@@ -117,6 +117,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/',['as'=>'collection.index','uses'=>'CollectionController@index']);
 	Route::get('collection/input/form',['as'=>'collection.input.form','uses'=>'CollectionController@inputForm']);
 	Route::get('collection/input/form/{session}/{class}/{section}',['as'=>'collection.getstudents','uses'=>'CollectionController@getStudents']);
+	Route::post('collection/input/form/{session}/{class}/{section}',['as'=>'collection.storecollection','uses'=>'CollectionController@storeCollection']);
 	// Collection Management
 	// Collection Management
 });

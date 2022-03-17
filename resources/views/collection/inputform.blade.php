@@ -117,13 +117,14 @@
             </div>
     </div>
 
+    {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!}
     <div class="table-responsive" style="margin-top: 5px;">
         @if($students == true)
         <table class="table" id="">
             {{-- datatable-students --}}
             <thead>
                 <tr>
-                    <th class="hiddenCheckbox" id="hiddenCheckbox"></th>
+                    {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
                     <th>ক্রঃ নঃ</th>
                     <th>রোল</th>
                     <th>আইডি</th>
@@ -144,11 +145,11 @@
             <tbody>
             @foreach ($students as $key => $student)
                 <tr>
-                    <td class="hiddenCheckbox" id="hiddenCheckbox">
-                        <input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}">
-                        {!! Form::hidden('student_id'.$student->student_id, $student->student_id) !!}
+                    {{-- <td class="hiddenCheckbox" id="hiddenCheckbox"><input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}"></td> --}}
+                    <td>
+                      {{ $key + 1 }}
+                      {!! Form::hidden('student_id'.$student->student_id, $student->student_id) !!}
                     </td>
-                    <td>{{ $key + 1 }}</td>
                     <td>{{ $student->roll }}</td>
                     <td>{{ $student->student_id }}</td>
                     <td>{{ $student->name }}</td>
@@ -170,52 +171,38 @@
         @endif
     </div>
     {{-- final select modal--}}
-    <button class="btn btn-success hiddenFinalSaveBtn" id="hiddenFinalSaveBtn" data-toggle="modal" data-target="#promoteModal" data-backdrop="static">নতুন ক্লাসে উন্নীত করুন</button>
+    @if (count($teachers) > 0)
+      <select name="collector" id="collector" class="form-control">
+        <option selected disabled>আদায়ASdকারী নির্বাচন করুন</option>
+        @foreach ($teachers as $teacher)
+        <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
+        @endforeach
+      </select>
+    @endif
+    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#saveButtonModal" data-backdrop="static">দাখিল করুন</button>
     <!-- Trigger the modal with a button -->
         <!-- Modal -->
-      <div class="modal fade" id="promoteModal" role="dialog">
+      <div class="modal fade" id="saveButtonModal" role="dialog">
         <div class="modal-dialog modal-md">
           <div class="modal-content">
             <div class="modal-header modal-header-success">
               <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">নতুন শ্রেণিতে উন্নীতকরণ</h4>
+              <h4 class="modal-title">ফি আদায় দাখিলকরণ</h4>
             </div>
-            {!! Form::open(array('route' => 'students.promotebulk','method'=>'POST')) !!}
+            
             <div class="modal-body">
-              আপনি কি নিশ্চিতভাবে চেকবক্সে নির্বাচিত শিক্ষার্থীদের চূড়ান্তভাবে নিম্ননির্ধারিত শ্রেণিতে উন্নীত করতে চান?
-              {!! Form::hidden('student_ids', null, ['id' => 'student_ids', 'required' => '']) !!}
-              <div class="form-group">
-                <label for="promotion_class"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
-                                <select class="form-control" id="promotion_class" name="promotion_class">
-                                    <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
-                                    @php
-                                        $classes = explode(',', Auth::user()->school->classes);
-                                    @endphp
-                                    @foreach($classes as $class)
-                                    <option value="{{ $class }}">Class {{ $class }}</option>
-                                    @endforeach
-                                </select>
-                            </div>	
-                            <div class="form-group">
-                                <label for="promotion_session"><strong>শ্রেণি নির্ধারণ করুন</strong></label>
-                                <select class="form-control" id="promotion_session" name="promotion_session">
-                                    <option selected="" disabled="">শিক্ষাবর্ষ নির্ধারণ করুন</option>
-                                    @for($optionyear = (date('Y')+1) ; $optionyear>=(Auth::user()->school->established); $optionyear--)
-                                    <option value="{{ $optionyear }}" @if($optionyear == date('Y')) selected="" @endif>{{ $optionyear }}</option>
-                                    @endfor
-                                </select>
-                            </div>
+              আপনি কি নিশ্চিতভাবে আদায়কৃত ফিসমূহ সংরক্ষণ করতে চান?
             </div>
             <div class="modal-footer">
-              <button type="submit" class="btn btn-success">Save</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-            {!! Form::close() !!}
+              <button type="submit" class="btn btn-success">দাখিল করুন</button>
+              <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button>
             </div>
           </div>
         </div>
       </div>
   {{-- final select modal--}}
-    @endpermission
+  {!! Form::close() !!}
+  @endpermission
 @stop
 
 @section('js')

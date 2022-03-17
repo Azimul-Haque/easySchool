@@ -8,6 +8,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Student;
+use App\User;
 
 use Auth, Session, DB, File;
 use Image;
@@ -35,7 +36,8 @@ class CollectionController extends Controller
                     ->withSessionsearch(null)
                     ->withClasssearch(null)
                     ->withSectionsearch(null)
-                    ->withStudents(null);
+                    ->withStudents(null)
+                    ->withTeachers(null);
     }
 
     public function getStudents($session, $class, $section)
@@ -54,10 +56,44 @@ class CollectionController extends Controller
                                ->orderBy('id','DESC')->get();
         } 
 
+        $teachers = User::where('school_id', Auth::user()->school_id)->get();
+        
+        foreach ($teachers as $teacher) {
+            $rolesarray = [];
+            foreach($teacher->roles as $role) {
+                $rolesarray[] = $role->name;
+            }
+            if(in_array('superadmin', $rolesarray)) {
+                $remove_id = $teacher->id;
+                $teachers = $teachers->reject(function ($value, $key) use($remove_id) {
+                    return $value->id == $remove_id;
+                });
+            }
+        }
+        // dd($teachers);
+
         return view('collection.inputform')
                     ->withSessionsearch($session)
                     ->withClasssearch($class)
                     ->withSectionsearch($section)
-                    ->withStudents($students);
+                    ->withStudents($students)
+                    ->withTeachers($teachers);
     }
+    
+    public function storeCollection(Request $request, $session, $class, $section)
+    {
+        dd($request->all());
+    }
+
+    // $table->string('admissio_session_fee');
+    // $table->string('annual_sports_cultural');
+    // $table->string('last_year_due');
+    // $table->string('exam_fee');
+    // $table->string('full_half_free_form');
+    // $table->string('3_6_8_12_fee');
+    // $table->string('jsc_ssc_form_fee');
+    // $table->string('certificate_fee');
+    // $table->string('scout_fee');
+    // $table->string('develoment_donation');
+    // $table->string('other_fee');
 }
