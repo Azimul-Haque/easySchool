@@ -3,29 +3,29 @@
 @section('title', 'Easy School | Collection Management')
 
 @section('content_header')
-    <h1>আদায় ব্যবস্থাপনা</h1>
+    <h1>বেতন ও অন্যান্য ফি আদায় ব্যবস্থাপনা</h1>
 @stop
 
 @section('content')
   {{-- @permission('school-settings') --}}
     <div class="row">
         <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-aqua">
+            <a href="#" class="small-box bg-aqua">
                 <div class="inner">
-                    <h3>150</h3>
-                    <p>New Orders</p>
+                    <h3 style="font-size: 30px !important;">ইনপুট ফরম</h3>
+                    <p>তথ্য ইনপুট দিতে ক্লিক করুন</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-bag"></i>
+                    <i class="fa fa-check-square-o"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            </a>
         </div>
 
         <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-green">
                 <div class="inner">
-                    <h3>53<sup style="font-size: 20px">%</sup></h3>
+                    <h3 style="font-size: 30px !important;">53<sup style="font-size: 20px">%</sup></h3>
                     <p>Bounce Rate</p>
                 </div>
                 <div class="icon">
@@ -38,7 +38,7 @@
         <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-yellow">
                 <div class="inner">
-                    <h3>44</h3>
+                    <h3 style="font-size: 30px !important;">44</h3>
                     <p>User Registrations</p>
                 </div>
                 <div class="icon">
@@ -51,7 +51,7 @@
         <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-red">
                 <div class="inner">
-                    <h3>65</h3>
+                    <h3 style="font-size: 30px !important;">65</h3>
                     <p>Unique Visitors</p>
                 </div>
                 <div class="icon">

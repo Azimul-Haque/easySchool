@@ -369,7 +369,7 @@
                             <span>শিক্ষক ব্যবস্থাপনা</span>
                         </a>
                     </li>
-                    <li class="{{ Request::is('collection') ? 'active' : '' }}">
+                    <li class="{{ Request::is('collection') ? 'active' : '' }} {{ Request::is('collection/*') ? 'active' : '' }}">
                       <a href="{{ route('collection.index') }}">
                           <i class="fa fa-fw fa-money"></i>
                           <span>আদায় ব্যবস্থাপনা</span>

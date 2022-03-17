@@ -18,4 +18,9 @@ class CollectionController extends Controller
     {
         return view('collection.index');
     }
+    
+    public function inputForm()
+    {
+        return view('collection.inputform');
+    }
 }

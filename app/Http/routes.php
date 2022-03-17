@@ -115,6 +115,7 @@ Route::group(['middleware' => ['auth']], function() {
 	// Collection Management
 	// Collection Management
 	Route::get('collection/',['as'=>'collection.index','uses'=>'CollectionController@index']);
+	Route::get('collection/input/form',['as'=>'collection.input.form','uses'=>'CollectionController@inputForm']);
 	// Collection Management
 	// Collection Management
 });
