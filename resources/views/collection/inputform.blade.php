@@ -3,6 +3,7 @@
 @section('title', 'Easy School | Input Form')
 
 @section('css')
+  <link rel="stylesheet" type="text/css" href="{{ asset('css/bootstrap-datepicker.min.css') }}">
   <style type="text/css">
     .hiddenCheckbox, .hiddenFinalSaveBtn {
       display:none;
@@ -57,64 +58,64 @@
         </div>
     @endif --}}
     <div class="row">
-            <div class="col-md-2">
-                <select class="form-control" id="search_class">
-                    <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
-                    @php
-                        $classes = explode(',', Auth::user()->school->classes);
-                    @endphp
-                    @foreach($classes as $class)
-                    <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
-                    @endforeach
-                </select>
-            </div>
+      <div class="col-md-2">
+          <select class="form-control" id="search_class">
+              <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
+              @php
+                  $classes = explode(',', Auth::user()->school->classes);
+              @endphp
+              @foreach($classes as $class)
+              <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
+              @endforeach
+          </select>
+      </div>
       @if(Auth::user()->school->sections > 0)
-            <div class="col-md-2">
-                <select class="form-control" id="search_section">
-                    <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
-          @if($classsearch < 9)
-                    <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
-                    <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-            @if(Auth::user()->school->sections == 3)
-                    <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-            @endif
-          @else
-            @if(Auth::user()->school->section_type == 1)
+        <div class="col-md-2">
+            <select class="form-control" id="search_section">
+                <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
+      @if($classsearch < 9)
                 <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
                 <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
-                @if(Auth::user()->school->sections >2)
+        @if(Auth::user()->school->sections == 3)
                 <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
-                @endif
-            @elseif(Auth::user()->school->section_type == 2)
-                <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
-                <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
-                @if(Auth::user()->school->sections >2)
-                <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
-                <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
-                <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
-                @endif
+        @endif
+      @else
+        @if(Auth::user()->school->section_type == 1)
+            <option value="1" @if($sectionsearch == 1) selected="" @endif>A</option>
+            <option value="2" @if($sectionsearch == 2) selected="" @endif>B</option>
+            @if(Auth::user()->school->sections >2)
+            <option value="3" @if($sectionsearch == 3) selected="" @endif>C</option>
             @endif
-          @endif
-                </select>
-            </div>
+        @elseif(Auth::user()->school->section_type == 2)
+            <option value="1" @if($sectionsearch == 1) selected="" @endif>SCIENCE</option>
+            <option value="2" @if($sectionsearch == 2) selected="" @endif>ARTS</option>
+            @if(Auth::user()->school->sections >2)
+            <option value="3" @if($sectionsearch == 3) selected="" @endif>COMMERCE</option>
+            <option value="4" @if($sectionsearch == 4) selected="" @endif>VOCATIONAL</option>
+            <option value="5" @if($sectionsearch == 5) selected="" @endif>TECHNICAL</option>
+            @endif
+        @endif
       @endif
-            <div class="col-md-2">
-                <select class="form-control" id="search_session">
-                    <option selected="" disabled="">শিক্ষাবর্ষ নির্ধারণ করুন</option>
-                    @for($optionyear = (date('Y')+1) ; $optionyear>=(Auth::user()->school->established); $optionyear--)
-                    <option value="{{ $optionyear }}" 
-                    @if($sessionsearch == null)
-                        @if($optionyear == date('Y')) selected="" @endif
-                    @else
-                        @if($sessionsearch == $optionyear) selected="" @endif
-                    @endif
-                    >{{ $optionyear }}</option>
-                    @endfor
-                </select>
-            </div>
-            <div class="col-md-2">
-                <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
-            </div>
+            </select>
+        </div>
+      @endif
+      <div class="col-md-2">
+          <select class="form-control" id="search_session">
+              <option selected="" disabled="">শিক্ষাবর্ষ নির্ধারণ করুন</option>
+              @for($optionyear = (date('Y')+1) ; $optionyear>=(Auth::user()->school->established); $optionyear--)
+              <option value="{{ $optionyear }}" 
+              @if($sessionsearch == null)
+                  @if($optionyear == date('Y')) selected="" @endif
+              @else
+                  @if($sessionsearch == $optionyear) selected="" @endif
+              @endif
+              >{{ $optionyear }}</option>
+              @endfor
+          </select>
+      </div>
+      <div class="col-md-2">
+          <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
+      </div>
     </div>
 
     {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!}
@@ -170,46 +171,65 @@
         </table>
         @endif
     </div>
-    {{-- final select modal--}}
-    @if (count($teachers) > 0)
-      <select name="collector" id="collector" class="form-control">
-        <option selected disabled>আদায়ASdকারী নির্বাচন করুন</option>
-        @foreach ($teachers as $teacher)
-        <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
-        @endforeach
-      </select>
-    @endif
-    <button class="btn btn-success" type="button" data-toggle="modal" data-target="#saveButtonModal" data-backdrop="static">দাখিল করুন</button>
-    <!-- Trigger the modal with a button -->
+    
+    @if(!empty($students))
+    <div class="row">
+      <div class="col-md-2">
+        <input class="form-control" type="text" name="collection_date" id="collection_date" value="" placeholder="আদায়ের তারিখ"  required>
+      </div>
+      <div class="col-md-2">
+          <select name="collector" id="collector" class="form-control" required>
+            <option value="" selected disabled>আদায়কারী নির্বাচন করুন</option>
+            @foreach ($teachers as $teacher)
+            <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
+            @endforeach
+          </select>
+      </div>
+      <div class="col-md-2">
+        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#saveButtonModal" data-backdrop="static">দাখিল করুন</button>
+        <!-- Trigger the modal with a button -->
         <!-- Modal -->
-      <div class="modal fade" id="saveButtonModal" role="dialog">
-        <div class="modal-dialog modal-md">
-          <div class="modal-content">
-            <div class="modal-header modal-header-success">
-              <button type="button" class="close" data-dismiss="modal">&times;</button>
-              <h4 class="modal-title">ফি আদায় দাখিলকরণ</h4>
-            </div>
-            
-            <div class="modal-body">
-              আপনি কি নিশ্চিতভাবে আদায়কৃত ফিসমূহ সংরক্ষণ করতে চান?
-            </div>
-            <div class="modal-footer">
-              <button type="submit" class="btn btn-success">দাখিল করুন</button>
-              <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button>
+        <div class="modal fade" id="saveButtonModal" role="dialog">
+          <div class="modal-dialog modal-md">
+            <div class="modal-content">
+              <div class="modal-header modal-header-success">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">ফি আদায় দাখিলকরণ</h4>
+              </div>
+        
+              <div class="modal-body">
+                আপনি কি নিশ্চিতভাবে আদায়কৃত ফিসমূহ সংরক্ষণ করতে চান?
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="btn btn-success">দাখিল করুন</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button>
+              </div>
             </div>
           </div>
         </div>
       </div>
-  {{-- final select modal--}}
+    </div>
+    @endif
+    
   {!! Form::close() !!}
   @endpermission
 @stop
 
 @section('js')
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
 <script type="text/javascript">
   $(function(){
    $('a[title]').tooltip();
    $('button[title]').tooltip();
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $("#collection_date").datepicker({
+      format: 'MM dd, yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
   });
 </script>
 <script type="text/javascript">

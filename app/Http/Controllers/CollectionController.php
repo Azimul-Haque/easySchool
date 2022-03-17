@@ -82,7 +82,33 @@ class CollectionController extends Controller
     
     public function storeCollection(Request $request, $session, $class, $section)
     {
+        $this->validate($request, [
+            'school_id'     => 'collection_date',
+            'exam_id'       => 'collector',
+        ]);
+
+        if($section != 'No_Section') {
+            $students = Student::where('school_id', Auth::user()->school_id)
+                               ->where('session',$session)
+                               ->where('class',$class)
+                               ->where('section',$section)
+                               ->orderBy('id','DESC')->get();
+
+        } else {
+            $students = Student::where('school_id', Auth::user()->school_id)
+                               ->where('session',$session)
+                               ->where('class',$class)
+                               ->orderBy('id','DESC')->get();
+        }
+
+        foreach($students as $student) {
+            if($request['admissio_session_fee'.$student->student_id]) {
+                dd($request['admissio_session_fee'.$student->student_id]);
+            }
+        }
+
         dd($request->all());
+        date('Y-m-d', strtotime($request->collection_date));
     }
 
     // $table->string('admissio_session_fee');
