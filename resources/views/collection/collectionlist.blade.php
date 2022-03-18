@@ -113,7 +113,7 @@
       </div>
     </div>
 
-    {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!}
+    {{-- {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!} --}}
     <div class="table-responsive" style="margin-top: 5px;">
         @if($feecollections == true)
         <table class="table table-bordered" id="">
@@ -161,80 +161,93 @@
                     <td>{{ $studentidcollections[0]->roll }}</td>
                     <td>{{ $studentidkey }}</td>
                     <td>{{ $studentidcollections[0]->student->name }}</td>
-                    <td>
+                    <td align="center">
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'admission_session_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                            <button type="submit" class="btn btn-xs btn-danger" title="তথ্যটি ডিলেট করুন"><i class="fa fa-trash"></i></button>
+                          {!! Form::close() !!}
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'annual_sports_cultural')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'last_year_due')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'exam_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'full_half_free_form')
-                          {{ $collection->fee_value }}
+                         ৳ {{ $collection->fee_value }}
+                         // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == '3_6_8_12_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'certificate_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'scout_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'develoment_donation')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'other_fee')
-                          {{ $collection->fee_value }}
+                          ৳ {{ $collection->fee_value }}
+                          // test delete
                         @endif
                       @endforeach
                     </td>
@@ -265,7 +278,7 @@
         </table>
         @endif
     </div>    
-  {!! Form::close() !!}
+  {{-- {!! Form::close() !!} --}}
   @endpermission
 @stop
 

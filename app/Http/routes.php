@@ -120,6 +120,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::post('collection/input/form/{session}/{class}/{section}',['as'=>'collection.storecollection','uses'=>'CollectionController@storeCollection']);
 	Route::get('collection/list',['as'=>'collection.list','uses'=>'CollectionController@collectionList']);
 	Route::get('collection/list/{session}/{class}/{section}/{from}/{to}',['as'=>'collection.list.data','uses'=>'CollectionController@collectionListData']);
+	Route::delete('collection/delete/{id}',['as'=>'collection.delete.single','uses'=>'CollectionController@deleteSingle']);
 	// Collection Management
 	// Collection Management
 });

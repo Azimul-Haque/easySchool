@@ -371,4 +371,12 @@ class CollectionController extends Controller
                     ->withUseddates($used_dates)
                     ->withTeachers($teachers);
     }
+
+    public function deleteSingle($id) {
+        $collection = Feecollection::findOrFail($id);
+        // $collection->delete();
+
+        Session::flash('success', 'Deleted!');
+        return redirect()->back();
+    }
 }
