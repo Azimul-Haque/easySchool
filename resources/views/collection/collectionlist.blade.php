@@ -109,7 +109,7 @@
         </div>
       </div>
       <div class="col-md-2">
-          <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
+          <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> তালিকা দেখুন</button>
       </div>
     </div>
 
@@ -226,12 +226,12 @@
       autoclose: true,
     });
     $("#from_date").datepicker({
-      format: 'M dd, yyyy',
+      format: 'dd-M-yyyy',
       todayHighlight: true,
       autoclose: true,
     });
     $("#to_date").datepicker({
-      format: 'M dd, yyyy',
+      format: 'dd-M-yyyy',
       todayHighlight: true,
       autoclose: true,
     });
@@ -271,14 +271,22 @@
       $(document).ready(function() {
         $('#search_students_btn').click(function() {
         @if(Auth::user()->school->sections > 0)
-            if($('#search_class').val() && $('#search_section').val() && $('#search_session').val()) {
-  		  		
-            window.location.href = window.location.protocol + "//" + window.location.host + "/collection/input/form/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val();
+            if($('#search_class').val() && $('#search_session').val() && $('#from_date').val() && $('#to_date').val()) 
+            {
+              if($('#search_class').val() == "All_Classes") {
+                window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+              } else {
+                if($('#search_session').val()) {
+                  window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+                } else {
+                  toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
+                }
+              }
             } else {
-                toastr.warning('শ্রেণি, শাখা এবং শিক্ষাবর্ষ সবগুলো সিলেক্ট করুন!');
+                toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
             }
         @else
-          window.location.href = window.location.protocol + "//" + window.location.host + "/collection/input/form/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section";
+          window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section/"+$('#from_date').val()+"/"+$('#to_date').val();
         @endif
         })
 

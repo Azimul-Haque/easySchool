@@ -269,21 +269,46 @@ class CollectionController extends Controller
                     ->withTeachers(null);
     }
 
-    public function collectionListData($session, $class, $section)
+    public function collectionListData($session, $class, $section, $date_from, $date_to)
     {
-        if($section != 'No_Section') {
-            $students = Student::where('school_id', Auth::user()->school_id)
-                               ->where('session',$session)
-                               ->where('class',$class)
-                               ->where('section',$section)
-                               ->orderBy('id','DESC')->get();
+        $from = date('Y-m-d', strtotime($date_from));
+        $to = date('Y-m-d', strtotime($date_to));
 
+        // dd($from);
+
+        if($section != 'No_Section') {
+            if($class != 'All_Classes') {
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                               ->where('session',$session)
+                                               ->where('class',$class)
+                                               ->where('section',$section)
+                                               ->whereBetween('collection_date', [$from, $to])
+                                            //    ->groupBy('collection_date')
+                                               ->orderBy('id','DESC')->get();
+            } else {
+                // $students = Student::where('school_id', Auth::user()->school_id)
+                //    ->where('session',$session)
+                //    ->where('class',$class)
+                //    ->where('section',$section)
+                //    ->whereBetween('collection_date', [$from, $to])
+                //    ->orderBy('id','DESC')->get();
+            }
         } else {
-            $students = Student::where('school_id', Auth::user()->school_id)
-                               ->where('session',$session)
-                               ->where('class',$class)
-                               ->orderBy('id','DESC')->get();
-        } 
+            if($class != 'All_Classes') {
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                               ->where('session',$session)
+                                               ->where('class',$class)
+                                               ->whereBetween('collection_date', [$from, $to])
+                                               ->orderBy('id','DESC')->get();
+            } else {
+                // $students = Student::where('school_id', Auth::user()->school_id)
+                //                    ->where('session',$session)
+                //                    ->where('class',$class)
+                //                    ->whereBetween('collection_date', [$from, $to])
+                //                    ->orderBy('id','DESC')->get();
+            }
+        }
+        dd($feecollections);
 
         $teachers = User::where('school_id', Auth::user()->school_id)->get();
         
