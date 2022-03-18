@@ -374,7 +374,7 @@ class CollectionController extends Controller
 
     public function deleteSingle($id) {
         $collection = Feecollection::findOrFail($id);
-        // $collection->delete();
+        $collection->delete();
 
         Session::flash('success', 'Deleted!');
         return redirect()->back();

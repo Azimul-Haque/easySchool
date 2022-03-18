@@ -165,9 +165,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'admission_session_fee')
                           ৳ {{ $collection->fee_value }}
-                          {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
-                            <button type="submit" class="btn btn-xs btn-danger" title="তথ্যটি ডিলেট করুন"><i class="fa fa-trash"></i></button>
-                          {!! Form::close() !!}
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+          
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -175,7 +195,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'annual_sports_cultural')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -183,7 +225,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'last_year_due')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+          
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -191,7 +255,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'exam_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -199,7 +285,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'full_half_free_form')
                          ৳ {{ $collection->fee_value }}
-                         // test delete
+                         <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                         <!-- Trigger the modal with a button -->
+                         <!-- Modal -->
+                         <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                           <div class="modal-dialog modal-md">
+                             <div class="modal-content">
+                               <div class="modal-header modal-header-danger">
+                                 <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                 <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                               </div>
+           
+                               <div class="modal-body">
+                                 আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                               </div>
+                               <div class="modal-footer">
+                                 {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                   <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                 {!! Form::close() !!}
+                                 {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                               </div>
+                             </div>
+                           </div>
+                         </div>
                         @endif
                       @endforeach
                     </td>
@@ -207,7 +315,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == '3_6_8_12_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -215,7 +345,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -223,7 +375,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'certificate_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -231,7 +405,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'scout_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -239,7 +435,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'develoment_donation')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
@@ -247,7 +465,29 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'other_fee')
                           ৳ {{ $collection->fee_value }}
-                          // test delete
+                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
+                          <!-- Trigger the modal with a button -->
+                          <!-- Modal -->
+                          <div class="modal fade" id="deleteModal{{ $collection->id }}" role="dialog">
+                            <div class="modal-dialog modal-md">
+                              <div class="modal-content">
+                                <div class="modal-header modal-header-danger">
+                                  <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  <h4 class="modal-title">ডিলেট নিশ্চিতকরণ</h4>
+                                </div>
+            
+                                <div class="modal-body">
+                                  আপনি কি নিশ্চিতভাবে আদায়কৃত ফি-টি ডিলেট করতে চান?
+                                </div>
+                                <div class="modal-footer">
+                                  {!! Form::open(array('route' => ['collection.delete.single', $collection->id], 'method'=>'DELETE')) !!}
+                                    <button type="submit" class="btn btn-danger">ডিলেট করুন</button>
+                                  {!! Form::close() !!}
+                                  {{-- <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button> --}}
+                                </div>
+                              </div>
+                            </div>
+                          </div>
                         @endif
                       @endforeach
                     </td>
