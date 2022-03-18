@@ -266,6 +266,8 @@ class CollectionController extends Controller
                     ->withClasssearch(null)
                     ->withSectionsearch(null)
                     ->withFeecollections(null)
+                    ->withUsedstudentids(null)
+                    ->withUseddates(null)
                     ->withFromdatesearch(null)
                     ->withTodatesearch(null)
                     ->withTeachers(null);
@@ -277,16 +279,34 @@ class CollectionController extends Controller
         $to = date('Y-m-d', strtotime($date_to));
 
         // dd($from);
+        
 
         if($section != 'No_Section') {
             if($class != 'All_Classes') {
+                $used_dates = Feecollection::where('school_id', Auth::user()->school_id)
+                                            ->where('session',$session)
+                                            ->where('class',$class)
+                                            ->where('section',$section)
+                                            ->whereBetween('collection_date', [$from, $to])
+                                            ->distinct()->select('collection_date')
+                                            ->get();
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                 ->where('session',$session)
+                                                 ->where('class',$class)
+                                                 ->where('section',$section)
+                                                 ->whereBetween('collection_date', [$from, $to])
+                                                 ->distinct()->select('student_id', 'collection_date')
+                                                 ->orderBy('collection_date','ASC')
+                                                 ->orderBy('roll','ASC')
+                                                 ->get();
+
                 $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                                                ->where('session',$session)
                                                ->where('class',$class)
                                                ->where('section',$section)
                                                ->whereBetween('collection_date', [$from, $to])
                                             //    ->groupBy('collection_date')
-                                               ->orderBy('collection_date','DESC')->get();
+                                               ->orderBy('collection_date','ASC')->get();
             } else {
                 // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                 //    ->where('session',$session)
@@ -297,11 +317,23 @@ class CollectionController extends Controller
             }
         } else {
             if($class != 'All_Classes') {
+                $used_dates = Feecollection::where('school_id', Auth::user()->school_id)
+                                            ->where('session',$session)
+                                            ->where('class',$class)
+                                            ->whereBetween('collection_date', [$from, $to])
+                                            ->distinct()->select('collection_date')
+                                            ->get();
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                 ->where('session',$session)
+                                                 ->where('class',$class)
+                                                 ->whereBetween('collection_date', [$from, $to])
+                                                 ->distinct()->select('student_id')->get();
+
                 $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                                                ->where('session',$session)
                                                ->where('class',$class)
                                                ->whereBetween('collection_date', [$from, $to])
-                                               ->orderBy('collection_date','DESC')->get();
+                                               ->orderBy('collection_date','ASC')->get();
             } else {
                 // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                 //                    ->where('session',$session)
@@ -310,7 +342,7 @@ class CollectionController extends Controller
                 //                    ->orderBy('collection_date','DESC')->get();
             }
         }
-        // dd($feecollections);
+        // dd($used_student_ids);
 
         $teachers = User::where('school_id', Auth::user()->school_id)->get();
         
@@ -335,6 +367,8 @@ class CollectionController extends Controller
                     ->withFromdatesearch($from)
                     ->withTodatesearch($to)
                     ->withFeecollections($feecollections)
+                    ->withUsedstudentids($used_student_ids)
+                    ->withUseddates($used_dates)
                     ->withTeachers($teachers);
     }
 }

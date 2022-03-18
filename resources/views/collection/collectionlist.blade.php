@@ -140,29 +140,106 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($feecollections as $key => $collection)
-                <tr>
-                    {{-- <td class="hiddenCheckbox" id="hiddenCheckbox"><input type="checkbox" name="student_check_ids[]" value="{{ $collection->id }}"></td> --}}
+              @php
+                $count_key = 0;
+                $collectiongroup = [];
+                foreach ($usedstudentids as $studentid) {
+                  foreach ($feecollections as $collection) {
+                    if($studentid->student_id == $collection->student_id && $studentid->collection_date == $collection->collection_date) {
+                      $collectiongroup[$studentid->collection_date][$studentid->student_id][] = $collection;
+                    }
+                  } 
+                }
+                // dd($collectiongroup);
+              @endphp
+              @foreach ($collectiongroup as $datekey => $datecollections)
+                @foreach ($datecollections as $studentidkey => $studentidcollections)
+                  <tr>
+                    <td>{{ $count_key + 1 }}</td>
+                    <td>{{ $datekey }}</td>
+                    <td>{{ $studentidcollections[0]->roll }}</td>
+                    <td>{{ $studentidkey }}</td>
+                    <td>{{ $studentidcollections[0]->student->name }}</td>
                     <td>
-                      {{ $key + 1 }}
-                      {!! Form::hidden('student_id'.$collection->student_id, $collection->student_id) !!}
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'admission_session_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
                     </td>
-                    <td>{{ $collection->roll }}</td>
-                    <td>{{ $collection->student_id }}</td>
-                    <td>{{ $collection->name }}</td>
-                    <td><center><input type="number" name="admission_session_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="annual_sports_cultural{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="last_year_due{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="exam_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="full_half_free_form{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="3_6_8_12_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="jsc_ssc_form_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="certificate_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="scout_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="develoment_donation{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="other_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
-                </tr>
-            @endforeach
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'annual_sports_cultural')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'last_year_due')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'exam_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'full_half_free_form')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == '3_6_8_12_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'certificate_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'scout_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'develoment_donation')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                    <td>
+                      @foreach ($studentidcollections as $collection)
+                        @if ($collection->fee_attribute == 'other_fee')
+                          {{ $collection->fee_value }}
+                        @endif
+                      @endforeach
+                    </td>
+                  </tr>                
+                @endforeach            
+              @endforeach            
             </tbody>
         </table>
         @endif
