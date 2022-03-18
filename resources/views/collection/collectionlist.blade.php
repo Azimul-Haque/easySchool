@@ -122,7 +122,7 @@
                 <tr>
                     {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
                     <th>ক্রঃ নঃ</th>
-                    <th>তারিখ</th>
+                    <th width="10%">তারিখ</th>
                     <th>রোল</th>
                     <th>আইডি</th>
                     <th width="20%">নাম</th>
@@ -137,6 +137,7 @@
                     <th>স্কাউট/ গার্লস গাইড ফি</th>
                     <th>উন্নয়ন/ দান</th>
                     <th>বিবিধ</th>
+                    <th>মোট</th>
                 </tr>
             </thead>
             <tbody>
@@ -155,8 +156,8 @@
               @foreach ($collectiongroup as $datekey => $datecollections)
                 @foreach ($datecollections as $studentidkey => $studentidcollections)
                   <tr>
-                    <td>{{ $count_key + 1 }}</td>
-                    <td>{{ $datekey }}</td>
+                    <td>{{ $count_key = $count_key + 1 }}</td>
+                    <td>{{ date('d-m-Y', strtotime($datekey)) }}</td>
                     <td>{{ $studentidcollections[0]->roll }}</td>
                     <td>{{ $studentidkey }}</td>
                     <td>{{ $studentidcollections[0]->student->name }}</td>
@@ -237,10 +238,30 @@
                         @endif
                       @endforeach
                     </td>
+                    <td>
+                      
+                    </td>
                   </tr>                
                 @endforeach            
               @endforeach            
             </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="5" align="right">মোটঃ</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+              </tr>
+            </tfoot>
         </table>
         @endif
     </div>    
