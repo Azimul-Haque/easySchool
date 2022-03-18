@@ -116,7 +116,7 @@
     {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!}
     <div class="table-responsive" style="margin-top: 5px;">
         @if($feecollections == true)
-        <table class="table" id="">
+        <table class="table table-bordered" id="">
             {{-- datatable-students --}}
             <thead>
                 <tr>
