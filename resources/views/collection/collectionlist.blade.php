@@ -19,6 +19,11 @@
         padding: 5px;
         -moz-appearance:textfield; /* Firefox */
     } 
+    /* .from_to_date{
+        padding: 5px;
+        font-size: 13px;
+        -moz-appearance:textfield; /* Firefox */
+    }  */
   </style>
 @stop
 
@@ -46,10 +51,11 @@
               @foreach($classes as $class)
               <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
               @endforeach
+              <option value="All_Classes">সকল শ্রেণি</option>
           </select>
       </div>
       @if(Auth::user()->school->sections > 0)
-        <div class="col-md-2">
+        <div class="col-md-2" id="search_section_div">
             <select class="form-control" id="search_section">
                 <option selected="" disabled="" value="">সেকশন নির্ধারণ করুন</option>
                 @if($classsearch < 9)
@@ -91,6 +97,16 @@
               >{{ $optionyear }}</option>
               @endfor
           </select>
+      </div>
+      <div class="col-md-3">
+        <div class="row">
+          <div class="col-md-6">
+            <input class="form-control" type="text" name="from_date" id="from_date" value="" placeholder="হতে" readonly required>
+          </div>
+          <div class="col-md-6">
+            <input class="form-control" type="text" name="to_date" id="to_date" value="" placeholder="পর্যন্ত" readonly required>
+          </div>
+        </div>
       </div>
       <div class="col-md-2">
           <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> শিক্ষার্থী তালিকা</button>
@@ -209,6 +225,16 @@
       todayHighlight: true,
       autoclose: true,
     });
+    $("#from_date").datepicker({
+      format: 'M dd, yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
+    $("#to_date").datepicker({
+      format: 'M dd, yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
   });
 </script>
 <script type="text/javascript">
@@ -285,18 +311,23 @@
     $('#search_section').prop('disabled', true);
     $('#search_section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
 
-    if($('#search_class').val() < 9) {
+    if($('#search_class').val() == 'All_Classes') {
+      // All_Classes Case
+      // All_Classes Case
+      $('#search_section_div').hide();
+    } else if($('#search_class').val() < 9) {
+      $('#search_section_div').show();
       $('#search_section')
             .find('option')
             .remove()
             .end()
             .prop('disabled', false)
             .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
-
       $('#search_section').append('<option value="'+1+'">A</option>');
       $('#search_section').append('<option value="'+2+'">B</option>');
       $('#search_section').append('<option value="'+3+'">C</option>');
     } else {
+      $('#search_section_div').show();
       $('#search_section')
             .find('option')
             .remove()
