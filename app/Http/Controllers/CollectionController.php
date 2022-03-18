@@ -265,7 +265,9 @@ class CollectionController extends Controller
                     ->withSessionsearch(null)
                     ->withClasssearch(null)
                     ->withSectionsearch(null)
-                    ->withStudents(null)
+                    ->withFeecollections(null)
+                    ->withFromdatesearch(null)
+                    ->withTodatesearch(null)
                     ->withTeachers(null);
     }
 
@@ -284,14 +286,14 @@ class CollectionController extends Controller
                                                ->where('section',$section)
                                                ->whereBetween('collection_date', [$from, $to])
                                             //    ->groupBy('collection_date')
-                                               ->orderBy('id','DESC')->get();
+                                               ->orderBy('collection_date','DESC')->get();
             } else {
-                // $students = Student::where('school_id', Auth::user()->school_id)
+                // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                 //    ->where('session',$session)
                 //    ->where('class',$class)
                 //    ->where('section',$section)
                 //    ->whereBetween('collection_date', [$from, $to])
-                //    ->orderBy('id','DESC')->get();
+                //    ->orderBy('collection_date','DESC')->get();
             }
         } else {
             if($class != 'All_Classes') {
@@ -299,16 +301,16 @@ class CollectionController extends Controller
                                                ->where('session',$session)
                                                ->where('class',$class)
                                                ->whereBetween('collection_date', [$from, $to])
-                                               ->orderBy('id','DESC')->get();
+                                               ->orderBy('collection_date','DESC')->get();
             } else {
-                // $students = Student::where('school_id', Auth::user()->school_id)
+                // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                 //                    ->where('session',$session)
                 //                    ->where('class',$class)
                 //                    ->whereBetween('collection_date', [$from, $to])
-                //                    ->orderBy('id','DESC')->get();
+                //                    ->orderBy('collection_date','DESC')->get();
             }
         }
-        dd($feecollections);
+        // dd($feecollections);
 
         $teachers = User::where('school_id', Auth::user()->school_id)->get();
         
@@ -326,11 +328,13 @@ class CollectionController extends Controller
         }
         // dd($teachers);
 
-        return view('collection.inputform')
+        return view('collection.collectionlist')
                     ->withSessionsearch($session)
                     ->withClasssearch($class)
                     ->withSectionsearch($section)
-                    ->withStudents($students)
+                    ->withFromdatesearch($from)
+                    ->withTodatesearch($to)
+                    ->withFeecollections($feecollections)
                     ->withTeachers($teachers);
     }
 }

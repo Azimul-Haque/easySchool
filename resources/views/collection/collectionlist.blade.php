@@ -101,10 +101,10 @@
       <div class="col-md-3">
         <div class="row">
           <div class="col-md-6">
-            <input class="form-control" type="text" name="from_date" id="from_date" value="" placeholder="হতে" readonly required>
+            <input class="form-control" type="text" name="from_date" id="from_date" @if($fromdatesearch) value="{{ $fromdatesearch }}" @endif placeholder="হতে" readonly required>
           </div>
           <div class="col-md-6">
-            <input class="form-control" type="text" name="to_date" id="to_date" value="" placeholder="পর্যন্ত" readonly required>
+            <input class="form-control" type="text" name="to_date" id="to_date" @if($todatesearch) value="{{ $todatesearch }}" @endif placeholder="পর্যন্ত" readonly required>
           </div>
         </div>
       </div>
@@ -115,13 +115,14 @@
 
     {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!}
     <div class="table-responsive" style="margin-top: 5px;">
-        @if($students == true)
+        @if($feecollections == true)
         <table class="table" id="">
             {{-- datatable-students --}}
             <thead>
                 <tr>
                     {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
                     <th>ক্রঃ নঃ</th>
+                    <th>তারিখ</th>
                     <th>রোল</th>
                     <th>আইডি</th>
                     <th width="20%">নাম</th>
@@ -139,73 +140,33 @@
                 </tr>
             </thead>
             <tbody>
-            @foreach ($students as $key => $student)
+            @foreach ($feecollections as $key => $collection)
                 <tr>
-                    {{-- <td class="hiddenCheckbox" id="hiddenCheckbox"><input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}"></td> --}}
+                    {{-- <td class="hiddenCheckbox" id="hiddenCheckbox"><input type="checkbox" name="student_check_ids[]" value="{{ $collection->id }}"></td> --}}
                     <td>
                       {{ $key + 1 }}
-                      {!! Form::hidden('student_id'.$student->student_id, $student->student_id) !!}
+                      {!! Form::hidden('student_id'.$collection->student_id, $collection->student_id) !!}
                     </td>
-                    <td>{{ $student->roll }}</td>
-                    <td>{{ $student->student_id }}</td>
-                    <td>{{ $student->name }}</td>
-                    <td><center><input type="number" name="admission_session_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="annual_sports_cultural{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="last_year_due{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="exam_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="full_half_free_form{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="3_6_8_12_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="jsc_ssc_form_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="certificate_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="scout_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="develoment_donation{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
-                    <td><center><input type="number" name="other_fee{{ $student->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td>{{ $collection->roll }}</td>
+                    <td>{{ $collection->student_id }}</td>
+                    <td>{{ $collection->name }}</td>
+                    <td><center><input type="number" name="admission_session_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="annual_sports_cultural{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="last_year_due{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="exam_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="full_half_free_form{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="3_6_8_12_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="jsc_ssc_form_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="certificate_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="scout_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="develoment_donation{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
+                    <td><center><input type="number" name="other_fee{{ $collection->student_id }}" class="form-control" min="0" step="any"></center></td>
                 </tr>
             @endforeach
             </tbody>
         </table>
         @endif
-    </div>
-    
-    @if(!empty($students))
-    <div class="row">
-      <div class="col-md-2">
-        <input class="form-control" type="text" name="collection_date" id="collection_date" value="" placeholder="আদায়ের তারিখ" readonly required>
-      </div>
-      <div class="col-md-2">
-          <select name="collector" id="collector" class="form-control" required>
-            <option value="" selected disabled>আদায়কারী নির্বাচন করুন</option>
-            @foreach ($teachers as $teacher)
-            <option value="{{ $teacher->name }}">{{ $teacher->name }}</option>
-            @endforeach
-          </select>
-      </div>
-      <div class="col-md-2">
-        <button class="btn btn-success" type="button" data-toggle="modal" data-target="#saveButtonModal" data-backdrop="static">দাখিল করুন</button>
-        <!-- Trigger the modal with a button -->
-        <!-- Modal -->
-        <div class="modal fade" id="saveButtonModal" role="dialog">
-          <div class="modal-dialog modal-md">
-            <div class="modal-content">
-              <div class="modal-header modal-header-success">
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">ফি আদায় দাখিলকরণ</h4>
-              </div>
-        
-              <div class="modal-body">
-                আপনি কি নিশ্চিতভাবে আদায়কৃত ফিসমূহ সংরক্ষণ করতে চান?
-              </div>
-              <div class="modal-footer">
-                <button type="submit" class="btn btn-success">দাখিল করুন</button>
-                <button type="button" class="btn btn-default" data-dismiss="modal">বন্ধ করুন</button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    @endif
-    
+    </div>    
   {!! Form::close() !!}
   @endpermission
 @stop
@@ -220,11 +181,6 @@
 </script>
 <script type="text/javascript">
   $(function() {
-    $("#collection_date").datepicker({
-      format: 'MM dd, yyyy',
-      todayHighlight: true,
-      autoclose: true,
-    });
     $("#from_date").datepicker({
       format: 'dd-M-yyyy',
       todayHighlight: true,
