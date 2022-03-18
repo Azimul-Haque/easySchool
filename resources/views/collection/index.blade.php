@@ -35,7 +35,7 @@
             </a>
         </div>
 
-        <div class="col-lg-3 col-xs-6">
+        {{-- <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-yellow">
                 <div class="inner">
                     <h3 style="font-size: 30px !important;">44</h3>
@@ -59,7 +59,7 @@
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>
-        </div>
+        </div> --}}
     </div>
   {{-- @endpermission --}}
 @stop
