@@ -44,13 +44,13 @@ class CollectionController extends Controller
                                ->where('session',$session)
                                ->where('class',$class)
                                ->where('section',$section)
-                               ->orderBy('id','DESC')->get();
+                               ->orderBy('roll','ASC')->get();
 
         } else {
             $students = Student::where('school_id', Auth::user()->school_id)
                                ->where('session',$session)
                                ->where('class',$class)
-                               ->orderBy('id','DESC')->get();
+                               ->orderBy('roll','ASC')->get();
         } 
 
         $teachers = User::where('school_id', Auth::user()->school_id)->get();
