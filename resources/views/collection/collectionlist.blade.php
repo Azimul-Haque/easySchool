@@ -23,6 +23,9 @@
         padding: 5px;
         font-size: 13px;
         -moz-appearance:textfield; /* Firefox */
+    .table>tbody>tr>td {
+      padding: 4px;
+    }
     }  */
   </style>
 @stop
@@ -108,13 +111,17 @@
           </div>
         </div>
       </div>
-      <div class="col-md-2">
+      <div class="col-md-3">
           <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> তালিকা দেখুন</button>
+          @if($feecollections == true)
+            <a href="{{ Request::url() . '/pdf' }}" class="btn btn-success btn-sm" style="margin-left: 10px;" id=""><i class="fa fa-fw fa-download"></i> পিডিএফ</a>
+          @endif
       </div>
     </div>
 
     {{-- {!! Form::open(array('route' => ['collection.storecollection', $sessionsearch, $classsearch, $sectionsearch], 'method'=>'POST')) !!} --}}
     <div class="table-responsive" style="margin-top: 5px;">
+        {{-- {{ Request::url() }} --}}
         @if($feecollections == true)
         <table class="table table-bordered" id="">
             {{-- datatable-students --}}
@@ -122,10 +129,10 @@
                 <tr>
                     {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
                     <th>ক্রঃ নঃ</th>
-                    <th width="10%">তারিখ</th>
+                    <th width="7%">তারিখ</th>
                     <th>রোল</th>
                     <th>আইডি</th>
-                    <th width="20%">নাম</th>
+                    <th width="15%">নাম</th>
                     <th>ভর্তি ফি /সেশন চাজ</th>
                     <th>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</th>
                     <th>গত বছরের বকেয়া</th>
@@ -137,7 +144,7 @@
                     <th>স্কাউট/ গার্লস গাইড ফি</th>
                     <th>উন্নয়ন/ দান</th>
                     <th>বিবিধ</th>
-                    <th>মোট</th>
+                    <th width="5%">মোট (৳)</th>
                 </tr>
             </thead>
             <tbody>
@@ -151,20 +158,38 @@
                     }
                   } 
                 }
+                $total_admission_session_fee = 0;
+                $total_annual_sports_cultural = 0;
+                $total_last_year_due = 0;
+                $total_exam_fee = 0;
+                $total_full_half_free_form = 0;
+                $total_3_6_8_12_fee = 0;
+                $total_jsc_ssc_form_fee = 0;
+                $total_certificate_fee = 0;
+                $total_scout_fee = 0;
+                $total_develoment_donation = 0;
+                $total_other_fee = 0;
                 // dd($collectiongroup);
               @endphp
               @foreach ($collectiongroup as $datekey => $datecollections)
                 @foreach ($datecollections as $studentidkey => $studentidcollections)
+                  @php
+                    $total_single_student_fee = 0;
+                  @endphp
                   <tr>
                     <td>{{ $count_key = $count_key + 1 }}</td>
-                    <td>{{ date('d-m-Y', strtotime($datekey)) }}</td>
-                    <td>{{ $studentidcollections[0]->roll }}</td>
+                    <td>{{ date('d-m-y', strtotime($datekey)) }}</td>
+                    <td>{{ $studentidcollections[0]->roll }} @if($classsearch == 'All_Classes') ({{ $studentidcollections[0]->class }}) @endif</td>
                     <td>{{ $studentidkey }}</td>
                     <td>{{ $studentidcollections[0]->student->name }}</td>
                     <td align="center">
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'admission_session_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -195,6 +220,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'annual_sports_cultural')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_annual_sports_cultural = $total_annual_sports_cultural + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -225,6 +254,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'last_year_due')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_last_year_due = $total_last_year_due + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -255,6 +288,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'exam_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_exam_fee = $total_exam_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -285,6 +322,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'full_half_free_form')
                          ৳ {{ $collection->fee_value }}
+                         @php
+                          $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                          $total_full_half_free_form = $total_full_half_free_form + $collection->fee_value;
+                         @endphp
                          <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                          <!-- Trigger the modal with a button -->
                          <!-- Modal -->
@@ -315,6 +356,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == '3_6_8_12_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_3_6_8_12_fee = $total_3_6_8_12_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -345,6 +390,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_jsc_ssc_form_fee = $total_jsc_ssc_form_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -375,6 +424,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'certificate_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_certificate_fee = $total_certificate_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -405,6 +458,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'scout_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_scout_fee = $total_scout_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -435,6 +492,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'develoment_donation')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_develoment_donation = $total_develoment_donation + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -465,6 +526,10 @@
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'other_fee')
                           ৳ {{ $collection->fee_value }}
+                          @php
+                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                            $total_other_fee = $total_other_fee + $collection->fee_value;
+                          @endphp
                           <button class="btn btn-xs btn-danger" type="button" title="তথ্যটি ডিলেট করুন" data-toggle="modal" data-target="#deleteModal{{ $collection->id }}" data-backdrop="static"><i class="fa fa-trash"></i></button>
                           <!-- Trigger the modal with a button -->
                           <!-- Modal -->
@@ -492,7 +557,7 @@
                       @endforeach
                     </td>
                     <td>
-                      
+                      <b>৳ {{ $total_single_student_fee }}</b>
                     </td>
                   </tr>                
                 @endforeach            
@@ -500,19 +565,19 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="5" align="right">মোটঃ</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td colspan="5" align="right">মোট (৳)</td>
+                <th>৳ {{ $total_admission_session_fee }}</th>
+                <th>৳ {{ $total_annual_sports_cultural }}</th>
+                <th>৳ {{ $total_last_year_due }}</th>
+                <th>৳ {{ $total_exam_fee }}</th>
+                <th>৳ {{ $total_full_half_free_form }}</th>
+                <th>৳ {{ $total_3_6_8_12_fee }}</th>
+                <th>৳ {{ $total_jsc_ssc_form_fee }}</th>
+                <th>৳ {{ $total_certificate_fee }}</th>
+                <th>৳ {{ $total_scout_fee }}</th>
+                <th>৳ {{ $total_develoment_donation }}</th>
+                <th>৳ {{ $total_other_fee }}</th>
+                <th>৳ {{ $total_admission_session_fee + $total_annual_sports_cultural + $total_last_year_due + $total_exam_fee + $total_full_half_free_form + $total_3_6_8_12_fee + $total_jsc_ssc_form_fee + $total_certificate_fee + $total_scout_fee + $total_develoment_donation + $total_other_fee }}</th>
               </tr>
             </tfoot>
         </table>

@@ -267,10 +267,8 @@ class CollectionController extends Controller
                     ->withSectionsearch(null)
                     ->withFeecollections(null)
                     ->withUsedstudentids(null)
-                    ->withUseddates(null)
                     ->withFromdatesearch(null)
-                    ->withTodatesearch(null)
-                    ->withTeachers(null);
+                    ->withTodatesearch(null);
     }
 
     public function collectionListData($session, $class, $section, $date_from, $date_to)
@@ -283,13 +281,6 @@ class CollectionController extends Controller
 
         if($section != 'No_Section') {
             if($class != 'All_Classes') {
-                $used_dates = Feecollection::where('school_id', Auth::user()->school_id)
-                                            ->where('session',$session)
-                                            ->where('class',$class)
-                                            ->where('section',$section)
-                                            ->whereBetween('collection_date', [$from, $to])
-                                            ->distinct()->select('collection_date')
-                                            ->get();
                 $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
                                                  ->where('session',$session)
                                                  ->where('class',$class)
@@ -308,57 +299,25 @@ class CollectionController extends Controller
                                             //    ->groupBy('collection_date')
                                                ->orderBy('collection_date','ASC')->get();
             } else {
-                // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
-                //    ->where('session',$session)
-                //    ->where('class',$class)
-                //    ->where('section',$section)
-                //    ->whereBetween('collection_date', [$from, $to])
-                //    ->orderBy('collection_date','DESC')->get();
-            }
-        } else {
-            if($class != 'All_Classes') {
-                $used_dates = Feecollection::where('school_id', Auth::user()->school_id)
-                                            ->where('session',$session)
-                                            ->where('class',$class)
-                                            ->whereBetween('collection_date', [$from, $to])
-                                            ->distinct()->select('collection_date')
-                                            ->get();
                 $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
-                                                 ->where('session',$session)
-                                                 ->where('class',$class)
-                                                 ->whereBetween('collection_date', [$from, $to])
-                                                 ->distinct()->select('student_id')->get();
+                                                ->where('session',$session)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->distinct()->select('student_id', 'collection_date')
+                                                ->orderBy('collection_date','ASC')
+                                                ->orderBy('class','ASC')
+                                                ->orderBy('roll','ASC')
+                                                ->get();
 
                 $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
-                                               ->where('session',$session)
-                                               ->where('class',$class)
-                                               ->whereBetween('collection_date', [$from, $to])
-                                               ->orderBy('collection_date','ASC')->get();
-            } else {
-                // $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
-                //                    ->where('session',$session)
-                //                    ->where('class',$class)
-                //                    ->whereBetween('collection_date', [$from, $to])
-                //                    ->orderBy('collection_date','DESC')->get();
+                                                ->where('session',$session)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->orderBy('collection_date','DESC')->get();
             }
+        } else {
+            // No_Section ER KAAJ BAKI ACHE
+            // No_Section ER KAAJ BAKI ACHE
         }
         // dd($used_student_ids);
-
-        $teachers = User::where('school_id', Auth::user()->school_id)->get();
-        
-        foreach ($teachers as $teacher) {
-            $rolesarray = [];
-            foreach($teacher->roles as $role) {
-                $rolesarray[] = $role->name;
-            }
-            if(in_array('superadmin', $rolesarray)) {
-                $remove_id = $teacher->id;
-                $teachers = $teachers->reject(function ($value, $key) use($remove_id) {
-                    return $value->id == $remove_id;
-                });
-            }
-        }
-        // dd($teachers);
 
         return view('collection.collectionlist')
                     ->withSessionsearch($session)
@@ -367,9 +326,67 @@ class CollectionController extends Controller
                     ->withFromdatesearch($from)
                     ->withTodatesearch($to)
                     ->withFeecollections($feecollections)
-                    ->withUsedstudentids($used_student_ids)
-                    ->withUseddates($used_dates)
-                    ->withTeachers($teachers);
+                    ->withUsedstudentids($used_student_ids);
+    }
+    
+    public function collectionListPDF($session, $class, $section, $date_from, $date_to)
+    {
+        $from = date('Y-m-d', strtotime($date_from));
+        $to = date('Y-m-d', strtotime($date_to));
+        // dd($from);
+
+        if($section != 'No_Section') {
+            if($class != 'All_Classes') {
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                 ->where('session',$session)
+                                                 ->where('class',$class)
+                                                 ->where('section',$section)
+                                                 ->whereBetween('collection_date', [$from, $to])
+                                                 ->distinct()->select('student_id', 'collection_date')
+                                                 ->orderBy('collection_date','ASC')
+                                                 ->orderBy('roll','ASC')
+                                                 ->get();
+
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                               ->where('session',$session)
+                                               ->where('class',$class)
+                                               ->where('section',$section)
+                                               ->whereBetween('collection_date', [$from, $to])
+                                            //    ->groupBy('collection_date')
+                                               ->orderBy('collection_date','ASC')->get();
+            } else {
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                ->where('session',$session)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->distinct()->select('student_id', 'collection_date')
+                                                ->orderBy('collection_date','ASC')
+                                                ->orderBy('class','ASC')
+                                                ->orderBy('roll','ASC')
+                                                ->get();
+
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                                ->where('session',$session)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->orderBy('collection_date','DESC')->get();
+            }
+        } else {
+            // No_Section ER KAAJ BAKI ACHE
+            // No_Section ER KAAJ BAKI ACHE
+        }
+        // dd($used_student_ids);
+
+        $pdf = PDF::loadView('collection.pdf.collectionlist', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$session, $class, $section, $date_from, $date_to]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $fileName = 'Collection_List_Report' . '.pdf';
+        return $pdf->stream($fileName); // stream, download
+
+        return view('collection.collectionlist')
+                    ->withSessionsearch($session)
+                    ->withClasssearch($class)
+                    ->withSectionsearch($section)
+                    ->withFromdatesearch($from)
+                    ->withTodatesearch($to)
+                    ->withFeecollections($feecollections)
+                    ->withUsedstudentids($used_student_ids);
     }
 
     public function deleteSingle($id) {
