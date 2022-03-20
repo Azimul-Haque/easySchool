@@ -32,7 +32,7 @@
 
 @section('content_header')
     <h1>
-        আদায় তালিকা <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
+        আদায় তালিকা <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ isset($sectionsearch) ? 'সকল' : bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
         <div class="pull-right btn-group"></div>	
     </h1>
 @stop
@@ -48,13 +48,13 @@
       <div class="col-md-2">
           <select class="form-control" id="search_class">
               <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
+              <option value="All_Classes" @if($classsearch == 'All_Classes') selected="" @endif>সকল শ্রেণি</option>
               @php
                   $classes = explode(',', Auth::user()->school->classes);
               @endphp
               @foreach($classes as $class)
               <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
               @endforeach
-              <option value="All_Classes">সকল শ্রেণি</option>
           </select>
       </div>
       @if(Auth::user()->school->sections > 0)
@@ -104,10 +104,10 @@
       <div class="col-md-3">
         <div class="row">
           <div class="col-md-6">
-            <input class="form-control" type="text" name="from_date" id="from_date" @if($fromdatesearch) value="{{ $fromdatesearch }}" @endif placeholder="হতে" readonly required>
+            <input class="form-control" type="text" name="from_date" id="from_date" @if($fromdatesearch) value="{{ date('d-M-Y', strtotime($fromdatesearch)) }}" @endif placeholder="হতে" readonly required>
           </div>
           <div class="col-md-6">
-            <input class="form-control" type="text" name="to_date" id="to_date" @if($todatesearch) value="{{ $todatesearch }}" @endif placeholder="পর্যন্ত" readonly required>
+            <input class="form-control" type="text" name="to_date" id="to_date" @if($todatesearch) value="{{ date('d-M-Y', strtotime($todatesearch)) }}" @endif placeholder="পর্যন্ত" readonly required>
           </div>
         </div>
       </div>
@@ -130,7 +130,7 @@
                     {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
                     <th>ক্রঃ নঃ</th>
                     <th width="7%">তারিখ</th>
-                    <th>রোল</th>
+                    <th width="5%">রোল</th>
                     <th>আইডি</th>
                     <th width="15%">নাম</th>
                     <th>ভর্তি ফি /সেশন চাজ</th>
@@ -179,13 +179,13 @@
                   <tr>
                     <td>{{ $count_key = $count_key + 1 }}</td>
                     <td>{{ date('d-m-y', strtotime($datekey)) }}</td>
-                    <td>{{ $studentidcollections[0]->roll }} @if($classsearch == 'All_Classes') ({{ $studentidcollections[0]->class }}) @endif</td>
+                    <td>{{ $studentidcollections[0]->roll }} @if($classsearch == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
                     <td>{{ $studentidkey }}</td>
                     <td>{{ $studentidcollections[0]->student->name }}</td>
                     <td align="center">
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'admission_session_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
@@ -219,7 +219,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'annual_sports_cultural')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_annual_sports_cultural = $total_annual_sports_cultural + $collection->fee_value;
@@ -253,7 +253,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'last_year_due')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_last_year_due = $total_last_year_due + $collection->fee_value;
@@ -287,7 +287,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'exam_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_exam_fee = $total_exam_fee + $collection->fee_value;
@@ -321,7 +321,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'full_half_free_form')
-                         ৳ {{ $collection->fee_value }}
+                         {{ $collection->fee_value }}
                          @php
                           $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                           $total_full_half_free_form = $total_full_half_free_form + $collection->fee_value;
@@ -355,7 +355,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == '3_6_8_12_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_3_6_8_12_fee = $total_3_6_8_12_fee + $collection->fee_value;
@@ -389,7 +389,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_jsc_ssc_form_fee = $total_jsc_ssc_form_fee + $collection->fee_value;
@@ -423,7 +423,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'certificate_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_certificate_fee = $total_certificate_fee + $collection->fee_value;
@@ -457,7 +457,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'scout_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_scout_fee = $total_scout_fee + $collection->fee_value;
@@ -491,7 +491,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'develoment_donation')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_develoment_donation = $total_develoment_donation + $collection->fee_value;
@@ -525,7 +525,7 @@
                     <td>
                       @foreach ($studentidcollections as $collection)
                         @if ($collection->fee_attribute == 'other_fee')
-                          ৳ {{ $collection->fee_value }}
+                          {{ $collection->fee_value }}
                           @php
                             $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                             $total_other_fee = $total_other_fee + $collection->fee_value;
@@ -557,7 +557,7 @@
                       @endforeach
                     </td>
                     <td>
-                      <b>৳ {{ $total_single_student_fee }}</b>
+                      <b>{{ $total_single_student_fee }}</b>
                     </td>
                   </tr>                
                 @endforeach            
@@ -566,18 +566,18 @@
             <tfoot>
               <tr>
                 <td colspan="5" align="right">মোট (৳)</td>
-                <th>৳ {{ $total_admission_session_fee }}</th>
-                <th>৳ {{ $total_annual_sports_cultural }}</th>
-                <th>৳ {{ $total_last_year_due }}</th>
-                <th>৳ {{ $total_exam_fee }}</th>
-                <th>৳ {{ $total_full_half_free_form }}</th>
-                <th>৳ {{ $total_3_6_8_12_fee }}</th>
-                <th>৳ {{ $total_jsc_ssc_form_fee }}</th>
-                <th>৳ {{ $total_certificate_fee }}</th>
-                <th>৳ {{ $total_scout_fee }}</th>
-                <th>৳ {{ $total_develoment_donation }}</th>
-                <th>৳ {{ $total_other_fee }}</th>
-                <th>৳ {{ $total_admission_session_fee + $total_annual_sports_cultural + $total_last_year_due + $total_exam_fee + $total_full_half_free_form + $total_3_6_8_12_fee + $total_jsc_ssc_form_fee + $total_certificate_fee + $total_scout_fee + $total_develoment_donation + $total_other_fee }}</th>
+                <th>{{ $total_admission_session_fee }}</th>
+                <th>{{ $total_annual_sports_cultural }}</th>
+                <th>{{ $total_last_year_due }}</th>
+                <th>{{ $total_exam_fee }}</th>
+                <th>{{ $total_full_half_free_form }}</th>
+                <th>{{ $total_3_6_8_12_fee }}</th>
+                <th>{{ $total_jsc_ssc_form_fee }}</th>
+                <th>{{ $total_certificate_fee }}</th>
+                <th>{{ $total_scout_fee }}</th>
+                <th>{{ $total_develoment_donation }}</th>
+                <th>{{ $total_other_fee }}</th>
+                <th>{{ $total_admission_session_fee + $total_annual_sports_cultural + $total_last_year_due + $total_exam_fee + $total_full_half_free_form + $total_3_6_8_12_fee + $total_jsc_ssc_form_fee + $total_certificate_fee + $total_scout_fee + $total_develoment_donation + $total_other_fee }}</th>
               </tr>
             </tfoot>
         </table>

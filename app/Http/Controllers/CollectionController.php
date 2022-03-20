@@ -305,6 +305,7 @@ class CollectionController extends Controller
                                                 ->distinct()->select('student_id', 'collection_date')
                                                 ->orderBy('collection_date','ASC')
                                                 ->orderBy('class','ASC')
+                                                ->orderBy('section','ASC')
                                                 ->orderBy('roll','ASC')
                                                 ->get();
 
