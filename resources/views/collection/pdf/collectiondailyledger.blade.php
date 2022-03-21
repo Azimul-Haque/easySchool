@@ -20,6 +20,10 @@
     font-family: 'kalpurush', sans-serif;
     font-size: 13px;
   }
+  @page {
+    header: page-header;
+    footer: page-footer;
+  }
   </style>
 </head>
 <body>
@@ -99,10 +103,10 @@
                     $total_single_section_fee = 0;
                 @endphp
                 <tr>
-                    <td>{{ $count_key = $count_key + 1 }}</td>
-                    <td>{{ date('d-m-y', strtotime($datekey)) }}</td>
-                    <td>{{ $sectioncollections[0]->class }}</td>
-                    <td>{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
+                    <td align="center">{{ $count_key = $count_key + 1 }}</td>
+                    <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
+                    <td align="center">{{ $sectioncollections[0]->class }}</td>
+                    <td align="center">{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
                     <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
@@ -118,7 +122,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -133,7 +137,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -148,7 +152,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -163,7 +167,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -178,7 +182,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -193,7 +197,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -208,7 +212,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -223,7 +227,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -238,7 +242,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -253,7 +257,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
+                    <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
                         @endphp
@@ -268,9 +272,7 @@
                         @endforeach
                         {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                     </td>
-                    <td>
-                    <b>{{ $total_single_section_fee }}</b>
-                    </td>
+                    <td align="center"><b>{{ $total_single_section_fee }}</b></td>
                 </tr>                
             @endforeach            
         @endforeach         
@@ -294,5 +296,9 @@
       </tr>
     </tfoot>
 </table>
+
+<htmlpagefooter name="page-footer">
+    {{-- <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small> --}}
+</htmlpagefooter>
 </body>
 </html>

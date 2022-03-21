@@ -122,10 +122,12 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/list/{session}/{class}/{section}/{from}/{to}',['as'=>'collection.list.data','uses'=>'CollectionController@collectionListData']);
 	Route::get('collection/list/{session}/{class}/{section}/{from}/{to}/pdf',['as'=>'collection.list.pdf','uses'=>'CollectionController@collectionListPDF']);
 	Route::delete('collection/delete/{id}',['as'=>'collection.delete.single','uses'=>'CollectionController@deleteSingle']);
-
 	Route::get('collection/daily/ledger',['as'=>'collection.daily.ledger','uses'=>'CollectionController@collectionDailyledger']);
 	Route::get('collection/daily/ledger/{from}/{to}',['as'=>'collection.daily.ledger.data','uses'=>'CollectionController@collectionDailyledgerData']);
 	Route::get('collection/daily/ledger/{from}/{to}/pdf',['as'=>'collection.daily.ledger.pdf','uses'=>'CollectionController@collectionDailyledgerPDF']);
+	Route::get('collection/sector/wise',['as'=>'collection.sector.wise','uses'=>'CollectionController@collectionSectorWise']);
+	Route::get('collection/sector/wise/{from}/{to}',['as'=>'collection.sector.wise.data','uses'=>'CollectionController@collectionSectorWiseData']);
+	Route::get('collection/sector/wise/{from}/{to}/pdf',['as'=>'collection.sector.wise.pdf','uses'=>'CollectionController@collectionSectorWisePDF']);
 	// Collection Management
 	// Collection Management
 });

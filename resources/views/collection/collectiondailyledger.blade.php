@@ -290,9 +290,7 @@
                                 @endforeach
                                 {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
                             </td>
-                            <td>
-                            <b>{{ $total_single_section_fee }}</b>
-                            </td>
+                            <td><b>{{ $total_single_section_fee }}</b></td>
                         </tr>                
                     @endforeach            
                 @endforeach            
