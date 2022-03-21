@@ -136,7 +136,7 @@
             <div class="col-md-8">
                 <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> তালিকা দেখুন</button>
                 @if($feecollections == true)
-                <a href="{{ Request::url() . '/pdf' }}" class="btn btn-success btn-sm" style="margin-left: 10px;" id=""><i class="fa fa-fw fa-download"></i> পিডিএফ</a>
+                <a href="{{ Request::url() . '/pdf' }}" id="downloadpdfbutton" class="btn btn-success btn-sm" style="margin-left: 10px;" id=""><i class="fa fa-fw fa-download"></i> পিডিএফ</a>
                 @endif
             </div>
         </div>
@@ -352,6 +352,9 @@
         $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
       @endif
     }
+  });
+  $('#search_sector').on('change', function() {
+    $('#downloadpdfbutton').hide();
   });
 </script>
 @stop
