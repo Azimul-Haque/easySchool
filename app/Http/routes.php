@@ -122,6 +122,10 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/list/{session}/{class}/{section}/{from}/{to}',['as'=>'collection.list.data','uses'=>'CollectionController@collectionListData']);
 	Route::get('collection/list/{session}/{class}/{section}/{from}/{to}/pdf',['as'=>'collection.list.pdf','uses'=>'CollectionController@collectionListPDF']);
 	Route::delete('collection/delete/{id}',['as'=>'collection.delete.single','uses'=>'CollectionController@deleteSingle']);
+
+	Route::get('collection/daily/ledger',['as'=>'collection.daily.ledger','uses'=>'CollectionController@collectionDailyledger']);
+	Route::get('collection/daily/ledger/{from}/{to}',['as'=>'collection.daily.ledger.data','uses'=>'CollectionController@collectionDailyledgerData']);
+	Route::get('collection/daily/ledger/{from}/{to}/pdf',['as'=>'collection.daily.ledger.pdf','uses'=>'CollectionController@collectionDailyledgerPDF']);
 	// Collection Management
 	// Collection Management
 });

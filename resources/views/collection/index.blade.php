@@ -16,7 +16,7 @@
                     <p>তথ্য ইনপুট দিতে ক্লিক করুন</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-check-square-o"></i>
+                    <i class="ion ion-compose"></i>
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
             </a>
@@ -29,33 +29,33 @@
                     <p>তারিখ অনুযায়ী আদায় তালিকা</p>
                 </div>
                 <div class="icon">
-                    <i class="fa fa-list-ul"></i>
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            </a>
+        </div>
+
+        <div class="col-lg-3 col-xs-6">
+            <a href="{{ route('collection.daily.ledger') }}" class="small-box bg-yellow">
+                <div class="inner">
+                    <h3 style="font-size: 30px !important;">দৈনিক খতিয়ান</h3>
+                    <p>দৈনিক খতিয়ান দেখুন</p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-clock"></i>
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
             </a>
         </div>
 
         {{-- <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-yellow">
-                <div class="inner">
-                    <h3 style="font-size: 30px !important;">44</h3>
-                    <p>User Registrations</p>
-                </div>
-                <div class="icon">
-                    <i class="ion ion-person-add"></i>
-                </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div>
-
-        <div class="col-lg-3 col-xs-6">
             <div class="small-box bg-red">
                 <div class="inner">
                     <h3 style="font-size: 30px !important;">65</h3>
                     <p>Unique Visitors</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-pie-graph"></i>
+                    <i class="ion ion-ion-compose"></i>
                 </div>
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
             </div>

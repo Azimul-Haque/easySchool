@@ -397,4 +397,69 @@ class CollectionController extends Controller
         Session::flash('success', 'Deleted!');
         return redirect()->back();
     }
+
+    public function collectionDailyledger()
+    {
+        return view('collection.collectiondailyledger')
+                    ->withFeecollections(null)
+                    ->withUsedstudentids(null)
+                    ->withFromdatesearch(null)
+                    ->withTodatesearch(null);
+    }
+
+    public function collectionDailyledgerData($date_from, $date_to)
+    {
+        $from = date('Y-m-d', strtotime($date_from));
+        $to = date('Y-m-d', strtotime($date_to));
+
+        // dd($from);
+        
+
+        $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                            ->whereBetween('collection_date', [$from, $to])
+                                            ->distinct()->select('class', 'section', 'collection_date')
+                                            ->orderBy('collection_date','ASC')
+                                            ->orderBy('class','ASC')
+                                            ->orderBy('section','ASC')
+                                            ->get();
+
+        $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                        ->whereBetween('collection_date', [$from, $to])
+                                    //    ->groupBy('collection_date')
+                                        ->orderBy('collection_date','ASC')->get();
+        // dd($used_student_ids);
+
+        return view('collection.collectiondailyledger')
+                    ->withFromdatesearch($from)
+                    ->withTodatesearch($to)
+                    ->withFeecollections($feecollections)
+                    ->withUsedstudentids($used_student_ids);
+    }
+    
+    public function collectionDailyledgerPDF($date_from, $date_to)
+    {
+        $from = date('Y-m-d', strtotime($date_from));
+        $to = date('Y-m-d', strtotime($date_to));
+
+        // dd($from);
+        
+
+        $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                            ->whereBetween('collection_date', [$from, $to])
+                                            ->distinct()->select('class', 'section', 'collection_date')
+                                            ->orderBy('collection_date','ASC')
+                                            ->orderBy('class','ASC')
+                                            ->orderBy('section','ASC')
+                                            ->get();
+
+        $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                        ->whereBetween('collection_date', [$from, $to])
+                                    //    ->groupBy('collection_date')
+                                        ->orderBy('collection_date','ASC')->get();
+        // dd($used_student_ids);
+
+        $pdf = PDF::loadView('collection.pdf.collectiondailyledger', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$date_from, $date_to]], ['mode' => 'utf-8', 'format' => 'A4-L']);
+        $fileName = 'Collection_Daily_Ledger_Report' . '.pdf';
+        return $pdf->stream($fileName); // stream, download
+    }
 }
