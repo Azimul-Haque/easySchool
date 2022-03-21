@@ -22,7 +22,7 @@ class CreateFeecollectionsTable extends Migration
             $table->string('student_id', 15);
             $table->string('fee_attribute', 50);
             $table->string('fee_value', 15);
-            // $table->string('admissio_session_fee');
+            // $table->string('admission_session_fee');
             // $table->string('annual_sports_cultural');
             // $table->string('last_year_due');
             // $table->string('exam_fee');

@@ -120,7 +120,7 @@
             <div class="col-md-4">
                 <select class="form-control" id="search_sector">
                     <option selected="" disabled="">খাত নির্ধারণ করুন</option>
-                    <option value="admissio_session_fee" @if($sectorsearch == 'admissio_session_fee') selected @endif>ভর্তি ফি/সেশন চাজ</option>
+                    <option value="admission_session_fee" @if($sectorsearch == 'admission_session_fee') selected @endif>ভর্তি ফি/সেশন চাজ</option>
                     <option value="annual_sports_cultural" @if($sectorsearch == 'annual_sports_cultural') selected @endif>বার্ষিক ক্রীড়া/সাংস্কৃ: অনুষ্ঠান</option>
                     <option value="last_year_due" @if($sectorsearch == 'last_year_due') selected @endif>গত বছরের বকেয়া</option>
                     <option value="exam_fee" @if($sectorsearch == 'exam_fee') selected @endif>পরীক্ষা ফি অর্ধবার্ষিক/বার্ষিক/নির্বাচনি/মডেল টেস্ট</option>
@@ -676,11 +676,11 @@
                 if($('#search_session').val()) {
                   window.location.href = window.location.protocol + "//" + window.location.host + "/collection/sector/wise/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val()+"/"+$('#search_sector').val();
                 } else {
-                  toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
+                  toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ, তারিখ ও খাতসহ সবগুলো সিলেক্ট করুন!');
                 }
               }
             } else {
-                toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
+                toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ, তারিখ ও খাতসহ সবগুলো সিলেক্ট করুন!');
             }
         @else
           window.location.href = window.location.protocol + "//" + window.location.host + "/collection/sector/wise/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section/"+$('#from_date').val()+"/"+$('#to_date').val()+"/"+$('#search_sector').val();

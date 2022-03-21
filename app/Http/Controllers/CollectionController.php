@@ -479,7 +479,7 @@ class CollectionController extends Controller
         $from = date('Y-m-d', strtotime($date_from));
         $to = date('Y-m-d', strtotime($date_to));
 
-        // dd($from);
+        // dd($sector);
 
         if($section != 'No_Section') {
             if($class != 'All_Classes') {
@@ -497,6 +497,7 @@ class CollectionController extends Controller
                                                ->where('session',$session)
                                                ->where('class',$class)
                                                ->where('section',$section)
+                                               ->where('fee_attribute',$sector)
                                                ->whereBetween('collection_date', [$from, $to])
                                             //    ->groupBy('collection_date')
                                                ->orderBy('collection_date','ASC')->get();
@@ -513,6 +514,7 @@ class CollectionController extends Controller
 
                 $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                                                 ->where('session',$session)
+                                                ->where('fee_attribute',$sector)
                                                 ->whereBetween('collection_date', [$from, $to])
                                                 ->orderBy('collection_date','DESC')->get();
             }
@@ -522,7 +524,7 @@ class CollectionController extends Controller
         }
         // dd($used_student_ids);
 
-        return view('collection.collectionlist')
+        return view('collection.collectionsectorwise')
                     ->withSessionsearch($session)
                     ->withClasssearch($class)
                     ->withSectionsearch($section)
