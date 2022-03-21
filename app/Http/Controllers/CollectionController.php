@@ -470,10 +470,11 @@ class CollectionController extends Controller
                     ->withFeecollections(null)
                     ->withUsedstudentids(null)
                     ->withFromdatesearch(null)
-                    ->withTodatesearch(null);
+                    ->withTodatesearch(null)
+                    ->withSectorsearch(null);
     }
 
-    public function collectionSectorWiseData($session, $class, $section, $date_from, $date_to)
+    public function collectionSectorWiseData($session, $class, $section, $date_from, $date_to, $sector)
     {
         $from = date('Y-m-d', strtotime($date_from));
         $to = date('Y-m-d', strtotime($date_to));
@@ -528,6 +529,7 @@ class CollectionController extends Controller
                     ->withFromdatesearch($from)
                     ->withTodatesearch($to)
                     ->withFeecollections($feecollections)
-                    ->withUsedstudentids($used_student_ids);
+                    ->withUsedstudentids($used_student_ids)
+                    ->withSectorsearch($sector);
     }
 }

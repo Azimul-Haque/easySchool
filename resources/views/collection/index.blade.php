@@ -48,18 +48,18 @@
             </a>
         </div>
 
-        {{-- <div class="col-lg-3 col-xs-6">
-            <div class="small-box bg-red">
+        <div class="col-lg-3 col-xs-6">
+            <a href="{{ route('collection.sector.wise') }}" class="small-box bg-red">
                 <div class="inner">
-                    <h3 style="font-size: 30px !important;">65</h3>
-                    <p>Unique Visitors</p>
+                    <h3 style="font-size: 30px !important;">খাতওয়ারী আদায়</h3>
+                    <p>খাতওয়ারী আদায় তালিকা দেখুন</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-ion-compose"></i>
+                    <i class="ion ion-pricetags"></i>
                 </div>
-                <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
-            </div>
-        </div> --}}
+                {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
+            </a>
+        </div>
     </div>
   {{-- @endpermission --}}
 @stop

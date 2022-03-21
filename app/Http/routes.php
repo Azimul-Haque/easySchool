@@ -126,8 +126,8 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/daily/ledger/{from}/{to}',['as'=>'collection.daily.ledger.data','uses'=>'CollectionController@collectionDailyledgerData']);
 	Route::get('collection/daily/ledger/{from}/{to}/pdf',['as'=>'collection.daily.ledger.pdf','uses'=>'CollectionController@collectionDailyledgerPDF']);
 	Route::get('collection/sector/wise',['as'=>'collection.sector.wise','uses'=>'CollectionController@collectionSectorWise']);
-	Route::get('collection/sector/wise/{from}/{to}',['as'=>'collection.sector.wise.data','uses'=>'CollectionController@collectionSectorWiseData']);
-	Route::get('collection/sector/wise/{from}/{to}/pdf',['as'=>'collection.sector.wise.pdf','uses'=>'CollectionController@collectionSectorWisePDF']);
+	Route::get('collection/sector/wise/{session}/{class}/{section}/{from}/{to}/{sector}',['as'=>'collection.sector.wise.data','uses'=>'CollectionController@collectionSectorWiseData']);
+	Route::get('collection/sector/wise/{session}/{class}/{section}/{from}/{to}/{sector}/pdf',['as'=>'collection.sector.wise.pdf','uses'=>'CollectionController@collectionSectorWisePDF']);
 	// Collection Management
 	// Collection Management
 });
