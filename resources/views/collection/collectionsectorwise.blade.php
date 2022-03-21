@@ -32,7 +32,7 @@
 
 @section('content_header')
     <h1>
-        খাতওয়ারী আদায় <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ isset($sectionsearch) ? 'সকল' : bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
+        খাতওয়ারী আদায় <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ @if($sectionsearch != 'null') {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }} @else সকল @endif]</span>
         <div class="pull-right btn-group"></div>	
     </h1>
 @stop
@@ -158,8 +158,7 @@
                     <th width="5%">রোল</th>
                     <th>আইডি</th>
                     <th width="15%">নাম</th>
-                    <th>{{ $sectorsearch }}</th>
-                    <th>মোট (৳)</th>
+                    <th>{{ collection_sector_bangla($sectorsearch) }}</th>
                 </tr>
             </thead>
             <tbody>
@@ -173,24 +172,11 @@
                     }
                   } 
                 }
-                $total_admission_session_fee = 0;
-                $total_annual_sports_cultural = 0;
-                $total_last_year_due = 0;
-                $total_exam_fee = 0;
-                $total_full_half_free_form = 0;
-                $total_3_6_8_12_fee = 0;
-                $total_jsc_ssc_form_fee = 0;
-                $total_certificate_fee = 0;
-                $total_scout_fee = 0;
-                $total_develoment_donation = 0;
-                $total_other_fee = 0;
+                $total_attribute_fee = 0;
                 // dd($collectiongroup);
               @endphp
               @foreach ($collectiongroup as $datekey => $datecollections)
                 @foreach ($datecollections as $studentidkey => $studentidcollections)
-                  @php
-                    $total_single_student_fee = 0;
-                  @endphp
                   <tr>
                     <td>{{ $count_key = $count_key + 1 }}</td>
                     <td>{{ date('d-m-y', strtotime($datekey)) }}</td>
@@ -198,19 +184,16 @@
                     <td>{{ $studentidkey }}</td>
                     <td>{{ $studentidcollections[0]->student->name }}</td>
                     <td align="center">
+                        @php
+                            $total_single_student_attribute_fee = 0;
+                        @endphp
                       @foreach ($studentidcollections as $collection)
-                        @if ($collection->fee_attribute == 'admission_session_fee')
-                          {{ $collection->fee_value }}
-                          @php
-                            $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
-                            $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
-                          @endphp
-                        @endif
+                        @php
+                            $total_single_student_attribute_fee = $total_single_student_attribute_fee + $collection->fee_value;
+                            $total_attribute_fee = $total_attribute_fee + $collection->fee_value;
+                        @endphp
                       @endforeach
-                    </td>
-            
-                    <td>
-                      <b>{{ $total_single_student_fee }}</b>
+                      {{ $total_single_student_attribute_fee }}
                     </td>
                   </tr>                
                 @endforeach            
@@ -219,8 +202,7 @@
             <tfoot>
               <tr>
                 <td colspan="5" align="right">মোট (৳)</td>
-                <th>{{ $total_admission_session_fee }}</th>
-                <th>{{ $total_admission_session_fee + $total_annual_sports_cultural + $total_last_year_due + $total_exam_fee + $total_full_half_free_form + $total_3_6_8_12_fee + $total_jsc_ssc_form_fee + $total_certificate_fee + $total_scout_fee + $total_develoment_donation + $total_other_fee }}</th>
+                <th>{{ $total_attribute_fee }}</th>
               </tr>
             </tfoot>
         </table>

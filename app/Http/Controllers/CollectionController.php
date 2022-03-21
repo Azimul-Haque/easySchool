@@ -534,4 +534,59 @@ class CollectionController extends Controller
                     ->withUsedstudentids($used_student_ids)
                     ->withSectorsearch($sector);
     }
+    
+    public function collectionSectorWisePDF($session, $class, $section, $date_from, $date_to, $sector)
+    {
+        $from = date('Y-m-d', strtotime($date_from));
+        $to = date('Y-m-d', strtotime($date_to));
+
+        // dd($sector);
+
+        if($section != 'No_Section') {
+            if($class != 'All_Classes') {
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                 ->where('session',$session)
+                                                 ->where('class',$class)
+                                                 ->where('section',$section)
+                                                 ->whereBetween('collection_date', [$from, $to])
+                                                 ->distinct()->select('student_id', 'collection_date')
+                                                 ->orderBy('collection_date','ASC')
+                                                 ->orderBy('roll','ASC')
+                                                 ->get();
+
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                               ->where('session',$session)
+                                               ->where('class',$class)
+                                               ->where('section',$section)
+                                               ->where('fee_attribute',$sector)
+                                               ->whereBetween('collection_date', [$from, $to])
+                                            //    ->groupBy('collection_date')
+                                               ->orderBy('collection_date','ASC')->get();
+            } else {
+                $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
+                                                ->where('session',$session)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->distinct()->select('student_id', 'collection_date')
+                                                ->orderBy('collection_date','ASC')
+                                                ->orderBy('class','ASC')
+                                                ->orderBy('section','ASC')
+                                                ->orderBy('roll','ASC')
+                                                ->get();
+
+                $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
+                                                ->where('session',$session)
+                                                ->where('fee_attribute',$sector)
+                                                ->whereBetween('collection_date', [$from, $to])
+                                                ->orderBy('collection_date','DESC')->get();
+            }
+        } else {
+            // No_Section ER KAAJ BAKI ACHE
+            // No_Section ER KAAJ BAKI ACHE
+        }
+        // dd($used_student_ids);
+
+        $pdf = PDF::loadView('collection.pdf.collectionsectorwise', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$session, $class, $section, $date_from, $date_to, $sector]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $fileName = 'Collection_Sector_Wise_Report' . '.pdf';
+        return $pdf->stream($fileName); // stream, download
+    }
 }
