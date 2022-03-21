@@ -35,6 +35,10 @@
         দৈনিক খতিয়ান <span style="color: #008000;">@if($fromdatesearch)({{ bangla(date('F d, Y', strtotime($fromdatesearch))) }} - {{ bangla(date('F d, Y', strtotime($todatesearch))) }})@endif</span>
         <div class="pull-right btn-group"></div>	
     </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('collection.index') }}"><i class="fa fa-money"></i> আদায় ব্যবস্থাপনা</a></li>
+        <li class="active">দৈনিক খতিয়ান</li>
+    </ol>
 @stop
 
 @section('content')

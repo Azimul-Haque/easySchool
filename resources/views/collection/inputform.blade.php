@@ -48,6 +48,10 @@
           {{-- <button class="btn btn-primary btn-sm" id="showCheckbox" disabled=""><i class="fa fa-graduation-cap"></i> শ্রেণি উন্নীতকরণ</button> --}}
         </div>	
     </h1>
+    <ol class="breadcrumb">
+      <li><a href="{{ route('collection.index') }}"><i class="fa fa-money"></i> আদায় ব্যবস্থাপনা</a></li>
+      <li class="active">ইনপুট ফরম</li>
+    </ol>
 @stop
 
 @section('content')

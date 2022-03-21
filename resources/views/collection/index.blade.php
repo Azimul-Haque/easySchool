@@ -4,6 +4,11 @@
 
 @section('content_header')
     <h1>বেতন ও অন্যান্য ফি আদায় ব্যবস্থাপনা</h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('collection.index') }}"><i class="fa fa-money"></i> আদায় ব্যবস্থাপনা</a></li>
+        {{-- <li><a href="#">UI</a></li>
+        <li class="active">Sliders</li> --}}
+    </ol>
 @stop
 
 @section('content')

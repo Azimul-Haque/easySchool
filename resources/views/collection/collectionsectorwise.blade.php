@@ -35,6 +35,10 @@
         খাতওয়ারী আদায় <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ @if($sectionsearch != 'null') {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }} @else সকল @endif]</span>
         <div class="pull-right btn-group"></div>	
     </h1>
+    <ol class="breadcrumb">
+        <li><a href="{{ route('collection.index') }}"><i class="fa fa-money"></i> আদায় ব্যবস্থাপনা</a></li>
+        <li class="active">খাতওয়ারী আদায়</li>
+    </ol>
 @stop
 
 @section('content')
