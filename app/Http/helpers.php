@@ -253,3 +253,71 @@ function collection_sector_bangla($sector) {
       }
       return $bangla_converted;
 }
+
+use App\Feecollection;
+function generate_receipt_no($session, $class, $section, $student_id, $collection_date)
+{  
+      $last_collection_specific_receipt_data = Feecollection::where('session', $session)
+                                                            ->where('class', $class)
+                                                            ->where('section', $section)
+                                                            ->where('student_id', $student_id)
+                                                            ->where('collection_date', date('Y-m-d', strtotime($collection_date)))
+                                                            ->select('receipt_no', 'collection_date', 'student_id')
+                                                            ->orderBy('receipt_no', 'DESC')
+                                                            ->first();
+      $last_collection_receipt_data = Feecollection::where('session', $session)
+                                                      ->where('class', $class)
+                                                      ->where('section', $section)
+                                                      ->select('receipt_no', 'collection_date', 'student_id')
+                                                      ->orderBy('receipt_no', 'DESC')
+                                                      ->first();
+
+      if($last_collection_specific_receipt_data == null) {
+            if($last_collection_receipt_data == null) {
+                  $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+            } else {
+                  if($last_collection_receipt_data->receipt_no  == null) {
+                        $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+                  } else {
+                        if($last_collection_receipt_data->student_id == $student_id) {
+                              if($last_collection_receipt_data->collection_date == date('Y-m-d', strtotime($collection_date))) {
+                                    $receipt_no = $last_collection_receipt_data->receipt_no;
+                              } else {
+                                    $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+                              }
+                        } else {
+                              $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+                        }
+                  }
+            } 
+      } else {
+            if($last_collection_specific_receipt_data->receipt_no == null) {
+                  if($last_collection_receipt_data == null) {
+                        $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+                  } else {
+                        if($last_collection_receipt_data->receipt_no  == null) {
+                              $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+                        } else {
+                              if($last_collection_receipt_data->student_id == $student_id) {
+                                    if($last_collection_receipt_data->collection_date == date('Y-m-d', strtotime($collection_date))) {
+                                          $receipt_no = $last_collection_receipt_data->receipt_no;
+                                    } else {
+                                          $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+                                    }
+                              } else {
+                                    $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+                              }
+                        }
+                  } 
+            } else {
+                  if($last_collection_specific_receipt_data->collection_date == date('Y-m-d', strtotime($collection_date))) {
+                        $receipt_no = $last_collection_specific_receipt_data->receipt_no;
+                  } else {
+                        $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+                  }
+            }
+            
+      }
+           
+      return $receipt_no;
+}

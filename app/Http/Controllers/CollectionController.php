@@ -99,9 +99,41 @@ class CollectionController extends Controller
         }
 
         foreach($students as $student) {
+            // $last_collection_receipt_data = Feecollection::where('session', $session)
+            //                                             ->where('class', $class)
+            //                                             ->where('section', $section)
+            //                                             ->select('receipt_no', 'collection_date', 'student_id')
+            //                                             ->orderBy('receipt_no', 'DESC')
+            //                                             ->first();
+            // if($last_collection_receipt_data == null) {
+            //     // EKDOM NOTUN
+            //     $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+            // } else {
+            //     // ACHE, KINTU RECEIPT NO NULL
+            //     if($last_collection_receipt_data->receipt_no  == null) {
+            //         $receipt_no = $class . date('y', strtotime($session)) . $section . '001';
+            //     } else {
+            //         if($last_collection_receipt_data->student_id == $student->student_id) {
+            //             // SAME DATE E SOB SAME RECEIPT NO, SAME ROW TE BOSE EJONNO, CHECK STUDENT ID
+            //             if($last_collection_receipt_data->collection_date == date('Y-m-d', strtotime($request->collection_date))) {
+            //                 $receipt_no = $last_collection_receipt_data->receipt_no;
+            //             } else {
+            //                 $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+            //             }
+            //         } else {
+            //             // ONNO DATE, INCREASE TO ONE
+            //             $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
+            //         }
+            //     }
+            // }
+            // echo $receipt_no;
+            // dd($last_collection_receipt_data->receipt_no);
+            
             if($request['admission_session_fee'.$student->student_id]) {
+                
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -116,6 +148,7 @@ class CollectionController extends Controller
             if($request['annual_sports_cultural'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -130,6 +163,7 @@ class CollectionController extends Controller
             if($request['last_year_due'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -144,6 +178,7 @@ class CollectionController extends Controller
             if($request['exam_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -158,6 +193,7 @@ class CollectionController extends Controller
             if($request['full_half_free_form'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -172,6 +208,7 @@ class CollectionController extends Controller
             if($request['3_6_8_12_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -186,6 +223,7 @@ class CollectionController extends Controller
             if($request['jsc_ssc_form_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -200,6 +238,7 @@ class CollectionController extends Controller
             if($request['certificate_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -214,6 +253,7 @@ class CollectionController extends Controller
             if($request['scout_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -228,6 +268,7 @@ class CollectionController extends Controller
             if($request['develoment_donation'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;
@@ -242,6 +283,7 @@ class CollectionController extends Controller
             if($request['other_fee'.$student->student_id]) {
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
+                $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
                 $collection->session = $session;
                 $collection->class = $class;
                 $collection->section = $section == 'No_Section' ? 0 : $section;

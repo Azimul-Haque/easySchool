@@ -25,7 +25,7 @@
 <body>
   <table>
     <tr>
-      <td width="18%">
+      <td width="5%">
       </td>
       <td>
         <p style="text-align: center; font-size: 20px;">
@@ -36,12 +36,13 @@
               <span style="font-size: 15px;">
                 <b>শ্রেণিঃ {{ bangla_class($data[1]) }}, শাখাঃ @if($data[2] != 'null') {{ bangla_section(Auth::user()->school->section_type, $data[1], $data[2]) }}, @else সকল,@endif শিক্ষাবর্ষঃ {{ bangla($data[0]) }}</b>
               </span><br/>
+              <span style="font-size: 18px;">({{ bangla(date('F d, Y', strtotime($data[3]))) }} - {{ bangla(date('F d, Y', strtotime($data[4]))) }})</span><br/>
               <span style="font-size: 20px;"><u>খাতওয়ারী আদায় - {{ collection_sector_bangla($data[5]) }}</u></span><br/>
             </span>
           </center>
         </p>
       </td>
-      <td width="18%"></td>
+      <td width="5%"></td>
     </tr>
   </table>
   {{-- <table class="maintable">

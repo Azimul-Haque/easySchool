@@ -15,6 +15,7 @@ class CreateFeecollectionsTable extends Migration
         Schema::create('feecollections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('school_id');
+            $table->string('receipt_no', 10)->nullable();
             $table->string('session', 15);
             $table->integer('class');
             $table->integer('section');
