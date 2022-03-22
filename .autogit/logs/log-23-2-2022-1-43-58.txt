@@ -1,0 +1,16 @@
+-------------------- Auto-Git Log --------------------
+		Wed Mar 23 2022 01:43:58 GMT+0600 (Bangladesh Standard Time)
+------------------------------------------------------
+
+Modified files:
+* app/Http/Controllers/CollectionController.php
+
+
+Created files:
+* .autogit/logs/log-23-2-2022-1-43-23.txt
+
+
+Deleted files:
+
+
+Renamed files:
