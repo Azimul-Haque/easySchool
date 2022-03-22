@@ -99,6 +99,7 @@ class CollectionController extends Controller
         }
 
         foreach($students as $student) {
+            // new
             // $last_collection_receipt_data = Feecollection::where('session', $session)
             //                                             ->where('class', $class)
             //                                             ->where('section', $section)
