@@ -1,6 +1,5 @@
 {
   "updateInterval": 10,
   "logging": true,
-  "silent": true,
-  "commit": "Rifat"
+  "silent": true
 }
