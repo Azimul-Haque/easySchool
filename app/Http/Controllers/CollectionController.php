@@ -129,8 +129,8 @@ class CollectionController extends Controller
             // echo $receipt_no;
             // dd($last_collection_receipt_data->receipt_no);
             
-            if($request['admission_session_fee'.$student->student_id]) {
-                
+            if($request['admission_session_fee'.$student->student_id]) { 
+                 
                 $collection = new Feecollection;
                 $collection->school_id = Auth::user()->school_id;
                 $collection->receipt_no = generate_receipt_no($session, $class, $section, $student->student_id, $request->collection_date);
