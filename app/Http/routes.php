@@ -128,6 +128,7 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/sector/wise',['as'=>'collection.sector.wise','uses'=>'CollectionController@collectionSectorWise']);
 	Route::get('collection/sector/wise/{session}/{class}/{section}/{from}/{to}/{sector}',['as'=>'collection.sector.wise.data','uses'=>'CollectionController@collectionSectorWiseData']);
 	Route::get('collection/sector/wise/{session}/{class}/{section}/{from}/{to}/{sector}/pdf',['as'=>'collection.sector.wise.pdf','uses'=>'CollectionController@collectionSectorWisePDF']);
+	Route::get('collection/receipt/generate',['as'=>'collection.receipt.generate','uses'=>'CollectionController@collectionReceiptGenerate']); 
 	// Collection Management
 	// Collection Management
 });

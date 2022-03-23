@@ -25,13 +25,13 @@
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
             </a>
-            <a href="{{ route('collection.input.form') }}" class="small-box bg-aqua">
+            <a href="{{ route('collection.receipt.generate') }}" class="small-box bg-aqua">
                 <div class="inner">
                     <h3 style="font-size: 30px !important;">রশিদ ডাউনলোড</h3>
                     <p>রশিদ তৈরি করুন</p>
                 </div>
                 <div class="icon">
-                    <i class="ion ion-compose"></i>
+                    <i class="fa fa-download"></i>
                 </div>
                 {{-- <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a> --}}
             </a>

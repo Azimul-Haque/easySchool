@@ -632,4 +632,17 @@ class CollectionController extends Controller
         $fileName = 'Collection_Sector_Wise_Report' . '.pdf';
         return $pdf->stream($fileName); // stream, download
     }
+
+    public function collectionReceiptGenerate()
+    {
+        return view('collection.collectionreceiptgenerate')
+                    ->withSessionsearch(null)
+                    ->withClasssearch(null)
+                    ->withSectionsearch(null)
+                    ->withFeecollections(null)
+                    ->withUsedstudentids(null)
+                    ->withFromdatesearch(null)
+                    ->withTodatesearch(null)
+                    ->withSectorsearch(null);
+    }
 }
