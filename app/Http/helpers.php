@@ -316,7 +316,6 @@ function generate_receipt_no($session, $class, $section, $student_id, $collectio
                         $receipt_no = (int) $last_collection_receipt_data->receipt_no + 1;
                   }
             }
-            
       }
            
       return $receipt_no;
