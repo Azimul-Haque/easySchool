@@ -58,22 +58,23 @@
         <tr>
             {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
             <th width="3.5%">ক্রঃ নঃ</th>
-            <th width="7%">তারিখ</th>
+            <th width="6%">তারিখ</th>
             <th width="5%">রোল</th>
-            <th width="6.5%">আইডি</th>
-            <th width="18%">নাম</th>
-            <th width="5%" style="font-size: 11px;">ভর্তি ফি/ সেশন চাজ</th>
-            <th width="5%" style="font-size: 11px;">বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</th>
-            <th width="5%" style="font-size: 11px;">গত বছরের বকেয়া</th>
-            <th width="5%" style="font-size: 10.5px;">পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</th>
-            <th width="5%" style="font-size: 11px;">ফুলফ্রি/ হাফফ্রি ফরম</th>
-            <th width="5%" style="font-size: 11px;">৩/৬/৯/১২ মাসের বেতন	</th>
-            <th width="5%" style="font-size: 10.5px;">জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</th>
-            <th width="5%" style="font-size: 10.5px;">প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</th>
-            <th width="5%" style="font-size: 11px;">স্কাউট/ গার্লস গাইড ফি</th>
-            <th width="5%" style="font-size: 11px;">উন্নয়ন/ দান</th>
-            <th width="5%" style="font-size: 11px;">বিবিধ</th>
-            <th width="5%">মোট (৳)</th>
+            <th width="6%">আইডি</th>
+            <th width="17%">নাম</th>
+            <th width="6.1%">রশিদ নং</th>
+            <th width="4.7%" style="font-size: 11px;">ভর্তি ফি/ সেশন চাজ</th>
+            <th width="4.7%" style="font-size: 11px;">বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</th>
+            <th width="4.7%" style="font-size: 11px;">গত বছরের বকেয়া</th>
+            <th width="4.7%" style="font-size: 10.5px;">পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</th>
+            <th width="4.7%" style="font-size: 11px;">ফুলফ্রি/ হাফফ্রি ফরম</th>
+            <th width="4.7%" style="font-size: 11px;">৩/৬/৯/১২ মাসের বেতন	</th>
+            <th width="4.7%" style="font-size: 10.5px;">জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</th>
+            <th width="4.7%" style="font-size: 10.5px;">প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</th>
+            <th width="4.7%" style="font-size: 11px;">স্কাউট/ গার্লস গাইড ফি</th>
+            <th width="4.7%" style="font-size: 11px;">উন্নয়ন/ দান</th>
+            <th width="4.7%" style="font-size: 11px;">বিবিধ</th>
+            <th width="4.7%">মোট (৳)</th>
         </tr>
     </thead>
     <tbody>
@@ -111,6 +112,7 @@
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
             <td align="center">{{ $studentidkey }}</td>
             <td style="font-size: 12px;">{{ $studentidcollections[0]->student->name }}</td>
+            <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
             <td align="center">
               @php
                 $total_single_student_single_sector_fee = 0;
@@ -285,7 +287,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="5" align="right">মোট (৳)</td>
+        <td colspan="6" align="right">মোট (৳)</td>
         <th>{{ $total_admission_session_fee }}</th>
         <th>{{ $total_annual_sports_cultural }}</th>
         <th>{{ $total_last_year_due }}</th>
