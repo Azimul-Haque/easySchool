@@ -59,11 +59,12 @@
         <tr>
             {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
             <th width="7%">ক্রঃ নঃ</th>
-            <th width="15%">তারিখ</th>
+            <th width="13%">তারিখ</th>
             <th width="10%">রোল</th>
-            <th width="15%">আইডি</th>
-            <th width="35%">নাম</th>
-            <th width="18%">{{ collection_sector_bangla($data[5]) }}</th>
+            <th width="13%">আইডি</th>
+            <th width="30%">নাম</th>
+            <th width="11%">রশিদ নং</th>
+            <th width="16%" style="font-size: 11px;">{{ collection_sector_bangla($data[5]) }}</th>
         </tr>
     </thead>
     <tbody>
@@ -88,6 +89,7 @@
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
             <td align="center">{{ $studentidkey }}</td>
             <td style="font-size: 12px;">{{ $studentidcollections[0]->student->name }}</td>
+            <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
             <td align="center">
               @php
                 $total_single_student_attribute_fee = 0;
@@ -106,7 +108,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="5" align="right">মোট (৳)</td>
+        <td colspan="6" align="right">মোট (৳)</td>
         <th>{{ $total_attribute_fee }}</th>
       </tr>
     </tfoot>
