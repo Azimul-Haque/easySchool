@@ -1,2 +1,2 @@
-git commit -a -m "autoupdate `--date=local`"
+git commit -a -m --date=local
 git push
