@@ -24,7 +24,7 @@
 
 @section('content_header')
     <h1>
-        কাজ চলছে...
+      রশিদ ডাউনলোড
     </h1>
     <ol class="breadcrumb">
       <li><a href="{{ route('collection.index') }}"><i class="fa fa-money"></i> আদায় ব্যবস্থাপনা</a></li>
@@ -38,7 +38,7 @@
       <div class="col-md-2">
           <select class="form-control" id="search_class">
               <option selected="" disabled="" value="">শ্রেণি নির্ধারণ করুন</option>
-              <option value="All_Classes" @if($classsearch == 'All_Classes') selected="" @endif>সকল শ্রেণি</option>
+              {{-- <option value="All_Classes" @if($classsearch == 'All_Classes') selected="" @endif>সকল শ্রেণি</option> --}}
               @php
                   $classes = explode(',', Auth::user()->school->classes);
               @endphp
