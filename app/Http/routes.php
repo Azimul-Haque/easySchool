@@ -131,7 +131,6 @@ Route::group(['middleware' => ['auth']], function() {
 	Route::get('collection/receipt/generate',['as'=>'collection.receipt.generate','uses'=>'CollectionController@collectionReceiptGenerate']); 
 	// Collection Management
 	// Collection Management
-	// test
 });
 // just to avoid the Auth Middleware 
 Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetpdf','uses'=>'ExamController@getSingleMarkSheetPdf']);
