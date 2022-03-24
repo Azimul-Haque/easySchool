@@ -95,7 +95,7 @@
         $total_scout_fee = 0;
         $total_develoment_donation = 0;
         $total_other_fee = 0;
-        dd($collectiongroup);
+        // dd($collectiongroup);
       @endphp
       @foreach ($collectiongroup as $datekey => $datecollections)
         @foreach ($datecollections as $classkey => $classcollections)
@@ -108,7 +108,7 @@
                     <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
                     <td align="center">{{ $sectioncollections[0]->class }}</td>
                     <td align="center">{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
-                    <td>{{ $sectioncollections->first()->class }}</td>
+                    <td>{{ $sectioncollections[0]->receipt_no }}</td>
                     <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
