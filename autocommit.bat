@@ -1,4 +1,4 @@
-set INTERVAL=10
+set INTERVAL=30
 :loop
 
 git commit -a -m "Commit %date% %time% %random%"
