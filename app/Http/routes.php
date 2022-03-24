@@ -132,11 +132,11 @@ Route::group(['middleware' => ['auth']], function() {
 	// Collection Management
 	// Collection Management
 });
-// just to avoid the Auth Middleware
+// just to avoid the Auth Middleware 
 Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetpdf','uses'=>'ExamController@getSingleMarkSheetPdf']);
 
 // public gets, posts and so on
-Route::resource('admissions','AdmissionController');
+Route::resource('admissions','AdmissionController'); 
 Route::get('admission/form/apply/{id}',['as'=>'admissions.apply','uses'=>'AdmissionController@apply']);
 Route::get('admission/form/search',['as'=>'admissions.searchpayment','uses'=>'AdmissionController@searchPaymentPage']);
 Route::get('admission/form/payment/{application_id}',['as'=>'admissions.getpayment','uses'=>'AdmissionController@getPaymentPage']);
@@ -150,8 +150,6 @@ Route::get('admission/form/retrieve/{dob}/{contact}',['as'=>'admissions.retrieve
 Route::get('schools/getdistricts/api',['as'=>'schools.getdistricts','uses'=>'SchoolController@getDistrictsAPI']);
 Route::get('schools/getupazillas/api/{district}',['as'=>'schools.getupazillas','uses'=>'SchoolController@getUpazillasAPI']);
 Route::get('schools/getschools/api/{district}/{upazilla}',['as'=>'schools.getschools','uses'=>'SchoolController@getSchoolsAPI']);
-
-
 
 // pdf generators
 Route::get('admission/form/copy/pdf/{application_id}',['as'=>'admissions.pdfapplicantscopy','uses'=>'AdmissionController@pdfApplicantsCopy']);
