@@ -108,7 +108,7 @@
                     <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
                     <td align="center">{{ $sectioncollections[0]->class }}</td>
                     <td align="center">{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
-                    <td></td>
+                    <td>{{ $sectioncollections->first()->class }}</td>
                     <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
