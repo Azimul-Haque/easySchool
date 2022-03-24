@@ -102,7 +102,7 @@
         </div>
       </div>
       <div class="col-md-3">
-          <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> তালিকা দেখুন</button>
+          <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-download"></i> ডাউনলোড করুন</button>
           {{-- @if($feecollections == true)
             <a href="{{ Request::url() . '/pdf' }}" class="btn btn-success btn-sm" style="margin-left: 10px;" id=""><i class="fa fa-fw fa-download"></i> পিডিএফ</a>
           @endif --}}
