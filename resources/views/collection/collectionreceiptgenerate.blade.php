@@ -103,14 +103,154 @@
       </div>
       <div class="col-md-3">
           <button class="btn btn-primary btn-sm" id="search_students_btn"><i class="fa fa-fw fa-search"></i> তালিকা দেখুন</button>
-          @if($feecollections == true)
+          {{-- @if($feecollections == true)
             <a href="{{ Request::url() . '/pdf' }}" class="btn btn-success btn-sm" style="margin-left: 10px;" id=""><i class="fa fa-fw fa-download"></i> পিডিএফ</a>
-          @endif
+          @endif --}}
       </div>
     </div>
   @endpermission
 @stop
 
 @section('js')
+<script type="text/javascript" src="{{ asset('js/bootstrap-datepicker.min.js') }}"></script>
+<script type="text/javascript">
+  $(function(){
+   $('a[title]').tooltip();
+   $('button[title]').tooltip();
+  });
+</script>
+<script type="text/javascript">
+  $(function() {
+    $("#from_date").datepicker({
+      format: 'dd-M-yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
+    $("#to_date").datepicker({
+      format: 'dd-M-yyyy',
+      todayHighlight: true,
+      autoclose: true,
+    });
+  });
+</script>
+<script type="text/javascript">
+    $(function () {
+      $('#example1').DataTable()
+      $('#datatable-students').DataTable({
+        'paging'      : true,
+        'pageLength'  : 100,
+        'lengthChange': true,
+        'searching'   : true,
+        'ordering'    : true,
+        'info'        : true,
+        'autoWidth'   : true,
+        'order': [[ 4, "asc" ]],
+           // columnDefs: [
+           //    { targets: [5], type: 'date'}
+           // ]
+          'language': {
+             "lengthMenu": "প্রতি পৃষ্ঠায় _MENU_ টি রেকর্ড প্রদর্শন করুন",
+             "zeroRecords": "কোন তথ্য পাওয়া যায়নি!",
+             "info": "পৃষ্ঠা নম্বরঃ _PAGE_, মোট পৃষ্ঠাঃ _PAGES_ টি",
+             "infoEmpty": "তথ্য পাওয়া যায়নি",
+             "infoFiltered": "(মোট _MAX_ সংখ্যক রেকর্ড থেকে খুঁজে বের করা হয়েছে)",
+             "search":         "খুঁজুনঃ",
+             "paginate": {
+                 "first":      "প্রথম পাতা",
+                 "last":       "শেষ পাতা",
+                 "next":       "পরের পাতা",
+                 "previous":   "আগের পাতা"
+             },
+         }
+      })
+    })
+      $(document).ready(function() {
+        $('#search_students_btn').click(function() {
+        @if(Auth::user()->school->sections > 0)
+            if($('#search_class').val() && $('#search_session').val() && $('#from_date').val() && $('#to_date').val()) 
+            {
+              if($('#search_class').val() == "All_Classes") {
+                window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+              } else {
+                if($('#search_session').val()) {
+                  window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+                } else {
+                  toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
+                }
+              }
+            } else {
+                toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
+            }
+        @else
+          window.location.href = window.location.protocol + "//" + window.location.host + "/collection/list/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section/"+$('#from_date').val()+"/"+$('#to_date').val();
+        @endif
+        })
 
+        $('#showCheckbox').click(function() {
+            $('td:nth-child(1)').toggleClass('hiddenCheckbox');
+            $('th:nth-child(1)').toggleClass('hiddenCheckbox');
+            $('#hiddenFinalSaveBtn').toggleClass('hiddenFinalSaveBtn');
+        });
+        $('#hiddenFinalSaveBtn').click(function() {
+            var checked = [];
+                $("input[name='student_check_ids[]']:checked").each(function ()
+                {
+                    checked.push($(this).val());
+                });
+                $('#student_ids').val(checked);
+                if($('#student_ids').val() == '') {
+                    toastr.warning('অন্তত একজন শিক্ষার্থী নির্বাচন করুন!', 'Warning').css('width','400px');
+					
+                    setTimeout(function() {
+            $('#promoteModal').modal('hide');
+          }, 1000);
+                }
+                console.log(checked);
+        });
+
+      })
+</script>
+<script type="text/javascript">
+  $('#search_class').on('change', function() {
+    $('#search_section').prop('disabled', true);
+    $('#search_section').append('<option value="" selected disabled>লোড হচ্ছে...</option>');
+
+    if($('#search_class').val() == 'All_Classes') {
+      // All_Classes Case
+      // All_Classes Case
+      $('#search_section_div').hide();
+    } else if($('#search_class').val() < 9) {
+      $('#search_section_div').show();
+      $('#search_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+      $('#search_section').append('<option value="'+1+'">A</option>');
+      $('#search_section').append('<option value="'+2+'">B</option>');
+      $('#search_section').append('<option value="'+3+'">C</option>');
+    } else {
+      $('#search_section_div').show();
+      $('#search_section')
+            .find('option')
+            .remove()
+            .end()
+            .prop('disabled', false)
+            .append('<option value="" selected disabled>শাখা নির্ধারণ করুন</option>');
+
+      @if(Auth::user()->school->section_type == 1)
+        $('#search_section').append('<option value="'+1+'">A</option>');
+        $('#search_section').append('<option value="'+2+'">B</option>');
+        $('#search_section').append('<option value="'+3+'">C</option>');
+      @elseif(Auth::user()->school->section_type == 2)
+        $('#search_section').append('<option value="'+1+'">SCIENCE</option>');
+        $('#search_section').append('<option value="'+2+'">ARTS</option>');
+        $('#search_section').append('<option value="'+3+'">COMMERCE</option>');
+        $('#search_section').append('<option value="'+4+'">VOCATIONAL</option>');
+        $('#search_section').append('<option value="'+5+'">TECHNICAL</option>');
+      @endif
+    }
+  });
+</script>
 @stop
