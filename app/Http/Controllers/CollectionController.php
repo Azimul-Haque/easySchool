@@ -667,7 +667,7 @@ class CollectionController extends Controller
                                             ->whereBetween('collection_date', [$from, $to])
                                             ->orderBy('collection_date','DESC')->get();
             
-            dd($feecollections);
+            // dd($feecollections);
             // if($class != 'All_Classes') {
             //     $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
             //                                      ->where('session',$session)
@@ -695,7 +695,7 @@ class CollectionController extends Controller
         }
         // dd($used_student_ids);
 
-        $pdf = PDF::loadView('collection.pdf.collectionreceipt', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$session, $class, $section, $date_from, $date_to]], ['mode' => 'utf-8', 'format' => 'A4']);
+        $pdf = PDF::loadView('collection.pdf.collectionreceiptgenerate', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$session, $class, $section, $date_from, $date_to]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = 'Collection_List_Report' . '.pdf';
         return $pdf->stream($fileName); // stream, download
     }
