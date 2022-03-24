@@ -1,2 +1,2 @@
-git commit -a -m --date=local
+git commit -a -m "Release at $(date)"
 git push
