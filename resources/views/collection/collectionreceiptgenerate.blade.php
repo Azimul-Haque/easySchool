@@ -170,10 +170,10 @@
             if($('#search_class').val() && $('#search_session').val() && $('#from_date').val() && $('#to_date').val()) 
             {
               if($('#search_class').val() == "All_Classes") {
-                window.location.href = window.location.protocol + "//" + window.location.host + "/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+                window.location.href = window.location.protocol + "//" + window.location.host + "/collection/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
               } else {
                 if($('#search_session').val()) {
-                  window.location.href = window.location.protocol + "//" + window.location.host + "/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
+                  window.location.href = window.location.protocol + "//" + window.location.host + "/collection/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/"+$('#search_section').val()+"/"+$('#from_date').val()+"/"+$('#to_date').val();
                 } else {
                   toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
                 }
@@ -182,7 +182,7 @@
                 toastr.warning('শ্রেণি, শাখা, শিক্ষাবর্ষ এবং তারিখসহ সবগুলো সিলেক্ট করুন!');
             }
         @else
-          window.location.href = window.location.protocol + "//" + window.location.host + "/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section/"+$('#from_date').val()+"/"+$('#to_date').val();
+          window.location.href = window.location.protocol + "//" + window.location.host + "/collection/receipt/generate/"+$('#search_session').val()+"/"+$('#search_class').val()+"/No_Section/"+$('#from_date').val()+"/"+$('#to_date').val();
         @endif
         })
 
