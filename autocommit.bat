@@ -1,3 +1,3 @@
 set message=date /T
-git commit -a -m "%message%"
+git commit -a -m "%date% %time%"
 git push
