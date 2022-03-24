@@ -132,6 +132,7 @@ Route::group(['middleware' => ['auth']], function() {
 	// Collection Management
 	// Collection Management
 
+	
 });
 // just to avoid the Auth Middleware 
 Route::get('exam/marksheets/generate/single/pdf/',['as'=>'exam.getsinglemarksheetpdf','uses'=>'ExamController@getSingleMarkSheetPdf']);
