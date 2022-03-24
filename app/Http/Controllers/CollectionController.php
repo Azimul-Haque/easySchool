@@ -697,6 +697,7 @@ class CollectionController extends Controller
 
         $pdf = PDF::loadView('collection.pdf.collectionreceiptgenerate', ['feecollections' => $feecollections, 'usedstudentids' => $used_student_ids], ['data' => [$session, $class, $section, $date_from, $date_to]], ['mode' => 'utf-8', 'format' => 'A4']);
         $fileName = 'Collection_List_Report' . '.pdf';
+        $pdf->max_colH_correction = .5; 
         return $pdf->stream($fileName); // stream, download
     }
 }
