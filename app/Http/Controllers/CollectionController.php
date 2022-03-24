@@ -645,4 +645,17 @@ class CollectionController extends Controller
                     ->withTodatesearch(null)
                     ->withSectorsearch(null);
     }
+    
+    public function collectionReceiptGeneratePDF($session, $class, $section, $date_from, $date_to)
+    {
+        return view('collection.collectionreceiptgenerate')
+                    ->withSessionsearch(null)
+                    ->withClasssearch(null)
+                    ->withSectionsearch(null)
+                    ->withFeecollections(null)
+                    ->withUsedstudentids(null)
+                    ->withFromdatesearch(null)
+                    ->withTodatesearch(null)
+                    ->withSectorsearch(null);
+    }
 }
