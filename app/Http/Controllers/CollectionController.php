@@ -666,6 +666,8 @@ class CollectionController extends Controller
                                             ->where('session',$session)
                                             ->whereBetween('collection_date', [$from, $to])
                                             ->orderBy('collection_date','DESC')->get();
+            
+            dd($feecollections);
             // if($class != 'All_Classes') {
             //     $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
             //                                      ->where('session',$session)
