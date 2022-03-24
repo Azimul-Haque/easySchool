@@ -1,2 +1,3 @@
-git commit -a -m "$msg"
+set message=Hello World
+git commit -a -m "%message%"
 git push
