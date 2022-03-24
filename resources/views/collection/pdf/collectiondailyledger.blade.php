@@ -108,6 +108,7 @@
                     <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
                     <td align="center">{{ $sectioncollections[0]->class }}</td>
                     <td align="center">{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
+                    <td></td>
                     <td align="center">
                         @php
                             $total_single_section_single_sector_fee = 0;
@@ -281,7 +282,7 @@
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="4" align="right">মোট (৳)</td>
+        <td colspan="5" align="right">মোট (৳)</td>
         <th>{{ $total_admission_session_fee }}</th>
         <th>{{ $total_annual_sports_cultural }}</th>
         <th>{{ $total_last_year_due }}</th>
