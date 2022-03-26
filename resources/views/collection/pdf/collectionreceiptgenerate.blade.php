@@ -123,7 +123,7 @@
                                     <tr>
                                         <td align="center">১</td>
                                         <td>ভর্তি ফি/ সেশন চাজ</td>
-                                        <td>
+                                        <td align="center">
                                             @php
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
