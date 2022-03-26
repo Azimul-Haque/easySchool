@@ -108,6 +108,22 @@
                                     <td>১</td>
                                     <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
                                 </tr>
+                                <tr>
+                                    <td>১</td>
+                                    <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
+                                </tr>
+                                <tr>
+                                    <td>১</td>
+                                    <td>স্কাউট/ গার্লস গাইড ফি</td>
+                                </tr>
+                                <tr>
+                                    <td>১</td>
+                                    <td>উন্নয়ন/ দান</td>
+                                </tr>
+                                <tr>
+                                    <td>১১</td>
+                                    <td>বিবিধ</td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
@@ -119,19 +135,7 @@
         </tr>
     </table>
     <table class="maintable" id="" style="">
-        {{-- datatable-students --}}
-        <thead>
-            <tr>
-                <th width="5%" style="font-size: 11px;"></th>
-                <th width="5%" style="font-size: 11px;">	</th>
-                <th width="5%" style="font-size: 10.5px;"></th>
-                <th width="5%" style="font-size: 10.5px;">প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</th>
-                <th width="5%" style="font-size: 11px;">স্কাউট/ গার্লস গাইড ফি</th>
-                <th width="5%" style="font-size: 11px;">উন্নয়ন/ দান</th>
-                <th width="5%" style="font-size: 11px;">বিবিধ</th> 
-                <th width="5%">মোট (৳)</th>--}}
-            </tr>
-        </thead>
+        
         <tbody>
           @php
             $count_key = 0;
