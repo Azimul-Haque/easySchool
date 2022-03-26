@@ -28,6 +28,12 @@
   </style>
 </head>
 <body>
+    <table class="maintable">
+        <tr>
+            <td>1</td>
+            <td>2</td>
+        </tr>
+    </table>
     <table>
         <tr>
             <td>
