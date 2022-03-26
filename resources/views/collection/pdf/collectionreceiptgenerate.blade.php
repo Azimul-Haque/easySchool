@@ -72,9 +72,9 @@
                             </table>
                         </td>
                     </tr>
-                    <tr style="margin-top: -10px;">
+                    <tr>
                         <td style="padding: 10px;">
-                            <table class="maintable">
+                            <table class="maintable" style="margin-top: -10px;">
                                 <tr>
                                     <td colspan="3">STUDENT NAME:</td>
                                 </tr>
