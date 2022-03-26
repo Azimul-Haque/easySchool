@@ -280,7 +280,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'scout_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -299,7 +299,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'develoment_donation')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -318,7 +318,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'other_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
