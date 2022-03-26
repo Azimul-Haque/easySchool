@@ -49,7 +49,7 @@
         $total_scout_fee = 0;
         $total_develoment_donation = 0;
         $total_other_fee = 0;
-        dd($collectiongroup);
+        // dd($collectiongroup);
     @endphp
     @foreach ($collectiongroup as $datekey => $datecollections)
         @foreach ($datecollections as $studentidkey => $studentidcollections)
@@ -125,7 +125,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">STUDENT ID:</td>
-                                        <td>DATE: {{ date('d-m-y', strtotime($datekey)) }}</td>
+                                        <td>DATE: {{ date('d-m-Y', strtotime($datekey)) }}</td>
                                     </tr>
                                 </table>
                             </td>
