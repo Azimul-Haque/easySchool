@@ -49,7 +49,7 @@
         $total_scout_fee = 0;
         $total_develoment_donation = 0;
         $total_other_fee = 0;
-        // dd($collectiongroup);
+        dd($collectiongroup);
     @endphp
     @foreach ($collectiongroup as $datekey => $datecollections)
         @foreach ($datecollections as $studentidkey => $studentidcollections)
