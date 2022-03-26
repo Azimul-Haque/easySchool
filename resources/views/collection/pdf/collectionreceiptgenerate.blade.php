@@ -395,7 +395,6 @@
                                                 @if ($collection->fee_attribute == 'admission_session_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -414,7 +413,6 @@
                                                 @if ($collection->fee_attribute == 'annual_sports_cultural')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -433,7 +431,6 @@
                                                 @if ($collection->fee_attribute == 'last_year_due')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -452,7 +449,6 @@
                                                 @if ($collection->fee_attribute == 'exam_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -471,7 +467,6 @@
                                                 @if ($collection->fee_attribute == 'full_half_free_form')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -490,7 +485,6 @@
                                                 @if ($collection->fee_attribute == '3_6_8_12_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -509,7 +503,6 @@
                                                 @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -528,7 +521,6 @@
                                                 @if ($collection->fee_attribute == 'certificate_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -547,7 +539,6 @@
                                                 @if ($collection->fee_attribute == 'scout_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -566,7 +557,6 @@
                                                 @if ($collection->fee_attribute == 'develoment_donation')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
@@ -585,7 +575,6 @@
                                                 @if ($collection->fee_attribute == 'other_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
                                                     $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
                                                 @endphp
                                                 @endif
