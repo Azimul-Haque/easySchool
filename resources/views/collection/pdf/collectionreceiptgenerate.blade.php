@@ -51,488 +51,189 @@
         $total_other_fee = 0;
         // dd($collectiongroup);
     @endphp
-    @foreach ($collectiongroup as $collection)
-        <table>
-            <tr>
-                <td width="50%" style="border-right: 1px dashed black;">
-                    <table style="margin-top: 10px;">
-                        <tr>
-                            <td>
-                                <p style="text-align: center; font-size: 18px;">
-                                    <center>
-                                        <b>{{ Auth::user()->school->name_bangla }}</b><br/>
-                                        <span style="font-size: 14px;">
-                                            {{-- adhoc --}}
-                                            {{-- adhoc --}}
-                                            ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
-                                            {{-- adhoc --}}
-                                            {{-- adhoc --}}
-                                        </span><br/>
-                                        <span style="font-size: 15px;">
-                                            বেতন ও অন্যান্য ফি আদায়ের রশিদ - অফিস কপি
-                                        </span><br/>
-                                    </center>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="padding-right: 15px;">রশিদ নং - </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px;">
-                                <table class="maintable" style="margin-top: -15px;">
-                                    <tr>
-                                        <td colspan="3">STUDENT NAME:</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">MOBILE NO:</td>
-                                    </tr>
-                                    <tr>
-                                        <td>CLASS:</td>
-                                        <td>SECTION:</td>
-                                        <td>ROLL NO:</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">STUDENT ID:</td>
-                                        <td>DATE:</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px;">
-                                <table class="maintable" style="margin-top: -15px;">
-                                    <tr>
-                                        <th width="10%">ক্রঃ নং</th>
-                                        <th width="75%">বিবরণ</th>
-                                        <th width="15%">টাকা (৳)</th>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১</td>
-                                        <td>ভর্তি ফি/ সেশন চাজ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">২</td>
-                                        <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৩</td>
-                                        <td>গত বছরের বকেয়া</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৪</td>
-                                        <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৫</td>
-                                        <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৬</td>
-                                        <td>৩/৬/৯/১২ মাসের বেতন</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৭</td>
-                                        <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৮</td>
-                                        <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৯</td>
-                                        <td>স্কাউট/ গার্লস গাইড ফি</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১০</td>
-                                        <td>উন্নয়ন/ দান</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১১</td>
-                                        <td>বিবিধ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" colspan="2">মোট = </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">কথায়ঃ</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0px 15px 0px 15px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
-                        </tr>
-                    </table>
-                </td>
-                <td width="50%">
-                    <table style="margin-top: 10px;">
-                        <tr>
-                            <td>
-                                <p style="text-align: center; font-size: 18px;">
-                                    <center>
-                                        <b>{{ Auth::user()->school->name_bangla }}</b><br/>
-                                        <span style="font-size: 14px;">
-                                            {{-- adhoc --}}
-                                            {{-- adhoc --}}
-                                            ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
-                                            {{-- adhoc --}}
-                                            {{-- adhoc --}}
-                                        </span><br/>
-                                        <span style="font-size: 15px;">
-                                            বেতন ও অন্যান্য ফি আদায়ের রশিদ - শিক্ষার্থী কপি
-                                        </span><br/>
-                                    </center>
-                                </p>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td align="right" style="padding-right: 15px;">রশিদ নং - </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px;">
-                                <table class="maintable" style="margin-top: -15px;">
-                                    <tr>
-                                        <td colspan="3">STUDENT NAME:</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">MOBILE NO:</td>
-                                    </tr>
-                                    <tr>
-                                        <td>CLASS:</td>
-                                        <td>SECTION:</td>
-                                        <td>ROLL NO:</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="2">STUDENT ID:</td>
-                                        <td>DATE:</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 15px;">
-                                <table class="maintable" style="margin-top: -15px;">
-                                    <tr>
-                                        <th width="10%">ক্রঃ নং</th>
-                                        <th width="75%">বিবরণ</th>
-                                        <th width="15%">টাকা (৳)</th>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১</td>
-                                        <td>ভর্তি ফি/ সেশন চাজ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">২</td>
-                                        <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৩</td>
-                                        <td>গত বছরের বকেয়া</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৪</td>
-                                        <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৫</td>
-                                        <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৬</td>
-                                        <td>৩/৬/৯/১২ মাসের বেতন</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৭</td>
-                                        <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৮</td>
-                                        <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">৯</td>
-                                        <td>স্কাউট/ গার্লস গাইড ফি</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১০</td>
-                                        <td>উন্নয়ন/ দান</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="center">১১</td>
-                                        <td>বিবিধ</td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td align="right" colspan="2">মোট = </td>
-                                        <td></td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">কথায়ঃ</td>
-                                    </tr>
-                                </table>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td style="padding: 0px 15px 0px 15px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
-                        </tr>
-                    </table>
-                </td>
-            </tr>
-        </table>
-    @endforeach
-    
-    <table class="maintable" id="" style="">
-        
-        <tbody>
-          @php
-            $count_key = 0;
-            $collectiongroup = [];
-            foreach ($usedstudentids as $studentid) {
-              foreach ($feecollections as $collection) {
-                if($studentid->collection_date == $collection->collection_date && $studentid->class == $collection->class && $studentid->section == $collection->section) {
-                    $collectiongroup[$studentid->collection_date][$studentid->class][$studentid->section][] = $collection;
-                }
-              } 
-            }
-            $total_admission_session_fee = 0;
-            $total_annual_sports_cultural = 0;
-            $total_last_year_due = 0;
-            $total_exam_fee = 0;
-            $total_full_half_free_form = 0;
-            $total_3_6_8_12_fee = 0;
-            $total_jsc_ssc_form_fee = 0;
-            $total_certificate_fee = 0;
-            $total_scout_fee = 0;
-            $total_develoment_donation = 0;
-            $total_other_fee = 0;
-            // dd($collectiongroup);
-          @endphp
-          @foreach ($collectiongroup as $datekey => $datecollections)
-            @foreach ($datecollections as $classkey => $classcollections)
-                @foreach ($classcollections as $sectionkey => $sectioncollections)
-                    @php
-                        $total_single_section_fee = 0;
-                    @endphp
-                    <tr>
-                        <td align="center">{{ $count_key = $count_key + 1 }}</td>
-                        <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
-                        <td align="center">{{ $sectioncollections[0]->class }}</td>
-                        <td align="center">{{ english_section_short(Auth::user()->school->section_type, $sectioncollections[0]->class, $sectioncollections[0]->section) }}</td>
-                        <td align="center">{{ $sectioncollections[0]->receipt_no }} হতে {{ $sectioncollections[count($sectioncollections)-1]->receipt_no }}</td>
-                        {{-- <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'admission_session_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'annual_sports_cultural')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_annual_sports_cultural = $total_annual_sports_cultural + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'last_year_due')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_last_year_due = $total_last_year_due + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'exam_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_exam_fee = $total_exam_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'full_half_free_form')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_full_half_free_form = $total_full_half_free_form + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == '3_6_8_12_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_3_6_8_12_fee = $total_3_6_8_12_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_jsc_ssc_form_fee = $total_jsc_ssc_form_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'certificate_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_certificate_fee = $total_certificate_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'scout_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_scout_fee = $total_scout_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'develoment_donation')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_develoment_donation = $total_develoment_donation + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td> 
-                        <td align="center">
-                            @php
-                                $total_single_section_single_sector_fee = 0;
-                            @endphp
-                            @foreach ($sectioncollections as $collection)
-                                @if ($collection->fee_attribute == 'other_fee')
-                                    @php
-                                        $total_single_section_single_sector_fee = $total_single_section_single_sector_fee + $collection->fee_value;
-                                        $total_single_section_fee = $total_single_section_fee + $collection->fee_value;
-                                        $total_other_fee = $total_other_fee + $collection->fee_value;
-                                    @endphp
-                                @endif
-                            @endforeach
-                            {{ $total_single_section_single_sector_fee == 0 ? '' : $total_single_section_single_sector_fee }}
-                        </td>
-                        <td align="center"><b>{{ $total_single_section_fee }}</b></td>--}}
-                    </tr>                
-                @endforeach            
-            @endforeach         
-          @endforeach            
-        </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5" align="right">মোট (৳)</td>
-            {{-- <th>{{ $total_admission_session_fee }}</th>
-            <th>{{ $total_annual_sports_cultural }}</th>
-            <th>{{ $total_last_year_due }}</th>
-            <th>{{ $total_exam_fee }}</th>
-            <th>{{ $total_full_half_free_form }}</th>
-            <th>{{ $total_3_6_8_12_fee }}</th>
-            <th>{{ $total_jsc_ssc_form_fee }}</th>
-            <th>{{ $total_certificate_fee }}</th>
-            <th>{{ $total_scout_fee }}</th>
-            <th>{{ $total_develoment_donation }}</th>
-            <th>{{ $total_other_fee }}</th>
-            <th align="center">{{ $total_admission_session_fee + $total_annual_sports_cultural + $total_last_year_due + $total_exam_fee + $total_full_half_free_form + $total_3_6_8_12_fee + $total_jsc_ssc_form_fee + $total_certificate_fee + $total_scout_fee + $total_develoment_donation + $total_other_fee }}</th> --}}
-          </tr>
-        </tfoot>
-    </table>
-  
-
+    @foreach ($collectiongroup as $datekey => $datecollections)
+        @foreach ($datecollections as $studentidkey => $studentidcollections)
+        @php
+            $total_single_student_fee = 0;
+        @endphp
+        <tr>
+            <td align="center">{{ $count_key = $count_key + 1 }}</td>
+            <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
+            <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
+            <td align="center">{{ $studentidkey }}</td>
+            <td style="font-size: 12px;">{{ $studentidcollections[0]->student->name }}</td>
+            <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'admission_session_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'annual_sports_cultural')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_annual_sports_cultural = $total_annual_sports_cultural + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'last_year_due')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_last_year_due = $total_last_year_due + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'exam_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_exam_fee = $total_exam_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'full_half_free_form')
+                @php
+                $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                $total_full_half_free_form = $total_full_half_free_form + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == '3_6_8_12_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_3_6_8_12_fee = $total_3_6_8_12_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_jsc_ssc_form_fee = $total_jsc_ssc_form_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'certificate_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_certificate_fee = $total_certificate_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'scout_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_scout_fee = $total_scout_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'develoment_donation')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_develoment_donation = $total_develoment_donation + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            @php
+                $total_single_student_single_sector_fee = 0;
+            @endphp
+            @foreach ($studentidcollections as $collection)
+                @if ($collection->fee_attribute == 'other_fee')
+                @php
+                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                    $total_other_fee = $total_other_fee + $collection->fee_value;
+                @endphp
+                @endif
+            @endforeach
+            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+            </td>
+            <td align="center">
+            <b>{{ $total_single_student_fee }}</b>
+            </td>
+        </tr>                
+        @endforeach            
+    @endforeach          
 <htmlpagefooter name="page-footer">
     {{-- <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small> --}}
 </htmlpagefooter>
