@@ -28,10 +28,10 @@
   </style>
 </head>
 <body>
-    <table class="maintable">
+    <table>
         <tr>
             <td>
-                <table>
+                <table class="maintable">
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
@@ -54,7 +54,7 @@
                 </table>
             </td>
             <td>
-                <table>
+                <table class="maintable">
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
