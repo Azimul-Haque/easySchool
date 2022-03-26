@@ -33,9 +33,9 @@
         $collectiongroup = [];
         foreach ($usedstudentids as $studentid) {
             foreach ($feecollections as $collection) {
-            if($studentid->collection_date == $collection->collection_date && $studentid->class == $collection->class && $studentid->section == $collection->section) {
-                $collectiongroup[$studentid->collection_date][$studentid->class][$studentid->section][] = $collection;
-            }
+                if($studentid->collection_date == $collection->collection_date && $studentid->class == $collection->class && $studentid->section == $collection->section) {
+                    $collectiongroup[$studentid->collection_date][$studentid->class][$studentid->section][] = $collection;
+                }
             } 
         }
         $total_admission_session_fee = 0;
