@@ -168,6 +168,7 @@ return [
         niklasravnsborg\LaravelPdf\PdfServiceProvider::class,
         Maatwebsite\Excel\ExcelServiceProvider::class,
         Cornford\Googlmapper\MapperServiceProvider::class,
+        Rakibhstu\Banglanumber\NumberToBanglaServiceProvider::class,
 
     ],
 
