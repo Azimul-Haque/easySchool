@@ -353,25 +353,25 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="padding-right: 15px;">রশিদ নং - </td>
+                            <td align="right" style="padding-right: 15px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 15px;">
                                 <table class="maintable" style="margin-top: -15px;">
                                     <tr>
-                                        <td colspan="3">STUDENT NAME:</td>
+                                        <td colspan="3">STUDENT NAME: {{ $studentidcollections[0]->student->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">MOBILE NO:</td>
+                                        <td colspan="3">MOBILE NO: {{ $studentidcollections[0]->student->contact }}</td>
                                     </tr>
                                     <tr>
-                                        <td>CLASS:</td>
-                                        <td>SECTION:</td>
-                                        <td>ROLL NO:</td>
+                                        <td>CLASS: {{ $studentidcollections[0]->student->class }}</td>
+                                        <td>SECTION: {{ $studentidcollections[0]->student->section }}</td>
+                                        <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">STUDENT ID:</td>
-                                        <td>DATE:</td>
+                                        <td colspan="2">STUDENT ID: {{ $studentidkey }}</td>
+                                        <td>DATE: {{ date('d-m-Y', strtotime($datekey)) }}</td>
                                     </tr>
                                 </table>
                             </td>
@@ -387,70 +387,224 @@
                                     <tr>
                                         <td align="center">১</td>
                                         <td>ভর্তি ফি/ সেশন চাজ</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">২</td>
                                         <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'annual_sports_cultural')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৩</td>
                                         <td>গত বছরের বকেয়া</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'last_year_due')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৪</td>
                                         <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'exam_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৫</td>
                                         <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'full_half_free_form')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৬</td>
                                         <td>৩/৬/৯/১২ মাসের বেতন</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == '3_6_8_12_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৭</td>
                                         <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৮</td>
                                         <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'certificate_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">৯</td>
                                         <td>স্কাউট/ গার্লস গাইড ফি</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'scout_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">১০</td>
                                         <td>উন্নয়ন/ দান</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'develoment_donation')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">১১</td>
                                         <td>বিবিধ</td>
-                                        <td></td>
+                                        <td align="center">
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'other_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
-                                        <td align="right" colspan="2">মোট = </td>
-                                        <td></td>
+                                        <td align="right" colspan="2">মোট =</td>
+                                        <td align="center">{{ $total_single_student_fee }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">কথায়ঃ</td>
+                                        <td colspan="3">কথায়ঃ {{ text_bn_num($total_single_student_fee) }} টাকা মাত্র</td>
                                     </tr>
                                 </table>
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 0px 15px 0px 15px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
+                            <td style="padding: 0px 15px 0px 15px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }}</td>
                         </tr>
                     </table>
                 </td>
