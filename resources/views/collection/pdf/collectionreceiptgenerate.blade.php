@@ -83,7 +83,12 @@
                                 <tr>
                                     <td>১</td>
                                     <td>ভর্তি ফি/ সেশন চাজ</td>
-                                    <td>টাকা (৳)</td>
+                                    <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
+                                    <td>গত বছরের বকেয়া</td>
+                                    <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
+                                    <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
+                                    <td>৩/৬/৯/১২ মাসের বেতন</td>
+                                    <td>৩/৬/৯/১২ মাসের বেতন</td>
                                 </tr>
                             </table>
                         </td>
@@ -99,12 +104,8 @@
         {{-- datatable-students --}}
         <thead>
             <tr>
-                {{-- <th width="5%" style="font-size: 11px;"></th>
-                <th width="5%" style="font-size: 11px;">বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</th>
-                <th width="5%" style="font-size: 11px;">গত বছরের বকেয়া</th>
-                <th width="5%" style="font-size: 10.5px;">পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</th>
-                <th width="5%" style="font-size: 11px;">ফুলফ্রি/ হাফফ্রি ফরম</th>
-                <th width="5%" style="font-size: 11px;">৩/৬/৯/১২ মাসের বেতন	</th>
+                <th width="5%" style="font-size: 11px;"></th>
+                <th width="5%" style="font-size: 11px;">	</th>
                 <th width="5%" style="font-size: 10.5px;">জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</th>
                 <th width="5%" style="font-size: 10.5px;">প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</th>
                 <th width="5%" style="font-size: 11px;">স্কাউট/ গার্লস গাইড ফি</th>
