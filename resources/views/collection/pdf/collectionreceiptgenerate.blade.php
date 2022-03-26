@@ -77,12 +77,13 @@
                             <table class="maintable" style="margin-top: -10px;">
                                 <tr>
                                     <td>ক্রঃ নংঃ</td>
-                                    <td>SECTION:</td>
-                                    <td>ROLL NO:</td>
+                                    <td>বিবরণ</td>
+                                    <td>টাকা (৳)</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">STUDENT ID:</td>
-                                    <td>DATE:</td>
+                                    <td>ক্রঃ নংঃ</td>
+                                    <td>বিবরণ</td>
+                                    <td>টাকা (৳)</td>
                                 </tr>
                             </table>
                         </td>
