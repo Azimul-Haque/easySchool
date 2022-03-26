@@ -52,11 +52,11 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="right">রশিদ নং - </td>
+                        <td align="right" style="padding-right: 10px;">রশিদ নং - </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
-                            <table class="maintable">
+                            <table class="maintable" style="margin-top: -10px;">
                                 <tr>
                                     <td colspan="3">STUDENT NAME:</td>
                                 </tr>
