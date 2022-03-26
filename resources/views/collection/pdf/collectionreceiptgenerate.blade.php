@@ -323,7 +323,7 @@
                                         <td align="center">{{ $total_single_student_fee }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">কথায়ঃ {{ text_bn_num($total_single_student_fee) }}</td>
+                                        <td colspan="3">কথায়ঃ {{ $total_single_student_fee > 0 }} ? {{ text_bn_num($total_single_student_fee) }} টাকা মাত্র : ''</td>
                                     </tr>
                                 </table>
                             </td>
