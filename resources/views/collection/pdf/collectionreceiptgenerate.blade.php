@@ -52,6 +52,11 @@
                         </td>
                     </tr>
                     <tr>
+                        <tr>
+                            <td colspan="3">রশিদ নং - </td>
+                        </tr>
+                    </tr>
+                    <tr>
                         <td style="padding: 10px;">
                             <table class="maintable">
                                 <tr>
