@@ -81,57 +81,57 @@
                                     <th width="15%">টাকা (৳)</th>
                                 </tr>
                                 <tr>
-                                    <td>১</td>
+                                    <td align="center">১</td>
                                     <td>ভর্তি ফি/ সেশন চাজ</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>২</td>
+                                    <td align="center">২</td>
                                     <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৩</td>
+                                    <td align="center">৩</td>
                                     <td>গত বছরের বকেয়া</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৪</td>
+                                    <td align="center">৪</td>
                                     <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৫</td>
+                                    <td align="center">৫</td>
                                     <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৬</td>
+                                    <td align="center">৬</td>
                                     <td>৩/৬/৯/১২ মাসের বেতন</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৭</td>
+                                    <td align="center">৭</td>
                                     <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৮</td>
+                                    <td align="center">৮</td>
                                     <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>৯</td>
+                                    <td align="center">৯</td>
                                     <td>স্কাউট/ গার্লস গাইড ফি</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>১০</td>
+                                    <td align="center">১০</td>
                                     <td>উন্নয়ন/ দান</td>
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td>১১</td>
+                                    <td align="center">১১</td>
                                     <td>বিবিধ</td>
                                     <td></td>
                                 </tr>
