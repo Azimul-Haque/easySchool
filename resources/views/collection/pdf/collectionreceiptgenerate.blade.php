@@ -28,7 +28,6 @@
   </style>
 </head>
 <body>
-  <columns column-count="2"  column-gap="0" />
     <table>
         <tr>
             <td>
@@ -45,13 +44,6 @@
                 </center>
                 </p>
             </td>
-        </tr>
-    </table>
-    <table>
-        <tr>
-            <th>asd</th>
-            <th>asd</th>
-            <th>asd</th>
         </tr>
     </table>
     <table class="maintable" id="" style="">
@@ -303,9 +295,6 @@
           </tr>
         </tfoot>
     </table>
-  </columns>
-  
-
   
 
 <htmlpagefooter name="page-footer">
