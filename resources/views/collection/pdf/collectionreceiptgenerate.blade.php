@@ -31,7 +31,7 @@
     <table>
         <tr>
             <td>
-                <table class="maintable">
+                <table>
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
@@ -50,6 +50,9 @@
                                 </center>
                             </p>
                         </td>
+                    </tr>
+                    <tr>
+                        
                     </tr>
                 </table>
             </td>
