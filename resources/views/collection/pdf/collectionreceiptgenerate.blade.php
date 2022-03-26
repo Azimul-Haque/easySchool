@@ -31,6 +31,7 @@
   <columns column-count="2"  column-gap="0" />
     <table>
         <tr>
+            
             <td>
                 <p style="text-align: center; font-size: 20px;">
                 <center>
