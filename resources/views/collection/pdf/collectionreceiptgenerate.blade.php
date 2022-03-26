@@ -116,9 +116,9 @@
                                         <td colspan="3">MOBILE NO: {{ $studentidcollections[0]->student->contact }}</td>
                                     </tr>
                                     <tr>
-                                        <td>CLASS:</td>
-                                        <td>SECTION:</td>
-                                        <td>ROLL NO:</td>
+                                        <td>CLASS: {{ $studentidcollections[0]->student->class }}</td>
+                                        <td>SECTION: {{ $studentidcollections[0]->student->section }}</td>
+                                        <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="2">STUDENT ID:</td>
