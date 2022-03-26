@@ -55,7 +55,10 @@
                         <td>
                             <table class="maintable">
                                 <tr>
-                                    <td colspan="3"></td>
+                                    <td colspan="3">STUDENT NAME:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">MOBILE NO:</td>
                                 </tr>
                             </table>
                         </td>
