@@ -34,7 +34,7 @@
                 <table>
                     <tr>
                         <td>
-                            <p style="text-align: center; font-size: 16px;">
+                            <p style="text-align: center; font-size: 18px;">
                                 <center>
                                     <b>{{ Auth::user()->school->name_bangla }}</b><br/>
                                     <span style="font-size: 14px;">
