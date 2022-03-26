@@ -21,7 +21,7 @@
     font-size: 13px;
   }
   @page {
-    margin: 20px 20px;
+    margin: 25px 25px;
     header: page-header;
     footer: page-footer;
   }
@@ -29,9 +29,9 @@
 </head>
 <body>
     <table>
-        <tr style="margin-top: 10px;">
+        <tr>
             <td width="50%">
-                <table>
+                <table style="margin-top: 10px;">
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
@@ -154,7 +154,7 @@
                 </table>
             </td>
             <td width="50%">
-                <table>
+                <table style="margin-top: 10px;">
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
