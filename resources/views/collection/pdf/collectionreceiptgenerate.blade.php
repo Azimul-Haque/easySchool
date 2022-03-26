@@ -60,19 +60,7 @@
             <td align="center">{{ $count_key = $count_key + 1 }}</td>
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
             <td align="center">
-                @php
-                    $total_single_student_single_sector_fee = 0;
-                @endphp
-                @foreach ($studentidcollections as $collection)
-                    @if ($collection->fee_attribute == 'admission_session_fee')
-                    @php
-                        $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                        $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
-                        $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
-                    @endphp
-                    @endif
-                @endforeach
-                {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                
             </td>
 
             <td align="center">
@@ -135,7 +123,21 @@
                                     <tr>
                                         <td align="center">১</td>
                                         <td>ভর্তি ফি/ সেশন চাজ</td>
-                                        <td></td>
+                                        <td>
+                                            @php
+                                                $total_single_student_single_sector_fee = 0;
+                                            @endphp
+                                            @foreach ($studentidcollections as $collection)
+                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @php
+                                                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                                                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                                                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                                                @endphp
+                                                @endif
+                                            @endforeach
+                                            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                                        </td>
                                     </tr>
                                     <tr>
                                         <td align="center">২</td>
