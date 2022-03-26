@@ -1,6 +1,6 @@
 <html>
 <head>
-  <title>Collection Daily Ledger | PDF</title>
+  <title>Receipt | PDF</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <link rel="icon" sizes="192x192" href="{{ asset('images/pdf-icon.png') }}">
   <style>
