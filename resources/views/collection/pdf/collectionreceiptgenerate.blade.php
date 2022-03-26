@@ -125,7 +125,7 @@
                                     </tr>
                                     <tr>
                                         <td colspan="2">STUDENT ID:</td>
-                                        <td>DATE:</td>
+                                        <td>DATE: {{ date('d-m-y', strtotime($datekey)) }}</td>
                                     </tr>
                                 </table>
                             </td>
