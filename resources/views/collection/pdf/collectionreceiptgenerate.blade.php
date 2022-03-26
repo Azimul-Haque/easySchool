@@ -52,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>
+                        <td style="padding: 10px;">
                             <table class="maintable">
                                 <tr>
                                     <td colspan="3">STUDENT NAME:</td>
