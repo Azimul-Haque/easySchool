@@ -320,7 +320,7 @@ function generate_receipt_no($session, $class, $section, $student_id, $collectio
       return $receipt_no;
 }
 
-use Banglanum;
+use Rakibhstu\Banglanumber\NumberToBangla;
 function text_bn_num($number)
 {  
       $numto = new NumberToBangla();
