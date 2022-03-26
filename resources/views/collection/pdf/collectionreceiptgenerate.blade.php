@@ -168,7 +168,255 @@
                                         {{-- adhoc --}}
                                     </span><br/>
                                     <span style="font-size: 15px;">
+                                        বেতন ও অন্যান্য ফি আদায়ের রশিদ - শিক্ষার্থী কপি
+                                    </span><br/>
+                                </center>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 10px;">রশিদ নং - </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">
+                            <table class="maintable" style="margin-top: -10px;">
+                                <tr>
+                                    <td colspan="3">STUDENT NAME:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">MOBILE NO:</td>
+                                </tr>
+                                <tr>
+                                    <td>CLASS:</td>
+                                    <td>SECTION:</td>
+                                    <td>ROLL NO:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">STUDENT ID:</td>
+                                    <td>DATE:</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">
+                            <table class="maintable" style="margin-top: -10px;">
+                                <tr>
+                                    <th width="10%">ক্রঃ নং</th>
+                                    <th width="75%">বিবরণ</th>
+                                    <th width="15%">টাকা (৳)</th>
+                                </tr>
+                                <tr>
+                                    <td align="center">১</td>
+                                    <td>ভর্তি ফি/ সেশন চাজ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">২</td>
+                                    <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৩</td>
+                                    <td>গত বছরের বকেয়া</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৪</td>
+                                    <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৫</td>
+                                    <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৬</td>
+                                    <td>৩/৬/৯/১২ মাসের বেতন</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৭</td>
+                                    <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৮</td>
+                                    <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৯</td>
+                                    <td>স্কাউট/ গার্লস গাইড ফি</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">১০</td>
+                                    <td>উন্নয়ন/ দান</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">১১</td>
+                                    <td>বিবিধ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" colspan="2">মোট = </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">কথায়ঃ</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0px 10px 0px 10px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        <tr>
+            <td width="50%">
+                <table>
+                    <tr>
+                        <td>
+                            <p style="text-align: center; font-size: 18px;">
+                                <center>
+                                    <b>{{ Auth::user()->school->name_bangla }}</b><br/>
+                                    <span style="font-size: 14px;">
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
+                                        ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
+                                    </span><br/>
+                                    <span style="font-size: 15px;">
                                         বেতন ও অন্যান্য ফি আদায়ের রশিদ - অফিস কপি
+                                    </span><br/>
+                                </center>
+                            </p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="right" style="padding-right: 10px;">রশিদ নং - </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">
+                            <table class="maintable" style="margin-top: -10px;">
+                                <tr>
+                                    <td colspan="3">STUDENT NAME:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">MOBILE NO:</td>
+                                </tr>
+                                <tr>
+                                    <td>CLASS:</td>
+                                    <td>SECTION:</td>
+                                    <td>ROLL NO:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">STUDENT ID:</td>
+                                    <td>DATE:</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 10px;">
+                            <table class="maintable" style="margin-top: -10px;">
+                                <tr>
+                                    <th width="10%">ক্রঃ নং</th>
+                                    <th width="75%">বিবরণ</th>
+                                    <th width="15%">টাকা (৳)</th>
+                                </tr>
+                                <tr>
+                                    <td align="center">১</td>
+                                    <td>ভর্তি ফি/ সেশন চাজ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">২</td>
+                                    <td>বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৩</td>
+                                    <td>গত বছরের বকেয়া</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৪</td>
+                                    <td>পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৫</td>
+                                    <td>ফুলফ্রি/ হাফফ্রি ফরম</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৬</td>
+                                    <td>৩/৬/৯/১২ মাসের বেতন</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৭</td>
+                                    <td>জেএসসি/ এসএসসি রেজি:/ ফরম ফিল আপ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৮</td>
+                                    <td>প্রশংসা/ প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">৯</td>
+                                    <td>স্কাউট/ গার্লস গাইড ফি</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">১০</td>
+                                    <td>উন্নয়ন/ দান</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="center">১১</td>
+                                    <td>বিবিধ</td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td align="right" colspan="2">মোট = </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">কথায়ঃ</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 0px 10px 0px 10px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
+                    </tr>
+                </table>
+            </td>
+            <td width="50%">
+                <table>
+                    <tr>
+                        <td>
+                            <p style="text-align: center; font-size: 18px;">
+                                <center>
+                                    <b>{{ Auth::user()->school->name_bangla }}</b><br/>
+                                    <span style="font-size: 14px;">
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
+                                        ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
+                                    </span><br/>
+                                    <span style="font-size: 15px;">
+                                        বেতন ও অন্যান্য ফি আদায়ের রশিদ - শিক্ষার্থী কপি
                                     </span><br/>
                                 </center>
                             </p>
