@@ -18,7 +18,7 @@
   .maintable tr th, .maintable tr td{
     padding: 2px;
     font-family: 'kalpurush', sans-serif;
-    font-size: 13px;
+    font-size: 12.5px;
   }
   @page {
     margin: 25px 25px;
