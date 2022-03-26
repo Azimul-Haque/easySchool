@@ -34,15 +34,15 @@
                 <table>
                     <tr>
                         <td>
-                            <p style="text-align: center; font-size: 14px;">
+                            <p style="text-align: center; font-size: 16px;">
                                 <center>
                                     <b>{{ Auth::user()->school->name_bangla }}</b><br/>
-                                    <span style="font-size: 15px;">
+                                    <span style="font-size: 14px;">
                                     স্থাপিতঃ {{ bangla(Auth::user()->school->established) }} ইংরেজি | ইআইআইএনঃ {{ bangla(Auth::user()->school->eiin) }}<br/>
-                                    <span style="font-size: 18px;">
+                                    <span style="font-size: 14px;">
                                         <b>{{ bangla(date('F d, Y', strtotime($data[0]))) }} - {{ bangla(date('F d, Y', strtotime($data[1]))) }}</b>
                                     </span><br/>
-                                    <span style="font-size: 20px;"><u>দৈনিক খতিয়ান</u></span><br/>
+                                    <span style="font-size: 14px;"><u>দৈনিক খতিয়ান</u></span><br/>
                                     </span>
                                 </center>
                             </p>
