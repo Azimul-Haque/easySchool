@@ -331,7 +331,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 0px 15px 0px 15px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }}</td>
+                            <td style="padding: 0px 30px 0px 15px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }}</td>
                         </tr>
                     </table>
                 </td>
@@ -596,7 +596,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 0px 30px 0px 30px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }}</td>
+                            <td style="padding: 0px 30px 0px 30px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }} asd asd asd asd asd asd asd</td>
                         </tr>
                     </table>
                 </td>
