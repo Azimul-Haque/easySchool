@@ -136,8 +136,11 @@
                                     <td></td>
                                 </tr>
                                 <tr>
-                                    <td align="right">১১</td>
-                                    <td>বিবিধ</td>
+                                    <td align="right" colspan="2">মোট = </td>
+                                    <td></td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">কথায়ঃ</td>
                                     <td></td>
                                 </tr>
                             </table>
