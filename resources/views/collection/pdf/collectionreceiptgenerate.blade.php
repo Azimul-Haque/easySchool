@@ -65,7 +65,7 @@
                             <td>
                                 <p style="text-align: center; font-size: 18px;">
                                     <center>
-                                        <b>{{ Auth::user()->school->name_bangla }}</b><br/>
+                                        <b>{{ Auth::user()->school->name_bangla }} {{ $count_key }}</b><br/>
                                         <span style="font-size: 14px;">
                                             {{-- adhoc --}}
                                             ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
