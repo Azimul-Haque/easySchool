@@ -59,8 +59,6 @@
         {{-- <tr>
             <td align="center">{{ $count_key = $count_key + 1 }}</td>
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
-            
-            <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
             <td align="center">
                 @php
                     $total_single_student_single_sector_fee = 0;
