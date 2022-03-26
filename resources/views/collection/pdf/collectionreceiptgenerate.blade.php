@@ -60,6 +60,9 @@
                                 <tr>
                                     <td colspan="3">MOBILE NO:</td>
                                 </tr>
+                                <tr>
+                                    <td>MOBILE NO:</td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
