@@ -60,7 +60,7 @@
         <table>
             <tr>
                 <td width="50%" style="border-right: 1px dashed black;">
-                    <table style="{{ $count_key%2 == 0 ? 'margin-top: 20px; margin-bottom: 10px;' : 'margin-top: 10px;'}}">
+                    <table style="{{ $count_key%2 == 0 ? 'margin-top: 10px;' : 'margin-top: 10px;'}}">
                         <tr>
                             <td style="{{ $count_key%2 == 0 ? 'border-top: 1px dashed black;' : ''}}">
                                 <p style="text-align: center; font-size: 18px; {{ $count_key%2 == 0 ? 'padding-top: 10px;' : ''}}">
