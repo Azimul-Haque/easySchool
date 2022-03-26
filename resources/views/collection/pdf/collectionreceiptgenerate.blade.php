@@ -65,6 +65,10 @@
                                     <td>SECTION:</td>
                                     <td>ROLL NO:</td>
                                 </tr>
+                                <tr>
+                                    <td colspan="2">STUDENT ID:</td>
+                                    <td>DATE:</td>
+                                </tr>
                             </table>
                         </td>
                     </tr>
