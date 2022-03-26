@@ -16,7 +16,7 @@
     border: 1px solid black;
   }
   .maintable tr th, .maintable tr td{
-    padding: 3px;
+    padding: 2px;
     font-family: 'kalpurush', sans-serif;
     font-size: 13px;
   }
