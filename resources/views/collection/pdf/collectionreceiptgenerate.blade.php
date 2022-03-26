@@ -149,7 +149,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td>asd</td>
+                        <td style="padding: 0px 10px 0px 10px;">asd</td>
                     </tr>
                 </table>
             </td>
