@@ -81,8 +81,8 @@
                                     <th width="20%">টাকা (৳)</th>
                                 </tr>
                                 <tr>
-                                    <td>ক্রঃ নংঃ</td>
-                                    <td>বিবরণ</td>
+                                    <td>১</td>
+                                    <td>ভর্তি ফি/ সেশন চাজ</td>
                                     <td>টাকা (৳)</td>
                                 </tr>
                             </table>
@@ -91,27 +91,7 @@
                 </table>
             </td>
             <td width="50%">
-                <table class="maintable">
-                    <tr>
-                        <td>
-                            <p style="text-align: center; font-size: 18px;">
-                                <center>
-                                    <b>{{ Auth::user()->school->name_bangla }}</b><br/>
-                                    <span style="font-size: 14px;">
-                                        {{-- adhoc --}}
-                                        {{-- adhoc --}}
-                                        ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
-                                        {{-- adhoc --}}
-                                        {{-- adhoc --}}
-                                    </span><br/>
-                                    <span style="font-size: 15px;">
-                                        বেতন ও অন্যান্য ফি আদায়ের রশিদ - শিক্ষার্থী কপি
-                                    </span><br/>
-                                </center>
-                            </p>
-                        </td>
-                    </tr>
-                </table>
+            
             </td>
         </tr>
     </table>
@@ -119,13 +99,7 @@
         {{-- datatable-students --}}
         <thead>
             <tr>
-                {{-- <th class="hiddenCheckbox" id="hiddenCheckbox"></th> --}}
-                <th width="4%">ক্রঃ নঃ</th>
-                <th width="9%">তারিখ</th>
-                <th width="5%">শ্রেণি</th>
-                <th width="5%">শাখা</th>
-                <th width="15%">রশিদ নং</th>
-                {{-- <th width="5%" style="font-size: 11px;">ভর্তি ফি/ সেশন চাজ</th>
+                {{-- <th width="5%" style="font-size: 11px;"></th>
                 <th width="5%" style="font-size: 11px;">বার্ষিক ক্রীড়া/ সাংস্কৃ: অনুষ্ঠান</th>
                 <th width="5%" style="font-size: 11px;">গত বছরের বকেয়া</th>
                 <th width="5%" style="font-size: 10.5px;">পরীক্ষা ফি অর্ধবার্ষিক/ বার্ষিক/ নির্বাচনি/ মডেল টেস্ট</th>
