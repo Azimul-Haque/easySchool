@@ -185,7 +185,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'exam_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -204,7 +204,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'full_half_free_form')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -223,7 +223,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == '3_6_8_12_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -242,7 +242,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'jsc_ssc_form_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
@@ -261,7 +261,7 @@
                                                 $total_single_student_single_sector_fee = 0;
                                             @endphp
                                             @foreach ($studentidcollections as $collection)
-                                                @if ($collection->fee_attribute == 'admission_session_fee')
+                                                @if ($collection->fee_attribute == 'certificate_fee')
                                                 @php
                                                     $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
                                                     $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
