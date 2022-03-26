@@ -320,10 +320,11 @@ function generate_receipt_no($session, $class, $section, $student_id, $collectio
       return $receipt_no;
 }
 
-use Banglanum;
-function text_bn_num($number) {  
-      $numto = new NumberToBangla();
-      $text = $numto->bnWord(13459);    // Output:  তেরো হাজার চার শত ঊনষাট
-      $text = $numto->bnWord(1345.05);  // Output:  এক হাজার তিন শত পঁয়তাল্লিশ দশমিক শূন্য পাঁচ
-      return $bangla_converted;
+use Rakibhstu\Banglanumber\NumberToBangla;
+function text_bn_num($number)
+{  
+      $numto = new Banglanum();
+      $text = $numto->bnWord($number);    // Output:  তেরো হাজার চার শত ঊনষাট
+      $text = $numto->bnWord($number);  // Output:  এক হাজার তিন শত পঁয়তাল্লিশ দশমিক শূন্য পাঁচ
+      return $text;
 }
