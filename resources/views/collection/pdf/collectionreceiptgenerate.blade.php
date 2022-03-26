@@ -56,17 +56,6 @@
         @php
             $total_single_student_fee = 0;
         @endphp
-        {{-- <tr>
-            <td align="center">{{ $count_key = $count_key + 1 }}</td>
-            <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
-            <td align="center">
-                
-            </td>
-
-            <td align="center">
-            <b>{{ $total_single_student_fee }}</b>
-            </td>
-        </tr> --}}
         <table>
             <tr>
                 <td width="50%" style="border-right: 1px dashed black;">
@@ -330,7 +319,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="right" colspan="2">মোট = </td>
+                                        <td align="right" colspan="2">মোট = {{ $total_single_student_fee }}</td>
                                         <td></td>
                                     </tr>
                                     <tr>
