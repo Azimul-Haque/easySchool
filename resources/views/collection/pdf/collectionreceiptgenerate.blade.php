@@ -59,8 +59,7 @@
         {{-- <tr>
             <td align="center">{{ $count_key = $count_key + 1 }}</td>
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
-            <td align="center">{{ $studentidkey }}</td>
-            <td style="font-size: 12px;"></td>
+            
             <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
             <td align="center">
             @php
@@ -121,7 +120,7 @@
                                         <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="2">STUDENT ID:</td>
+                                        <td colspan="2">STUDENT ID: {{ $studentidkey }}</td>
                                         <td>DATE: {{ date('d-m-Y', strtotime($datekey)) }}</td>
                                     </tr>
                                 </table>
