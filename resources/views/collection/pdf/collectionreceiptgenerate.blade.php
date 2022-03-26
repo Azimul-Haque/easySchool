@@ -30,7 +30,7 @@
 <body>
     <table>
         <tr>
-            <td width: 50%>
+            <td width="50%">
                 <table>
                     <tr>
                         <td>
@@ -70,7 +70,7 @@
                     </tr>
                 </table>
             </td>
-            <td>
+            <td width="50%">
                 <table class="maintable">
                     <tr>
                         <td>
