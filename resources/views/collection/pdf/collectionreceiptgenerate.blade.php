@@ -55,6 +55,7 @@
         @foreach ($datecollections as $studentidkey => $studentidcollections)
         @php
             $total_single_student_fee = 0;
+            $count_key++;
         @endphp
         <table>
             <tr>
