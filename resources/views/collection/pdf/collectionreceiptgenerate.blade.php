@@ -21,7 +21,7 @@
     font-size: 12.5px;
   }
   @page {
-    margin: 25px 25px;
+    margin: 20px 20px;
     header: page-header;
     footer: page-footer;
   }
