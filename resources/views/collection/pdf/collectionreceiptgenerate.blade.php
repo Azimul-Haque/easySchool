@@ -57,16 +57,19 @@
                 <table>
                     <tr>
                         <td>
-                            <p style="text-align: center; font-size: 14px;">
+                            <p style="text-align: center; font-size: 18px;">
                                 <center>
                                     <b>{{ Auth::user()->school->name_bangla }}</b><br/>
-                                    <span style="font-size: 15px;">
-                                    স্থাপিতঃ {{ bangla(Auth::user()->school->established) }} ইংরেজি | ইআইআইএনঃ {{ bangla(Auth::user()->school->eiin) }}<br/>
-                                    <span style="font-size: 18px;">
-                                        <b>{{ bangla(date('F d, Y', strtotime($data[0]))) }} - {{ bangla(date('F d, Y', strtotime($data[1]))) }}</b>
+                                    <span style="font-size: 14px;">
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
+                                        ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
+                                        {{-- adhoc --}}
+                                        {{-- adhoc --}}
                                     </span><br/>
-                                    <span style="font-size: 20px;"><u>দৈনিক খতিয়ান</u></span><br/>
-                                    </span>
+                                    <span style="font-size: 15px;">
+                                        বেতন ও অন্যান্য ফি আদায়ের রশিদ - অফিস কপি
+                                    </span><br/>
                                 </center>
                             </p>
                         </td>
