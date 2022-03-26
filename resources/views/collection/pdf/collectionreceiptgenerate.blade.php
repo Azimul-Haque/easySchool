@@ -52,9 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <tr>
-                            <td colspan="3">রশিদ নং - </td>
-                        </tr>
+                        <td align="right">রশিদ নং - </td>
                     </tr>
                     <tr>
                         <td style="padding: 10px;">
