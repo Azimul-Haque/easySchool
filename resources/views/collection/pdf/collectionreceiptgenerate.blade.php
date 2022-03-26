@@ -80,7 +80,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="padding-right: 20px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
+                            <td align="right" style="padding-right: 25px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 15px;">
