@@ -325,6 +325,6 @@ function text_bn_num($number)
 {  
       $numto = new NumberToBangla();
       $text = $numto->bnWord($number);    // Output:  তেরো হাজার চার শত ঊনষাট
-      $text = $numto->bnWord($number);  // Output:  এক হাজার তিন শত পঁয়তাল্লিশ দশমিক শূন্য পাঁচ
+      // $text = $numto->bnWord($number);  // Output:  এক হাজার তিন শত পঁয়তাল্লিশ দশমিক শূন্য পাঁচ
       return $text;
 }
