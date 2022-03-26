@@ -359,7 +359,7 @@
                             <td align="right" style="padding-right: 20px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 15px 15px 15px 20px;">
+                            <td style="padding: 15px 15px 15px 25px;">
                                 <table class="maintable" style="margin-top: -15px;">
                                     <tr>
                                         <td colspan="3">STUDENT NAME: {{ $studentidcollections[0]->student->name }}</td>
@@ -380,7 +380,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 15px;">
+                            <td style="padding: 15px 25px 15px 15px;">
                                 <table class="maintable" style="margin-top: -15px;">
                                     <tr>
                                         <th width="10%">ক্রঃ নং</th>
