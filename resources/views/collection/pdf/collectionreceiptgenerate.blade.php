@@ -356,7 +356,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="padding-right: 20px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
+                            <td align="right" style="padding-right: 30px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 15px 15px 15px 30px;">
@@ -596,7 +596,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 0px 30px 0px 30px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }} asd asd asd asd asd asd asd</td>
+                            <td style="padding: 0px 15px 0px 30px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }}</td>
                         </tr>
                     </table>
                 </td>
