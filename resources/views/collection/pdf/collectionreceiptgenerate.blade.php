@@ -319,8 +319,8 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td align="right" colspan="2">মোট = {{ $total_single_student_fee }}</td>
-                                        <td></td>
+                                        <td align="right" colspan="2">মোট =</td>
+                                        <td align="center">{{ $total_single_student_fee }}</td>
                                     </tr>
                                     <tr>
                                         <td colspan="3">কথায়ঃ</td>
