@@ -319,3 +319,31 @@ function generate_receipt_no($session, $class, $section, $student_id, $collectio
       }
       return $receipt_no;
 }
+
+use Banglanum;
+function collection_sector_bangla($sector) {  
+      if($sector == 'admission_session_fee'){
+            $bangla_converted = 'ভর্তি ফি/সেশন চাজ';
+      }else if($sector == 'annual_sports_cultural'){
+            $bangla_converted = 'বার্ষিক ক্রীড়া/সাংস্কৃ: অনুষ্ঠান';
+      }else if($sector == 'last_year_due'){
+            $bangla_converted = 'গত বছরের বকেয়া';
+      }else if($sector == 'exam_fee'){
+            $bangla_converted = 'পরীক্ষা ফি অর্ধবার্ষিক/বার্ষিক/নির্বাচনি/মডেল টেস্ট';
+      }else if($sector == 'full_half_free_form'){
+            $bangla_converted = '>ফুলফ্রি/হাফফ্রি ফরম';
+      }else if($sector == '3_6_8_12_fee'){
+            $bangla_converted = '৩/৬/৯/১২মাসের বেতন';
+      }else if($sector == 'jsc_ssc_form_fee'){
+            $bangla_converted = 'জেএসসি/এসএসসি রেজি:/ ফরম ফিল আপ';
+      }else if($sector == 'certificate_fee'){
+            $bangla_converted = 'প্রশংসা/প্রত্যয়ন পত্র /টিসি/ মার্কশীট /সনদ পত্র';
+      }else if($sector == 'scout_fee'){
+            $bangla_converted = 'স্কাউট/গার্লস গাইড ফি';
+      }else if($sector == 'develoment_donation'){
+            $bangla_converted = 'উন্নয়ন/দান';
+      }else if($sector == 'other_fee'){
+            $bangla_converted = 'বিবিধ';
+      }
+      return $bangla_converted;
+}
