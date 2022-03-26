@@ -62,19 +62,19 @@
             
             <td align="center" style="font-size: 12px;">{{ $studentidcollections[0]->receipt_no }}</td>
             <td align="center">
-            @php
-                $total_single_student_single_sector_fee = 0;
-            @endphp
-            @foreach ($studentidcollections as $collection)
-                @if ($collection->fee_attribute == 'admission_session_fee')
                 @php
-                    $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
-                    $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
-                    $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                    $total_single_student_single_sector_fee = 0;
                 @endphp
-                @endif
-            @endforeach
-            {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
+                @foreach ($studentidcollections as $collection)
+                    @if ($collection->fee_attribute == 'admission_session_fee')
+                    @php
+                        $total_single_student_single_sector_fee = $total_single_student_single_sector_fee + $collection->fee_value;
+                        $total_single_student_fee = $total_single_student_fee + $collection->fee_value;
+                        $total_admission_session_fee = $total_admission_session_fee + $collection->fee_value;
+                    @endphp
+                    @endif
+                @endforeach
+                {{ $total_single_student_single_sector_fee == 0 ? '' : $total_single_student_single_sector_fee }}
             </td>
 
             <td align="center">
@@ -103,7 +103,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td align="right" style="padding-right: 15px;">রশিদ নং - </td>
+                            <td align="right" style="padding-right: 15px;">রশিদ নং - {{ $studentidcollections[0]->receipt_no }}</td>
                         </tr>
                         <tr>
                             <td style="padding: 15px;">
