@@ -596,7 +596,7 @@
                             </td>
                         </tr>
                         <tr>
-                            <td style="padding: 0px 30px 0px 30px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }} ASD ASD ASd</td>
+                            <td style="padding: 0px 30px 0px 30px; font-size: 12px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ {{ $studentidcollections[0]->collector }} ASD ASD ASd</td>
                         </tr>
                     </table>
                 </td>
