@@ -76,13 +76,7 @@
                         <td style="padding: 10px;">
                             <table class="maintable" style="margin-top: -10px;">
                                 <tr>
-                                    <td colspan="3">STUDENT NAME:</td>
-                                </tr>
-                                <tr>
-                                    <td colspan="3">MOBILE NO:</td>
-                                </tr>
-                                <tr>
-                                    <td>CLASS:</td>
+                                    <td>ক্রঃ নংঃ</td>
                                     <td>SECTION:</td>
                                     <td>ROLL NO:</td>
                                 </tr>
