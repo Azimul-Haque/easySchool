@@ -30,7 +30,7 @@
 <body>
     <table>
         <tr>
-            <td width="50%">
+            <td width="50%" style="border-right: 1px solid black;">
                 <table style="margin-top: 10px;">
                     <tr>
                         <td>
