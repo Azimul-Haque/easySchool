@@ -58,7 +58,6 @@
         @endphp
         {{-- <tr>
             <td align="center">{{ $count_key = $count_key + 1 }}</td>
-            <td align="center">{{ date('d-m-y', strtotime($datekey)) }}</td>
             <td align="center">{{ $studentidcollections[0]->roll }} @if($data[1] == 'All_Classes') ({{ $studentidcollections[0]->class }}{{ english_section_short(Auth::user()->school->section_type, $studentidcollections[0]->class, $studentidcollections[0]->section) }}) @endif</td>
             <td align="center">{{ $studentidkey }}</td>
             <td style="font-size: 12px;">{{ $studentidcollections[0]->student->name }}</td>
@@ -94,9 +93,7 @@
                                         <b>{{ Auth::user()->school->name_bangla }}</b><br/>
                                         <span style="font-size: 14px;">
                                             {{-- adhoc --}}
-                                            {{-- adhoc --}}
                                             ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
-                                            {{-- adhoc --}}
                                             {{-- adhoc --}}
                                         </span><br/>
                                         <span style="font-size: 15px;">
@@ -217,9 +214,7 @@
                                         <b>{{ Auth::user()->school->name_bangla }}</b><br/>
                                         <span style="font-size: 14px;">
                                             {{-- adhoc --}}
-                                            {{-- adhoc --}}
                                             ডাকঘর-শিবগঞ্জ, উপজেলা ও জেলা- ঠাকুরগাঁও
-                                            {{-- adhoc --}}
                                             {{-- adhoc --}}
                                         </span><br/>
                                         <span style="font-size: 15px;">
