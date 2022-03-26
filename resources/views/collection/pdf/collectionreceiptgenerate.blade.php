@@ -52,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td align="right" style="padding-right: 10px;">রশিদ নং - </td>
+                        <td align="right" style="padding-right: 15px;">রশিদ নং - </td>
                     </tr>
                     <tr>
                         <td style="padding: 15px;">
@@ -76,7 +76,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 10px;">
+                        <td style="padding: 15px;">
                             <table class="maintable" style="margin-top: -10px;">
                                 <tr>
                                     <th width="10%">ক্রঃ নং</th>
@@ -149,12 +149,12 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 0px 10px 0px 10px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
+                        <td style="padding: 0px 15px 0px 15px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
                     </tr>
                 </table>
             </td>
             <td width="50%">
-                <table style="margin-top: 10px;">
+                <table style="margin-top: 15px;">
                     <tr>
                         <td>
                             <p style="text-align: center; font-size: 18px;">
