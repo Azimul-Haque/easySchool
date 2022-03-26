@@ -72,6 +72,27 @@
                             </table>
                         </td>
                     </tr>
+                    <tr>
+                        <td style="padding: 10px;">
+                            <table class="maintable">
+                                <tr>
+                                    <td colspan="3">STUDENT NAME:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3">MOBILE NO:</td>
+                                </tr>
+                                <tr>
+                                    <td>CLASS:</td>
+                                    <td>SECTION:</td>
+                                    <td>ROLL NO:</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="2">STUDENT ID:</td>
+                                    <td>DATE:</td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
                 </table>
             </td>
             <td width="50%">
