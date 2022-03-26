@@ -59,7 +59,7 @@
         @endphp
         <table>
             <tr>
-                <td width="50%" style="border-right: 1px dashed black; {{ $count_key%2 == 0 ? border-right: 1px dashed black; : ''}}">
+                <td width="50%" style="border-right: 1px dashed black; {{ $count_key%2 == 0 ? 'border-top: 1px dashed black;' : ''}}">
                     <table style="margin-top: 10px;">
                         <tr>
                             <td>
