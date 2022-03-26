@@ -371,7 +371,6 @@
                                         <td width="33%">CLASS: {{ $studentidcollections[0]->student->class }}</td>
                                         <td width="33%">SECTION: {{ $studentidcollections[0]->student->section }}</td>
                                         <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
-                                        
                                     </tr>
                                     <tr>
                                         <td colspan="2">STUDENT ID: {{ $studentidkey }}</td>
