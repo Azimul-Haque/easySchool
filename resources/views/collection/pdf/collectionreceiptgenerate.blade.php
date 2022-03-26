@@ -44,10 +44,9 @@
                                         {{-- adhoc --}}
                                         {{-- adhoc --}}
                                     </span><br/>
-                                    <span style="font-size: 14px;">
-                                        <b>{{ bangla(date('F d, Y', strtotime($data[0]))) }} - {{ bangla(date('F d, Y', strtotime($data[1]))) }}</b>
+                                    <span style="font-size: 15px;">
+                                        বেতন ও অন্যান্য ফি আদায়ের রশিদ - অফিস কপি
                                     </span><br/>
-                                    <span style="font-size: 14px;"><u>দৈনিক খতিয়ান</u></span><br/>
                                 </center>
                             </p>
                         </td>
