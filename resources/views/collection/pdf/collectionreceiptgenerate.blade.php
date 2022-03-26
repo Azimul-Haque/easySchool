@@ -56,7 +56,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 15px;">
-                            <table class="maintable" style="margin-top: -10px;">
+                            <table class="maintable" style="margin-top: -15px;">
                                 <tr>
                                     <td colspan="3">STUDENT NAME:</td>
                                 </tr>
@@ -77,7 +77,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 15px;">
-                            <table class="maintable" style="margin-top: -10px;">
+                            <table class="maintable" style="margin-top: -15px;">
                                 <tr>
                                     <th width="10%">ক্রঃ নং</th>
                                     <th width="75%">বিবরণ</th>
@@ -179,7 +179,7 @@
                     </tr>
                     <tr>
                         <td style="padding: 15px;">
-                            <table class="maintable" style="margin-top: -10px;">
+                            <table class="maintable" style="margin-top: -15px;">
                                 <tr>
                                     <td colspan="3">STUDENT NAME:</td>
                                 </tr>
