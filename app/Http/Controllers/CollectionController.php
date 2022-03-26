@@ -654,7 +654,9 @@ class CollectionController extends Controller
 
         if($section != 'No_Section') {
             $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
-                                            ->where('session',$session)
+                                            ->where('session', $session)
+                                            ->where('class', $class)
+                                            ->where('section', $section)
                                             ->whereBetween('collection_date', [$from, $to])
                                             ->distinct()->select('student_id', 'collection_date')
                                             ->orderBy('collection_date','ASC')
@@ -664,6 +666,8 @@ class CollectionController extends Controller
 
             $feecollections = Feecollection::where('school_id', Auth::user()->school_id)
                                             ->where('session',$session)
+                                            ->where('class', $class)
+                                            ->where('section', $section)
                                             ->whereBetween('collection_date', [$from, $to])
                                             ->orderBy('collection_date','DESC')->get();
             
