@@ -63,7 +63,7 @@
                     <table style="{{ $count_key%2 == 0 ? 'margin-top: 20px;' : 'margin-top: 10px;'}}">
                         <tr>
                             <td style="{{ $count_key%2 == 0 ? 'border-top: 1px dashed black;' : ''}}">
-                                <p style="text-align: center; font-size: 18px; {{ $count_key%2 == 0 ? 'margin-top: 20px;' : 'margin-top: 10px;'}}">
+                                <p style="text-align: center; font-size: 18px;">
                                     <center>
                                         <b>{{ Auth::user()->school->name_bangla }}</b><br/>
                                         <span style="font-size: 14px;">
