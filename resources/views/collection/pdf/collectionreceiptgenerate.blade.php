@@ -28,7 +28,7 @@
   </style>
 </head>
 <body>
-    <table>
+    <table class="maintable">
         <tr>
             <td>
                 <table>
@@ -52,7 +52,7 @@
                         </td>
                     </tr>
                     <tr>
-                        
+                        <td>asd</td>
                     </tr>
                 </table>
             </td>
