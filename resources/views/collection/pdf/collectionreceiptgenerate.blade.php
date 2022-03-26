@@ -28,7 +28,30 @@
   </style>
 </head>
 <body>
-    @foreach ($feecollections as $collection)
+    @php
+        $count_key = 0;
+        $collectiongroup = [];
+        foreach ($usedstudentids as $studentid) {
+            foreach ($feecollections as $collection) {
+            if($studentid->collection_date == $collection->collection_date && $studentid->class == $collection->class && $studentid->section == $collection->section) {
+                $collectiongroup[$studentid->collection_date][$studentid->class][$studentid->section][] = $collection;
+            }
+            } 
+        }
+        $total_admission_session_fee = 0;
+        $total_annual_sports_cultural = 0;
+        $total_last_year_due = 0;
+        $total_exam_fee = 0;
+        $total_full_half_free_form = 0;
+        $total_3_6_8_12_fee = 0;
+        $total_jsc_ssc_form_fee = 0;
+        $total_certificate_fee = 0;
+        $total_scout_fee = 0;
+        $total_develoment_donation = 0;
+        $total_other_fee = 0;
+        // dd($collectiongroup);
+    @endphp
+    @foreach ($collectiongroup as $collection)
         <table>
             <tr>
                 <td width="50%" style="border-right: 1px dashed black;">
