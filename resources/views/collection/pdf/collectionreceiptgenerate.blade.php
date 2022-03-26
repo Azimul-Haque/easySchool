@@ -30,7 +30,7 @@
 <body>
     <table>
         <tr>
-            <td>
+            <td width: 50%>
                 <table>
                     <tr>
                         <td>
@@ -61,7 +61,9 @@
                                     <td colspan="3">MOBILE NO:</td>
                                 </tr>
                                 <tr>
-                                    <td>MOBILE NO:</td>
+                                    <td>CLASS:</td>
+                                    <td>SECTION:</td>
+                                    <td>ROLL NO:</td>
                                 </tr>
                             </table>
                         </td>
