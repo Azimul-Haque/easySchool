@@ -226,7 +226,7 @@ return [
         'PDF' => niklasravnsborg\LaravelPdf\Facades\Pdf::class,
         'Excel' => Maatwebsite\Excel\Facades\Excel::class,
         'Mapper' => Cornford\Googlmapper\Facades\MapperFacade::class,
-
+        'Banglanum' => Rakibhstu\Banglanumber\NumberToBangla::class,
     ],
 
 ];
