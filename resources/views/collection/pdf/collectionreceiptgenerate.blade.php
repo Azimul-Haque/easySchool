@@ -141,7 +141,6 @@
                                 </tr>
                                 <tr>
                                     <td colspan="3">কথায়ঃ</td>
-                                    <td></td>
                                 </tr>
                             </table>
                         </td>
