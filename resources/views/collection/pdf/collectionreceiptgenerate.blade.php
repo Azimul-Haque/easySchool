@@ -32,6 +32,7 @@
     <table>
         <tr>
             <td>
+                
                 <p style="text-align: center; font-size: 20px;">
                 <center>
                     <b>{{ Auth::user()->school->name_bangla }}</b><br/>
