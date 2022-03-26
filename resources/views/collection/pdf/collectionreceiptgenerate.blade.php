@@ -47,7 +47,14 @@
             </td>
         </tr>
     </table>
-    <table class="" id="" style="">
+    <table>
+        <tr>
+            <th>asd</th>
+            <th>asd</th>
+            <th>asd</th>
+        </tr>
+    </table>
+    <table class="maintable" id="" style="">
         {{-- datatable-students --}}
         <thead>
             <tr>
