@@ -6,7 +6,7 @@
     'aliases' => 
     array (
     ),
-    'reference' => '177dc40565f3807a24e7de906d7deeefb2b7d1d7',
+    'reference' => '2106fb61a20572e39f99b74d67eda56b92b7cfed',
     'name' => 'laravel/laravel',
   ),
   'versions' => 
@@ -397,7 +397,7 @@
       'aliases' => 
       array (
       ),
-      'reference' => '177dc40565f3807a24e7de906d7deeefb2b7d1d7',
+      'reference' => '2106fb61a20572e39f99b74d67eda56b92b7cfed',
     ),
     'laravelcollective/html' => 
     array (
@@ -668,6 +668,15 @@
       array (
       ),
       'reference' => 'e64e10b20f8d229cac76399e1f3edddb57a0f280',
+    ),
+    'rakibhstu/number-to-bangla' => 
+    array (
+      'pretty_version' => 'v1.3',
+      'version' => '1.3.0.0',
+      'aliases' => 
+      array (
+      ),
+      'reference' => 'c8cedd2f9d76f1b9e2f3a11ba3d977edf82d85e9',
     ),
     'ralouphie/getallheaders' => 
     array (

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "02abd60491025bf51513989841e3553f",
+    "content-hash": "4508953e0f3c06b0800ee3c40abf8af8",
     "packages": [
         {
             "name": "anhskohbo/no-captcha",
@@ -1868,6 +1868,64 @@
                 "shell"
             ],
             "time": "2016-03-09T05:03:14+00:00"
+        },
+        {
+            "name": "rakibhstu/number-to-bangla",
+            "version": "v1.3",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/rakibdevs/number-to-bangla.git",
+                "reference": "c8cedd2f9d76f1b9e2f3a11ba3d977edf82d85e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/rakibdevs/number-to-bangla/zipball/c8cedd2f9d76f1b9e2f3a11ba3d977edf82d85e9",
+                "reference": "c8cedd2f9d76f1b9e2f3a11ba3d977edf82d85e9",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^7.1|^7.2|^7.3|^7.4|^8.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rakibhstu\\Banglanumber\\NumberToBanglaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rakibhstu\\Banglanumber\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Md. Rakibul Islam",
+                    "email": "rakib1708@gmail.com",
+                    "homepage": "https://rakibul.dev"
+                }
+            ],
+            "description": "Laravel package to convert English numbers to Bangla number or Bangla text, Bangla month name and Bangla Money Format",
+            "homepage": "https://github.com/rakibdevs/number-to-bangla",
+            "keywords": [
+                "Laravel-number-bangla",
+                "laravel",
+                "number-bangla",
+                "number-month"
+            ],
+            "support": {
+                "issues": "https://github.com/rakibdevs/number-to-bangla/issues",
+                "source": "https://github.com/rakibdevs/number-to-bangla/tree/v1.3"
+            },
+            "time": "2021-08-12T08:28:59+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
