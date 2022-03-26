@@ -113,7 +113,7 @@
                                         <td colspan="3">STUDENT NAME: {{ $studentidcollections[0]->student->name }}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">MOBILE NO: {{ $studentidcollections[0]->student->mobile }}</td>
+                                        <td colspan="3">MOBILE NO: {{ $studentidcollections[0]->student->contact }}</td>
                                     </tr>
                                     <tr>
                                         <td>CLASS:</td>
