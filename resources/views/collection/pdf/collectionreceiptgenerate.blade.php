@@ -76,9 +76,9 @@
                         <td style="padding: 10px;">
                             <table class="maintable" style="margin-top: -10px;">
                                 <tr>
-                                    <th width="15%">ক্রঃ নং</th>
-                                    <th width="75%">বিবরণ</th>
-                                    <th width="20%">টাকা (৳)</th>
+                                    <th width="13%">ক্রঃ নং</th>
+                                    <th width="80%">বিবরণ</th>
+                                    <th width="17%">টাকা (৳)</th>
                                 </tr>
                                 <tr>
                                     <td>১</td>
