@@ -149,7 +149,7 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="padding: 0px 10px 0px 10px;"></td>
+                        <td style="padding: 0px 10px 0px 10px;">আদায়কারী/শ্রেণি শিক্ষকের নামঃ </td>
                     </tr>
                 </table>
             </td>
