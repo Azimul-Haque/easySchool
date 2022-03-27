@@ -93,7 +93,7 @@
                                     </tr>
                                     <tr>
                                         <td width="33%">CLASS: {{ $studentidcollections[0]->student->class }}</td>
-                                        <td width="33%">SECTION: {{ english_section(Auth::user()->school->section_type, $studentidcollections[0]->student->clas, $studentidcollections[0]->student->section) }}</td>
+                                        <td width="33%">SECTION: {{ english_section(Auth::user()->school->section_type, $studentidcollections[0]->student->class, $studentidcollections[0]->student->section) }}</td>
                                         <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
                                     </tr>
                                     <tr>
@@ -369,7 +369,8 @@
                                     </tr>
                                     <tr>
                                         <td width="33%">CLASS: {{ $studentidcollections[0]->student->class }}</td>
-                                        <td width="33%">SECTION: {{ english_section(Auth::user()->school->section_type, $studentidcollections[0]->student->clas, $studentidcollections[0]->student->section) }}</td>
+                                        <td width="33%">SECTION: {{ english_section(Auth::user()->school->section_type, $studentidcollections[0]->student->class, $studentidcollections[0]->student->section) }}</td>
+                                        
                                         <td>ROLL NO: {{ $studentidcollections[0]->student->roll }}</td>
                                     </tr>
                                     <tr>
