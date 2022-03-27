@@ -65,7 +65,7 @@ function bangla_section($section_type, $class, $section){
       return $section;
 }
 
-function english_section($section_type, $class, $section){
+function english_section($section_type, $class, $section) {
       if($section_type == 1) {
             $en = array(0, 1, 2, 3, 4, 5);
             $bn = array('', 'A','B','C', 'D', 'E');
