@@ -488,6 +488,7 @@ class CollectionController extends Controller
         $used_student_ids = Feecollection::where('school_id', Auth::user()->school_id)
                                             ->whereBetween('collection_date', [$from, $to])
                                             ->distinct()->select('class', 'section', 'collection_date')
+                                            // ->orderBy('receipt_no','ASC')
                                             ->orderBy('collection_date','ASC')
                                             ->orderBy('class','ASC')
                                             ->orderBy('section','ASC')
