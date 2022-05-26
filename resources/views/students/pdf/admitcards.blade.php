@@ -24,6 +24,10 @@
   @page {
     header: page-header;
     footer: page-footer;
+    margin-top: 0.50cm;
+    margin-bottom: 0.50cm;
+    margin-left: 0.50cm;
+    margin-right: 0.50cm;
   }
   </style>
 </head>
@@ -34,7 +38,7 @@
       $counter = 1;
     @endphp
     @foreach($students as $student)
-      <td width="50%" style="padding: 20px; height: 300px;">
+      <td width="50%" style="padding: 35px; height: 300px;">
         <table>
           <tr>
             <td width="100%" style="border: 1px solid #000; padding: 10">
@@ -133,7 +137,7 @@
     </tr>
   </table>
   <htmlpagefooter name="page-footer">
-    <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small>
+    {{-- <small style="font-family: Calibri; color: #6D6E6A;">Powered by EasySchool.XYZ</small> --}}
   </htmlpagefooter>
 </body>
 </html>
