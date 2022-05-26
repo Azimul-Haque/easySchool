@@ -24,10 +24,10 @@
   @page {
     header: page-header;
     footer: page-footer;
-    margin-top: 0.30cm;
-    margin-bottom: 0.30cm;
-    margin-left: 0.30cm;
-    margin-right: 0.30cm;
+    margin-top: 0cm;
+    margin-bottom: 0cm;
+    margin-left: 0cm;
+    margin-right: 0cm;
   }
   </style>
 </head>
@@ -38,7 +38,7 @@
       $counter = 1;
     @endphp
     @foreach($students as $student)
-      <td width="50%" style="padding: 40px; height: 300px;">
+      <td width="50%" style="padding: 5AS5px; height: 300px;">
         <table>
           <tr>
             <td width="100%" style="border: 1px solid #000; padding: 10">
