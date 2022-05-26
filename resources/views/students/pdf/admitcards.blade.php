@@ -38,7 +38,7 @@
       $counter = 1;
     @endphp
     @foreach($students as $student)
-      <td width="50%" style="padding: 5AS5px; height: 300px;">
+      <td width="50%" style="padding: 55px; height: 300px;">
         <table>
           <tr>
             <td width="100%" style="border: 1px solid #000; padding: 10">
