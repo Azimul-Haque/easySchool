@@ -12,7 +12,12 @@
 
 @section('content_header')
     <h1>
-    	শিক্ষার্থী তালিকাঃ <span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]</span>
+    	শিক্ষার্থী তালিকাঃ
+    	<span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }},
+    		@if($sectionsearch != 'No_Section')
+    			শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]
+    		@endif
+    	</span>
     	<div class="pull-right btn-group">
           @if($classsearch == 8)
           <a href="{{ route('students.gettotlist8pdf', [$sessionsearch, $classsearch, $sectionsearch]) }}" class="btn btn-brown btn-sm" title="JSC  TOT List প্রিন্ট করুন" target="_blank">
