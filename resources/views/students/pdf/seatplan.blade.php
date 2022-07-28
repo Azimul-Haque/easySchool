@@ -33,7 +33,7 @@
       <div style="text-align: center;  border:1px solid black; width: 200px;  height: 115px; line-height: 1.47em; letter-spacing: 0px;">
           <span style="@if(strlen($student->school->name_bangla) < 65) font-size: 19px; @elseif(strlen($student->school->name_bangla) > 65 && strlen($student->school->name_bangla) <= 97) font-size: 14px;letter-spacing: -1px; @elseif(strlen($student->school->name_bangla) > 97) font-size: 12px;letter-spacing: -1px; @endif margin-top: 5px;"><b>{{ $student->school->name_bangla }}</b></span><br/>
           <span style="font-size: 14px;">
-            <u>{{ Auth::user()->exam ? exam(Auth::user()->exam->name) }}-{{ bangla(Auth::user()->exam->exam_session) : 'পরীক্ষার নামঃ _____' }}<br/></u>
+            <u>{{ Auth::user()->exam ? exam(Auth::user()->exam->name) . ' - ' . bangla(Auth::user()->exam->exam_session) : 'পরীক্ষার নামঃ _____' }}<br/></u>
           </span>
           <span style="font-size: 13px; margin-top: 0px;">শ্রেণিঃ {{ bangla_class($student->class) }}
           @if($student->section !=0)
