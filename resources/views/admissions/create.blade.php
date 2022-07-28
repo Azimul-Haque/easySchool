@@ -66,7 +66,9 @@
                                 $classes = explode(',', $school->classes);
                               @endphp
                               @foreach($classes as $class)
-                              <option value="{{ $class }}" {{ (old("class") == $class ? "selected":"") }}>Class {{ $class }}</option>
+                                <option value="{{ $class }}" {{ (old("class") == $class ? "selected":"") }}>
+                                  @if($class == -1) Nursery @elseif($class == 0) KG Zero @else Class {{ $class }} @endif
+                                </option>
                               @endforeach
                             </select>
                         </div>

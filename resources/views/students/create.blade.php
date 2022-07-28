@@ -40,7 +40,7 @@
                                 $classes = explode(',', Auth::user()->school->classes);
                               @endphp
                               @foreach($classes as $class)
-                              <option value="{{ $class }}">Class {{ $class }}</option>
+                              <option value="{{ $class }}">@if($class == -1) Nursery @elseif($class == 0) KG Zero @else Class {{ $class }} @endif</option>
                               @endforeach
                             </select>
                         </div>
@@ -79,7 +79,7 @@
                             <select class="form-control" name="session" id="session" required="">
                               <option value="" selected disabled>শিক্ষাবর্ষ নির্ধারণ করুন</option>
                               @for($session_year = date('Y') - 2; $session_year < (date('Y') + 3); $session_year++)
-                              <option value="{{ $session_year }}">{{ $session_year }}</option>
+                              <option value="{{ $session_year }}" @if($session_year == date('Y')) selected @endif>{{ $session_year }}</option>
                               @endfor
                             </select>
                         </div>
@@ -315,12 +315,13 @@
                           <label for="remarks">প্রধান শিক্ষকের মন্তব্যঃ</label>
                           <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-pencil-square-o"></i></span>
-                            {!! Form::text('remarks', null, array('placeholder' => 'প্রধান শিক্ষকের মন্তব্য','class' => 'form-control', 'id' => 'remarks')) !!}
+                            {!! Form::text('remarks', 'Good', array('placeholder' => 'প্রধান শিক্ষকের মন্তব্য','class' => 'form-control', 'id' => 'remarks')) !!}
                           </div>
                       </div>
                     </div>
                   </div>
 
+                  @if(!in_array('-1', $classes))
                   {{-- JSC Row --}}
                   <hr>
                   <div class="row">
@@ -403,15 +404,16 @@
                   </div>
                   <hr>
                   {{-- SSC Row --}}
+                  @endif
 
 
                   <div class="row">
                     <div class="col-md-3">
                       <div class="form-group">
-                        <label for="previous_school">গতবছরে পঠিত বিদ্যালয়ের নাম</label>
+                        <label for="previous_school">গত বছরে পঠিত বিদ্যালয়ের নাম</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-university"></i></span>
-                            {!! Form::text('previous_school', null, array('placeholder' => 'পূর্ববর্তী স্কুলের নাম লিখুন','class' => 'form-control', 'id' => 'previous_school', 'required' => '')) !!}
+                            {!! Form::text('previous_school', 'N/A', array('placeholder' => 'পূর্ববর্তী স্কুলের নাম লিখুন','class' => 'form-control', 'id' => 'previous_school', 'required' => '')) !!}
                         </div>
                       </div>
                     </div>
@@ -420,7 +422,7 @@
                         <label for="pec_result">সমাপনি/সর্বশেষ বার্ষিক পরীক্ষার ফলাফল</label>
                         <div class="input-group">
                             <span class="input-group-addon"><i class="fa fa-balance-scale"></i></span>
-                            {!! Form::text('pec_result', null, array('placeholder' =>'সমাপনি পরীক্ষার ফলাফল','class' => 'form-control', 'id' => 'pec_result', 'required' => '')) !!}
+                            {!! Form::text('pec_result', 'N/A', array('placeholder' =>'সমাপনি পরীক্ষার ফলাফল','class' => 'form-control', 'id' => 'pec_result', 'required' => '')) !!}
                         </div>
                       </div>
                     </div>

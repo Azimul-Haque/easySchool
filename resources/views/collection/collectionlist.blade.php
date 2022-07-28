@@ -57,7 +57,9 @@
                   $classes = explode(',', Auth::user()->school->classes);
               @endphp
               @foreach($classes as $class)
-              <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
+              <option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>
+                @if($class == -1) Nursery @elseif($class == 0) KG Zero @else Class {{ $class }} @endif
+              </option>
               @endforeach
           </select>
       </div>

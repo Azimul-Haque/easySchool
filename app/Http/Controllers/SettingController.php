@@ -65,7 +65,7 @@ class SettingController extends Controller
         // sign upload
         if($request->hasFile('headmaster_sign')) {
             $image = $request->file('headmaster_sign');
-            if(file_exists(public_path('/images/schools/signs/' . $school->headmaster_sign))) {
+            if(file_exists(public_path('/images/schools/signs/' . $school->headmaster_sign)) && $school->headmaster_sign != '') {
                 unlink(public_path('/images/schools/signs/' . $school->headmaster_sign));
             }
             $filename   = 'sign_'. time() .'_'.$school->eiin.'.' . $image->getClientOriginalExtension();

@@ -156,9 +156,9 @@
                 <div class="form-group">
                   <strong>ক্লাসঃ</strong>
                   <br/>
-                  @for($clss = 1;$clss<=10;$clss++)
+                  @for($clss = -1;$clss<=10;$clss++)
                     <label style="margin-right: 25px;">
-                    <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"> Class {{ $clss }}
+                    <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"> @if($clss == -1) Nursery @elseif($clss == 0) KG Zero @else Class {{ $clss }} @endif
                     </label>
                   @endfor
                 </div>  

@@ -28,8 +28,8 @@
                     <span class="input-group-addon"><i class="fa fa-users"></i></span>
                     <select class="form-control" name="class" id="class" required="">
                       <option value="" selected disabled>শ্রেণি নির্ধারণ করুন</option>
-                      @for($clss = 1;$clss<=10;$clss++)
-                        <option value="{{ $clss }}" @if($student->class == $clss) selected="" @endif>Class {{ $clss }}</option>
+                      @for($clss = -1;$clss<=10;$clss++)
+                        <option value="{{ $clss }}" @if($student->class == $clss) selected="" @endif>@if($clss == -1) Nursery @elseif($clss == 0) KG Zero @else Class {{ $clss }} @endif</option>
                       @endfor
                     </select>
                 </div>

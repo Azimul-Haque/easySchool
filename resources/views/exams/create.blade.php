@@ -53,7 +53,7 @@
                           $y = date('Y')-2;
                           for($y; $y<=2038; $y++) {
                         @endphp
-                          <option value="{{ $y }}">{{ $y }}</option>
+                          <option value="{{ $y }}" @if(date('Y') == $y) selected @endif>{{ $y }}</option>
                         @php
                           }
                         @endphp
@@ -141,13 +141,13 @@
   <script type="text/javascript">
     var htlmFields = '';
     @foreach($classes as $class)
-    var classcounter{{ $class }} = 1;
+    var classcounter{{ $class + 1 }} = 1;
     $("#addSubject{{ $class }}").click(function() {
-        htlmFields += '<div id="subject_{{ $class }}_'+classcounter{{ $class }}+'" class="exam_subject_add">';
+        htlmFields += '<div id="subject_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="exam_subject_add">';
 
-        htlmFields += '  <button type="button" class="btn btn-danger btn-xs pull-right marginbottom10" onclick="removeSubject(subject_{{ $class }}_'+classcounter{{ $class }}+', {{ $class }})"><i class="fa fa-trash"></i> মুছে দিন</button>';
+        htlmFields += '  <button type="button" class="btn btn-danger btn-xs pull-right marginbottom10" onclick="removeSubject(subject_{{ $class }}_'+classcounter{{ $class + 1 }}+', {{ $class }})"><i class="fa fa-trash"></i> মুছে দিন</button>';
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <select id="subject_id_{{ $class }}_'+classcounter{{ $class }}+'" onchange="onchageSelect(this, {{ $class }}, '+classcounter{{ $class }}+')" class="form-control">';
+        htlmFields += '   <select id="subject_id_{{ $class }}_'+classcounter{{ $class + 1 }}+'" onchange="onchageSelect(this, {{ $class }}, '+classcounter{{ $class + 1 }}+')" class="form-control">';
         htlmFields += '      <option value="" selected="" disabled="">বিষয় নির্ধারণ করুন</option>';
         @foreach($subjects as $subject)
         htlmFields += '      <option value="{{ $subject->id }}">{{ $subject->name_bangla }} ({{ $subject->name_english }})</option>';
@@ -156,50 +156,50 @@
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="written_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="লিখিত মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="written_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="লিখিত মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="written_pass_mark_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="লিখিত পাশ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="written_pass_mark_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="লিখিত পাশ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="mcq_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="এমসিকিউ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="mcq_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="এমসিকিউ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="mcq_pass_mark_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="এমসিকিউ পাশ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="mcq_pass_mark_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="এমসিকিউ পাশ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="practical_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="প্র্যাক্টিক্যাল মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="practical_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="প্র্যাক্টিক্যাল মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="practical_pass_mark_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="প্র্যাক্টিক্যাল পাশ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="practical_pass_mark_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="প্র্যাক্টিক্যাল পাশ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="total_percentage_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="প্রাপ্ত মার্কের পারসেন্টেজ (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="total_percentage_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="প্রাপ্ত মার্কের পারসেন্টেজ (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="ca_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="সিএ/ এসবিএ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="ca_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="সিএ/ এসবিএ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="total_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="সর্বমোট মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="total_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="সর্বমোট মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '  <div class="form-group">';
-        htlmFields += '   <input type="number" id="pass_mark_{{ $class }}_'+classcounter{{ $class }}+'" class="form-control" placeholder="সর্বমোট পাশ মার্ক (ইংরেজি সংখ্যায়)">';
+        htlmFields += '   <input type="number" id="pass_mark_{{ $class }}_'+classcounter{{ $class + 1 }}+'" class="form-control" placeholder="সর্বমোট পাশ মার্ক (ইংরেজি সংখ্যায়)">';
         htlmFields += '  </div>';
 
         htlmFields += '</div>';
         $("#subjectfieldscontainer{{ $class }}").append(htlmFields);
         $("#total_subjects_{{ $class }}").attr('required', true);
         htlmFields = '';
-        classcounter{{ $class }}++;
+        classcounter{{ $class + 1 }}++;
     });
     @endforeach
 

@@ -77,7 +77,7 @@ class StudentController extends Controller
     {
         $this->validate($request, [
             'class' => 'required',
-            'section' => 'required',
+            'section' => 'sometimes',
             'roll' => 'required',
             'session' => 'required',
             //'name_bangla' => 'required|max:255',
@@ -145,7 +145,8 @@ class StudentController extends Controller
             } else {
                 $admission_year = date('y');
             }
-            $student_id = $request->class.$admission_year.$school->id.$request->section.$first_id_for_student;
+            $tempclass = $request->class < 1 ? 1 : $request->class;
+            $student_id = $tempclass.$admission_year.$school->id.$request->section.$first_id_for_student;
         }
         // dd($student_id);
 
@@ -156,7 +157,7 @@ class StudentController extends Controller
 
         $student->roll = $request->roll;
         $student->class = $request->class;
-        $student->section = $request->section;
+        $student->section = $request->section ? $request->section : 0;
         //$student->name_bangla = $request->name_bangla;
         $student->name = $request->name;
         $student->father = $request->father;
@@ -209,7 +210,7 @@ class StudentController extends Controller
         $student->save();
 
         Session::flash('success', 'সফলভাবে শিক্ষার্থী ভর্তি করা হয়েছে!');
-        return redirect()->route('students.getstudents', [$request->session, $request->class, $request->section]);
+        return redirect()->route('students.getstudents', [$request->session, $request->class, $request->section ? $request->section : 'No_Section']);
     }
 
     public function checkStudentIDDuplicacy($student_id) {
@@ -268,7 +269,7 @@ class StudentController extends Controller
     {
         $this->validate($request, [
             'class' => 'required',
-            'section' => 'required',
+            'section' => 'sometimes',
             'roll' => 'required',
             'session' => 'required',
             //'name_bangla' => 'required|max:255',
@@ -382,7 +383,7 @@ class StudentController extends Controller
         $student->save();
 
         Session::flash('success', 'সফলভাবে হালনাগাদ করা হয়েছে!');
-        return redirect()->route('students.getstudents', [$request->session, $request->class, $request->section]);
+        return redirect()->route('students.getstudents', [$request->session, $request->class, $request->section  ? $request->section : 'No_Section']);
     }
 
     /**

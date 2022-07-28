@@ -160,11 +160,18 @@
           @php
           $classes = explode(',', $school->classes);
           @endphp
-          @for($clss = 1;$clss<=10;$clss++)
+          {{-- @for($clss = 1;$clss<=10;$clss++)
             <label style="margin-right: 20px;">
             <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"
             @if(in_array($clss, $classes)) checked @endif
             > Class {{ $clss }}
+            </label>
+          @endfor --}}
+          @for($clss = -1;$clss<=10;$clss++)
+            <label style="margin-right: 20px;">
+            <input type="checkbox" name="classes[]" value="{{ $clss }}" class="classes icheck"
+            @if(in_array($clss, $classes)) checked @endif
+            > @if($clss == -1) Nursery @elseif($clss == 0) KG Zero @else Class {{ $clss }} @endif
             </label>
           @endfor
         </div>  

@@ -45,7 +45,7 @@
               <table>
                 <tr>
                   <td width="70%">
-                    <span style="font-size: 22px; font-weight: bold;">
+                    <span style="font-size: 18px; font-weight: bold;">
                       {{ strtoupper($student->school->name) }}<br/>
                     </span>
                     <span style="font-size: 15px;">
@@ -72,7 +72,7 @@
               <table>
                 <tr>
                   <td width="10%"></td>
-                  <td width="40%" align="center">CLASS: {{ $student->class }}</td>
+                  <td width="40%" align="center">CLASS: @if($student->class == -1) Nursery @elseif($student->class == 0) KG Zero @else {{ $student->class }} @endif</td>
                   <td width="50%" align="center">SECTION/ GROUP: {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}</td>
                   {{-- <td width="10%"></td> --}}
                 </tr>

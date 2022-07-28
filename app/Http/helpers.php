@@ -22,8 +22,8 @@ function bangla($str){
 }
 
 function bangla_class($str){
-      $en = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'All_Classes');
-      $bn = array('প্রথম', 'দ্বিতীয়', 'তৃতীয়', 'চতুর্থ', 'পঞ্চম', 'ষষ্ঠ', 'সপ্তম', 'অষ্টম', 'নবম', 'দশম', 'সকল শ্রেণি');
+      $en = array(-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'All_Classes');
+      $bn = array('নার্সারি', 'কেজি জিরো', 'প্রথম', 'দ্বিতীয়', 'তৃতীয়', 'চতুর্থ', 'পঞ্চম', 'ষষ্ঠ', 'সপ্তম', 'অষ্টম', 'নবম', 'দশম', 'সকল শ্রেণি');
       $str = str_replace($en, $bn, $str);
       if($str == 'প্রথম0') {
           return 'দশম';
@@ -34,8 +34,8 @@ function bangla_class($str){
 }
 
 function en_class($str){
-      $en = array(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'All_Classes');
-      $bn = array('One', 'Two', 'Three', 'Four','Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'All Classes');
+      $en = array(-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'All_Classes');
+      $bn = array('Nursery', 'KG Zero', 'One', 'Two', 'Three', 'Four','Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'All Classes');
       $str = str_replace($en, $bn, $str);
       if($str == 'One0') {
           return 'Ten';
@@ -60,7 +60,7 @@ function bangla_section($section_type, $class, $section){
             
             $section = str_replace($en, $bn, $section);
       } else {
-            //
+            $section = '';
       }
       return $section;
 }
@@ -80,7 +80,7 @@ function english_section($section_type, $class, $section) {
             
             $section = str_replace($en, $bn, $section);
       } else {
-            //
+            $section = '';
       }
       return $section;
 }

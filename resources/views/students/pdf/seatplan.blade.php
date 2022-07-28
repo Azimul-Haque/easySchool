@@ -35,7 +35,11 @@
           <span style="font-size: 14px;">
             <u>{{ exam(Auth::user()->exam->name) }}-{{ bangla(Auth::user()->exam->exam_session) }}<br/></u>
           </span>
-          <span style="font-size: 13px; margin-top: 0px;">শ্রেণিঃ {{ bangla_class($student->class) }}, শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $student->class, $student->section) }}<br/>
+          <span style="font-size: 13px; margin-top: 0px;">শ্রেণিঃ {{ bangla_class($student->class) }}
+          @if($student->section !=0)
+            , শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $student->class, $student->section) }}
+          @endif
+          <br/>
           </span>
           <span style="font-size: 20px; margin-top: 0px;"><b>রোল: {{ bangla(STR_PAD($student->roll, 2, 0, STR_PAD_LEFT)) }}<br/></b></span>
           <span style="font-size: 13px; margin-top: 0px;line-height: 1em; letter-spacing: -1px;">

@@ -73,7 +73,9 @@
 						$classes = explode(',', Auth::user()->school->classes);
 					@endphp
 					@foreach($classes as $class)
-					<option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>Class {{ $class }}</option>
+					<option value="{{ $class }}" @if($classsearch == $class) selected="" @endif>
+						@if($class == -1) Nursery @elseif($class == 0) KG Zero @else Class {{ $class }} @endif
+					</option>
 					@endforeach
 				</select>
 			</div>
@@ -133,9 +135,7 @@
 				<tr>
 					<th class="hiddenCheckbox" id="hiddenCheckbox"></th>
           <th>আইডি</th>
-          <th>ক্লাস</th>
-          <th>শাখা</th>
-          <th>রোল</th>
+          <th>তথ্য</th>
           <th width="20%">নাম</th>
           <th>পিতার নাম</th>
 					<th>মাতার নাম</th>
@@ -150,13 +150,18 @@
 						<input type="checkbox" name="student_check_ids[]" value="{{ $student->id }}">
 					</td>
 					<td>{{ $student->student_id }}</td>
-          <td>{{ $student->class }}</td>
           <td>
-              {{ english_section(Auth::user()->school->section_type, $student->class, $student->section) }}
+          	ক্লাসঃ {{ bangla_class($student->class) }},
+          	@if($student->section != 0)
+          		শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $student->class, $student->section) }},
+          	@endif
+          	রোলঃ {{ $student->roll }}
           </td>
-					<td>{{ $student->roll }}</td>
           <td>{{ $student->name }}</td>
-          <td>{{ $student->father }}</td>
+          <td>
+          	{{ $student->father }}<br/>
+          	<small>{{ $student->contact }}</small>
+          </td>
 					<td>{{ $student->mother }}</td>
 					<td>
 						@if($student->image != null || $student->image != '')
