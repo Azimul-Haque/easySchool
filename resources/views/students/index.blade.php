@@ -13,7 +13,7 @@
 @section('content_header')
     <h1>
     	শিক্ষার্থী তালিকাঃ
-    	<span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }},
+    	<span style="color: #008000;">[শিক্ষাবর্ষঃ {{ bangla($sessionsearch) }}, শ্রেণিঃ {{ bangla_class($classsearch) }}
     		@if($sectionsearch != 'No_Section')
     			শাখাঃ {{ bangla_section(Auth::user()->school->section_type, $classsearch, $sectionsearch) }}]
     		@endif
