@@ -458,7 +458,13 @@ class AdmissionController extends Controller
             $student_id = $last_student_id->student_id + 1;
             $roll = $last_student_id->roll + 1;
           } else {
-            $student_id = $request->class.date('y', strtotime(Auth::user()->school->admission_session)).$application->school_id.$request->section_to_final_admit.str_pad($rollandserial, 3, '0', STR_PAD_LEFT);
+            $tempclass = $request->class;
+            if($request->class == -1) {
+                $tempclass = 50;
+            } elseif($request->class == 0) {
+                $tempclass = 51;
+            }
+            $student_id = $tempclass . date('y', strtotime(Auth::user()->school->admission_session)).$application->school_id.$request->section_to_final_admit.str_pad($rollandserial, 3, '0', STR_PAD_LEFT);
             $roll = $rollandserial;
           }
           //dd($student_id);

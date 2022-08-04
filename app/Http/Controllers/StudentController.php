@@ -145,7 +145,12 @@ class StudentController extends Controller
             } else {
                 $admission_year = date('y');
             }
-            $tempclass = $request->class < 1 ? 1 : $request->class;
+            $tempclass = $request->class;
+            if($request->class == -1) {
+                $tempclass = 50;
+            } elseif($request->class == 0) {
+                $tempclass = 51;
+            }
             $student_id = $tempclass.$admission_year.$school->id.$request->section.$first_id_for_student;
         }
         // dd($student_id);
