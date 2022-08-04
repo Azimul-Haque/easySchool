@@ -427,7 +427,7 @@ class AdmissionController extends Controller
         $this->validate($request, [
             'application_ids_to_admit' => 'required',
             'class' => 'required',
-            'section_to_final_admit' => 'required',
+            'section_to_final_admit' => 'sometimes',
             'admission_date' => 'required',
         ]);
         $application_ids = explode(',', $request->application_ids_to_admit);
