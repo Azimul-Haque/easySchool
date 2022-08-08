@@ -37,7 +37,7 @@ function en_class($str){
       $en = array(-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 'All_Classes');
       $bn = array('Nursery', 'KG Zero', 'One', 'Two', 'Three', 'Four','Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'All Classes');
       $str = str_replace($en, $bn, $str);
-      if($str == 'One0') {
+      if($str == 'One0' || $str == 'OneKG Zero') {
           return 'Ten';
       } else {
           return $str;
