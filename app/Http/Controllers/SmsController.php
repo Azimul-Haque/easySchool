@@ -25,7 +25,7 @@ class SmsController extends Controller
         try {
             // $actualbalance = number_format((float) file_get_contents('http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123'), 2, '.', '');
             
-            $ch = curl_init("http://66.45.237.70/balancechk.php?username=01751398392&password=Bulk.Sms.Bd.123");
+            $ch = curl_init("http://66.45.237.70/balancechk.php?username=01837409842&password=Bulk.Sms.Bd.123");
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
             $result = strip_tags(curl_exec($ch));
